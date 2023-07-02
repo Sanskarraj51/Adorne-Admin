@@ -1,6 +1,4 @@
-export const MenuBasicJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const MenuBasicJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { useState } from 'react'
 
 // ** MUI Imports
@@ -35,13 +33,9 @@ const MenuBasic = () => {
 }
 
 export default MenuBasic
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const MenuCompositionJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const MenuCompositionJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { useEffect, useRef, useState } from 'react'
 
 // ** MUI Imports
@@ -154,13 +148,9 @@ const MenuComposition = () => {
 }
 
 export default MenuComposition
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const MenuContextJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const MenuContextJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { useState } from 'react'
 
 // ** MUI Imports
@@ -218,13 +208,9 @@ const MenuContext = () => {
 }
 
 export default MenuContext
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const MenuCustomizedJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const MenuCustomizedJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { useState } from 'react'
 
 // ** MUI Imports
@@ -235,10 +221,8 @@ import ListItemText from '@mui/material/ListItemText'
 import MuiMenu from '@mui/material/Menu'
 import MuiMenuItem from '@mui/material/MenuItem'
 
-// ** Icons Imports
-import Send from 'mdi-material-ui/Send'
-import EmailOpen from 'mdi-material-ui/EmailOpen'
-import InboxArrowDown from 'mdi-material-ui/InboxArrowDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // Styled Menu component
 const Menu = styled(MuiMenu)(({ theme }) => ({
@@ -292,19 +276,19 @@ const MenuCustomized = () => {
       >
         <MenuItem>
           <ListItemIcon>
-            <Send fontSize='small' />
+            <Icon icon='mdi:send' fontSize={20} />
           </ListItemIcon>
           <ListItemText primary='Sent mail' />
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <EmailOpen fontSize='small' />
+            <Icon icon='mdi:email-open' fontSize={20} />
           </ListItemIcon>
           <ListItemText primary='Drafts' />
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <InboxArrowDown fontSize='small' />
+            <Icon icon='mdi:inbox-arrow-down' fontSize={20} />
           </ListItemIcon>
           <ListItemText primary='Inbox' />
         </MenuItem>
@@ -314,13 +298,9 @@ const MenuCustomized = () => {
 }
 
 export default MenuCustomized
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const MenuMaxHeightJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const MenuMaxHeightJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { useState } from 'react'
 
 // ** MUI Imports
@@ -328,8 +308,8 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import IconButton from '@mui/material/IconButton'
 
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const options = [
   'None',
@@ -364,7 +344,7 @@ const MenuMaxHeight = () => {
   return (
     <div>
       <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleClick}>
-        <DotsVertical />
+        <Icon icon='mdi:dots-vertical' />
       </IconButton>
       <Menu
         keepMounted
@@ -389,13 +369,9 @@ const MenuMaxHeight = () => {
 }
 
 export default MenuMaxHeight
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const MenuSelectedJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const MenuSelectedJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { useState } from 'react'
 
 // ** MUI Imports
@@ -465,13 +441,9 @@ const MenuSelected = () => {
 }
 
 export default MenuSelected
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const MenuTransitionJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const MenuTransitionJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { useState } from 'react'
 
 // ** MUI Imports
@@ -514,6 +486,5 @@ const MenuTransition = () => {
 }
 
 export default MenuTransition
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
+

@@ -1,131 +1,84 @@
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
-import Link from '@mui/material/Link'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-/**
- ** Icons Imports:
- * ! You need to import all the icons which come from the API or from your server and then add these icons in 'icons' variable.
- * ! If you need all the icons from the library, use "import * as Icon from 'mdi-material-ui'"
- * */
-import Abacus from 'mdi-material-ui/Abacus'
-import Account from 'mdi-material-ui/Account'
-import AbTesting from 'mdi-material-ui/AbTesting'
-import AccountBox from 'mdi-material-ui/AccountBox'
-import AccountCog from 'mdi-material-ui/AccountCog'
-import AbjadArabic from 'mdi-material-ui/AbjadArabic'
-import AbjadHebrew from 'mdi-material-ui/AbjadHebrew'
-import AbugidaThai from 'mdi-material-ui/AbugidaThai'
-import AccessPoint from 'mdi-material-ui/AccessPoint'
-import AccountCash from 'mdi-material-ui/AccountCash'
-import AccountEdit from 'mdi-material-ui/AccountEdit'
-import AccountAlert from 'mdi-material-ui/AccountAlert'
-import AccountCheck from 'mdi-material-ui/AccountCheck'
-import AccountChild from 'mdi-material-ui/AccountChild'
-import AccountClock from 'mdi-material-ui/AccountClock'
-import AccountGroup from 'mdi-material-ui/AccountGroup'
-import AccountCancel from 'mdi-material-ui/AccountCancel'
-import AccountCircle from 'mdi-material-ui/AccountCircle'
-import AccessPointOff from 'mdi-material-ui/AccessPointOff'
-import AccountConvert from 'mdi-material-ui/AccountConvert'
-import AccountDetails from 'mdi-material-ui/AccountDetails'
-import AccessPointPlus from 'mdi-material-ui/AccessPointPlus'
-import AccessPointCheck from 'mdi-material-ui/AccessPointCheck'
-import AccessPointMinus from 'mdi-material-ui/AccessPointMinus'
-import AccountArrowLeft from 'mdi-material-ui/AccountArrowLeft'
-import AccountCowboyHat from 'mdi-material-ui/AccountCowboyHat'
-import AbugidaDevanagari from 'mdi-material-ui/AbugidaDevanagari'
-import AccessPointRemove from 'mdi-material-ui/AccessPointRemove'
-import AccountArrowRight from 'mdi-material-ui/AccountArrowRight'
-import AccountBoxOutline from 'mdi-material-ui/AccountBoxOutline'
-import AccountCogOutline from 'mdi-material-ui/AccountCogOutline'
-import AccessPointNetwork from 'mdi-material-ui/AccessPointNetwork'
-import AccountBoxMultiple from 'mdi-material-ui/AccountBoxMultiple'
-import AccountCashOutline from 'mdi-material-ui/AccountCashOutline'
-import AccountChildCircle from 'mdi-material-ui/AccountChildCircle'
-import AccountEditOutline from 'mdi-material-ui/AccountEditOutline'
-import AccountAlertOutline from 'mdi-material-ui/AccountAlertOutline'
-import AccountCheckOutline from 'mdi-material-ui/AccountCheckOutline'
-import AccountChildOutline from 'mdi-material-ui/AccountChildOutline'
-import AccountClockOutline from 'mdi-material-ui/AccountClockOutline'
-import AccountCancelOutline from 'mdi-material-ui/AccountCancelOutline'
-import AccountCircleOutline from 'mdi-material-ui/AccountCircleOutline'
-import AccessPointNetworkOff from 'mdi-material-ui/AccessPointNetworkOff'
-import AccountConvertOutline from 'mdi-material-ui/AccountConvertOutline'
-import AccountDetailsOutline from 'mdi-material-ui/AccountDetailsOutline'
-import AccountArrowLeftOutline from 'mdi-material-ui/AccountArrowLeftOutline'
-import AccountArrowRightOutline from 'mdi-material-ui/AccountArrowRightOutline'
-import AccountBoxMultipleOutline from 'mdi-material-ui/AccountBoxMultipleOutline'
-
 // ** Custom Components Imports
+import Icon from 'src/@core/components/icon'
 import PageHeader from 'src/@core/components/page-header'
 
-const icons = {
-  Abacus,
-  Account,
-  AbTesting,
-  AccountBox,
-  AccountCog,
-  AbjadArabic,
-  AbjadHebrew,
-  AbugidaThai,
-  AccessPoint,
-  AccountCash,
-  AccountEdit,
-  AccountAlert,
-  AccountCheck,
-  AccountChild,
-  AccountClock,
-  AccountGroup,
-  AccountCancel,
-  AccountCircle,
-  AccessPointOff,
-  AccountConvert,
-  AccountDetails,
-  AccessPointPlus,
-  AccessPointCheck,
-  AccessPointMinus,
-  AccountArrowLeft,
-  AccountCowboyHat,
-  AbugidaDevanagari,
-  AccessPointRemove,
-  AccountArrowRight,
-  AccountBoxOutline,
-  AccountCogOutline,
-  AccessPointNetwork,
-  AccountBoxMultiple,
-  AccountCashOutline,
-  AccountChildCircle,
-  AccountEditOutline,
-  AccountAlertOutline,
-  AccountCheckOutline,
-  AccountChildOutline,
-  AccountClockOutline,
-  AccountCancelOutline,
-  AccountCircleOutline,
-  AccessPointNetworkOff,
-  AccountConvertOutline,
-  AccountDetailsOutline,
-  AccountArrowLeftOutline,
-  AccountArrowRightOutline,
-  AccountBoxMultipleOutline
-}
+const icons = [
+  'mdi:abacus',
+  'mdi:account',
+  'mdi:ab-testing',
+  'mdi:account-box',
+  'mdi:account-cog',
+  'mdi:abjad-arabic',
+  'mdi:abjad-hebrew',
+  'mdi:abugida-thai',
+  'mdi:access-point',
+  'mdi:account-cash',
+  'mdi:account-edit',
+  'mdi:account-alert',
+  'mdi:account-check',
+  'mdi:account-child',
+  'mdi:account-clock',
+  'mdi:account-group',
+  'mdi:account-cancel',
+  'mdi:account-circle',
+  'mdi:access-point-off',
+  'mdi:account-convert',
+  'mdi:account-details',
+  'mdi:access-point-plus',
+  'mdi:access-point-check',
+  'mdi:access-point-minus',
+  'mdi:account-arrow-left',
+  'mdi:account-cowboy-hat',
+  'mdi:abugida-devanagari',
+  'mdi:access-point-remove',
+  'mdi:account-arrow-right',
+  'mdi:account-box-outline',
+  'mdi:account-cog-outline',
+  'mdi:access-point-network',
+  'mdi:account-box-multiple',
+  'mdi:account-cash-outline',
+  'mdi:account-child-circle',
+  'mdi:account-edit-outline',
+  'mdi:account-alert-outline',
+  'mdi:account-check-outline',
+  'mdi:account-child-outline',
+  'mdi:account-clock-outline',
+  'mdi:account-cancel-outline',
+  'mdi:account-circle-outline',
+  'mdi:access-point-network-off',
+  'mdi:account-convert-outline',
+  'mdi:account-details-outline',
+  'mdi:account-arrow-left-outline',
+  'mdi:account-arrow-right-outline',
+  'mdi:account-box-multiple-outline'
+]
+
+const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main
+}))
 
 const Icons = () => {
   const renderIconGrids = () => {
-    return Object.keys(icons).map(key => {
-      const IconTag = icons[key]
-
+    return icons.map((icon, index) => {
       return (
-        <Grid item key={key}>
-          <Tooltip arrow title={key} placement='top'>
+        <Grid item key={index}>
+          <Tooltip arrow title={icon} placement='top'>
             <Card>
               <CardContent sx={{ display: 'flex' }}>
-                <IconTag />
+                <Icon icon={icon} />
               </CardContent>
             </Card>
           </Tooltip>
@@ -139,12 +92,12 @@ const Icons = () => {
       <PageHeader
         title={
           <Typography variant='h5'>
-            <Link href='https://materialdesignicons.com/' target='_blank'>
-              Material Design Icons
-            </Link>
+            <LinkStyled href='https://iconify.design/' target='_blank'>
+              Iconify Design
+            </LinkStyled>
           </Typography>
         }
-        subtitle={<Typography variant='body2'>Material Design Icons from the Community</Typography>}
+        subtitle={<Typography variant='body2'>Modern unified SVG framework</Typography>}
       />
       <Grid item xs={12}>
         <Grid container spacing={6}>
@@ -155,11 +108,11 @@ const Icons = () => {
         <Button
           target='_blank'
           rel='noreferrer'
-          component={Link}
           variant='contained'
-          href='https://materialdesignicons.com/'
+          component={LinkStyled}
+          href='https://icon-sets.iconify.design/'
         >
-          View All Material Design Icons
+          View All Icons
         </Button>
       </Grid>
     </Grid>

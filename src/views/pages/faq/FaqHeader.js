@@ -6,18 +6,15 @@ import MuiCard from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
 import MuiTextField from '@mui/material/TextField'
 
-// ** Icons Imports
-import Magnify from 'mdi-material-ui/Magnify'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // Styled Card component
 const Card = styled(MuiCard)(({ theme }) => ({
   border: 0,
   boxShadow: 'none',
   backgroundSize: 'cover',
-  backgroundImage:
-    theme.palette.mode === 'light'
-      ? 'url(/images/pages/pages-header-bg-light.png)'
-      : 'url(/images/pages/pages-header-bg-dark.png)'
+  backgroundImage: `url(/images/pages/pages-header-bg-${theme.palette.mode}.png)`
 }))
 
 // Styled TextField component
@@ -27,7 +24,7 @@ const TextField = styled(MuiTextField)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper
   },
   [theme.breakpoints.up('sm')]: {
-    width: 450
+    width: '55%'
   }
 }))
 
@@ -41,28 +38,26 @@ const FaqHeader = props => {
 
   return (
     <Card>
-      <CardContent sx={{ pt: 20, textAlign: 'center', pb: theme => `${theme.spacing(25)} !important` }}>
-        <Typography
-          variant='h5'
-          sx={{ mb: 2.5, color: 'primary.main', fontWeight: 600, fontSize: '1.5rem !important' }}
-        >
+      <CardContent sx={{ pt: 23, textAlign: 'center', pb: theme => `${theme.spacing(23)} !important` }}>
+        <Typography variant='h5' sx={{ mb: 8 }}>
           Hello, how can we help?
         </Typography>
-        <Typography variant='body2' sx={{ mb: 6.5 }}>
-          or choose a category to quickly find the help you need
-        </Typography>
+
         <TextField
           value={searchTerm}
-          placeholder='Ask a question....'
+          placeholder='Search a question....'
           onChange={e => handleFaqFilter(e)}
           InputProps={{
             startAdornment: (
               <InputAdornment position='start'>
-                <Magnify />
+                <Icon icon='mdi:magnify' />
               </InputAdornment>
             )
           }}
         />
+        <Typography sx={{ mt: 4, color: 'text.secondary' }}>
+          or choose a category to quickly find the help you need
+        </Typography>
       </CardContent>
     </Card>
   )

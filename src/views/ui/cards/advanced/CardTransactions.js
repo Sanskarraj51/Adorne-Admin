@@ -2,17 +2,15 @@
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const data = [
   {
@@ -24,7 +22,11 @@ const data = [
     avatarColor: 'success',
     subtitle: 'Digital Ocean',
     imgSrc: '/images/cards/credit-card.png',
-    trend: <ChevronDown sx={{ color: 'error.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'success.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-up' />
+      </Box>
+    )
   },
   {
     imgWidth: 17,
@@ -35,7 +37,11 @@ const data = [
     avatarColor: 'primary',
     subtitle: 'Received Money',
     imgSrc: '/images/cards/paypal.png',
-    trend: <ChevronUp sx={{ color: 'success.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'success.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-up' />
+      </Box>
+    )
   },
   {
     imgHeight: 18,
@@ -46,7 +52,11 @@ const data = [
     avatarColor: 'info',
     imgAlt: 'mastercard',
     imgSrc: '/images/cards/mastercard.png',
-    trend: <ChevronDown sx={{ color: 'error.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'error.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-down' />
+      </Box>
+    )
   },
   {
     imgWidth: 20,
@@ -57,7 +67,11 @@ const data = [
     subtitle: "Mac'D",
     avatarColor: 'error',
     imgSrc: '/images/cards/wallet.png',
-    trend: <ChevronDown sx={{ color: 'error.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'error.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-down' />
+      </Box>
+    )
   },
   {
     imgWidth: 17,
@@ -68,7 +82,11 @@ const data = [
     subtitle: 'Refund',
     avatarColor: 'primary',
     imgSrc: '/images/cards/paypal.png',
-    trend: <ChevronUp sx={{ color: 'success.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'success.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-up' />
+      </Box>
+    )
   },
   {
     imgHeight: 18,
@@ -79,7 +97,11 @@ const data = [
     avatarColor: 'warning',
     subtitle: 'Buy Apple Watch',
     imgSrc: '/images/cards/stripe.png',
-    trend: <ChevronDown sx={{ color: 'error.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'error.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-down' />
+      </Box>
+    )
   }
 ]
 
@@ -89,9 +111,10 @@ const CardTransactions = () => {
       <CardHeader
         title='Transactions'
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', sx: { color: 'text.primary' } }}
+          />
         }
       />
       <CardContent>

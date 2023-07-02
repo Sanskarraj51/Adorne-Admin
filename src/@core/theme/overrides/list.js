@@ -1,41 +1,41 @@
-const List = theme => {
+const List = () => {
   return {
     MuiListItemIcon: {
       styleOverrides: {
-        root: {
-          minWidth: 0,
+        root: ({ theme }) => ({
+          minWidth: '0 !important',
           marginRight: theme.spacing(3),
           color: theme.palette.text.secondary
-        }
+        })
       }
     },
     MuiListItemAvatar: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           minWidth: 0,
           marginRight: theme.spacing(4)
-        }
+        })
       }
     },
     MuiListItemText: {
       styleOverrides: {
-        dense: {
+        dense: ({ theme }) => ({
           '& .MuiListItemText-primary': {
             color: theme.palette.text.primary
           },
           '& .MuiListItemText-primary, & .MuiListItemText-secondary': {
             lineHeight: 1.43
           }
-        }
+        })
       }
     },
     MuiListSubheader: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           fontWeight: 600,
           textTransform: 'uppercase',
           color: theme.palette.text.primary
-        }
+        })
       }
     }
   }

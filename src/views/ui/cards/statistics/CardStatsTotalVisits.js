@@ -9,10 +9,8 @@ import LinearProgress from '@mui/material/LinearProgress'
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
 
-// ** Icons Imports
-import Monitor from 'mdi-material-ui/Monitor'
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import TabletAndroid from 'mdi-material-ui/TabletAndroid'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const CardStatsTotalVisits = () => {
   return (
@@ -23,11 +21,11 @@ const CardStatsTotalVisits = () => {
             <Typography variant='body2'>Total Visits</Typography>
             <Typography variant='h6'>42.5k</Typography>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { color: 'success.main' } }}>
             <Typography variant='subtitle2' sx={{ color: 'success.main' }}>
               +18.4%
             </Typography>
-            <ChevronUp sx={{ color: 'success.main' }} />
+            <Icon icon='mdi:chevron-up' />
           </Box>
         </Box>
         <Box sx={{ mb: 5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -39,7 +37,7 @@ const CardStatsTotalVisits = () => {
                 variant='rounded'
                 sx={{ mr: 1.5, height: 24, width: 24, borderRadius: '6px' }}
               >
-                <TabletAndroid sx={{ fontSize: '0.875rem' }} />
+                <Icon icon='mdi:cellphone' fontSize='0.875rem' />
               </CustomAvatar>
               <Typography variant='body2'>Mobile</Typography>
             </Box>
@@ -63,7 +61,7 @@ const CardStatsTotalVisits = () => {
                 Desktop
               </Typography>
               <CustomAvatar skin='light' variant='rounded' sx={{ height: 24, width: 24, borderRadius: '6px' }}>
-                <Monitor sx={{ fontSize: '0.875rem' }} />
+                <Icon icon='mdi:monitor' fontSize='0.875rem' />
               </CustomAvatar>
             </Box>
             <Typography variant='h6'>76.5%</Typography>

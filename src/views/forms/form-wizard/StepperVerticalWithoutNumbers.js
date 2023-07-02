@@ -66,7 +66,7 @@ const StepperVerticalWithoutNumbers = () => {
 
   return (
     <Card>
-      <CardHeader title='Vertical Stepper without Numbers' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Vertical Stepper without Numbers' />
       <CardContent>
         <StepperWrapper>
           <Stepper activeStep={activeStep} orientation='vertical'>

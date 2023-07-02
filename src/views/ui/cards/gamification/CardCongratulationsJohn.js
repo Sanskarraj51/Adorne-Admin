@@ -2,13 +2,10 @@
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
-import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
-
-// ** Hook
-import { useSettings } from 'src/@core/hooks/useSettings'
+import { styled, useTheme } from '@mui/material/styles'
 
 // Styled Grid component
 const StyledGrid = styled(Grid)(({ theme }) => ({
@@ -33,7 +30,7 @@ const Img = styled('img')(({ theme }) => ({
 
 const CardCongratulationsJohn = () => {
   // ** Hook
-  const { settings } = useSettings()
+  const theme = useTheme()
 
   return (
     <Card sx={{ position: 'relative' }}>
@@ -60,7 +57,7 @@ const CardCongratulationsJohn = () => {
             <Button variant='contained'>View Profile</Button>
           </Grid>
           <StyledGrid item xs={12} sm={6}>
-            <Img alt='Congratulations John' src={`/images/cards/illustration-john-${settings.mode}.png`} />
+            <Img alt='Congratulations John' src={`/images/cards/illustration-john-${theme.palette.mode}.png`} />
           </StyledGrid>
         </Grid>
       </CardContent>

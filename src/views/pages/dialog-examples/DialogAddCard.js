@@ -30,9 +30,8 @@ import CardWrapper from 'src/@core/styles/libs/react-credit-cards'
 // ** Styles Import
 import 'react-credit-cards/es/styles-compiled.css'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
@@ -72,8 +71,8 @@ const DialogAddCard = () => {
 
   return (
     <Card>
-      <CardContent sx={{ textAlign: 'center' }}>
-        <CreditCardOutline sx={{ mb: 2, fontSize: '2rem' }} />
+      <CardContent sx={{ textAlign: 'center', '& svg': { mb: 2 } }}>
+        <Icon icon='mdi:credit-card-outline' fontSize='2rem' />
         <Typography variant='h6' sx={{ mb: 4 }}>
           Add New Card
         </Typography>
@@ -93,9 +92,16 @@ const DialogAddCard = () => {
         onBackdropClick={handleClose}
         TransitionComponent={Transition}
       >
-        <DialogContent sx={{ pb: 6, px: { xs: 8, sm: 15 }, pt: { xs: 8, sm: 12.5 }, position: 'relative' }}>
+        <DialogContent
+          sx={{
+            position: 'relative',
+            pb: theme => `${theme.spacing(8)} !important`,
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            pt: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <IconButton size='small' onClick={handleClose} sx={{ position: 'absolute', right: '1rem', top: '1rem' }}>
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
           <Box sx={{ mb: 4, textAlign: 'center' }}>
             <Typography variant='h5' sx={{ mb: 3, lineHeight: '2rem' }}>
@@ -174,7 +180,13 @@ const DialogAddCard = () => {
             </Grid>
           </Grid>
         </DialogContent>
-        <DialogActions sx={{ pb: { xs: 8, sm: 12.5 }, justifyContent: 'center' }}>
+        <DialogActions
+          sx={{
+            justifyContent: 'center',
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <Button variant='contained' sx={{ mr: 2 }} onClick={handleClose}>
             Submit
           </Button>

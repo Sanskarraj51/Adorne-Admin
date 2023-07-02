@@ -6,9 +6,16 @@ import Alert from '@mui/material/Alert'
 import Button from '@mui/material/Button'
 import Snackbar from '@mui/material/Snackbar'
 
+// ** Hook Import
+import { useSettings } from 'src/@core/hooks/useSettings'
+
 const SnackbarAlert = () => {
   // ** State
   const [open, setOpen] = useState(false)
+
+  // ** Hook & Var
+  const { settings } = useSettings()
+  const { skin } = settings
 
   const handleClick = () => {
     setOpen(true)
@@ -27,7 +34,7 @@ const SnackbarAlert = () => {
         Open alert snackbar
       </Button>
       <Snackbar open={open} onClose={handleClose} autoHideDuration={3000}>
-        <Alert variant='filled' elevation={3} onClose={handleClose} severity='success'>
+        <Alert variant='filled' elevation={skin === 'bordered' ? 0 : 3} onClose={handleClose} severity='success'>
           This is a success message!
         </Alert>
       </Snackbar>

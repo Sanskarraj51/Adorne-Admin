@@ -14,13 +14,8 @@ import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import Grid from '@mui/material/Grid'
 
-// ** Icons Imports
-import Twitter from 'mdi-material-ui/Twitter'
-import CartPlus from 'mdi-material-ui/CartPlus'
-import Facebook from 'mdi-material-ui/Facebook'
-import Linkedin from 'mdi-material-ui/Linkedin'
-import GooglePlus from 'mdi-material-ui/GooglePlus'
-import ShareVariant from 'mdi-material-ui/ShareVariant'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // Styled Grid component
 const StyledGrid = styled(Grid)(({ theme }) => ({
@@ -81,8 +76,8 @@ const CardMobile = () => {
           </CardContent>
           <CardActions className='card-action-dense'>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-              <Button>
-                <CartPlus fontSize='small' sx={{ mr: 2 }} />
+              <Button sx={{ '& svg': { mr: 2 } }}>
+                <Icon icon='mdi:cart-plus' fontSize={20} />
                 Add to Card
               </Button>
               <IconButton
@@ -93,7 +88,7 @@ const CardMobile = () => {
                 aria-controls='long-menu'
                 aria-expanded={open ? 'true' : undefined}
               >
-                <ShareVariant fontSize='small' />
+                <Icon icon='mdi:share-variant' fontSize={20} />
               </IconButton>
               <Menu
                 open={open}
@@ -105,16 +100,16 @@ const CardMobile = () => {
                 }}
               >
                 <MenuItem onClick={handleClose}>
-                  <Facebook />
+                  <Icon icon='mdi:facebook' />
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Twitter />
+                  <Icon icon='mdi:twitter' />
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Linkedin />
+                  <Icon icon='mdi:linkedin' />
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <GooglePlus />
+                  <Icon icon='mdi:google-plus' />
                 </MenuItem>
               </Menu>
             </Box>

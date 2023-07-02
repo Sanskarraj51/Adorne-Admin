@@ -1,45 +1,48 @@
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
+import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import ArrowUp from 'mdi-material-ui/ArrowUp'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomChip from 'src/@core/components/mui/chip'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
+const series = [
+  {
+    data: [280, 200, 220, 180, 270, 250, 70, 90, 200, 150, 160, 100, 150, 100, 50]
+  }
+]
+
 const ApexLineChart = () => {
+  // ** Hook
+  const theme = useTheme()
+
   const options = {
     chart: {
       parentHeightOffset: 0,
       zoom: { enabled: false },
       toolbar: { show: false }
     },
+    colors: ['#ff9f43'],
+    stroke: { curve: 'straight' },
+    dataLabels: { enabled: false },
     markers: {
       strokeWidth: 7,
       strokeOpacity: 1,
       colors: ['#ff9f43'],
       strokeColors: ['#fff']
     },
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      curve: 'straight'
-    },
-    colors: ['#ff9f43'],
     grid: {
+      padding: { top: -10 },
+      borderColor: theme.palette.divider,
       xaxis: {
-        lines: {
-          show: true
-        }
-      },
-      padding: {
-        top: -10
+        lines: { show: true }
       }
     },
     tooltip: {
@@ -49,7 +52,20 @@ const ApexLineChart = () => {
         </div>`
       }
     },
+    yaxis: {
+      labels: {
+        style: { colors: theme.palette.text.disabled }
+      }
+    },
     xaxis: {
+      axisBorder: { show: false },
+      axisTicks: { color: theme.palette.divider },
+      crosshairs: {
+        stroke: { color: theme.palette.divider }
+      },
+      labels: {
+        style: { colors: theme.palette.text.disabled }
+      },
       categories: [
         '7/12',
         '8/12',
@@ -70,19 +86,11 @@ const ApexLineChart = () => {
     }
   }
 
-  const series = [
-    {
-      data: [280, 200, 220, 180, 270, 250, 70, 90, 200, 150, 160, 100, 150, 100, 50]
-    }
-  ]
-
   return (
     <Card>
       <CardHeader
         title='Balance'
-        titleTypographyProps={{ variant: 'h6' }}
         subheader='Commercial networks & enterprises'
-        subheaderTypographyProps={{ variant: 'caption' }}
         sx={{
           flexDirection: ['column', 'row'],
           alignItems: ['flex-start', 'center'],
@@ -99,8 +107,8 @@ const ApexLineChart = () => {
               color='success'
               sx={{ fontWeight: 500, borderRadius: 1, fontSize: '0.875rem' }}
               label={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ArrowUp sx={{ fontSize: '1rem', mr: 1 }} />
+                <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 1 } }}>
+                  <Icon icon='mdi:arrow-up' fontSize='1rem' />
                   <span>22%</span>
                 </Box>
               }
@@ -109,7 +117,7 @@ const ApexLineChart = () => {
         }
       />
       <CardContent>
-        <ReactApexcharts options={options} series={series} type='line' height={400} />
+        <ReactApexcharts type='line' height={400} options={options} series={series} />
       </CardContent>
     </Card>
   )

@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState, useEffect, forwardRef } from 'react'
+import { useState, useEffect, forwardRef } from 'react'
 
 // ** Next Import
 import Link from 'next/link'
@@ -8,7 +8,6 @@ import Link from 'next/link'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
-import Menu from '@mui/material/Menu'
 import Tooltip from '@mui/material/Tooltip'
 import { styled } from '@mui/material/styles'
 import MenuItem from '@mui/material/MenuItem'
@@ -19,23 +18,11 @@ import InputLabel from '@mui/material/InputLabel'
 import Typography from '@mui/material/Typography'
 import FormControl from '@mui/material/FormControl'
 import CardContent from '@mui/material/CardContent'
-import { DataGrid } from '@mui/x-data-grid'
 import Select from '@mui/material/Select'
+import { DataGrid } from '@mui/x-data-grid'
 
-// ** Icons Imports
-import Send from 'mdi-material-ui/Send'
-import Check from 'mdi-material-ui/Check'
-import ChartPie from 'mdi-material-ui/ChartPie'
-import Download from 'mdi-material-ui/Download'
-import ArrowDown from 'mdi-material-ui/ArrowDown'
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import TrendingUp from 'mdi-material-ui/TrendingUp'
-import ContentCopy from 'mdi-material-ui/ContentCopy'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import PencilOutline from 'mdi-material-ui/PencilOutline'
-import DeleteOutline from 'mdi-material-ui/DeleteOutline'
-import InformationOutline from 'mdi-material-ui/InformationOutline'
-import ContentSaveOutline from 'mdi-material-ui/ContentSaveOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Imports
 import format from 'date-fns/format'
@@ -51,79 +38,26 @@ import { getInitials } from 'src/@core/utils/get-initials'
 // ** Custom Components Imports
 import CustomChip from 'src/@core/components/mui/chip'
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import OptionsMenu from 'src/@core/components/option-menu'
 import TableHeader from 'src/views/apps/invoice/list/TableHeader'
-
-// ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
 
 // ** Styled Components
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
 // ** Styled component for the link in the dataTable
-const StyledLink = styled('a')(({ theme }) => ({
+const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
   color: theme.palette.primary.main
 }))
 
-const RowOptions = ({ id }) => {
-  // ** State
-  const [anchorEl, setAnchorEl] = useState(null)
-  const rowOptionsOpen = Boolean(anchorEl)
-
-  const handleRowOptionsClick = event => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleRowOptionsClose = () => {
-    setAnchorEl(null)
-  }
-
-  return (
-    <Fragment>
-      <IconButton size='small' onClick={handleRowOptionsClick}>
-        <DotsVertical />
-      </IconButton>
-      <Menu
-        keepMounted
-        anchorEl={anchorEl}
-        open={rowOptionsOpen}
-        onClose={handleRowOptionsClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-      >
-        <MenuItem>
-          <Download fontSize='small' sx={{ mr: 2 }} />
-          Download
-        </MenuItem>
-        <Link href={`/apps/invoice/edit/${id}`} passHref>
-          <MenuItem>
-            <PencilOutline fontSize='small' sx={{ mr: 2 }} />
-            Edit
-          </MenuItem>
-        </Link>
-        <MenuItem>
-          <ContentCopy fontSize='small' sx={{ mr: 2 }} />
-          Duplicate
-        </MenuItem>
-      </Menu>
-    </Fragment>
-  )
-}
-
 // ** Vars
 const invoiceStatusObj = {
-  Sent: { color: 'secondary', icon: <Send sx={{ fontSize: '1.25rem' }} /> },
-  Paid: { color: 'success', icon: <Check sx={{ fontSize: '1.25rem' }} /> },
-  Draft: { color: 'primary', icon: <ContentSaveOutline sx={{ fontSize: '1.25rem' }} /> },
-  'Partial Payment': { color: 'warning', icon: <ChartPie sx={{ fontSize: '1.25rem' }} /> },
-  'Past Due': { color: 'error', icon: <InformationOutline sx={{ fontSize: '1.25rem' }} /> },
-  Downloaded: { color: 'info', icon: <ArrowDown sx={{ fontSize: '1.25rem' }} /> }
+  Sent: { color: 'secondary', icon: 'mdi:send' },
+  Paid: { color: 'success', icon: 'mdi:check' },
+  Draft: { color: 'primary', icon: 'mdi:content-save-outline' },
+  'Partial Payment': { color: 'warning', icon: 'mdi:chart-pie' },
+  'Past Due': { color: 'error', icon: 'mdi:information-outline' },
+  Downloaded: { color: 'info', icon: 'mdi:arrow-down' }
 }
 
 // ** renders client column
@@ -149,21 +83,20 @@ const defaultColumns = [
     field: 'id',
     minWidth: 80,
     headerName: '#',
-    renderCell: ({ row }) => (
-      <Link href={`/apps/invoice/preview/${row.id}`} passHref>
-        <StyledLink>{`#${row.id}`}</StyledLink>
-      </Link>
-    )
+    renderCell: ({ row }) => <LinkStyled href={`/apps/invoice/preview/${row.id}`}>{`#${row.id}`}</LinkStyled>
   },
   {
     flex: 0.1,
     minWidth: 80,
     field: 'invoiceStatus',
-    renderHeader: () => <TrendingUp fontSize='small' sx={{ color: 'action.active' }} />,
+    renderHeader: () => (
+      <Box sx={{ display: 'flex', color: 'action.active' }}>
+        <Icon icon='mdi:trending-up' fontSize={20} />
+      </Box>
+    ),
     renderCell: ({ row }) => {
       const { dueDate, balance, invoiceStatus } = row
       const color = invoiceStatusObj[invoiceStatus] ? invoiceStatusObj[invoiceStatus].color : 'primary'
-      const Icon = invoiceStatusObj[invoiceStatus] ? invoiceStatusObj[invoiceStatus].icon : null
 
       return (
         <Tooltip
@@ -186,7 +119,7 @@ const defaultColumns = [
           }
         >
           <CustomAvatar skin='light' color={color} sx={{ width: 34, height: 34 }}>
-            {Icon}
+            <Icon icon={invoiceStatusObj[invoiceStatus].icon} fontSize='1.25rem' />
           </CustomAvatar>
         </Tooltip>
       )
@@ -265,11 +198,11 @@ const InvoiceList = () => {
   // ** State
   const [dates, setDates] = useState([])
   const [value, setValue] = useState('')
-  const [pageSize, setPageSize] = useState(10)
   const [statusValue, setStatusValue] = useState('')
   const [endDateRange, setEndDateRange] = useState(null)
   const [selectedRows, setSelectedRows] = useState([])
-  const [startDateRange, setStartDateRange] = useState(new Date())
+  const [startDateRange, setStartDateRange] = useState(null)
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
 
   // ** Hooks
   const dispatch = useDispatch()
@@ -313,54 +246,70 @@ const InvoiceList = () => {
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Tooltip title='Delete Invoice'>
             <IconButton size='small' sx={{ mr: 0.5 }} onClick={() => dispatch(deleteInvoice(row.id))}>
-              <DeleteOutline />
+              <Icon icon='mdi:delete-outline' />
             </IconButton>
           </Tooltip>
           <Tooltip title='View'>
-            <Box>
-              <Link href={`/apps/invoice/preview/${row.id}`} passHref>
-                <IconButton size='small' component='a' sx={{ textDecoration: 'none', mr: 0.5 }}>
-                  <EyeOutline />
-                </IconButton>
-              </Link>
-            </Box>
+            <IconButton size='small' component={Link} sx={{ mr: 0.5 }} href={`/apps/invoice/preview/${row.id}`}>
+              <Icon icon='mdi:eye-outline' />
+            </IconButton>
           </Tooltip>
-          <RowOptions id={row.id} />
+          <OptionsMenu
+            iconProps={{ fontSize: 20 }}
+            iconButtonProps={{ size: 'small' }}
+            menuProps={{ sx: { '& .MuiMenuItem-root svg': { mr: 2 } } }}
+            options={[
+              {
+                text: 'Download',
+                icon: <Icon icon='mdi:download' fontSize={20} />
+              },
+              {
+                text: 'Edit',
+                href: `/apps/invoice/edit/${row.id}`,
+                icon: <Icon icon='mdi:pencil-outline' fontSize={20} />
+              },
+              {
+                text: 'Duplicate',
+                icon: <Icon icon='mdi:content-copy' fontSize={20} />
+              }
+            ]}
+          />
         </Box>
       )
     }
   ]
 
   return (
-    <Grid container spacing={6}>
-      <Grid item xs={12}>
-        <Card>
-          <CardHeader title='Filters' />
-          <CardContent>
-            <Grid container spacing={6}>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth>
-                  <InputLabel id='invoice-status-select'>Invoice Status</InputLabel>
+    <DatePickerWrapper>
+      <Grid container spacing={6}>
+        <Grid item xs={12}>
+          <Card>
+            <CardHeader title='Filters' />
+            <CardContent>
+              <Grid container spacing={6}>
+                <Grid item xs={12} sm={6}>
+                  <FormControl fullWidth>
+                    <InputLabel id='invoice-status-select'>Invoice Status</InputLabel>
 
-                  <Select
-                    fullWidth
-                    value={statusValue}
-                    sx={{ mr: 4, mb: 2 }}
-                    label='Invoice Status'
-                    onChange={handleStatusValue}
-                    labelId='invoice-status-select'
-                  >
-                    <MenuItem value=''>none</MenuItem>
-                    <MenuItem value='downloaded'>Downloaded</MenuItem>
-                    <MenuItem value='draft'>Draft</MenuItem>
-                    <MenuItem value='paid'>Paid</MenuItem>
-                    <MenuItem value='past due'>Past Due</MenuItem>
-                    <MenuItem value='partial payment'>Partial Payment</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <DatePickerWrapper>
+                    <Select
+                      fullWidth
+                      value={statusValue}
+                      sx={{ mr: 4, mb: 2 }}
+                      label='Invoice Status'
+                      onChange={handleStatusValue}
+                      labelId='invoice-status-select'
+                    >
+                      <MenuItem value=''>none</MenuItem>
+                      <MenuItem value='downloaded'>Downloaded</MenuItem>
+                      <MenuItem value='draft'>Draft</MenuItem>
+                      <MenuItem value='paid'>Paid</MenuItem>
+                      <MenuItem value='partial payment'>Partial Payment</MenuItem>
+                      <MenuItem value='past due'>Past Due</MenuItem>
+                      <MenuItem value='sent'>Sent</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
                   <DatePicker
                     isClearable
                     selectsRange
@@ -381,31 +330,30 @@ const InvoiceList = () => {
                       />
                     }
                   />
-                </DatePickerWrapper>
+                </Grid>
               </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12}>
+          <Card>
+            <TableHeader value={value} selectedRows={selectedRows} handleFilter={handleFilter} />
+            <DataGrid
+              autoHeight
+              pagination
+              rows={store.data}
+              columns={columns}
+              checkboxSelection
+              disableRowSelectionOnClick
+              pageSizeOptions={[10, 25, 50]}
+              paginationModel={paginationModel}
+              onPaginationModelChange={setPaginationModel}
+              onRowSelectionModelChange={rows => setSelectedRows(rows)}
+            />
+          </Card>
+        </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Card>
-          <TableHeader value={value} selectedRows={selectedRows} handleFilter={handleFilter} />
-          <DataGrid
-            autoHeight
-            pagination
-            rows={store.data}
-            columns={columns}
-            checkboxSelection
-            disableSelectionOnClick
-            pageSize={Number(pageSize)}
-            rowsPerPageOptions={[10, 25, 50]}
-            sx={{ '& .MuiDataGrid-columnHeaders': { borderRadius: 0 } }}
-            onSelectionModelChange={rows => setSelectedRows(rows)}
-            onPageSizeChange={newPageSize => setPageSize(newPageSize)}
-          />
-        </Card>
-      </Grid>
-    </Grid>
+    </DatePickerWrapper>
   )
 }
 

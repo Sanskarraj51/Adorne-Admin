@@ -25,8 +25,8 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Payment from 'payment'
 import Cards from 'react-credit-cards'
 
-// ** Icons Imports
-import ChevronDown from 'mdi-material-ui/ChevronDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Styled Component Imports
 import CardWrapper from 'src/@core/styles/libs/react-credit-cards'
@@ -88,7 +88,7 @@ const FormLayoutsCollapsible = () => {
     <form onSubmit={e => e.preventDefault()}>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
-          expandIcon={<ChevronDown />}
+          expandIcon={<Icon icon='mdi:chevron-down' />}
           id='form-layouts-collapsible-header-1'
           aria-controls='form-layouts-collapsible-content-1'
         >
@@ -96,7 +96,7 @@ const FormLayoutsCollapsible = () => {
             Delivery Address
           </Typography>
         </AccordionSummary>
-        <Divider sx={{ m: 0 }} />
+        <Divider sx={{ m: '0 !important' }} />
         <AccordionDetails>
           <Grid container spacing={5}>
             <Grid item xs={12} sm={6}>
@@ -153,7 +153,7 @@ const FormLayoutsCollapsible = () => {
 
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <AccordionSummary
-          expandIcon={<ChevronDown />}
+          expandIcon={<Icon icon='mdi:chevron-down' />}
           id='form-layouts-collapsible-header-2'
           aria-controls='form-layouts-collapsible-content-2'
         >
@@ -161,7 +161,7 @@ const FormLayoutsCollapsible = () => {
             Delivery Options
           </Typography>
         </AccordionSummary>
-        <Divider sx={{ m: 0 }} />
+        <Divider sx={{ m: '0 !important' }} />
         <AccordionDetails sx={{ pt: 6, pb: 6 }}>
           <BoxWrapper
             onClick={() => setOption('standard')}
@@ -225,7 +225,7 @@ const FormLayoutsCollapsible = () => {
 
       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <AccordionSummary
-          expandIcon={<ChevronDown />}
+          expandIcon={<Icon icon='mdi:chevron-down' />}
           id='form-layouts-collapsible-header-3'
           aria-controls='form-layouts-collapsible-content-3'
         >
@@ -233,7 +233,7 @@ const FormLayoutsCollapsible = () => {
             Payment Method
           </Typography>
         </AccordionSummary>
-        <Divider sx={{ m: 0 }} />
+        <Divider sx={{ m: '0 !important' }} />
         <AccordionDetails>
           <Grid container spacing={5}>
             <Grid item xs={12}>
@@ -322,13 +322,13 @@ const FormLayoutsCollapsible = () => {
             </Grid>
           </Grid>
         </AccordionDetails>
-        <Divider sx={{ m: 0 }} />
+        <Divider sx={{ m: '0 !important' }} />
         <AccordionDetails>
           <Button size='large' type='submit' variant='contained' sx={{ mr: 4 }}>
             Place Order
           </Button>
-          <Button size='large' variant='outlined'>
-            Cancel
+          <Button type='reset' size='large' variant='outlined' color='secondary'>
+            Reset
           </Button>
         </AccordionDetails>
       </Accordion>

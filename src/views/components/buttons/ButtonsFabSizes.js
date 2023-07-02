@@ -4,35 +4,34 @@ import { Fragment } from 'react'
 // ** MUI Imports
 import Fab from '@mui/material/Fab'
 
-// ** Icons Import
-import Plus from 'mdi-material-ui/Plus'
-import NavigationOutline from 'mdi-material-ui/NavigationOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ButtonsFabSizes = () => {
   return (
     <Fragment>
       <div className='demo-space-x'>
         <Fab color='primary' aria-label='add' size='small'>
-          <Plus />
+          <Icon icon='mdi:plus' />
         </Fab>
         <Fab color='primary' aria-label='add' size='medium'>
-          <Plus />
+          <Icon icon='mdi:plus' />
         </Fab>
         <Fab color='primary' aria-label='add' size='large'>
-          <Plus />
+          <Icon icon='mdi:plus' />
         </Fab>
       </div>
       <div className='demo-space-x'>
-        <Fab variant='extended' size='small'>
-          <NavigationOutline sx={{ mr: 1 }} />
+        <Fab variant='extended' size='small' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:navigation-outline' />
           Navigate
         </Fab>
-        <Fab variant='extended' size='medium'>
-          <NavigationOutline sx={{ mr: 1 }} />
+        <Fab variant='extended' size='medium' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:navigation-outline' />
           Navigate
         </Fab>
-        <Fab variant='extended' size='large'>
-          <NavigationOutline sx={{ mr: 1 }} />
+        <Fab variant='extended' size='large' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:navigation-outline' />
           Navigate
         </Fab>
       </div>

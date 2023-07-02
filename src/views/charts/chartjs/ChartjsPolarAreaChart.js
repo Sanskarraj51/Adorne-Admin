@@ -1,18 +1,17 @@
 // ** MUI Imports
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
-
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
 
 // ** Third Party Imports
 import { PolarArea } from 'react-chartjs-2'
 
+// ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
+
 const ChartjsPolarAreaChart = props => {
   // ** Props
-  const { info, grey, green, yellow, primary, warning, labelColor } = props
+  const { info, grey, green, yellow, primary, warning, legendColor } = props
 
   const options = {
     responsive: true,
@@ -36,7 +35,7 @@ const ChartjsPolarAreaChart = props => {
         labels: {
           padding: 25,
           boxWidth: 9,
-          color: labelColor,
+          color: legendColor,
           usePointStyle: true
         }
       }
@@ -59,15 +58,16 @@ const ChartjsPolarAreaChart = props => {
     <Card>
       <CardHeader
         title='Average Skills'
-        titleTypographyProps={{ variant: 'h6' }}
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical fontSize='small' />
-          </IconButton>
+          <OptionsMenu
+            iconProps={{ fontSize: 20 }}
+            options={['Refresh', 'Edit', 'Share']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options', sx: { color: 'text.secondary' } }}
+          />
         }
       />
       <CardContent>
-        <PolarArea data={data} options={options} height={350} />
+        <PolarArea data={data} height={350} options={options} />
       </CardContent>
     </Card>
   )

@@ -25,8 +25,7 @@ import TableCell from '@mui/material/TableCell'
 import CardContent from '@mui/material/CardContent'
 
 // ** Icon Imports
-import Plus from 'mdi-material-ui/Plus'
-import Close from 'mdi-material-ui/Close'
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Imports
 import axios from 'axios'
@@ -37,9 +36,6 @@ import themeConfig from 'src/configs/themeConfig'
 
 // ** Custom Component Imports
 import Repeater from 'src/@core/components/repeater'
-
-// ** Styles
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
 const CustomInput = forwardRef(({ ...props }, ref) => {
   return (
@@ -221,7 +217,7 @@ const EditCard = ({ data }) => {
                     {themeConfig.templateName}
                   </Typography>
                 </Box>
-                <Box>
+                <div>
                   <Typography variant='body2' sx={{ mb: 1 }}>
                     Office 149, 450 South Brand Brooklyn
                   </Typography>
@@ -229,58 +225,54 @@ const EditCard = ({ data }) => {
                     San Diego County, CA 91905, USA
                   </Typography>
                   <Typography variant='body2'>+1 (123) 456 7891, +44 (876) 543 2198</Typography>
-                </Box>
+                </div>
               </Box>
             </Grid>
             <Grid item xl={6} xs={12}>
-              <DatePickerWrapper sx={{ '& .react-datepicker-wrapper': { width: 'auto' } }}>
-                <Box
-                  sx={{ display: 'flex', flexDirection: 'column', alignItems: { xl: 'flex-end', xs: 'flex-start' } }}
-                >
-                  <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
-                    <Typography variant='h6' sx={{ mr: 1, width: '105px' }}>
-                      Invoice
-                    </Typography>
-                    <TextField
-                      size='small'
-                      value={data.invoice.id}
-                      sx={{ width: { sm: '250px', xs: '170px' } }}
-                      InputProps={{
-                        disabled: true,
-                        startAdornment: <InputAdornment position='start'>#</InputAdornment>
-                      }}
-                    />
-                  </Box>
-                  <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
-                    <Typography variant='body2' sx={{ mr: 2, width: '100px' }}>
-                      Date Issued:
-                    </Typography>
-                    <DatePicker
-                      id='issue-date'
-                      selected={issueDate}
-                      showDisabledMonthNavigation
-                      customInput={<CustomInput />}
-                      onChange={date => setIssueDate(date)}
-                    />
-                  </Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Typography variant='body2' sx={{ mr: 2, width: '100px' }}>
-                      Date Due:
-                    </Typography>
-                    <DatePicker
-                      selected={dueDate}
-                      showDisabledMonthNavigation
-                      customInput={<CustomInput />}
-                      onChange={date => setDueDate(date)}
-                    />
-                  </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: { xl: 'flex-end', xs: 'flex-start' } }}>
+                <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
+                  <Typography variant='h6' sx={{ mr: 1, width: '105px' }}>
+                    Invoice
+                  </Typography>
+                  <TextField
+                    size='small'
+                    value={data.invoice.id}
+                    sx={{ width: { sm: '250px', xs: '170px' } }}
+                    InputProps={{
+                      disabled: true,
+                      startAdornment: <InputAdornment position='start'>#</InputAdornment>
+                    }}
+                  />
                 </Box>
-              </DatePickerWrapper>
+                <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
+                  <Typography variant='body2' sx={{ mr: 2, width: '100px' }}>
+                    Date Issued:
+                  </Typography>
+                  <DatePicker
+                    id='issue-date'
+                    selected={issueDate}
+                    showDisabledMonthNavigation
+                    customInput={<CustomInput />}
+                    onChange={date => setIssueDate(date)}
+                  />
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Typography variant='body2' sx={{ mr: 2, width: '100px' }}>
+                    Date Due:
+                  </Typography>
+                  <DatePicker
+                    selected={dueDate}
+                    showDisabledMonthNavigation
+                    customInput={<CustomInput />}
+                    onChange={date => setDueDate(date)}
+                  />
+                </Box>
+              </Box>
             </Grid>
           </Grid>
         </CardContent>
 
-        <Divider sx={{ mt: 1 }} />
+        <Divider sx={{ mt: theme => `${theme.spacing(1)} !important` }} />
 
         <CardContent sx={{ pb: 2 }}>
           <Grid container>
@@ -302,7 +294,7 @@ const EditCard = ({ data }) => {
                   ))}
               </Select>
               {selectedClient !== null ? (
-                <Box>
+                <div>
                   <Typography variant='body2' sx={{ mb: 1, color: 'text.primary' }}>
                     {selectedClient.company}
                   </Typography>
@@ -315,7 +307,7 @@ const EditCard = ({ data }) => {
                   <Typography variant='body2' sx={{ mb: 1, color: 'text.primary' }}>
                     {selectedClient.companyEmail}
                   </Typography>
-                </Box>
+                </div>
               ) : null}
             </Grid>
             <Grid item xs={12} sm={6} sx={{ display: 'flex', justifyContent: ['flex-start', 'flex-end'] }}>
@@ -374,7 +366,7 @@ const EditCard = ({ data }) => {
           </Grid>
         </CardContent>
 
-        <Divider sx={{ mb: 1.25 }} />
+        <Divider sx={{ mb: theme => `${theme.spacing(1.25)} !important` }} />
 
         <RepeaterWrapper>
           <Repeater count={count}>
@@ -472,7 +464,7 @@ const EditCard = ({ data }) => {
                       </Grid>
                       <InvoiceAction>
                         <IconButton size='small' onClick={deleteForm}>
-                          <Close fontSize='small' />
+                          <Icon icon='mdi:close' fontSize={20} />
                         </IconButton>
                       </InvoiceAction>
                     </RepeatingContent>
@@ -487,8 +479,8 @@ const EditCard = ({ data }) => {
               <Button
                 size='small'
                 variant='contained'
-                startIcon={<Plus fontSize='small' />}
                 onClick={() => setCount(count + 1)}
+                startIcon={<Icon icon='mdi:plus' fontSize={20} />}
               >
                 Add Item
               </Button>
@@ -539,7 +531,9 @@ const EditCard = ({ data }) => {
                   21%
                 </Typography>
               </CalcWrapper>
-              <Divider sx={{ mt: 5, mb: 1.5 }} />
+              <Divider
+                sx={{ mt: theme => `${theme.spacing(5)} !important`, mb: theme => `${theme.spacing(1.5)} !important` }}
+              />
               <CalcWrapper>
                 <Typography variant='body2'>Total:</Typography>
                 <Typography variant='body2' sx={{ fontWeight: 600, color: 'text.primary', lineHeight: '.25px' }}>
@@ -550,7 +544,7 @@ const EditCard = ({ data }) => {
           </Grid>
         </CardContent>
 
-        <Divider sx={{ my: 1 }} />
+        <Divider sx={{ my: theme => `${theme.spacing(1)} !important` }} />
 
         <CardContent sx={{ pt: 4 }}>
           <InputLabel htmlFor='invoice-note' sx={{ mb: 2 }}>

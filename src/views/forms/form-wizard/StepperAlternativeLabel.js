@@ -20,9 +20,8 @@ import OutlinedInput from '@mui/material/OutlinedInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import Select from '@mui/material/Select'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import StepperCustomDot from './StepperCustomDot'
@@ -105,10 +104,6 @@ const StepperAlternativeLabel = () => {
     setState({ ...state, showPassword: !state.showPassword })
   }
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
-  }
-
   // Handle Confirm Password
   const handleConfirmChange = prop => event => {
     setState({ ...state, [prop]: event.target.value })
@@ -116,10 +111,6 @@ const StepperAlternativeLabel = () => {
 
   const handleClickShowConfirmPassword = () => {
     setState({ ...state, showPassword2: !state.showPassword2 })
-  }
-
-  const handleMouseDownConfirmPassword = event => {
-    event.preventDefault()
   }
 
   // Handle Language
@@ -165,10 +156,10 @@ const StepperAlternativeLabel = () => {
                       <IconButton
                         edge='end'
                         onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
+                        onMouseDown={e => e.preventDefault()}
                         aria-label='toggle password visibility'
                       >
-                        {state.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                        <Icon icon={state.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                       </IconButton>
                     </InputAdornment>
                   }
@@ -188,11 +179,11 @@ const StepperAlternativeLabel = () => {
                     <InputAdornment position='end'>
                       <IconButton
                         edge='end'
+                        onMouseDown={e => e.preventDefault()}
                         aria-label='toggle password visibility'
                         onClick={handleClickShowConfirmPassword}
-                        onMouseDown={handleMouseDownConfirmPassword}
                       >
-                        {state.showPassword2 ? <EyeOutline /> : <EyeOffOutline />}
+                        <Icon icon={state.showPassword2 ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                       </IconButton>
                     </InputAdornment>
                   }

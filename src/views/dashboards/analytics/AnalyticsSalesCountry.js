@@ -2,13 +2,10 @@
 import Card from '@mui/material/Card'
 import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-
 // ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 // ** Util Import
@@ -39,8 +36,16 @@ const AnalyticsSalesCountry = () => {
         startingShape: 'rounded'
       }
     },
+    dataLabels: {
+      offsetY: 8,
+      style: {
+        fontWeight: 500,
+        fontSize: '0.875rem'
+      }
+    },
     grid: {
       strokeDashArray: 8,
+      borderColor: theme.palette.divider,
       xaxis: {
         lines: { show: true }
       },
@@ -49,9 +54,9 @@ const AnalyticsSalesCountry = () => {
       },
       padding: {
         top: -18,
-        left: 26,
-        right: 50,
-        bottom: 6
+        left: 21,
+        right: 33,
+        bottom: 10
       }
     },
     colors: [
@@ -75,11 +80,22 @@ const AnalyticsSalesCountry = () => {
       axisBorder: { show: false },
       categories: ['US', 'IN', 'JA', 'CA', 'AU'],
       labels: {
-        formatter: val => `${Number(val) / 1000}k`
+        formatter: val => `${Number(val) / 1000}k`,
+        style: {
+          fontSize: '0.875rem',
+          colors: theme.palette.text.disabled
+        }
       }
     },
     yaxis: {
-      labels: { align: theme.direction === 'rtl' ? 'right' : 'left' }
+      labels: {
+        align: theme.direction === 'rtl' ? 'right' : 'left',
+        style: {
+          fontWeight: 600,
+          fontSize: '0.875rem',
+          colors: theme.palette.text.primary
+        }
+      }
     }
   }
 
@@ -91,9 +107,10 @@ const AnalyticsSalesCountry = () => {
         subheaderTypographyProps={{ sx: { lineHeight: 1.429 } }}
         titleTypographyProps={{ sx: { letterSpacing: '0.15px' } }}
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
       <CardContent

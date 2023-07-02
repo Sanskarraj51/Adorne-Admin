@@ -1,8 +1,8 @@
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import { DataGrid } from '@mui/x-data-grid'
 import CardHeader from '@mui/material/CardHeader'
+import { DataGrid } from '@mui/x-data-grid'
 
 // ** Data Import
 import { rows } from 'src/@fake-db/table/static-data'
@@ -33,8 +33,9 @@ const columns = [
     type: 'date',
     minWidth: 130,
     editable: true,
+    headerName: 'Date',
     field: 'start_date',
-    headerName: 'Date'
+    valueGetter: params => new Date(params.value)
   },
   {
     flex: 0.15,

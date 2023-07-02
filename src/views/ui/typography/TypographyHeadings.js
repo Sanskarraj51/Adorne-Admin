@@ -15,7 +15,7 @@ const DemoGrid = styled(Grid)(({ theme }) => ({
 const TypographyHeadings = () => {
   return (
     <Card>
-      <CardHeader title='Headings' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Headings' />
       <CardContent>
         <Grid container spacing={6}>
           <Grid item xs={12} sm={2} sx={{ display: 'flex', alignItems: 'center' }}>

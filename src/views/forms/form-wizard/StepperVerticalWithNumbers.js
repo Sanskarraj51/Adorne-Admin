@@ -66,7 +66,7 @@ const StepperVerticalWithNumbers = () => {
 
   return (
     <Card>
-      <CardHeader title='Vertical Stepper with Numbers' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Vertical Stepper with Numbers' />
       <CardContent>
         <StepperWrapper>
           <Stepper activeStep={activeStep} orientation='vertical'>
@@ -75,7 +75,7 @@ const StepperVerticalWithNumbers = () => {
                 <Step key={index} className={clsx({ active: activeStep === index })}>
                   <StepLabel StepIconComponent={StepperCustomDot}>
                     <div className='step-label'>
-                      <Typography className='step-number'>0{index + 1}</Typography>
+                      <Typography className='step-number'>{`0${index + 1}`}</Typography>
                       <div>
                         <Typography className='step-title'>{step.title}</Typography>
                         <Typography className='step-subtitle'>{step.subtitle}</Typography>

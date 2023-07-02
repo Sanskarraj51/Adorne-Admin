@@ -32,9 +32,7 @@ const TableHeader = props => {
         disabled={selectedRows && selectedRows.length === 0}
         renderValue={selected => (selected.length === 0 ? 'Actions' : selected)}
       >
-        <MenuItem value='' disabled>
-          Actions
-        </MenuItem>
+        <MenuItem disabled>Actions</MenuItem>
         <MenuItem value='Delete'>Delete</MenuItem>
         <MenuItem value='Edit'>Edit</MenuItem>
         <MenuItem value='Send'>Send</MenuItem>
@@ -47,12 +45,9 @@ const TableHeader = props => {
           sx={{ mr: 4, mb: 2, maxWidth: '180px' }}
           onChange={e => handleFilter(e.target.value)}
         />
-
-        <Link href='/apps/invoice/add' passHref>
-          <Button sx={{ mb: 2 }} variant='contained'>
-            Create Invoice
-          </Button>
-        </Link>
+        <Button sx={{ mb: 2 }} component={Link} variant='contained' href='/apps/invoice/add'>
+          Create Invoice
+        </Button>
       </Box>
     </Box>
   )

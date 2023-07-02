@@ -17,16 +17,8 @@ import CardContent from '@mui/material/CardContent'
 import Fade from '@mui/material/Fade'
 import DialogContent from '@mui/material/DialogContent'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import Check from 'mdi-material-ui/Check'
-import ArrowLeft from 'mdi-material-ui/ArrowLeft'
-import ArrowRight from 'mdi-material-ui/ArrowRight'
-import ChartDonut from 'mdi-material-ui/ChartDonut'
-import CubeOutline from 'mdi-material-ui/CubeOutline'
-import StarOutline from 'mdi-material-ui/StarOutline'
-import ClipboardOutline from 'mdi-material-ui/ClipboardOutline'
-import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Hook Imports
 import { useSettings } from 'src/@core/hooks/useSettings'
@@ -45,7 +37,7 @@ const TabLabel = props => {
   const { icon, title, subtitle, active } = props
 
   return (
-    <Box>
+    <div>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Avatar
           variant='rounded'
@@ -63,7 +55,7 @@ const TabLabel = props => {
           </Typography>
         </Box>
       </Box>
-    </Box>
+    </div>
   )
 }
 const tabsArr = ['detailsTab', 'frameworkTab', 'DatabaseTab', 'paymentTab', 'submitTab']
@@ -83,8 +75,8 @@ const DialogCreateApp = () => {
     setShow(false)
     setActiveTab('detailsTab')
   }
-  const NextArrow = direction === 'ltr' ? ArrowRight : ArrowLeft
-  const PreviousArrow = direction === 'ltr' ? ArrowLeft : ArrowRight
+  const nextArrow = direction === 'ltr' ? 'mdi:arrow-right' : 'mdi:arrow-left'
+  const previousArrow = direction === 'ltr' ? 'mdi:arrow-left' : 'mdi:arrow-right'
 
   const renderTabFooter = () => {
     const prevTab = tabsArr[tabsArr.indexOf(activeTab) - 1]
@@ -95,16 +87,16 @@ const DialogCreateApp = () => {
         <Button
           variant='outlined'
           color='secondary'
-          startIcon={<PreviousArrow />}
           disabled={activeTab === 'detailsTab'}
           onClick={() => setActiveTab(prevTab)}
+          startIcon={<Icon icon={previousArrow} />}
         >
           Previous
         </Button>
         <Button
           variant='contained'
-          endIcon={activeTab === 'submitTab' ? <Check /> : <NextArrow />}
           color={activeTab === 'submitTab' ? 'success' : 'primary'}
+          endIcon={<Icon icon={activeTab === 'submitTab' ? 'mdi:check' : nextArrow} />}
           onClick={() => {
             if (activeTab !== 'submitTab') {
               setActiveTab(nextTab)
@@ -121,8 +113,8 @@ const DialogCreateApp = () => {
 
   return (
     <Card>
-      <CardContent sx={{ textAlign: 'center' }}>
-        <CubeOutline sx={{ mb: 2, fontSize: '2rem' }} />
+      <CardContent sx={{ textAlign: 'center', '& svg': { mb: 2 } }}>
+        <Icon icon='mdi:cube-outline' fontSize='2rem' />
         <Typography variant='h6' sx={{ mb: 4 }}>
           Create App
         </Typography>
@@ -145,14 +137,13 @@ const DialogCreateApp = () => {
         <DialogContent
           sx={{
             position: 'relative',
-            pr: { xs: 5, sm: 12 },
-            pl: { xs: 4, sm: 11 },
-            pt: { xs: 8, sm: 12.5 },
-            pb: { xs: 5, sm: 12.5 }
+            pr: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            pl: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(11)} !important`],
+            py: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
           }}
         >
           <IconButton size='small' onClick={handleClose} sx={{ position: 'absolute', right: '1rem', top: '1rem' }}>
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
           <Box sx={{ mb: 3, textAlign: 'center' }}>
             <Typography variant='h5' sx={{ mb: 3, lineHeight: '2rem' }}>
@@ -185,7 +176,7 @@ const DialogCreateApp = () => {
                     <TabLabel
                       title='Details'
                       subtitle='Enter Details'
-                      icon={<ClipboardOutline />}
+                      icon={<Icon icon='mdi:clipboard-outline' />}
                       active={activeTab === 'detailsTab'}
                     />
                   }
@@ -196,7 +187,7 @@ const DialogCreateApp = () => {
                   label={
                     <TabLabel
                       title='Frameworks'
-                      icon={<StarOutline />}
+                      icon={<Icon icon='mdi:star-outline' />}
                       subtitle='Select Framework'
                       active={activeTab === 'frameworkTab'}
                     />
@@ -210,7 +201,7 @@ const DialogCreateApp = () => {
                       title='Database'
                       active={activeTab === 'DatabaseTab'}
                       subtitle='Select Database'
-                      icon={<ChartDonut />}
+                      icon={<Icon icon='mdi:chart-donut' />}
                     />
                   }
                 />
@@ -222,7 +213,7 @@ const DialogCreateApp = () => {
                       title='Billing'
                       active={activeTab === 'paymentTab'}
                       subtitle='Payment details'
-                      icon={<CreditCardOutline />}
+                      icon={<Icon icon='mdi:credit-card-outline' />}
                     />
                   }
                 />
@@ -230,27 +221,32 @@ const DialogCreateApp = () => {
                   disableRipple
                   value='submitTab'
                   label={
-                    <TabLabel title='Submit' subtitle='Submit' active={activeTab === 'submitTab'} icon={<Check />} />
+                    <TabLabel
+                      title='Submit'
+                      subtitle='Submit'
+                      icon={<Icon icon='mdi:check' />}
+                      active={activeTab === 'submitTab'}
+                    />
                   }
                 />
               </TabList>
-              <TabPanel value='detailsTab' sx={{ flexGrow: 1 }}>
+              <TabPanel value='detailsTab' sx={{ flexGrow: 1, p: '0 !important' }}>
                 <DialogTabDetails />
                 {renderTabFooter()}
               </TabPanel>
-              <TabPanel value='frameworkTab' sx={{ flexGrow: 1 }}>
+              <TabPanel value='frameworkTab' sx={{ flexGrow: 1, p: '0 !important' }}>
                 <DialogTabFramework />
                 {renderTabFooter()}
               </TabPanel>
-              <TabPanel value='DatabaseTab' sx={{ flexGrow: 1 }}>
+              <TabPanel value='DatabaseTab' sx={{ flexGrow: 1, p: '0 !important' }}>
                 <DialogTabDatabase />
                 {renderTabFooter()}
               </TabPanel>
-              <TabPanel value='paymentTab' sx={{ flexGrow: 1 }}>
+              <TabPanel value='paymentTab' sx={{ flexGrow: 1, p: '0 !important' }}>
                 <DialogTabBilling />
                 {renderTabFooter()}
               </TabPanel>
-              <TabPanel value='submitTab' sx={{ flexGrow: 1 }}>
+              <TabPanel value='submitTab' sx={{ flexGrow: 1, p: '0 !important' }}>
                 <Box sx={{ textAlign: 'center' }}>
                   <Typography variant='h6'>Submit</Typography>
                   <Typography variant='body2'>Submit to kickstart your project.</Typography>

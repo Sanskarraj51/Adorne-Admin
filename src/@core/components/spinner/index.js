@@ -1,9 +1,9 @@
-// ** MUI Import
-import Box from '@mui/material/Box'
+// ** MUI Imports
 import { useTheme } from '@mui/material/styles'
+import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 
-const FallbackSpinner = () => {
+const FallbackSpinner = ({ sx }) => {
   // ** Hook
   const theme = useTheme()
 
@@ -14,7 +14,8 @@ const FallbackSpinner = () => {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'column',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        ...sx
       }}
     >
       <svg width={80} fill='none' height={44} viewBox='0 0 268 150' xmlns='http://www.w3.org/2000/svg'>

@@ -1,6 +1,4 @@
-export const SliderColorsJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SliderColorsJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Slider from '@mui/material/Slider'
 import Typography from '@mui/material/Typography'
 
@@ -16,13 +14,9 @@ const SliderColors = () => {
 }
 
 export default SliderColors
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SliderBasicJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SliderBasicJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Slider from '@mui/material/Slider'
 import Typography from '@mui/material/Typography'
 
@@ -38,153 +32,34 @@ const SliderBasic = () => {
 }
 
 export default SliderBasic
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SliderCustomColorsJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
-import { styled } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
-import MuiSlider from '@mui/material/Slider'
-
-// ** Util Import
-import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
-
-// Styled component for a success Slider
-const SliderSuccess = styled(MuiSlider)(({ theme }) => ({
-  color: theme.palette.success.main,
-  '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
-    boxShadow: 0 0 0 {theme.spacing(2)} {hexToRGBA(theme.palette.success.main, 0.16)}
-  },
-  '@media(hover:none)': {
-    '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
-      boxShadow: 'none'
-    }
-  },
-  '& .MuiSlider-thumb.Mui-focusVisible.Mui-active': {
-    boxShadow: 0 0 0 {theme.spacing(3.5)} {hexToRGBA(theme.palette.success.main, 0.16)}
-  }
-}))
-
-// Styled component for a error Slider
-const SliderError = styled(MuiSlider)(({ theme }) => ({
-  color: theme.palette.error.main,
-  '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
-    boxShadow: 0 0 0 {theme.spacing(2)} {hexToRGBA(theme.palette.error.main, 0.16)}
-  },
-  '@media(hover:none)': {
-    '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
-      boxShadow: 'none'
-    }
-  },
-  '& .MuiSlider-thumb.Mui-focusVisible.Mui-active': {
-    boxShadow: 0 0 0 {theme.spacing(3.5)} {hexToRGBA(theme.palette.error.main, 0.16)}
-  }
-}))
-
-// Styled component for a warning Slider
-const SliderWarning = styled(MuiSlider)(({ theme }) => ({
-  color: theme.palette.warning.main,
-  '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
-    boxShadow: 0 0 0 {theme.spacing(2)} {hexToRGBA(theme.palette.warning.main, 0.16)}
-  },
-  '@media(hover:none)': {
-    '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
-      boxShadow: 'none'
-    }
-  },
-  '& .MuiSlider-thumb.Mui-focusVisible.Mui-active': {
-    boxShadow: 0 0 0 {theme.spacing(3.5)} {hexToRGBA(theme.palette.warning.main, 0.16)}
-  }
-}))
-
-// Styled component for a info Slider
-const SliderInfo = styled(MuiSlider)(({ theme }) => ({
-  color: theme.palette.info.main,
-  '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
-    boxShadow: 0 0 0 {theme.spacing(2)} {hexToRGBA(theme.palette.info.main, 0.16)}
-  },
-  '@media(hover:none)': {
-    '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
-      boxShadow: 'none'
-    }
-  },
-  '& .MuiSlider-thumb.Mui-focusVisible.Mui-active': {
-    boxShadow: 0 0 0 {theme.spacing(3.5)} {hexToRGBA(theme.palette.info.main, 0.16)}
-  }
-}))
-
-const SliderCustomColors = () => {
-  return (
-    <div>
-      <Typography sx={{ fontWeight: 500 }}>Success Slider</Typography>
-      <SliderSuccess defaultValue={30} aria-labelledby='success-slider' />
-      <Typography sx={{ fontWeight: 500 }}>Error Slider</Typography>
-      <SliderError defaultValue={30} aria-labelledby='error-slider' />
-      <Typography sx={{ fontWeight: 500 }}>Warning Slider</Typography>
-      <SliderWarning defaultValue={30} aria-labelledby='warning-slider' />
-      <Typography sx={{ fontWeight: 500 }}>Info Slider</Typography>
-      <SliderInfo defaultValue={30} aria-labelledby='info-slider' />
-    </div>
-  )
-}
-
-export default SliderCustomColors
-`}</code>
-  </pre>
-)
-
-export const SliderCustomMarksJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SliderDiscreteJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Slider from '@mui/material/Slider'
-
-const marks = [
-  {
-    value: 0,
-    label: '0°'
-  },
-  {
-    value: 20,
-    label: '20°'
-  },
-  {
-    value: 37,
-    label: '37°'
-  },
-  {
-    value: 100,
-    label: '100°'
-  }
-]
 
 const valuetext = value => {
   return {value}°C
 }
 
-const SliderCustomMarks = () => {
+const SliderDiscrete = () => {
   return (
     <Slider
+      marks
+      min={10}
+      max={110}
       step={10}
-      marks={marks}
-      defaultValue={20}
+      defaultValue={30}
       valueLabelDisplay='auto'
       getAriaValueText={valuetext}
-      aria-labelledby='custom-marks-slider'
+      aria-labelledby='discrete-slider'
     />
   )
 }
 
-export default SliderCustomMarks
-`}</code>
-  </pre>
-)
+export default SliderDiscrete
+`}</code></pre>) 
 
-export const SliderCustomizedJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SliderCustomizedJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import { styled } from '@mui/material/styles'
 import MuiSlider from '@mui/material/Slider'
 
@@ -253,18 +128,171 @@ const Slider = styled(MuiSlider)(({ theme }) => ({
     }
   }
 }))
+
 const SliderCustomized = () => (
   <Slider marks={marks} defaultValue={60} valueLabelDisplay='on' aria-labelledby='customized-slider' />
 )
 
 export default SliderCustomized
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SliderLabelAlwaysVisibleJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SliderControlledUncontrolledJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
+import { useState } from 'react'
+
+// ** MUI Imports
+import Slider from '@mui/material/Slider'
+import Typography from '@mui/material/Typography'
+
+const SliderControlledUncontrolled = () => {
+  // ** State
+  const [value, setValue] = useState(30)
+
+  return (
+    <div>
+      <Typography sx={{ fontWeight: 500 }}>Controlled Slider</Typography>
+      <Slider value={value} aria-labelledby='controlled-slider' onChange={(event, newValue) => setValue(newValue)} />
+      <Typography sx={{ fontWeight: 500 }}>Uncontrolled Slider</Typography>
+      <Slider defaultValue={30} aria-labelledby='uncontrolled-slider' />
+    </div>
+  )
+}
+
+export default SliderControlledUncontrolled
+`}</code></pre>) 
+
+export const SliderCustomColorsJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
+import { styled } from '@mui/material/styles'
+import Typography from '@mui/material/Typography'
+import MuiSlider from '@mui/material/Slider'
+
+// ** Util Import
+import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
+
+// Styled component for a success Slider
+const SliderSuccess = styled(MuiSlider)(({ theme }) => ({
+  color: theme.palette.success.main,
+  '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
+    boxShadow: 0 0 0 8px {hexToRGBA(theme.palette.success.main, 0.16)}
+  },
+  '@media(hover:none)': {
+    '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
+      boxShadow: 'none'
+    }
+  },
+  '& .MuiSlider-thumb.Mui-focusVisible.Mui-active': {
+    boxShadow: 0 0 0 14px {hexToRGBA(theme.palette.success.main, 0.16)}
+  }
+}))
+
+// Styled component for a error Slider
+const SliderError = styled(MuiSlider)(({ theme }) => ({
+  color: theme.palette.error.main,
+  '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
+    boxShadow: 0 0 0 8px {hexToRGBA(theme.palette.error.main, 0.16)}
+  },
+  '@media(hover:none)': {
+    '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
+      boxShadow: 'none'
+    }
+  },
+  '& .MuiSlider-thumb.Mui-focusVisible.Mui-active': {
+    boxShadow: 0 0 0 14px {hexToRGBA(theme.palette.error.main, 0.16)}
+  }
+}))
+
+// Styled component for a warning Slider
+const SliderWarning = styled(MuiSlider)(({ theme }) => ({
+  color: theme.palette.warning.main,
+  '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
+    boxShadow: 0 0 0 8px {hexToRGBA(theme.palette.warning.main, 0.16)}
+  },
+  '@media(hover:none)': {
+    '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
+      boxShadow: 'none'
+    }
+  },
+  '& .MuiSlider-thumb.Mui-focusVisible.Mui-active': {
+    boxShadow: 0 0 0 14px {hexToRGBA(theme.palette.warning.main, 0.16)}
+  }
+}))
+
+// Styled component for a info Slider
+const SliderInfo = styled(MuiSlider)(({ theme }) => ({
+  color: theme.palette.info.main,
+  '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
+    boxShadow: 0 0 0 8px {hexToRGBA(theme.palette.info.main, 0.16)}
+  },
+  '@media(hover:none)': {
+    '& .MuiSlider-thumb:hover, & .MuiSlider-thumb.Mui-focusVisible': {
+      boxShadow: 'none'
+    }
+  },
+  '& .MuiSlider-thumb.Mui-focusVisible.Mui-active': {
+    boxShadow: 0 0 0 14px {hexToRGBA(theme.palette.info.main, 0.16)}
+  }
+}))
+
+const SliderCustomColors = () => {
+  return (
+    <div>
+      <Typography sx={{ fontWeight: 500 }}>Success Slider</Typography>
+      <SliderSuccess defaultValue={30} aria-labelledby='success-slider' />
+      <Typography sx={{ fontWeight: 500 }}>Error Slider</Typography>
+      <SliderError defaultValue={30} aria-labelledby='error-slider' />
+      <Typography sx={{ fontWeight: 500 }}>Warning Slider</Typography>
+      <SliderWarning defaultValue={30} aria-labelledby='warning-slider' />
+      <Typography sx={{ fontWeight: 500 }}>Info Slider</Typography>
+      <SliderInfo defaultValue={30} aria-labelledby='info-slider' />
+    </div>
+  )
+}
+
+export default SliderCustomColors
+`}</code></pre>) 
+
+export const SliderCustomMarksJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
+import Slider from '@mui/material/Slider'
+
+const marks = [
+  {
+    value: 0,
+    label: '0°'
+  },
+  {
+    value: 20,
+    label: '20°'
+  },
+  {
+    value: 37,
+    label: '37°'
+  },
+  {
+    value: 100,
+    label: '100°'
+  }
+]
+
+const valuetext = value => {
+  return {value}°C
+}
+
+const SliderCustomMarks = () => {
+  return (
+    <Slider
+      step={10}
+      marks={marks}
+      defaultValue={20}
+      valueLabelDisplay='auto'
+      getAriaValueText={valuetext}
+      aria-labelledby='custom-marks-slider'
+    />
+  )
+}
+
+export default SliderCustomMarks
+`}</code></pre>) 
+
+export const SliderLabelAlwaysVisibleJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Slider from '@mui/material/Slider'
 
 const marks = [
@@ -304,13 +332,74 @@ const SliderLabelAlwaysVisible = () => {
 }
 
 export default SliderLabelAlwaysVisible
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SliderMinimumDistanceJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const SliderSizesJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
+import Slider from '@mui/material/Slider'
+import Typography from '@mui/material/Typography'
+
+const SliderSizes = () => {
+  return (
+    <div>
+      <Typography sx={{ fontWeight: 500 }}>Small</Typography>
+      <Slider size='small' defaultValue={30} aria-labelledby='small-slider' />
+      <Typography sx={{ fontWeight: 500 }}>Normal</Typography>
+      <Slider defaultValue={30} aria-labelledby='normal-slider' />
+    </div>
+  )
+}
+
+export default SliderSizes
+`}</code></pre>) 
+
+export const SliderRestrictedValuesJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
+import Slider from '@mui/material/Slider'
+
+const marks = [
+  {
+    value: 0,
+    label: '0°'
+  },
+  {
+    value: 20,
+    label: '20°'
+  },
+  {
+    value: 37,
+    label: '37°'
+  },
+  {
+    value: 100,
+    label: '100°'
+  }
+]
+
+const valuetext = value => {
+  return {value}°C
+}
+
+const valueLabelFormat = value => {
+  return marks.findIndex(mark => mark.value === value) + 1
+}
+
+const SliderRestrictedValues = () => {
+  return (
+    <Slider
+      step={null}
+      marks={marks}
+      defaultValue={20}
+      valueLabelDisplay='auto'
+      getAriaValueText={valuetext}
+      valueLabelFormat={valueLabelFormat}
+      aria-labelledby='restricted-values-slider'
+    />
+  )
+}
+
+export default SliderRestrictedValues
+`}</code></pre>) 
+
+export const SliderMinimumDistanceJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { useState } from 'react'
 
 // ** MUI Imports
@@ -377,13 +466,32 @@ const SliderMinimumDistance = () => {
 }
 
 export default SliderMinimumDistance
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SliderInvertedTrackJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SliderSmallStepsJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
+import Slider from '@mui/material/Slider'
+
+const valuetext = value => {
+  return {value}°C
+}
+
+const SliderSmallSteps = () => {
+  return (
+    <Slider
+      marks
+      step={5}
+      defaultValue={20}
+      valueLabelDisplay='auto'
+      getAriaValueText={valuetext}
+      aria-labelledby='small-steps-slider'
+    />
+  )
+}
+
+export default SliderSmallSteps
+`}</code></pre>) 
+
+export const SliderInvertedTrackJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Slider from '@mui/material/Slider'
 
 const marks = [
@@ -422,64 +530,9 @@ const SliderInvertedTrack = () => {
 }
 
 export default SliderInvertedTrack
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SliderRestrictedValuesJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
-import Slider from '@mui/material/Slider'
-
-const marks = [
-  {
-    value: 0,
-    label: '0°'
-  },
-  {
-    value: 20,
-    label: '20°'
-  },
-  {
-    value: 37,
-    label: '37°'
-  },
-  {
-    value: 100,
-    label: '100°'
-  }
-]
-
-const valuetext = value => {
-  return {value}°C
-}
-
-const valueLabelFormat = value => {
-  return marks.findIndex(mark => mark.value === value) + 1
-}
-
-const SliderRestrictedValues = () => {
-  return (
-    <Slider
-      step={null}
-      marks={marks}
-      defaultValue={20}
-      valueLabelDisplay='auto'
-      getAriaValueText={valuetext}
-      valueLabelFormat={valueLabelFormat}
-      aria-labelledby='restricted-values-slider'
-    />
-  )
-}
-
-export default SliderRestrictedValues
-`}</code>
-  </pre>
-)
-
-export const SliderRangeJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SliderRangeJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Slider from '@mui/material/Slider'
 
 const valuetext = value => {
@@ -498,92 +551,9 @@ const SliderRange = () => {
 }
 
 export default SliderRange
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SliderDiscreteJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
-import Slider from '@mui/material/Slider'
-
-const valuetext = value => {
-  return {value}°C
-}
-
-const SliderDiscrete = () => {
-  return (
-    <Slider
-      marks
-      min={10}
-      max={110}
-      step={10}
-      defaultValue={30}
-      valueLabelDisplay='auto'
-      getAriaValueText={valuetext}
-      aria-labelledby='discrete-slider'
-    />
-  )
-}
-
-export default SliderDiscrete
-`}</code>
-  </pre>
-)
-
-export const SliderSizesJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
-import Slider from '@mui/material/Slider'
-import Typography from '@mui/material/Typography'
-
-const SliderSizes = () => {
-  return (
-    <div>
-      <Typography sx={{ fontWeight: 500 }}>Small</Typography>
-      <Slider size='small' defaultValue={30} aria-labelledby='small-slider' />
-      <Typography sx={{ fontWeight: 500 }}>Normal</Typography>
-      <Slider defaultValue={30} aria-labelledby='normal-slider' />
-    </div>
-  )
-}
-
-export default SliderSizes
-`}</code>
-  </pre>
-)
-
-export const SliderControlledUncontrolledJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
-import { useState } from 'react'
-
-// ** MUI Imports
-import Slider from '@mui/material/Slider'
-import Typography from '@mui/material/Typography'
-
-const SliderControlledUncontrolled = () => {
-  // ** State
-  const [value, setValue] = useState(30)
-
-  return (
-    <div>
-      <Typography sx={{ fontWeight: 500 }}>Controlled Slider</Typography>
-      <Slider value={value} aria-labelledby='controlled-slider' onChange={(event, newValue) => setValue(newValue)} />
-      <Typography sx={{ fontWeight: 500 }}>Uncontrolled Slider</Typography>
-      <Slider defaultValue={30} aria-labelledby='uncontrolled-slider' />
-    </div>
-  )
-}
-
-export default SliderControlledUncontrolled
-`}</code>
-  </pre>
-)
-
-export const SliderRemovedTrackJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SliderRemovedTrackJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Slider from '@mui/material/Slider'
 
 const marks = [
@@ -622,40 +592,9 @@ const SliderRemovedTrack = () => {
 }
 
 export default SliderRemovedTrack
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SliderSmallStepsJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
-import Slider from '@mui/material/Slider'
-
-const valuetext = value => {
-  return {value}°C
-}
-
-const SliderSmallSteps = () => {
-  return (
-    <Slider
-      marks
-      step={5}
-      defaultValue={20}
-      valueLabelDisplay='auto'
-      getAriaValueText={valuetext}
-      aria-labelledby='small-steps-slider'
-    />
-  )
-}
-
-export default SliderSmallSteps
-`}</code>
-  </pre>
-)
-
-export const SliderVerticalJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SliderVerticalJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Box from '@mui/material/Box'
 import Slider from '@mui/material/Slider'
 
@@ -705,6 +644,5 @@ const SliderVertical = () => {
 }
 
 export default SliderVertical
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
+

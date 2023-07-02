@@ -16,10 +16,8 @@ import format from 'date-fns/format'
 import DatePicker from 'react-datepicker'
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 
-// ** Icons Imports
-import Circle from 'mdi-material-ui/Circle'
-import BellOutline from 'mdi-material-ui/BellOutline'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const angularData = [
   { x: 5.4, y: 170 },
@@ -72,13 +70,13 @@ const reactData = [
 const RechartsScatterChart = ({ direction }) => {
   // ** States
   const [endDate, setEndDate] = useState(null)
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(null)
 
   // ** Hooks
   const theme = useTheme()
 
   const CustomInput = forwardRef((props, ref) => {
-    const startDate = format(props.start, 'MM/dd/yyyy')
+    const startDate = props.start !== null ? format(props.start, 'MM/dd/yyyy') : ''
     const endDate = props.end !== null ? ` - ${format(props.end, 'MM/dd/yyyy')}` : null
     const value = `${startDate}${endDate !== null ? endDate : ''}`
 
@@ -91,12 +89,12 @@ const RechartsScatterChart = ({ direction }) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
-              <BellOutline />
+              <Icon icon='mdi:bell-outline' />
             </InputAdornment>
           ),
           endAdornment: (
             <InputAdornment position='end'>
-              <ChevronDown />
+              <Icon icon='mdi:chevron-down' />
             </InputAdornment>
           )
         }}
@@ -114,7 +112,6 @@ const RechartsScatterChart = ({ direction }) => {
     <Card>
       <CardHeader
         title='Framework Usage'
-        titleTypographyProps={{ variant: 'h6' }}
         sx={{
           flexDirection: ['column', 'row'],
           alignItems: ['flex-start', 'center'],
@@ -136,17 +133,17 @@ const RechartsScatterChart = ({ direction }) => {
       />
       <CardContent>
         <Box sx={{ display: 'flex', mb: 4 }}>
-          <Box sx={{ mr: 6, display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.5, fontSize: '0.75rem', color: 'primary.main' }} />
-            <Typography>React</Typography>
+          <Box sx={{ mr: 6, display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'primary.main' } }}>
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>React</Typography>
           </Box>
-          <Box sx={{ mr: 6, display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.5, fontSize: '0.75rem', color: 'success.main' }} />
-            <Typography>Vue</Typography>
+          <Box sx={{ mr: 6, display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'success.main' } }}>
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>Vue</Typography>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.5, fontSize: '0.75rem', color: 'error.main' }} />
-            <Typography>Angular</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'error.main' } }}>
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>Angular</Typography>
           </Box>
         </Box>
         <Box sx={{ height: 350 }}>

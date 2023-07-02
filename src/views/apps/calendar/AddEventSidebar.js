@@ -9,6 +9,7 @@ import Switch from '@mui/material/Switch'
 import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
+import IconButton from '@mui/material/IconButton'
 import InputLabel from '@mui/material/InputLabel'
 import Typography from '@mui/material/Typography'
 import FormControl from '@mui/material/FormControl'
@@ -19,9 +20,8 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import DeleteOutline from 'mdi-material-ui/DeleteOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Styled Components
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
@@ -200,13 +200,17 @@ const AddEventSidebar = props => {
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           {store.selectedEvent !== null && store.selectedEvent.title.length ? (
-            <DeleteOutline
-              fontSize='small'
-              sx={{ cursor: 'pointer', mr: store.selectedEvent !== null ? 2 : 0 }}
+            <IconButton
+              size='small'
               onClick={handleDeleteEvent}
-            />
+              sx={{ color: 'text.primary', mr: store.selectedEvent !== null ? 1 : 0 }}
+            >
+              <Icon icon='mdi:delete-outline' fontSize={20} />
+            </IconButton>
           ) : null}
-          <Close fontSize='small' onClick={handleSidebarClose} sx={{ cursor: 'pointer' }} />
+          <IconButton size='small' onClick={handleSidebarClose} sx={{ color: 'text.primary' }}>
+            <Icon icon='mdi:close' fontSize={20} />
+          </IconButton>
         </Box>
       </Box>
       <Box className='sidebar-body' sx={{ p: theme => theme.spacing(5, 6) }}>

@@ -6,9 +6,8 @@ import Box from '@mui/material/Box'
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import Check from 'mdi-material-ui/Check'
-import CheckAll from 'mdi-material-ui/CheckAll'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Components
 import PerfectScrollbarComponent from 'react-perfect-scrollbar'
@@ -35,10 +34,10 @@ const ChatLog = props => {
     if (chatArea.current) {
       if (hidden) {
         // @ts-ignore
-        chatArea.current.scrollTop = Number.MAX_SAFE_INTEGER
+        chatArea.current.scrollTop = chatArea.current.scrollHeight
       } else {
         // @ts-ignore
-        chatArea.current._container.scrollTop = Number.MAX_SAFE_INTEGER
+        chatArea.current._container.scrollTop = chatArea.current._container.scrollHeight
       }
     }
   }
@@ -86,9 +85,23 @@ const ChatLog = props => {
   const renderMsgFeedback = (isSender, feedback) => {
     if (isSender) {
       if (feedback.isSent && !feedback.isDelivered) {
-        return <Check sx={{ mr: 2, fontSize: '1rem', color: 'text.secondary' }} />
+        return (
+          <Box component='span' sx={{ display: 'inline-flex', '& svg': { mr: 2, color: 'text.secondary' } }}>
+            <Icon icon='mdi:check' fontSize='1rem' />
+          </Box>
+        )
       } else if (feedback.isSent && feedback.isDelivered) {
-        return <CheckAll sx={{ mr: 2, fontSize: '1rem', color: feedback.isSeen ? 'success.main' : 'text.secondary' }} />
+        return (
+          <Box
+            component='span'
+            sx={{
+              display: 'inline-flex',
+              '& svg': { mr: 2, color: feedback.isSeen ? 'success.main' : 'text.secondary' }
+            }}
+          >
+            <Icon icon='mdi:check-all' fontSize='1rem' />
+          </Box>
+        )
       } else {
         return null
       }
@@ -115,7 +128,7 @@ const ChatLog = props => {
             mb: index !== formattedChatData().length - 1 ? 9.75 : undefined
           }}
         >
-          <Box>
+          <div>
             <CustomAvatar
               skin='light'
               color={data.contact.avatarColor ? data.contact.avatarColor : undefined}
@@ -141,7 +154,7 @@ const ChatLog = props => {
             >
               {data.contact.avatarColor ? getInitials(data.contact.fullName) : null}
             </CustomAvatar>
-          </Box>
+          </div>
 
           <Box className='chat-body' sx={{ maxWidth: ['calc(100% - 5.75rem)', '75%', '65%'] }}>
             {item.messages.map((chat, index, { length }) => {
@@ -149,13 +162,15 @@ const ChatLog = props => {
 
               return (
                 <Box key={index} sx={{ '&:not(:last-of-type)': { mb: 3.5 } }}>
-                  <Box>
+                  <div>
                     <Typography
                       sx={{
                         boxShadow: 1,
                         borderRadius: 1,
+                        maxWidth: '100%',
                         width: 'fit-content',
                         fontSize: '0.875rem',
+                        wordWrap: 'break-word',
                         p: theme => theme.spacing(3, 4),
                         ml: isSender ? 'auto' : undefined,
                         borderTopLeftRadius: !isSender ? 0 : undefined,
@@ -166,7 +181,7 @@ const ChatLog = props => {
                     >
                       {chat.msg}
                     </Typography>
-                  </Box>
+                  </div>
                   {index + 1 === length ? (
                     <Box
                       sx={{

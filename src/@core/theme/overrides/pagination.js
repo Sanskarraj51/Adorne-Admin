@@ -1,35 +1,29 @@
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
-const Pagination = theme => {
+const Pagination = () => {
   return {
     MuiPaginationItem: {
       styleOverrides: {
-        root: {
-          '&.Mui-selected:not(.Mui-disabled):not(.MuiPaginationItem-textPrimary):not(.MuiPaginationItem-textSecondary):hover':
-            {
-              backgroundColor: `rgba(${theme.palette.customColors.main}, 0.12)`
-            }
-        },
-        outlined: {
+        outlined: ({ theme }) => ({
           borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`
-        },
-        outlinedPrimary: {
+        }),
+        outlinedPrimary: ({ theme }) => ({
           '&.Mui-selected': {
             backgroundColor: hexToRGBA(theme.palette.primary.main, 0.12),
             '&:hover': {
               backgroundColor: `${hexToRGBA(theme.palette.primary.main, 0.24)} !important`
             }
           }
-        },
-        outlinedSecondary: {
+        }),
+        outlinedSecondary: ({ theme }) => ({
           '&.Mui-selected': {
             backgroundColor: hexToRGBA(theme.palette.secondary.main, 0.12),
             '&:hover': {
               backgroundColor: `${hexToRGBA(theme.palette.secondary.main, 0.24)} !important`
             }
           }
-        },
+        }),
         rounded: {
           borderRadius: 8
         }

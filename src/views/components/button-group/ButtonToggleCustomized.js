@@ -8,15 +8,8 @@ import { styled } from '@mui/material/styles'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import MuiToggleButton from '@mui/material/ToggleButton'
 
-// ** Icons Imports
-import FormatBold from 'mdi-material-ui/FormatBold'
-import FormatItalic from 'mdi-material-ui/FormatItalic'
-import FormatUnderline from 'mdi-material-ui/FormatUnderline'
-import FormatColorFill from 'mdi-material-ui/FormatColorFill'
-import FormatAlignLeft from 'mdi-material-ui/FormatAlignLeft'
-import FormatAlignRight from 'mdi-material-ui/FormatAlignRight'
-import FormatAlignCenter from 'mdi-material-ui/FormatAlignCenter'
-import FormatAlignJustify from 'mdi-material-ui/FormatAlignJustify'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // Styled ToggleButton component
 const ToggleButton = styled(MuiToggleButton)(({ theme }) => ({
@@ -48,31 +41,31 @@ const ButtonToggleCustomized = () => {
     <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
       <ToggleButtonGroup exclusive value={alignment} onChange={handleAlignment} aria-label='text alignment'>
         <ToggleButton value='left' aria-label='left aligned'>
-          <FormatAlignLeft />
+          <Icon icon='mdi:format-align-left' />
         </ToggleButton>
         <ToggleButton value='center' aria-label='center aligned'>
-          <FormatAlignCenter />
+          <Icon icon='mdi:format-align-center' />
         </ToggleButton>
         <ToggleButton value='right' aria-label='right aligned'>
-          <FormatAlignRight />
+          <Icon icon='mdi:format-align-right' />
         </ToggleButton>
         <ToggleButton value='justify' aria-label='justified' disabled>
-          <FormatAlignJustify />
+          <Icon icon='mdi:format-align-justify' />
         </ToggleButton>
       </ToggleButtonGroup>
       <Divider flexItem orientation='vertical' sx={{ m: 1 }} />
       <ToggleButtonGroup value={formats} onChange={handleFormat} aria-label='text alignment'>
         <ToggleButton value='bold' aria-label='bold'>
-          <FormatBold />
+          <Icon icon='mdi:format-bold' />
         </ToggleButton>
         <ToggleButton value='italic' aria-label='italic'>
-          <FormatItalic />
+          <Icon icon='mdi:format-italic' />
         </ToggleButton>
         <ToggleButton value='underlined' aria-label='underlined'>
-          <FormatUnderline />
+          <Icon icon='mdi:format-underline' />
         </ToggleButton>
         <ToggleButton value='color' aria-label='color' disabled>
-          <FormatColorFill />
+          <Icon icon='mdi:format-color-fill' />
         </ToggleButton>
       </ToggleButtonGroup>
     </Box>

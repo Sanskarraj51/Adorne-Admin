@@ -8,14 +8,14 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import TableContainer from '@mui/material/TableContainer'
 
-// ** Icons Imports
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
+
+// ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const data = [
   {
@@ -75,9 +75,10 @@ const CardSubscribersByCountries = () => {
         title='Subscribers by Countries'
         titleTypographyProps={{ sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' } }}
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
       <TableContainer>
@@ -127,18 +128,21 @@ const CardSubscribersByCountries = () => {
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        '& svg': { color: row.trendDir === 'up' ? 'success.main' : 'error.main' }
+                      }}
+                    >
                       <Typography
                         variant='body2'
                         sx={{ fontWeight: 600, color: row.trendDir === 'up' ? 'success.main' : 'error.main' }}
                       >
                         {row.trendNumber}
                       </Typography>
-                      {row.trendDir === 'up' ? (
-                        <ChevronUp sx={{ color: 'success.main' }} />
-                      ) : (
-                        <ChevronDown sx={{ color: 'error.main' }} />
-                      )}
+                      <Icon icon={row.trendDir === 'up' ? 'mdi:chevron-up' : 'mdi:chevron-down'} />
                     </Box>
                   </TableCell>
                 </TableRow>

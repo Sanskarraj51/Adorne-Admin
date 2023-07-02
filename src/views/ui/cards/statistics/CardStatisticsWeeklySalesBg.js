@@ -14,8 +14,8 @@ import CardContent from '@mui/material/CardContent'
 import clsx from 'clsx'
 import { useKeenSlider } from 'keen-slider/react'
 
-// ** Icons Imports
-import ChevronUp from 'mdi-material-ui/ChevronUp'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
@@ -62,14 +62,14 @@ const Slides = () => {
             <Typography variant='h6' sx={{ color: 'common.white' }}>
               Weekly Sales
             </Typography>
-            <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ mb: 4, display: 'flex', alignItems: 'center', '& svg': { color: 'success.main' } }}>
               <Typography variant='caption' sx={{ mr: 1.5, color: 'common.white' }}>
                 Total $23.5k Earning
               </Typography>
               <Typography variant='subtitle2' sx={{ color: 'success.main' }}>
                 +62%
               </Typography>
-              <ChevronUp fontSize='small' sx={{ color: 'success.main' }} />
+              <Icon icon='mdi:chevron-up' fontSize={20} />
             </Box>
             <Grid container>
               <Grid item xs={12} sm={6} lg={8} sx={{ order: [2, 1] }}>

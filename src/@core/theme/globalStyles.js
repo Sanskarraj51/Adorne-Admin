@@ -1,13 +1,13 @@
-const GlobalStyles = (theme, settings) => {
-  // ** Vars
-  const { skin } = settings
+// ** Hook Import
+import { useSettings } from 'src/@core/hooks/useSettings'
+
+const GlobalStyles = theme => {
+  // ** Hook & Var
+  const { settings } = useSettings()
+  const { mode } = settings
 
   const perfectScrollbarThumbBgColor = () => {
-    if (skin === 'semi-dark' && theme.palette.mode === 'light') {
-      return '#57596C !important'
-    } else if (skin === 'semi-dark' && theme.palette.mode === 'dark') {
-      return '#BFBFD5 !important'
-    } else if (theme.palette.mode === 'light') {
+    if (mode === 'light') {
       return '#BFBFD5 !important'
     } else {
       return '#57596C !important'
@@ -15,15 +15,6 @@ const GlobalStyles = (theme, settings) => {
   }
 
   return {
-    'body[style^="padding-right"] header::after, body[style^="padding-right"] footer::after': {
-      content: '""',
-      position: 'absolute',
-      left: '100%',
-      top: 0,
-      height: '100%',
-      backgroundColor: theme.palette.background.paper,
-      width: '30px'
-    },
     '.demo-space-x > *': {
       marginTop: '1rem !important',
       marginRight: '1rem !important',

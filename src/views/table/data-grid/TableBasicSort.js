@@ -46,8 +46,8 @@ const statusObj = {
 
 const TableSort = () => {
   // ** States
-  const [pageSize, setPageSize] = useState(7)
   const [isNameSortable, setIsNameSortable] = useState(true)
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
 
   const columns = [
     {
@@ -76,10 +76,12 @@ const TableSort = () => {
     },
     {
       flex: 0.2,
+      type: 'date',
       minWidth: 120,
       headerName: 'Date',
       field: 'start_date',
       sortable: isNameSortable,
+      valueGetter: params => new Date(params.value),
       renderCell: params => (
         <Typography variant='body2' sx={{ color: 'text.primary' }}>
           {params.row.start_date}
@@ -137,20 +139,20 @@ const TableSort = () => {
       <CardHeader
         title='Sorting'
         action={
-          <Box>
+          <div>
             <Button size='small' variant='contained' onClick={() => setIsNameSortable(!isNameSortable)}>
               {`Disable Sorting: ${!isNameSortable}`}
             </Button>
-          </Box>
+          </div>
         }
       />
       <DataGrid
         autoHeight
         rows={rows}
         columns={columns}
-        pageSize={pageSize}
-        rowsPerPageOptions={[7, 10, 25, 50]}
-        onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+        pageSizeOptions={[7, 10, 25, 50]}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
       />
     </Card>
   )

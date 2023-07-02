@@ -5,8 +5,8 @@ import { Fragment } from 'react'
 import Chip from '@mui/material/Chip'
 import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import DeleteOutline from 'mdi-material-ui/DeleteOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ChipsOnDelete = () => {
   const handleDelete = () => {
@@ -23,9 +23,14 @@ const ChipsOnDelete = () => {
       </div>
       <Typography sx={{ mt: 4, fontWeight: 500 }}>Custom</Typography>
       <div className='demo-space-x'>
-        <Chip label='Basic' onDelete={handleDelete} deleteIcon={<DeleteOutline />} />
-        <Chip label='Primary' color='primary' onDelete={handleDelete} deleteIcon={<DeleteOutline />} />
-        <Chip label='Secondary' color='secondary' onDelete={handleDelete} deleteIcon={<DeleteOutline />} />
+        <Chip label='Basic' onDelete={handleDelete} deleteIcon={<Icon icon='mdi:delete-outline' />} />
+        <Chip label='Primary' color='primary' onDelete={handleDelete} deleteIcon={<Icon icon='mdi:delete-outline' />} />
+        <Chip
+          label='Secondary'
+          color='secondary'
+          onDelete={handleDelete}
+          deleteIcon={<Icon icon='mdi:delete-outline' />}
+        />
       </div>
     </Fragment>
   )

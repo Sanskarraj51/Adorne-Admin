@@ -62,8 +62,8 @@ const getFullName = params =>
 
 const TableColumns = () => {
   // ** States
-  const [pageSize, setPageSize] = useState(7)
   const [hideNameColumn, setHideNameColumn] = useState(false)
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
 
   const columns = [
     {
@@ -71,7 +71,6 @@ const TableColumns = () => {
       minWidth: 290,
       field: 'full_name',
       headerName: 'Name',
-      hide: hideNameColumn,
       renderCell: params => {
         const { row } = params
 
@@ -92,9 +91,11 @@ const TableColumns = () => {
     },
     {
       flex: 0.175,
+      type: 'date',
       minWidth: 120,
       headerName: 'Date',
       field: 'start_date',
+      valueGetter: params => new Date(params.value),
       renderCell: params => (
         <Typography variant='body2' sx={{ color: 'text.primary' }}>
           {params.row.start_date}
@@ -162,21 +163,22 @@ const TableColumns = () => {
       <CardHeader
         title='Column'
         action={
-          <Box>
+          <div>
             <Button size='small' variant='contained' onClick={() => setHideNameColumn(!hideNameColumn)}>
               Toggle Name Column
             </Button>
-          </Box>
+          </div>
         }
       />
       <DataGrid
         autoHeight
         rows={rows}
         columns={columns}
-        pageSize={pageSize}
-        disableSelectionOnClick
-        rowsPerPageOptions={[7, 10, 25, 50]}
-        onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+        disableRowSelectionOnClick
+        pageSizeOptions={[7, 10, 25, 50]}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
+        initialState={{ columns: { columnVisibilityModel: { full_name: hideNameColumn } } }}
       />
     </Card>
   )

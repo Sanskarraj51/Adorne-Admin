@@ -3,8 +3,8 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import TextBoxOutline from 'mdi-material-ui/TextBoxOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Components
 import toast from 'react-hot-toast'
@@ -17,8 +17,10 @@ const ToastMultiLine = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex', textAlign: 'center', alignItems: 'center', flexDirection: 'column' }}>
-      <TextBoxOutline sx={{ mb: 2, fontSize: '2rem' }} />
+    <Box
+      sx={{ display: 'flex', textAlign: 'center', alignItems: 'center', flexDirection: 'column', '& svg': { mb: 2 } }}
+    >
+      <Icon icon='mdi:text-box-outline' fontSize='2rem' />
       <Typography sx={{ mb: 4, fontWeight: 600 }}>Multi Line</Typography>
       <Typography sx={{ mb: 3 }}>The most basic variant with longer texts</Typography>
       <Button sx={{ mb: 8 }} variant='contained' onClick={handleClick}>

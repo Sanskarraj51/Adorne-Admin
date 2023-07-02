@@ -2,39 +2,35 @@
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
-import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import Poll from 'mdi-material-ui/Poll'
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import TrendingUp from 'mdi-material-ui/TrendingUp'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const salesData = [
   {
     stats: '8,458',
     color: 'primary',
     title: 'Customers',
-    icon: <AccountOutline />
+    icon: <Icon icon='mdi:account-outline' />
   },
   {
-    icon: <Poll />,
     stats: '$28.5k',
     color: 'warning',
-    title: 'Total Profit'
+    title: 'Total Profit',
+    icon: <Icon icon='mdi:poll' />
   },
   {
     color: 'info',
     stats: '2,450k',
-    icon: <TrendingUp />,
-    title: 'Transactions'
+    title: 'Transactions',
+    icon: <Icon icon='mdi:trending-up' />
   }
 ]
 
@@ -64,19 +60,20 @@ const EcommerceSalesOverview = () => {
         title='Sales Overview'
         titleTypographyProps={{ variant: 'h6' }}
         action={
-          <IconButton aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
         subheader={
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { color: 'success.main' } }}>
             <Typography variant='caption' sx={{ mr: 1.5 }}>
               Total 42.5k Sales
             </Typography>
             <Typography variant='subtitle2' sx={{ color: 'success.main' }}>
               +18%
             </Typography>
-            <ChevronUp fontSize='small' sx={{ color: 'success.main' }} />
+            <Icon icon='mdi:chevron-up' fontSize={20} />
           </Box>
         }
       />

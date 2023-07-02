@@ -2,8 +2,8 @@
 import Chip from '@mui/material/Chip'
 import Avatar from '@mui/material/Avatar'
 
-// ** Icons Imports
-import ArchiveOutline from 'mdi-material-ui/ArchiveOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ChipsAvatar = () => {
   return (
@@ -15,7 +15,7 @@ const ChipsAvatar = () => {
         label='Archived'
         avatar={
           <Avatar>
-            <ArchiveOutline fontSize='small' />
+            <Icon icon='mdi:archive-outline' fontSize={20} />
           </Avatar>
         }
       />

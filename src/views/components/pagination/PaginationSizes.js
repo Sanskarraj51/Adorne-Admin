@@ -5,8 +5,8 @@ const PaginationSizes = () => {
   return (
     <div className='demo-space-y'>
       <Pagination count={10} size='small' />
-      <Pagination count={10} />
-      <Pagination count={10} size='large' />
+      <Pagination count={10} color='primary' />
+      <Pagination count={10} size='large' color='secondary' />
     </div>
   )
 }

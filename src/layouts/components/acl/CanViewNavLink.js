@@ -10,8 +10,11 @@ const CanViewNavLink = props => {
 
   // ** Hook
   const ability = useContext(AbilityContext)
-
-  return ability && ability.can(navLink?.action, navLink?.subject) ? <>{children}</> : null
+  if (navLink && navLink.auth === false) {
+    return <>{children}</>
+  } else {
+    return ability && ability.can(navLink?.action, navLink?.subject) ? <>{children}</> : null
+  }
 }
 
 export default CanViewNavLink

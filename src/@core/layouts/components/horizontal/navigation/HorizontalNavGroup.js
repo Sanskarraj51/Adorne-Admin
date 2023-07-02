@@ -20,10 +20,8 @@ import MuiListItem from '@mui/material/ListItem'
 import clsx from 'clsx'
 import { usePopper } from 'react-popper'
 
-// ** Icons Imports
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import ChevronLeft from 'mdi-material-ui/ChevronLeft'
-import ChevronRight from 'mdi-material-ui/ChevronRight'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Theme Config Import
 import themeConfig from 'src/configs/themeConfig'
@@ -81,7 +79,7 @@ const HorizontalNavGroup = props => {
   // ** Hooks & Vars
   const theme = useTheme()
   const router = useRouter()
-  const currentURL = router.pathname
+  const currentURL = router.asPath
   const { skin, direction } = settings
   const { navSubItemIcon, menuTextTruncate, horizontalMenuToggle, horizontalMenuAnimation } = themeConfig
   const popperOffsetHorizontal = direction === 'rtl' ? 16 : -16
@@ -103,6 +101,10 @@ const HorizontalNavGroup = props => {
         options: {
           offset: hasParent ? [-8, 15] : [popperOffsetHorizontal, 5]
         }
+      },
+      {
+        enabled: true,
+        name: 'flip'
       }
     ]
   })
@@ -129,8 +131,8 @@ const HorizontalNavGroup = props => {
     handleGroupClose()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.asPath])
-  const IconTag = item.icon ? item.icon : navSubItemIcon
-  const ToggleIcon = direction === 'rtl' ? ChevronLeft : ChevronRight
+  const icon = item.icon ? item.icon : navSubItemIcon
+  const toggleIcon = direction === 'rtl' ? 'mdi:chevron-left' : 'mdi:chevron-right'
   const WrapperCondition = horizontalMenuToggle === 'click'
   const MainWrapper = WrapperCondition ? ClickAwayListener : 'div'
   const ChildWrapper = WrapperCondition ? 'div' : Fragment
@@ -158,6 +160,7 @@ const HorizontalNavGroup = props => {
 
   return (
     <CanViewNavGroup navGroup={item}>
+      {/* @ts-ignore */}
       <MainWrapper {...(WrapperCondition ? { onClickAway: handleGroupClose } : { onMouseLeave: handleGroupClose })}>
         <ChildWrapper>
           <List component='div' sx={{ py: skin === 'bordered' ? 2.625 : 2.75 }}>
@@ -167,13 +170,13 @@ const HorizontalNavGroup = props => {
               className={clsx('menu-group', { 'Mui-selected': hasActiveChild(item, currentURL) })}
               {...(horizontalMenuToggle === 'click' ? { onClick: handleMenuToggleOnClick } : {})}
               sx={{
-                ...(menuOpen ? { backgroundColor: theme.palette.action.hover } : {}),
+                ...(menuOpen ? { backgroundColor: 'action.hover' } : {}),
                 ...(!hasParent
                   ? {
                       borderRadius: '8px',
                       '&.Mui-selected': {
-                        backgroundColor: theme.palette.primary.main,
-                        '& .MuiTypography-root, & .MuiListItemIcon-root, & .MuiSvgIcon-root': {
+                        backgroundColor: 'primary.main',
+                        '& .MuiTypography-root, & .MuiListItemIcon-root, & svg': {
                           color: 'common.white'
                         }
                       }
@@ -183,6 +186,7 @@ const HorizontalNavGroup = props => {
             >
               <Box
                 sx={{
+                  gap: 2,
                   width: '100%',
                   display: 'flex',
                   flexDirection: 'row',
@@ -200,30 +204,22 @@ const HorizontalNavGroup = props => {
                   }}
                 >
                   <ListItemIcon sx={{ mr: hasParent ? 3 : 2.5, color: 'text.primary' }}>
-                    <UserIcon
-                      icon={IconTag}
-                      componentType='horizontal-menu'
-                      iconProps={{ sx: IconTag === navSubItemIcon ? { fontSize: '0.5rem' } : {} }}
-                    />
+                    <UserIcon icon={icon} fontSize={icon === navSubItemIcon ? '0.5rem' : '1.5rem'} />
                   </ListItemIcon>
                   <Typography {...(menuTextTruncate && { noWrap: true })}>
                     <Translations text={item.title} />
                   </Typography>
                 </Box>
-                <Box sx={{ ml: 1.5, display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', color: 'text.secondary' }}>
                   {item.badgeContent ? (
                     <Chip
                       size='small'
                       label={item.badgeContent}
                       color={item.badgeColor || 'primary'}
-                      sx={{ mr: 0.75, '& .MuiChip-label': { px: 2.5, lineHeight: 1.385, textTransform: 'capitalize' } }}
+                      sx={{ mr: 1.5, '& .MuiChip-label': { px: 2.5, lineHeight: 1.385, textTransform: 'capitalize' } }}
                     />
                   ) : null}
-                  {hasParent ? (
-                    <ToggleIcon sx={{ color: 'text.secondary' }} />
-                  ) : (
-                    <ChevronDown sx={{ color: 'text.secondary' }} />
-                  )}
+                  <Icon icon={hasParent ? toggleIcon : 'mdi:chevron-down'} />
                 </Box>
               </Box>
             </ListItem>
@@ -246,8 +242,8 @@ const HorizontalNavGroup = props => {
                       ? { overflowX: 'visible', maxHeight: 'calc(100vh - 21rem)' }
                       : { maxHeight: 'calc(100vh - 13rem)' }),
                     ...(skin === 'bordered'
-                      ? { boxShadow: theme.shadows[0], border: `1px solid ${theme.palette.divider}` }
-                      : { boxShadow: theme.shadows[4] })
+                      ? { boxShadow: 0, border: `1px solid ${theme.palette.divider}` }
+                      : { boxShadow: 4 })
                   }}
                 >
                   <HorizontalNavItems {...props} hasParent horizontalNavItems={item.children} />

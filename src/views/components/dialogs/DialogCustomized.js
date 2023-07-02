@@ -10,8 +10,8 @@ import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const DialogCustomized = () => {
   // ** State
@@ -32,22 +32,22 @@ const DialogCustomized = () => {
           <IconButton
             aria-label='close'
             onClick={handleClose}
-            sx={{ top: 10, right: 10, position: 'absolute', color: theme => theme.palette.grey[500] }}
+            sx={{ top: 10, right: 10, position: 'absolute', color: 'grey.500' }}
           >
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
         </DialogTitle>
         <DialogContent dividers sx={{ p: 4 }}>
-          <Typography gutterBottom>
+          <Typography sx={{ mb: 4 }}>
             Chupa chups jelly-o candy sweet roll wafer cake chocolate bar. Brownie sweet roll topping cake chocolate
             cake cheesecake tiramisu chocolate cake. Jujubes liquorice chocolate bar pastry. Chocolate jujubes caramels
             pastry.
           </Typography>
-          <Typography gutterBottom>
+          <Typography sx={{ mb: 4 }}>
             Ice cream marshmallow dragée bonbon croissant. Carrot cake sweet donut ice cream bonbon oat cake danish
             sugar plum. Gingerbread gummies marzipan gingerbread.
           </Typography>
-          <Typography gutterBottom>
+          <Typography>
             Soufflé toffee ice cream. Jelly-o pudding sweet roll bonbon. Marshmallow liquorice icing. Jelly beans
             chocolate bar chocolate marzipan candy fruitcake jujubes.
           </Typography>

@@ -1,11 +1,13 @@
 // ** React Imports
 import { useState } from 'react'
 
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import CardHeader from '@mui/material/CardHeader'
@@ -18,9 +20,8 @@ import OutlinedInput from '@mui/material/OutlinedInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormHelperText from '@mui/material/FormHelperText'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const FormLayoutsBasic = () => {
   // ** States
@@ -50,13 +51,9 @@ const FormLayoutsBasic = () => {
     setConfirmPassValues({ ...confirmPassValues, showPassword: !confirmPassValues.showPassword })
   }
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
-  }
-
   return (
     <Card>
-      <CardHeader title='Basic' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Basic' />
       <CardContent>
         <form onSubmit={e => e.preventDefault()}>
           <Grid container spacing={5}>
@@ -87,10 +84,10 @@ const FormLayoutsBasic = () => {
                       <IconButton
                         edge='end'
                         onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
+                        onMouseDown={e => e.preventDefault()}
                         aria-label='toggle password visibility'
                       >
-                        {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                        <Icon icon={values.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                       </IconButton>
                     </InputAdornment>
                   }
@@ -115,10 +112,10 @@ const FormLayoutsBasic = () => {
                       <IconButton
                         edge='end'
                         onClick={handleClickConfirmPassShow}
-                        onMouseDown={handleMouseDownPassword}
+                        onMouseDown={e => e.preventDefault()}
                         aria-label='toggle password visibility'
                       >
-                        {confirmPassValues.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                        <Icon icon={confirmPassValues.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                       </IconButton>
                     </InputAdornment>
                   }
@@ -141,7 +138,13 @@ const FormLayoutsBasic = () => {
                 <Button type='submit' variant='contained' size='large'>
                   Get Started!
                 </Button>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    '& a': { color: 'primary.main', textDecoration: 'none' }
+                  }}
+                >
                   <Typography sx={{ mr: 2 }}>Already have an account?</Typography>
                   <Link href='/' onClick={e => e.preventDefault()}>
                     Log in

@@ -14,7 +14,7 @@ import DialogShareProject from 'src/views/pages/dialog-examples/DialogShareProje
 import DialogEditUserInfo from 'src/views/pages/dialog-examples/DialogEditUserInfo'
 import DialogAuthentication from 'src/views/pages/dialog-examples/DialogAuthentication'
 
-const DialogExamples = ({ apiPricingData }) => (
+const DialogExamples = ({ apiPricingPlanData }) => (
   <Grid container spacing={6} className='match-height'>
     <Grid item md={4} sm={6} xs={12}>
       <DialogShareProject />
@@ -23,7 +23,7 @@ const DialogExamples = ({ apiPricingData }) => (
       <DialogAddCard />
     </Grid>
     <Grid item md={4} sm={6} xs={12}>
-      <DialogPricing data={apiPricingData} />
+      <DialogPricing data={apiPricingPlanData} />
     </Grid>
     <Grid item md={4} sm={6} xs={12}>
       <DialogReferEarn />
@@ -45,11 +45,11 @@ const DialogExamples = ({ apiPricingData }) => (
 
 export const getStaticProps = async () => {
   const res = await axios.get('/pages/pricing')
-  const apiPricingData = res.data
+  const data = res.data
 
   return {
     props: {
-      apiPricingData
+      apiPricingPlanData: data.pricingPlans
     }
   }
 }

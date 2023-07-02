@@ -12,8 +12,8 @@ import AddCard from 'src/views/apps/invoice/add/AddCard'
 import AddActions from 'src/views/apps/invoice/add/AddActions'
 import AddNewCustomers from 'src/views/apps/invoice/add/AddNewCustomer'
 
-// ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+// ** Styled Component
+import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
 const InvoiceAdd = ({ apiClientData, invoiceNumber }) => {
   // ** State
@@ -23,7 +23,7 @@ const InvoiceAdd = ({ apiClientData, invoiceNumber }) => {
   const toggleAddCustomerDrawer = () => setAddCustomerOpen(!addCustomerOpen)
 
   return (
-    <>
+    <DatePickerWrapper sx={{ '& .react-datepicker-wrapper': { width: 'auto' } }}>
       <Grid container spacing={6}>
         <Grid item xl={9} md={8} xs={12}>
           <AddCard
@@ -45,7 +45,7 @@ const InvoiceAdd = ({ apiClientData, invoiceNumber }) => {
         toggle={toggleAddCustomerDrawer}
         setSelectedClient={setSelectedClient}
       />
-    </>
+    </DatePickerWrapper>
   )
 }
 

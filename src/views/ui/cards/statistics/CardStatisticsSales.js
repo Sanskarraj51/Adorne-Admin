@@ -2,39 +2,35 @@
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
-import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import Poll from 'mdi-material-ui/Poll'
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import TrendingUp from 'mdi-material-ui/TrendingUp'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const salesData = [
   {
     stats: '8,458',
     color: 'primary',
     title: 'Customers',
-    icon: <AccountOutline />
+    icon: 'mdi:account-outline'
   },
   {
-    icon: <Poll />,
     stats: '$28.5k',
     color: 'warning',
+    icon: 'mdi:poll',
     title: 'Total Profit'
   },
   {
     color: 'info',
     stats: '2,450k',
-    icon: <TrendingUp />,
-    title: 'Transactions'
+    title: 'Transactions',
+    icon: 'mdi:trending-up'
   }
 ]
 
@@ -43,7 +39,7 @@ const renderStats = () => {
     <Grid item xs={12} sm={4} key={index}>
       <Box key={index} sx={{ display: 'flex', alignItems: 'center' }}>
         <CustomAvatar skin='light' variant='rounded' color={sale.color} sx={{ mr: 4 }}>
-          {sale.icon}
+          <Icon icon={sale.icon} />
         </CustomAvatar>
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Typography variant='h6' sx={{ fontWeight: 600 }}>
@@ -63,19 +59,20 @@ const CardStatisticsSales = () => {
         title='Sales Overview'
         titleTypographyProps={{ variant: 'h6' }}
         action={
-          <IconButton aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Refresh', 'Share', 'Update']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options', sx: { color: 'text.secondary' } }}
+          />
         }
         subheader={
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography variant='caption' sx={{ mr: 1.5 }}>
               Total 42.5k Sales
             </Typography>
-            <Typography variant='subtitle2' sx={{ color: 'success.main' }}>
+            <Typography variant='subtitle2' sx={{ '&, & + svg': { color: 'success.main' } }}>
               +18%
             </Typography>
-            <ChevronUp fontSize='small' sx={{ color: 'success.main' }} />
+            <Icon icon='mdi:chevron-up' fontSize='1.25rem' />
           </Box>
         }
       />

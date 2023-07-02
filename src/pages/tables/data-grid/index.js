@@ -1,6 +1,9 @@
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
 // ** Custom Components Imports
@@ -15,15 +18,20 @@ import TableBasicSort from 'src/views/table/data-grid/TableBasicSort'
 import TableSelection from 'src/views/table/data-grid/TableSelection'
 import TableServerSide from 'src/views/table/data-grid/TableServerSide'
 
+const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main
+}))
+
 const DataGrid = () => {
   return (
     <Grid container spacing={6}>
       <PageHeader
         title={
           <Typography variant='h5'>
-            <Link href='https://mui.com/x/react-data-grid/' target='_blank'>
+            <LinkStyled href='https://mui.com/x/react-data-grid/' target='_blank'>
               Data Grid
-            </Link>
+            </LinkStyled>
           </Typography>
         }
         subtitle={

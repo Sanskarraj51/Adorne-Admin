@@ -1,25 +1,19 @@
 // ** React Imports
 import { useEffect, useCallback, useState } from 'react'
 
-// ** Next Images
+// ** Next Import
 import Link from 'next/link'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
-import { DataGrid } from '@mui/x-data-grid'
-import { styled } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
+import { DataGrid } from '@mui/x-data-grid'
 
-// ** Icons Imports
-import Laptop from 'mdi-material-ui/Laptop'
-import ChartDonut from 'mdi-material-ui/ChartDonut'
-import CogOutline from 'mdi-material-ui/CogOutline'
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import PencilOutline from 'mdi-material-ui/PencilOutline'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Store Imports
 import { useDispatch, useSelector } from 'react-redux'
@@ -39,11 +33,11 @@ import TableHeader from 'src/views/apps/roles/TableHeader'
 
 // ** Vars
 const userRoleObj = {
-  admin: <Laptop sx={{ mr: 2, color: 'error.main' }} />,
-  author: <CogOutline sx={{ mr: 2, color: 'warning.main' }} />,
-  editor: <PencilOutline sx={{ mr: 2, color: 'info.main' }} />,
-  maintainer: <ChartDonut sx={{ mr: 2, color: 'success.main' }} />,
-  subscriber: <AccountOutline sx={{ mr: 2, color: 'primary.main' }} />
+  admin: { icon: 'mdi:laptop', color: 'error.main' },
+  author: { icon: 'mdi:cog-outline', color: 'warning.main' },
+  editor: { icon: 'mdi:pencil-outline', color: 'info.main' },
+  maintainer: { icon: 'mdi:chart-donut', color: 'success.main' },
+  subscriber: { icon: 'mdi:account-outline', color: 'primary.main' }
 }
 
 const userStatusObj = {
@@ -52,32 +46,15 @@ const userStatusObj = {
   inactive: 'secondary'
 }
 
-// ** Styled component for the link for the avatar with image
-const AvatarWithImageLink = styled(Link)(({ theme }) => ({
-  marginRight: theme.spacing(3)
-}))
-
-// ** Styled component for the link for the avatar without image
-const AvatarWithoutImageLink = styled(Link)(({ theme }) => ({
-  textDecoration: 'none',
-  marginRight: theme.spacing(3)
-}))
-
 // ** renders client column
 const renderClient = row => {
   if (row.avatar.length) {
-    return (
-      <AvatarWithImageLink href={`/apps/user/view/${row.id}`}>
-        <CustomAvatar src={row.avatar} sx={{ mr: 3, width: 34, height: 34 }} />
-      </AvatarWithImageLink>
-    )
+    return <CustomAvatar src={row.avatar} sx={{ mr: 3, width: 34, height: 34 }} />
   } else {
     return (
-      <AvatarWithoutImageLink href={`/apps/user/view/${row.id}`}>
-        <CustomAvatar skin='light' color={row.avatarColor} sx={{ mr: 3, width: 34, height: 34, fontSize: '1rem' }}>
-          {getInitials(row.fullName ? row.fullName : 'John Doe')}
-        </CustomAvatar>
-      </AvatarWithoutImageLink>
+      <CustomAvatar skin='light' color={row.avatarColor} sx={{ mr: 3, width: 34, height: 34, fontSize: '1rem' }}>
+        {getInitials(row.fullName ? row.fullName : 'John Doe')}
+      </CustomAvatar>
     )
   }
 }
@@ -89,27 +66,29 @@ const columns = [
     field: 'fullName',
     headerName: 'User',
     renderCell: ({ row }) => {
-      const { id, fullName, username } = row
+      const { fullName, username } = row
 
       return (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           {renderClient(row)}
           <Box sx={{ display: 'flex', alignItems: 'flex-start', flexDirection: 'column' }}>
-            <Link href={`/apps/user/view/${id}`} passHref>
-              <Typography
-                noWrap
-                component='a'
-                variant='subtitle2'
-                sx={{ color: 'text.primary', textDecoration: 'none' }}
-              >
-                {fullName}
-              </Typography>
-            </Link>
-            <Link href={`/apps/user/view/${id}`} passHref>
-              <Typography noWrap component='a' variant='caption' sx={{ textDecoration: 'none' }}>
-                @{username}
-              </Typography>
-            </Link>
+            <Typography
+              noWrap
+              component={Link}
+              variant='subtitle2'
+              href='/apps/user/view/overview/'
+              sx={{
+                fontWeight: 600,
+                color: 'text.primary',
+                textDecoration: 'none',
+                '&:hover': { color: 'primary.main' }
+              }}
+            >
+              {fullName}
+            </Typography>
+            <Typography noWrap variant='caption'>
+              {`@${username}`}
+            </Typography>
           </Box>
         </Box>
       )
@@ -135,8 +114,8 @@ const columns = [
     headerName: 'Role',
     renderCell: ({ row }) => {
       return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {userRoleObj[row.role]}
+        <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 3, color: userRoleObj[row.role].color } }}>
+          <Icon icon={userRoleObj[row.role].icon} fontSize={20} />
           <Typography noWrap sx={{ color: 'text.secondary', textTransform: 'capitalize' }}>
             {row.role}
           </Typography>
@@ -180,12 +159,10 @@ const columns = [
     sortable: false,
     field: 'actions',
     headerName: 'Actions',
-    renderCell: ({ row }) => (
-      <Link href={`/apps/user/view/${row.id}`} passHref>
-        <IconButton>
-          <EyeOutline />
-        </IconButton>
-      </Link>
+    renderCell: () => (
+      <IconButton component={Link} href='/apps/user/view/overview/'>
+        <Icon icon='mdi:eye-outline' />
+      </IconButton>
     )
   }
 ]
@@ -194,7 +171,7 @@ const UserList = () => {
   // ** State
   const [plan, setPlan] = useState('')
   const [value, setValue] = useState('')
-  const [pageSize, setPageSize] = useState(10)
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 })
 
   // ** Hooks
   const dispatch = useDispatch()
@@ -228,10 +205,10 @@ const UserList = () => {
             rows={store.data}
             columns={columns}
             checkboxSelection
-            pageSize={pageSize}
-            disableSelectionOnClick
-            rowsPerPageOptions={[10, 25, 50]}
-            onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+            disableRowSelectionOnClick
+            pageSizeOptions={[10, 25, 50]}
+            paginationModel={paginationModel}
+            onPaginationModelChange={setPaginationModel}
             sx={{ '& .MuiDataGrid-columnHeaders': { borderRadius: 0 } }}
           />
         </Card>

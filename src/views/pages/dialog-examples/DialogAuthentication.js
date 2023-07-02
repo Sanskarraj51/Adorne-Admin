@@ -16,13 +16,8 @@ import CardContent from '@mui/material/CardContent'
 import Fade from '@mui/material/Fade'
 import DialogContent from '@mui/material/DialogContent'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import CogOutline from 'mdi-material-ui/CogOutline'
-import LockOutline from 'mdi-material-ui/LockOutline'
-import ChevronLeft from 'mdi-material-ui/ChevronLeft'
-import ChevronRight from 'mdi-material-ui/ChevronRight'
-import MessageOutline from 'mdi-material-ui/MessageOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Hooks
 import useBgColor from 'src/@core/hooks/useBgColor'
@@ -39,7 +34,7 @@ const DialogAuthentication = () => {
   const [showAuthDialog, setShowAuthDialog] = useState(false)
 
   // ** Hooks
-  const bgClasses = useBgColor()
+  const bgColors = useBgColor()
   const { settings } = useSettings()
 
   // ** Var
@@ -61,12 +56,12 @@ const DialogAuthentication = () => {
       }, 250)
     }
   }
-  const Arrow = direction === 'ltr' ? ChevronRight : ChevronLeft
+  const arrowIcon = direction === 'ltr' ? 'mdi:chevron-right' : 'mdi:chevron-left'
 
   return (
     <Card>
-      <CardContent sx={{ textAlign: 'center' }}>
-        <LockOutline sx={{ mb: 2, fontSize: '2rem' }} />
+      <CardContent sx={{ textAlign: 'center', '& svg': { mb: 2 } }}>
+        <Icon icon='mdi:lock-outline' fontSize='2rem' />
         <Typography variant='h6' sx={{ mb: 4 }}>
           Two Factor Auth
         </Typography>
@@ -84,9 +79,15 @@ const DialogAuthentication = () => {
         onBackdropClick={handleClose}
         TransitionComponent={Transition}
       >
-        <DialogContent sx={{ px: { xs: 8, sm: 15 }, py: { xs: 8, sm: 12.5 }, position: 'relative' }}>
+        <DialogContent
+          sx={{
+            position: 'relative',
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            py: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <IconButton size='small' onClick={handleClose} sx={{ position: 'absolute', right: '1rem', top: '1rem' }}>
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
 
           <Grid container spacing={6}>
@@ -109,29 +110,35 @@ const DialogAuthentication = () => {
                   px: 7.2,
                   borderRadius: 1,
                   cursor: 'pointer',
+                  ...(authType === 'app' ? { ...bgColors.primaryLight } : { backgroundColor: 'action.hover' }),
                   border: theme =>
                     `1px solid ${authType === 'app' ? theme.palette.primary.main : theme.palette.secondary.main}`,
                   ...(authType === 'app'
-                    ? { ...bgClasses.primaryLight }
-                    : {
-                        background: theme =>
-                          `linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), ${theme.palette.secondary.main}`
-                      })
+                    ? { ...bgColors.primaryLight }
+                    : { backgroundColor: bgColors.secondaryLight.backgroundColor })
                 }}
               >
-                <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
-                  <CogOutline sx={{ fontSize: '2.375rem', mr: 5.25 }} />
-                  <Box>
-                    <Typography
-                      variant='h6'
-                      sx={{ mb: 1.25, ...(authType === 'app' ? { color: 'primary.main' } : {}) }}
-                    >
+                <Box
+                  sx={{
+                    rowGap: 1.5,
+                    columnGap: 3,
+                    display: 'flex',
+                    alignItems: 'center',
+                    textAlign: ['center', 'start'],
+                    flexDirection: ['column', 'row']
+                  }}
+                >
+                  <Box sx={{ display: 'flex' }}>
+                    <Icon icon='mdi:cog-outline' fontSize={35} />
+                  </Box>
+                  <div>
+                    <Typography variant='h6' sx={{ mb: 1.25, ...(authType === 'app' && { color: 'primary.main' }) }}>
                       Authenticator Apps
                     </Typography>
-                    <Typography sx={{ ...(authType === 'app' ? { color: 'primary.main' } : {}) }}>
+                    <Typography sx={{ ...(authType === 'app' && { color: 'primary.main' }) }}>
                       Get code from an app like Google Authenticator or Microsoft Authenticator.
                     </Typography>
-                  </Box>
+                  </div>
                 </Box>
               </Box>
             </Grid>
@@ -144,36 +151,50 @@ const DialogAuthentication = () => {
                   px: 7.2,
                   borderRadius: 1,
                   cursor: 'pointer',
+                  ...(authType === 'sms' ? { ...bgColors.primaryLight } : { backgroundColor: 'action.hover' }),
                   border: theme =>
                     `1px solid ${authType === 'sms' ? theme.palette.primary.main : theme.palette.secondary.main}`,
                   ...(authType === 'sms'
-                    ? { ...bgClasses.primaryLight }
-                    : {
-                        background: theme =>
-                          `linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), ${theme.palette.secondary.main}`
-                      })
+                    ? { ...bgColors.primaryLight }
+                    : { backgroundColor: bgColors.secondaryLight.backgroundColor })
                 }}
               >
-                <Box sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
-                  <MessageOutline sx={{ fontSize: '2.375rem', mr: 5.25 }} />
-                  <Box>
+                <Box
+                  sx={{
+                    rowGap: 1.5,
+                    columnGap: 3,
+                    display: 'flex',
+                    alignItems: 'center',
+                    textAlign: ['center', 'start'],
+                    flexDirection: ['column', 'row']
+                  }}
+                >
+                  <Box sx={{ display: 'flex' }}>
+                    <Icon icon='mdi:message-outline' fontSize={35} />
+                  </Box>
+                  <div>
                     <Typography
                       variant='h6'
-                      sx={{ mb: 1.25, ...(authType === 'sms' ? { color: 'primary.main' } : {}) }}
+                      sx={{
+                        mb: 1.25,
+                        fontWeight: 600,
+                        textTransform: 'uppercase',
+                        ...(authType === 'sms' && { color: 'primary.main' })
+                      }}
                     >
-                      SMS
+                      sms
                     </Typography>
-                    <Typography sx={{ ...(authType === 'sms' ? { color: 'primary.main' } : {}) }}>
+                    <Typography sx={{ ...(authType === 'sms' && { color: 'primary.main' }) }}>
                       We will send a code via SMS if you need to use your backup login method.
                     </Typography>
-                  </Box>
+                  </div>
                 </Box>
               </Box>
             </Grid>
             <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
               <Button
                 variant='contained'
-                endIcon={<Arrow />}
+                endIcon={<Icon icon={arrowIcon} />}
                 onClick={() => {
                   setShow(false)
                   setShowAuthDialog(true)
@@ -195,19 +216,25 @@ const DialogAuthentication = () => {
         TransitionComponent={Transition}
         onBackdropClick={handleAuthDialogClose}
       >
-        <DialogContent sx={{ px: { xs: 8, sm: 15 }, py: { xs: 8, sm: 12.5 }, position: 'relative' }}>
+        <DialogContent
+          sx={{
+            position: 'relative',
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            py: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <IconButton
             size='small'
             onClick={handleAuthDialogClose}
             sx={{ position: 'absolute', right: '1rem', top: '1rem' }}
           >
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
 
           <Grid container spacing={6}>
             <Grid item xs={12}>
               {authType === 'sms' ? (
-                <Box>
+                <div>
                   <Typography variant='h6'>Verify Your Mobile Number for SMS</Typography>
                   <Typography variant='body2'>
                     Enter your mobile phone number with country code and we will send you a verification code.
@@ -218,14 +245,14 @@ const DialogAuthentication = () => {
                       <Button variant='outlined' color='secondary' onClick={handleAuthDialogClose} sx={{ mr: 4 }}>
                         Cancel
                       </Button>
-                      <Button variant='contained' endIcon={<Arrow />} onClick={handleAuthDialogClose}>
+                      <Button variant='contained' endIcon={<Icon icon={arrowIcon} />} onClick={handleAuthDialogClose}>
                         Continue
                       </Button>
                     </Grid>
                   </Grid>
-                </Box>
+                </div>
               ) : (
-                <Box>
+                <div>
                   <Typography variant='h5' sx={{ mb: 4, textAlign: 'center' }}>
                     Add Authenticator App
                   </Typography>
@@ -257,12 +284,12 @@ const DialogAuthentication = () => {
                       <Button variant='outlined' color='secondary' onClick={handleAuthDialogClose} sx={{ mr: 4 }}>
                         Cancel
                       </Button>
-                      <Button variant='contained' endIcon={<Arrow />} onClick={handleAuthDialogClose}>
+                      <Button variant='contained' endIcon={<Icon icon={arrowIcon} />} onClick={handleAuthDialogClose}>
                         Continue
                       </Button>
                     </Grid>
                   </Grid>
-                </Box>
+                </div>
               )}
             </Grid>
           </Grid>

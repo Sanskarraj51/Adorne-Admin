@@ -10,14 +10,8 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 
-// ** Icons Imports
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import SendClock from 'mdi-material-ui/SendClock'
-import ContentCopy from 'mdi-material-ui/ContentCopy'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import EmailOutline from 'mdi-material-ui/EmailOutline'
-import ClockOutline from 'mdi-material-ui/ClockOutline'
-import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ListNested = () => {
   // ** State
@@ -33,10 +27,10 @@ const ListNested = () => {
         <ListItem disablePadding>
           <ListItemButton onClick={handleClick}>
             <ListItemIcon>
-              <EmailOutline />
+              <Icon icon='mdi:email-outline' fontSize={20} />
             </ListItemIcon>
             <ListItemText primary='Inbox' />
-            {open ? <ChevronUp /> : <ChevronDown />}
+            <Icon icon={open ? 'mdi:chevron-up' : 'mdi:chevron-down'} />
           </ListItemButton>
         </ListItem>
         <Collapse in={open} timeout='auto' unmountOnExit>
@@ -44,7 +38,7 @@ const ListNested = () => {
             <ListItem disablePadding>
               <ListItemButton sx={{ pl: 8 }}>
                 <ListItemIcon sx={{ mr: 4 }}>
-                  <SendClock />
+                  <Icon icon='mdi:send-clock' fontSize={20} />
                 </ListItemIcon>
                 <ListItemText primary='Scheduled' />
               </ListItemButton>
@@ -54,18 +48,18 @@ const ListNested = () => {
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
-              <ContentCopy />
+              <Icon icon='mdi:content-copy' fontSize={20} />
             </ListItemIcon>
             <ListItemText primary='Draft' />
           </ListItemButton>
         </ListItem>
       </List>
-      <Divider sx={{ m: 0 }} />
+      <Divider sx={{ m: '0 !important' }} />
       <List component='nav' aria-label='secondary mailbox'>
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
-              <ClockOutline />
+              <Icon icon='mdi:clock-outline' fontSize={20} />
             </ListItemIcon>
             <ListItemText primary='Snoozed' />
           </ListItemButton>
@@ -73,7 +67,7 @@ const ListNested = () => {
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
-              <AlertCircleOutline />
+              <Icon icon='mdi:alert-circle-outline' fontSize={20} />
             </ListItemIcon>
             <ListItemText primary='Spam' />
           </ListItemButton>

@@ -6,11 +6,8 @@ import Box from '@mui/material/Box'
 import Radio from '@mui/material/Radio'
 import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import React from 'mdi-material-ui/React'
-import Vuejs from 'mdi-material-ui/Vuejs'
-import Angular from 'mdi-material-ui/Angular'
-import Laravel from 'mdi-material-ui/Laravel'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Avatar Component
 import CustomAvatar from 'src/@core/components/mui/avatar'
@@ -23,7 +20,7 @@ const TabFramework = () => {
   }
 
   return (
-    <Box>
+    <div>
       <Typography variant='h6' sx={{ mb: 4 }}>
         Select Framework
       </Typography>
@@ -34,14 +31,14 @@ const TabFramework = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomAvatar skin='light' color='info' variant='rounded' sx={{ mr: 3, width: 48, height: 48 }}>
-              <React />
+              <Icon icon='mdi:react' />
             </CustomAvatar>
-            <Box>
+            <div>
               <Typography sx={{ color: 'text.secondary' }}>React Native</Typography>
               <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                 Create truly native apps
               </Typography>
-            </Box>
+            </div>
           </Box>
           <Radio value='react' onChange={handleChange} checked={value === 'react'} />
         </Box>
@@ -52,14 +49,14 @@ const TabFramework = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomAvatar skin='light' color='error' variant='rounded' sx={{ mr: 3, width: 48, height: 48 }}>
-              <Angular />
+              <Icon icon='mdi:angular' />
             </CustomAvatar>
-            <Box>
+            <div>
               <Typography sx={{ color: 'text.secondary' }}>Angular</Typography>
               <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                 Most suited for your application
               </Typography>
-            </Box>
+            </div>
           </Box>
           <Radio value='angular' onChange={handleChange} checked={value === 'angular'} />
         </Box>
@@ -69,14 +66,14 @@ const TabFramework = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomAvatar skin='light' color='success' variant='rounded' sx={{ mr: 3, width: 48, height: 48 }}>
-              <Vuejs />
+              <Icon icon='mdi:vuejs' />
             </CustomAvatar>
-            <Box>
+            <div>
               <Typography sx={{ color: 'text.secondary' }}>Vue</Typography>
               <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                 Progressive Framework
               </Typography>
-            </Box>
+            </div>
           </Box>
           <Radio value='vuejs' onChange={handleChange} checked={value === 'vuejs'} />
         </Box>
@@ -86,19 +83,19 @@ const TabFramework = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomAvatar skin='light' color='warning' variant='rounded' sx={{ mr: 3, width: 48, height: 48 }}>
-              <Laravel />
+              <Icon icon='mdi:laravel' />
             </CustomAvatar>
-            <Box>
+            <div>
               <Typography sx={{ color: 'text.secondary' }}>Laravel</Typography>
               <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                 PHP web frameworks
               </Typography>
-            </Box>
+            </div>
           </Box>
           <Radio value='laravel' onChange={handleChange} checked={value === 'laravel'} />
         </Box>
       </Box>
-    </Box>
+    </div>
   )
 }
 

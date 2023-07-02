@@ -13,17 +13,16 @@ import format from 'date-fns/format'
 import { Line } from 'react-chartjs-2'
 import DatePicker from 'react-datepicker'
 
-// ** Icons Imports
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import CalendarOutline from 'mdi-material-ui/CalendarOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ChartjsAreaChart = props => {
   // ** Props
-  const { blue, white, blueLight, greyLight, labelColor, borderColor } = props
+  const { blue, white, blueLight, greyLight, labelColor, borderColor, legendColor } = props
 
   // ** States
   const [endDate, setEndDate] = useState(null)
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(null)
 
   const options = {
     responsive: true,
@@ -34,8 +33,7 @@ const ChartjsAreaChart = props => {
     scales: {
       x: {
         grid: {
-          borderColor,
-          color: 'transparent'
+          color: borderColor
         },
         ticks: { color: labelColor }
       },
@@ -43,8 +41,7 @@ const ChartjsAreaChart = props => {
         min: 0,
         max: 400,
         grid: {
-          borderColor,
-          color: 'transparent'
+          color: borderColor
         },
         ticks: {
           stepSize: 100,
@@ -59,7 +56,7 @@ const ChartjsAreaChart = props => {
         labels: {
           padding: 25,
           boxWidth: 9,
-          color: labelColor,
+          color: legendColor,
           usePointStyle: true
         }
       }
@@ -134,7 +131,7 @@ const ChartjsAreaChart = props => {
   }
 
   const CustomInput = forwardRef((props, ref) => {
-    const startDate = format(props.start, 'MM/dd/yyyy')
+    const startDate = props.start !== null ? format(props.start, 'MM/dd/yyyy') : ''
     const endDate = props.end !== null ? ` - ${format(props.end, 'MM/dd/yyyy')}` : null
     const value = `${startDate}${endDate !== null ? endDate : ''}`
 
@@ -147,12 +144,12 @@ const ChartjsAreaChart = props => {
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
-              <CalendarOutline />
+              <Icon icon='mdi:calendar-outline' />
             </InputAdornment>
           ),
           endAdornment: (
             <InputAdornment position='end'>
-              <ChevronDown />
+              <Icon icon='mdi:chevron-down' />
             </InputAdornment>
           )
         }}
@@ -170,7 +167,6 @@ const ChartjsAreaChart = props => {
     <Card>
       <CardHeader
         title='Data Science'
-        titleTypographyProps={{ variant: 'h6' }}
         sx={{
           flexDirection: ['column', 'row'],
           alignItems: ['flex-start', 'center'],
@@ -191,7 +187,7 @@ const ChartjsAreaChart = props => {
         }
       />
       <CardContent>
-        <Line data={data} options={options} height={450} />
+        <Line data={data} height={450} options={options} />
       </CardContent>
     </Card>
   )

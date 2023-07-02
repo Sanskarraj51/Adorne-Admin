@@ -4,35 +4,36 @@ import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import { GridToolbarFilterButton } from '@mui/x-data-grid'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import Magnify from 'mdi-material-ui/Magnify'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const QuickSearchToolbar = props => {
   return (
     <Box
       sx={{
-        p: 2,
-        pb: 0,
+        gap: 2,
         display: 'flex',
         flexWrap: 'wrap',
-        alignItems: 'flex-start',
-        justifyContent: 'space-between'
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        p: theme => theme.spacing(2, 5, 4, 5)
       }}
     >
-      <Box>
-        <GridToolbarFilterButton />
-      </Box>
+      <GridToolbarFilterButton />
       <TextField
-        variant='standard'
+        size='small'
         value={props.value}
         onChange={props.onChange}
         placeholder='Search…'
         InputProps={{
-          startAdornment: <Magnify fontSize='small' />,
+          startAdornment: (
+            <Box sx={{ mr: 2, display: 'flex' }}>
+              <Icon icon='mdi:magnify' fontSize={20} />
+            </Box>
+          ),
           endAdornment: (
             <IconButton size='small' title='Clear' aria-label='Clear' onClick={props.clearSearch}>
-              <Close fontSize='small' />
+              <Icon icon='mdi:close' fontSize={20} />
             </IconButton>
           )
         }}
@@ -41,13 +42,8 @@ const QuickSearchToolbar = props => {
             xs: 1,
             sm: 'auto'
           },
-          m: theme => theme.spacing(1, 0.5, 1.5),
-          '& .MuiSvgIcon-root': {
-            mr: 0.5
-          },
-          '& .MuiInput-underline:before': {
-            borderBottom: 1,
-            borderColor: 'divider'
+          '& .MuiInputBase-root > svg': {
+            mr: 2
           }
         }}
       />

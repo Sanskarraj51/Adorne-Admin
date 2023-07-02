@@ -4,12 +4,8 @@ import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import { DataGrid } from '@mui/x-data-grid'
 
-// ** Icons Imports
-import Cog from 'mdi-material-ui/Cog'
-import Laptop from 'mdi-material-ui/Laptop'
-import ChartDonut from 'mdi-material-ui/ChartDonut'
-import PencilOutline from 'mdi-material-ui/PencilOutline'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components
 import CustomChip from 'src/@core/components/mui/chip'
@@ -20,19 +16,39 @@ import { getInitials } from 'src/@core/utils/get-initials'
 
 const roleObj = {
   admin: {
-    icon: <Laptop sx={{ mr: 2, color: 'error.main' }} />
+    icon: (
+      <Box component='span' sx={{ mr: 2, display: 'flex', color: 'error.main' }}>
+        <Icon icon='mdi:laptop' />
+      </Box>
+    )
   },
   author: {
-    icon: <Cog sx={{ mr: 2, color: 'warning.main' }} />
+    icon: (
+      <Box component='span' sx={{ mr: 2, display: 'flex', color: 'warning.main' }}>
+        <Icon icon='mdi:cog' />
+      </Box>
+    )
   },
   maintainer: {
-    icon: <ChartDonut sx={{ mr: 2, color: 'success.main' }} />
+    icon: (
+      <Box component='span' sx={{ mr: 2, display: 'flex', color: 'success.main' }}>
+        <Icon icon='mdi:chart-donut' />
+      </Box>
+    )
   },
   editor: {
-    icon: <PencilOutline sx={{ mr: 2, color: 'info.main' }} />
+    icon: (
+      <Box component='span' sx={{ mr: 2, display: 'flex', color: 'info.main' }}>
+        <Icon icon='mdi:pencil-outline' />
+      </Box>
+    )
   },
   subscriber: {
-    icon: <AccountOutline sx={{ mr: 2, color: 'primary.main' }} />
+    icon: (
+      <Box component='span' sx={{ mr: 2, display: 'flex', color: 'primary.main' }}>
+        <Icon icon='mdi:account-outline' />
+      </Box>
+    )
   }
 }
 
@@ -181,7 +197,7 @@ const columns = [
 const EcommerceTable = () => {
   return (
     <Card>
-      <DataGrid autoHeight hideFooter rows={rows} columns={columns} disableSelectionOnClick pagination={undefined} />
+      <DataGrid autoHeight hideFooter rows={rows} columns={columns} disableRowSelectionOnClick pagination={undefined} />
     </Card>
   )
 }

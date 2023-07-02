@@ -1,8 +1,7 @@
-// ** Next Imports
+// ** Next Import
 import Link from 'next/link'
 
 // ** MUI Components
-import MuiLink from '@mui/material/Link'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
@@ -10,8 +9,8 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled, useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import ChevronLeft from 'mdi-material-ui/ChevronLeft'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Configs
 import themeConfig from 'src/configs/themeConfig'
@@ -76,10 +75,6 @@ const ForgotPasswordV2 = () => {
   // ** Vars
   const { skin } = settings
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
-
-  const handleSubmit = e => {
-    e.preventDefault()
-  }
 
   const imageSource =
     skin === 'bordered' ? 'auth-v2-forgot-password-illustration-bordered' : 'auth-v2-forgot-password-illustration'
@@ -199,22 +194,28 @@ const ForgotPasswordV2 = () => {
                 Enter your email and we&prime;ll send you instructions to reset your password
               </Typography>
             </Box>
-            <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+            <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
               <TextField autoFocus type='email' label='Email' sx={{ display: 'flex', mb: 4 }} />
               <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 5.25 }}>
                 Send reset link
               </Button>
-              <Typography sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Link passHref href='/pages/auth/login-v2'>
-                  <Typography
-                    component={MuiLink}
-                    sx={{ display: 'flex', alignItems: 'center', color: 'primary.main', justifyContent: 'center' }}
-                  >
-                    <ChevronLeft sx={{ mr: 1.5, fontSize: '2rem' }} />
-                    <span>Back to login</span>
-                  </Typography>
-                </Link>
-              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Typography
+                  component={Link}
+                  href='/pages/auth/login-v2'
+                  sx={{
+                    display: 'flex',
+                    '& svg': { mr: 1.5 },
+                    alignItems: 'center',
+                    color: 'primary.main',
+                    textDecoration: 'none',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <Icon icon='mdi:chevron-left' fontSize='2rem' />
+                  <span>Back to login</span>
+                </Typography>
+              </Box>
             </form>
           </BoxWrapper>
         </Box>

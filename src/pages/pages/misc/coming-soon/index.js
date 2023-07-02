@@ -30,10 +30,6 @@ const Img = styled('img')(({ theme }) => ({
 }))
 
 const ComingSoon = () => {
-  const handleSubmit = e => {
-    e.preventDefault()
-  }
-
   return (
     <Box className='content-center'>
       <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -46,7 +42,7 @@ const ComingSoon = () => {
               Our website is opening soon. Please register to get notified when it&prime;s ready!
             </Typography>
           </Box>
-          <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <TextField autoFocus size='small' type='email' sx={{ mr: 6 }} placeholder='Enter your email' />
               <Button type='submit' variant='contained'>

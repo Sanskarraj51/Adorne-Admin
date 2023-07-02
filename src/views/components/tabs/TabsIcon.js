@@ -8,10 +8,8 @@ import TabPanel from '@mui/lab/TabPanel'
 import TabContext from '@mui/lab/TabContext'
 import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import Phone from 'mdi-material-ui/Phone'
-import HeartOutline from 'mdi-material-ui/HeartOutline'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const TabsIcon = () => {
   // ** State
@@ -24,9 +22,9 @@ const TabsIcon = () => {
   return (
     <TabContext value={value}>
       <TabList onChange={handleChange} aria-label='icon tabs example'>
-        <Tab value='1' label='Recent' icon={<Phone />} />
-        <Tab value='2' label='Favorites' icon={<HeartOutline />} />
-        <Tab value='3' label='Contacts' icon={<AccountOutline />} />
+        <Tab value='1' label='Recent' icon={<Icon icon='mdi:phone' />} />
+        <Tab value='2' label='Favorites' icon={<Icon icon='mdi:heart-outline' />} />
+        <Tab value='3' label='Contacts' icon={<Icon icon='mdi:account-outline' />} />
       </TabList>
       <TabPanel value='1'>
         <Typography>

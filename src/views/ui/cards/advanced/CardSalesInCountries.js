@@ -6,55 +6,77 @@ import TableRow from '@mui/material/TableRow'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import TableContainer from '@mui/material/TableContainer'
 
-// ** Icons Imports
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomChip from 'src/@core/components/mui/chip'
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const data = [
   {
     sales: '18,879',
     title: 'Australia',
     trendNumber: '15%',
-    trend: <ChevronDown sx={{ color: 'error.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'error.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-down' />
+      </Box>
+    )
   },
   {
     sales: '10,357',
     title: 'Canada',
     trendNumber: '85%',
-    trend: <ChevronUp sx={{ color: 'success.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'success.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-up' />
+      </Box>
+    )
   },
   {
     sales: '4,860',
     title: 'India',
     trendNumber: '48%',
-    trend: <ChevronUp sx={{ color: 'success.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'success.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-up' />
+      </Box>
+    )
   },
   {
     sales: '899',
     title: 'US',
     trendNumber: '16%',
-    trend: <ChevronDown sx={{ color: 'error.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'error.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-down' />
+      </Box>
+    )
   },
   {
     sales: '43',
     title: 'Japan',
     trendNumber: '35%',
-    trend: <ChevronUp sx={{ color: 'success.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'success.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-up' />
+      </Box>
+    )
   },
   {
     sales: '18',
     title: 'Brazil',
     trendNumber: '12%',
-    trend: <ChevronUp sx={{ color: 'success.main' }} />
+    trend: (
+      <Box component='span' sx={{ color: 'success.main', '& svg': { verticalAlign: 'bottom' } }}>
+        <Icon icon='mdi:chevron-up' />
+      </Box>
+    )
   }
 ]
 
@@ -65,9 +87,10 @@ const CardSalesInCountries = () => {
         title='Most Sales in Countries'
         titleTypographyProps={{ sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' } }}
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', sx: { color: 'text.primary' } }}
+          />
         }
       />
       <CardContent>
@@ -99,15 +122,13 @@ const CardSalesInCountries = () => {
                       '&:first-of-type td': { borderTop: theme => `1px solid ${theme.palette.divider}` },
                       '& .MuiTableCell-root': {
                         '&:last-of-type': { pr: 0 },
-                        '&:first-of-type': { pl: 0 },
+                        '&:first-of-type': { pl: '0 !important' },
                         py: theme => `${theme.spacing(2.75)} !important`
                       }
                     }}
                   >
                     <TableCell>
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography sx={{ fontSize: '0.875rem' }}>{row.title}</Typography>
-                      </Box>
+                      <Typography sx={{ fontSize: '0.875rem' }}>{row.title}</Typography>
                     </TableCell>
                     <TableCell align='right'>
                       <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{row.sales}</Typography>

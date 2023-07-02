@@ -14,16 +14,8 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import BlockHelper from 'mdi-material-ui/BlockHelper'
-import StarOutline from 'mdi-material-ui/StarOutline'
-import EmailOutline from 'mdi-material-ui/EmailOutline'
-import PhoneOutline from 'mdi-material-ui/PhoneOutline'
-import ImageOutline from 'mdi-material-ui/ImageOutline'
-import DeleteOutline from 'mdi-material-ui/DeleteOutline'
-import BookmarkOutline from 'mdi-material-ui/BookmarkOutline'
-import ClockTimeFiveOutline from 'mdi-material-ui/ClockTimeFiveOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Components
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -74,9 +66,15 @@ const UserProfileRight = props => {
             <IconButton
               size='small'
               onClick={handleUserProfileRightSidebarToggle}
-              sx={{ top: '0.7rem', right: '0.7rem', position: 'absolute', color: 'text.secondary' }}
+              sx={{
+                top: '0.7rem',
+                right: '0.7rem',
+                position: 'absolute',
+                color: 'text.secondary',
+                '& svg': { color: 'action.active' }
+              }}
             >
-              <Close sx={{ color: 'action.active' }} />
+              <Icon icon='mdi:close' />
             </IconButton>
             <Box sx={{ px: 5, pb: 7, pt: 9.5, display: 'flex', flexDirection: 'column' }}>
               <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
@@ -145,7 +143,7 @@ const UserProfileRight = props => {
                   <List dense sx={{ p: 0 }}>
                     <ListItem sx={{ px: 2 }}>
                       <ListItemIcon sx={{ mr: 3 }}>
-                        <EmailOutline />
+                        <Icon icon='mdi:email-outline' />
                       </ListItemIcon>
                       <ListItemText
                         sx={{ textTransform: 'lowercase' }}
@@ -154,20 +152,20 @@ const UserProfileRight = props => {
                     </ListItem>
                     <ListItem sx={{ px: 2 }}>
                       <ListItemIcon sx={{ mr: 3 }}>
-                        <PhoneOutline />
+                        <Icon icon='mdi:phone-outline' />
                       </ListItemIcon>
                       <ListItemText secondary='+1(123) 456 - 7890' />
                     </ListItem>
                     <ListItem sx={{ px: 2 }}>
                       <ListItemIcon sx={{ mr: 3 }}>
-                        <ClockTimeFiveOutline />
+                        <Icon icon='mdi:clock-time-five-outline' />
                       </ListItemIcon>
                       <ListItemText secondary='Mon - Fri 10AM - 8PM' />
                     </ListItem>
                   </List>
                 </Box>
 
-                <Box>
+                <div>
                   <Typography variant='body2' sx={{ mb: 1.5, textTransform: 'uppercase' }}>
                     Settings
                   </Typography>
@@ -175,7 +173,7 @@ const UserProfileRight = props => {
                     <ListItem disablePadding>
                       <ListItemButton sx={{ px: 2 }}>
                         <ListItemIcon sx={{ mr: 3 }}>
-                          <BookmarkOutline />
+                          <Icon icon='mdi:bookmark-outline' />
                         </ListItemIcon>
                         <ListItemText secondary='Add Tag' />
                       </ListItemButton>
@@ -183,7 +181,7 @@ const UserProfileRight = props => {
                     <ListItem disablePadding>
                       <ListItemButton sx={{ px: 2 }}>
                         <ListItemIcon sx={{ mr: 3 }}>
-                          <StarOutline />
+                          <Icon icon='mdi:star-outline' />
                         </ListItemIcon>
                         <ListItemText secondary='Important Contact' />
                       </ListItemButton>
@@ -191,7 +189,7 @@ const UserProfileRight = props => {
                     <ListItem disablePadding>
                       <ListItemButton sx={{ px: 2 }}>
                         <ListItemIcon sx={{ mr: 3 }}>
-                          <ImageOutline />
+                          <Icon icon='mdi:image-outline' />
                         </ListItemIcon>
                         <ListItemText secondary='Shared Media' />
                       </ListItemButton>
@@ -199,7 +197,7 @@ const UserProfileRight = props => {
                     <ListItem disablePadding>
                       <ListItemButton sx={{ px: 2 }}>
                         <ListItemIcon sx={{ mr: 3 }}>
-                          <DeleteOutline />
+                          <Icon icon='mdi:delete-outline' />
                         </ListItemIcon>
                         <ListItemText secondary='Delete Contact' />
                       </ListItemButton>
@@ -207,13 +205,13 @@ const UserProfileRight = props => {
                     <ListItem disablePadding>
                       <ListItemButton sx={{ px: 2 }}>
                         <ListItemIcon sx={{ mr: 2.5, ml: 0.5 }}>
-                          <BlockHelper fontSize='small' />
+                          <Icon icon='mdi:block-helper' fontSize={20} />
                         </ListItemIcon>
                         <ListItemText secondary='Block Contact' />
                       </ListItemButton>
                     </ListItem>
                   </List>
-                </Box>
+                </div>
               </Box>
             </ScrollWrapper>
           </Box>

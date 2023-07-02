@@ -5,10 +5,8 @@ import { useState } from 'react'
 import TreeView from '@mui/lab/TreeView'
 import TreeItem from '@mui/lab/TreeItem'
 
-// ** Icons Imports
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import ChevronLeft from 'mdi-material-ui/ChevronLeft'
-import ChevronRight from 'mdi-material-ui/ChevronRight'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const TreeViewControlled = ({ direction }) => {
   // ** States
@@ -22,7 +20,7 @@ const TreeViewControlled = ({ direction }) => {
   const handleSelect = (event, nodeIds) => {
     setSelected(nodeIds)
   }
-  const ExpandIcon = direction === 'rtl' ? <ChevronLeft /> : <ChevronRight />
+  const ExpandIcon = direction === 'rtl' ? 'mdi:chevron-left' : 'mdi:chevron-right'
 
   return (
     <TreeView
@@ -31,8 +29,8 @@ const TreeViewControlled = ({ direction }) => {
       sx={{ minHeight: 240 }}
       onNodeToggle={handleToggle}
       onNodeSelect={handleSelect}
-      defaultExpandIcon={ExpandIcon}
-      defaultCollapseIcon={<ChevronDown />}
+      defaultExpandIcon={<Icon icon={ExpandIcon} />}
+      defaultCollapseIcon={<Icon icon='mdi:chevron-down' />}
     >
       <TreeItem nodeId='1' label='Applications'>
         <TreeItem nodeId='2' label='Calendar' />

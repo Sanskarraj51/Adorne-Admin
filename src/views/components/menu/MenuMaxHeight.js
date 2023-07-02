@@ -6,8 +6,8 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import IconButton from '@mui/material/IconButton'
 
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const options = [
   'None',
@@ -42,7 +42,7 @@ const MenuMaxHeight = () => {
   return (
     <div>
       <IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={handleClick}>
-        <DotsVertical />
+        <Icon icon='mdi:dots-vertical' />
       </IconButton>
       <Menu
         keepMounted

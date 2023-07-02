@@ -21,10 +21,8 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import HomeOutline from 'mdi-material-ui/HomeOutline'
-import BriefcaseOutline from 'mdi-material-ui/BriefcaseOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Hooks
 import useBgColor from 'src/@core/hooks/useBgColor'
@@ -39,12 +37,12 @@ const DialogAddAddress = () => {
   const [addressType, setAddressType] = useState('home')
 
   // ** Hooks
-  const bgClasses = useBgColor()
+  const bgColors = useBgColor()
 
   return (
     <Card>
-      <CardContent sx={{ textAlign: 'center' }}>
-        <HomeOutline sx={{ mb: 2, fontSize: '2rem' }} />
+      <CardContent sx={{ textAlign: 'center', '& svg': { mb: 2 } }}>
+        <Icon icon='mdi:home-outline' fontSize='2rem' />
         <Typography variant='h6' sx={{ mb: 4 }}>
           Add New Address
         </Typography>
@@ -64,13 +62,20 @@ const DialogAddAddress = () => {
         TransitionComponent={Transition}
         onBackdropClick={() => setShow(false)}
       >
-        <DialogContent sx={{ pb: 6, px: { xs: 8, sm: 15 }, pt: { xs: 8, sm: 12.5 }, position: 'relative' }}>
+        <DialogContent
+          sx={{
+            position: 'relative',
+            pb: theme => `${theme.spacing(8)} !important`,
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            pt: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <IconButton
             size='small'
             onClick={() => setShow(false)}
             sx={{ position: 'absolute', right: '1rem', top: '1rem' }}
           >
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
           <Box sx={{ mb: 9, textAlign: 'center' }}>
             <Typography variant='h5' sx={{ mb: 3, lineHeight: '2rem' }}>
@@ -87,19 +92,17 @@ const DialogAddAddress = () => {
                   px: 4,
                   borderRadius: 1,
                   cursor: 'pointer',
+                  ...(addressType === 'home' ? { ...bgColors.primaryLight } : { backgroundColor: 'action.hover' }),
                   border: theme =>
                     `1px solid ${addressType === 'home' ? theme.palette.primary.main : theme.palette.secondary.main}`,
                   ...(addressType === 'home'
-                    ? { ...bgClasses.primaryLight }
-                    : {
-                        background: theme =>
-                          `linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), ${theme.palette.secondary.main}`
-                      })
+                    ? { ...bgColors.primaryLight }
+                    : { backgroundColor: bgColors.secondaryLight.backgroundColor })
                 }}
               >
-                <Box sx={{ mb: 1, display: 'flex', alignItems: 'center' }}>
-                  <HomeOutline sx={{ mr: 2 }} />
-                  <Typography variant='h6' sx={{ mb: 0, ...(addressType === 'home' ? { color: 'primary.main' } : {}) }}>
+                <Box sx={{ mb: 1, display: 'flex', alignItems: 'center', '& svg': { mr: 2 } }}>
+                  <Icon icon='mdi:home-outline' />
+                  <Typography variant='h6' sx={{ ...(addressType === 'home' ? { color: 'primary.main' } : {}) }}>
                     Home
                   </Typography>
                 </Box>
@@ -116,22 +119,17 @@ const DialogAddAddress = () => {
                   px: 4,
                   borderRadius: 1,
                   cursor: 'pointer',
+                  ...(addressType === 'office' ? { ...bgColors.primaryLight } : { backgroundColor: 'action.hover' }),
                   border: theme =>
                     `1px solid ${addressType === 'office' ? theme.palette.primary.main : theme.palette.secondary.main}`,
                   ...(addressType === 'office'
-                    ? { ...bgClasses.primaryLight }
-                    : {
-                        background: theme =>
-                          `linear-gradient(0deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)), ${theme.palette.secondary.main}`
-                      })
+                    ? { ...bgColors.primaryLight }
+                    : { backgroundColor: bgColors.secondaryLight.backgroundColor })
                 }}
               >
-                <Box sx={{ mb: 1, display: 'flex', alignItems: 'center' }}>
-                  <BriefcaseOutline sx={{ mr: 2 }} />
-                  <Typography
-                    variant='h6'
-                    sx={{ mb: 0, ...(addressType === 'office' ? { color: 'primary.main' } : {}) }}
-                  >
+                <Box sx={{ mb: 1, display: 'flex', alignItems: 'center', '& svg': { mr: 2 } }}>
+                  <Icon icon='mdi:briefcase-outline' />
+                  <Typography variant='h6' sx={{ ...(addressType === 'office' ? { color: 'primary.main' } : {}) }}>
                     Office
                   </Typography>
                 </Box>
@@ -185,7 +183,13 @@ const DialogAddAddress = () => {
             </Grid>
           </Grid>
         </DialogContent>
-        <DialogActions sx={{ pb: { xs: 8, sm: 12.5 }, justifyContent: 'center' }}>
+        <DialogActions
+          sx={{
+            justifyContent: 'center',
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <Button variant='contained' sx={{ mr: 2 }} onClick={() => setShow(false)}>
             Submit
           </Button>

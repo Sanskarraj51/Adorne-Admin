@@ -2,14 +2,11 @@
 import Card from '@mui/material/Card'
 import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-
 // ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 const CrmMonthlyBudget = () => {
@@ -99,9 +96,10 @@ const CrmMonthlyBudget = () => {
       <CardHeader
         title='Monthly Budget'
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Refresh', 'Edit', 'Update']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
       <CardContent>

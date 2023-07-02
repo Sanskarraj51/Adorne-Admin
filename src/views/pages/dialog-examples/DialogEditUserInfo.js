@@ -22,9 +22,8 @@ import DialogActions from '@mui/material/DialogActions'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Select from '@mui/material/Select'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
@@ -44,8 +43,8 @@ const DialogEditUserInfo = () => {
 
   return (
     <Card>
-      <CardContent sx={{ textAlign: 'center' }}>
-        <AccountOutline sx={{ mb: 2, fontSize: '2rem' }} />
+      <CardContent sx={{ textAlign: 'center', '& svg': { mb: 2 } }}>
+        <Icon icon='mdi:account-outline' fontSize='2rem' />
         <Typography variant='h6' sx={{ mb: 4 }}>
           Edit User Info
         </Typography>
@@ -63,13 +62,20 @@ const DialogEditUserInfo = () => {
         TransitionComponent={Transition}
         onBackdropClick={() => setShow(false)}
       >
-        <DialogContent sx={{ pb: 6, px: { xs: 8, sm: 15 }, pt: { xs: 8, sm: 12.5 }, position: 'relative' }}>
+        <DialogContent
+          sx={{
+            position: 'relative',
+            pb: theme => `${theme.spacing(8)} !important`,
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            pt: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <IconButton
             size='small'
             onClick={() => setShow(false)}
             sx={{ position: 'absolute', right: '1rem', top: '1rem' }}
           >
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
           <Box sx={{ mb: 8, textAlign: 'center' }}>
             <Typography variant='h5' sx={{ mb: 3, lineHeight: '2rem' }}>
@@ -170,7 +176,13 @@ const DialogEditUserInfo = () => {
             </Grid>
           </Grid>
         </DialogContent>
-        <DialogActions sx={{ pb: { xs: 8, sm: 12.5 }, justifyContent: 'center' }}>
+        <DialogActions
+          sx={{
+            justifyContent: 'center',
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <Button variant='contained' sx={{ mr: 2 }} onClick={() => setShow(false)}>
             Submit
           </Button>

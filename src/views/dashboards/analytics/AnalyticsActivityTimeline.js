@@ -5,7 +5,6 @@ import { styled } from '@mui/material/styles'
 import TimelineDot from '@mui/lab/TimelineDot'
 import TimelineItem from '@mui/lab/TimelineItem'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import TimelineContent from '@mui/lab/TimelineContent'
@@ -13,9 +12,11 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator'
 import TimelineConnector from '@mui/lab/TimelineConnector'
 import MuiTimeline from '@mui/lab/Timeline'
 
-// ** Icons Imports
-import PlayCircle from 'mdi-material-ui/PlayCircle'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
+
+// ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 
 // Styled Timeline component
 const Timeline = styled(MuiTimeline)({
@@ -35,9 +36,10 @@ const AnalyticsActivityTimeline = () => {
       <CardHeader
         title='Activity Timeline'
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
       <CardContent sx={{ pt: theme => `${theme.spacing(2.5)} !important` }}>
@@ -65,8 +67,8 @@ const AnalyticsActivityTimeline = () => {
               <Typography variant='body2' sx={{ mb: 2 }}>
                 Product introduction and details video
               </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <PlayCircle sx={{ mr: 2.5, color: 'error.main' }} />
+              <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 2.5, color: 'error.main' } }}>
+                <Icon icon='mdi:play-circle' />
                 <Typography noWrap variant='subtitle2' sx={{ fontWeight: 600 }}>
                   www.youtube.com/channel/UCuryo5s0CW4aP83itLjIdZg
                 </Typography>

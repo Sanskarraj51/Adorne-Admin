@@ -1,36 +1,34 @@
 // ** MUI Imports
-import { styled } from '@mui/material/styles'
 import MuiBox from '@mui/material/Box'
+import { alpha, styled, useTheme } from '@mui/material/styles'
 
-// ** Icons Imports
-import Alert from 'mdi-material-ui/Alert'
-import CheckCircle from 'mdi-material-ui/CheckCircle'
-
-// ** Util Imports
-import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
+// ** Custom Icon Import
+import Icon from 'src/@core/components/icon'
 
 // Styled Box component
-const Box = styled(MuiBox)(({ theme }) => ({
+const Box = styled(MuiBox)(() => ({
   width: 20,
   height: 20,
   borderWidth: 3,
   borderRadius: '50%',
-  borderStyle: 'solid',
-  borderColor: hexToRGBA(theme.palette.primary.main, 0.12)
+  borderStyle: 'solid'
 }))
 
 const StepperCustomDot = props => {
   // ** Props
   const { active, completed, error } = props
+
+  // ** Hooks
+  const theme = useTheme()
   if (error) {
-    return <Alert sx={{ width: 20, height: 20, color: 'error.main', transform: 'scale(1.2)' }} />
+    return <Icon icon='mdi:alert' fontSize={20} color={theme.palette.error.main} transform='scale(1.2)' />
   } else if (completed) {
-    return <CheckCircle sx={{ width: 20, height: 20, color: 'primary.main', transform: 'scale(1.2)' }} />
+    return <Icon icon='mdi:check-circle' fontSize={20} color={theme.palette.primary.main} transform='scale(1.2)' />
   } else {
     return (
       <Box
         sx={{
-          ...(active && { borderColor: 'primary.main' })
+          borderColor: active ? 'primary.main' : alpha(theme.palette.primary.main, 0.3)
         }}
       />
     )

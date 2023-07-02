@@ -1,8 +1,8 @@
-const Switch = theme => {
+const Switch = () => {
   return {
     MuiSwitch: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           '& .MuiSwitch-track': {
             borderRadius: theme.shape.borderRadius
           },
@@ -16,7 +16,7 @@ const Switch = theme => {
           '& .Mui-disabled + .MuiSwitch-track': {
             backgroundColor: `rgb(${theme.palette.customColors.main})`
           }
-        }
+        })
       }
     }
   }

@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import ChevronUp from 'mdi-material-ui/ChevronUp'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
@@ -79,11 +79,11 @@ const CardStatisticsLiveVisitors = () => {
         subheaderTypographyProps={{ variant: 'caption' }}
         sx={{ '& .MuiCardHeader-subheader': { fontSize: '0.75rem' } }}
         action={
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { color: 'success.main' } }}>
             <Typography variant='body2' sx={{ color: 'success.main' }}>
               +78.2%
             </Typography>
-            <ChevronUp sx={{ color: 'success.main' }} />
+            <Icon icon='mdi:chevron-up' />
           </Box>
         }
       />

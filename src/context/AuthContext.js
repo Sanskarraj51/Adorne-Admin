@@ -16,11 +16,8 @@ const defaultProvider = {
   loading: true,
   setUser: () => null,
   setLoading: () => Boolean,
-  isInitialized: false,
   login: () => Promise.resolve(),
-  logout: () => Promise.resolve(),
-  setIsInitialized: () => Boolean,
-  register: () => Promise.resolve()
+  logout: () => Promise.resolve()
 }
 const AuthContext = createContext(defaultProvider)
 
@@ -28,13 +25,11 @@ const AuthProvider = ({ children }) => {
   // ** States
   const [user, setUser] = useState(defaultProvider.user)
   const [loading, setLoading] = useState(defaultProvider.loading)
-  const [isInitialized, setIsInitialized] = useState(defaultProvider.isInitialized)
 
   // ** Hooks
   const router = useRouter()
   useEffect(() => {
     const initAuth = async () => {
-      setIsInitialized(true)
       const storedToken = window.localStorage.getItem(authConfig.storageTokenKeyName)
       if (storedToken) {
         setLoading(true)
@@ -54,34 +49,30 @@ const AuthProvider = ({ children }) => {
             localStorage.removeItem('accessToken')
             setUser(null)
             setLoading(false)
+            if (authConfig.onTokenExpiration === 'logout' && !router.pathname.includes('login')) {
+              router.replace('/login')
+            }
           })
       } else {
         setLoading(false)
       }
     }
     initAuth()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleLogin = (params, errorCallback) => {
     axios
       .post(authConfig.loginEndpoint, params)
-      .then(async res => {
-        window.localStorage.setItem(authConfig.storageTokenKeyName, res.data.accessToken)
-      })
-      .then(() => {
-        axios
-          .get(authConfig.meEndpoint, {
-            headers: {
-              Authorization: window.localStorage.getItem(authConfig.storageTokenKeyName)
-            }
-          })
-          .then(async response => {
-            const returnUrl = router.query.returnUrl
-            setUser({ ...response.data.userData })
-            await window.localStorage.setItem('userData', JSON.stringify(response.data.userData))
-            const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
-            router.replace(redirectURL)
-          })
+      .then(async response => {
+        params.rememberMe
+          ? window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
+          : null
+        const returnUrl = router.query.returnUrl
+        setUser({ ...response.data.userData })
+        params.rememberMe ? window.localStorage.setItem('userData', JSON.stringify(response.data.userData)) : null
+        const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
+        router.replace(redirectURL)
       })
       .catch(err => {
         if (errorCallback) errorCallback(err)
@@ -90,23 +81,9 @@ const AuthProvider = ({ children }) => {
 
   const handleLogout = () => {
     setUser(null)
-    setIsInitialized(false)
     window.localStorage.removeItem('userData')
     window.localStorage.removeItem(authConfig.storageTokenKeyName)
     router.push('/login')
-  }
-
-  const handleRegister = (params, errorCallback) => {
-    axios
-      .post(authConfig.registerEndpoint, params)
-      .then(res => {
-        if (res.data.error) {
-          if (errorCallback) errorCallback(res.data.error)
-        } else {
-          handleLogin({ email: params.email, password: params.password })
-        }
-      })
-      .catch(err => (errorCallback ? errorCallback(err) : null))
   }
 
   const values = {
@@ -114,11 +91,8 @@ const AuthProvider = ({ children }) => {
     loading,
     setUser,
     setLoading,
-    isInitialized,
-    setIsInitialized,
     login: handleLogin,
-    logout: handleLogout,
-    register: handleRegister
+    logout: handleLogout
   }
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>

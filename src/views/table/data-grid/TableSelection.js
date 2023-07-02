@@ -69,9 +69,11 @@ const columns = [
   },
   {
     flex: 0.175,
+    type: 'date',
     minWidth: 120,
     headerName: 'Date',
     field: 'start_date',
+    valueGetter: params => new Date(params.value),
     renderCell: params => (
       <Typography variant='body2' sx={{ color: 'text.primary' }}>
         {params.row.start_date}
@@ -123,7 +125,7 @@ const columns = [
 
 const TableSelection = () => {
   // ** State
-  const [pageSize, setPageSize] = useState(7)
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
 
   return (
     <Card>
@@ -133,9 +135,9 @@ const TableSelection = () => {
         rows={rows}
         columns={columns}
         checkboxSelection
-        pageSize={pageSize}
-        rowsPerPageOptions={[7, 10, 25, 50]}
-        onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+        pageSizeOptions={[7, 10, 25, 50]}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
       />
     </Card>
   )

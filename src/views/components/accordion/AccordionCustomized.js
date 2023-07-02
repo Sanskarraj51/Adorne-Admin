@@ -8,9 +8,8 @@ import MuiAccordion from '@mui/material/Accordion'
 import MuiAccordionSummary from '@mui/material/AccordionSummary'
 import MuiAccordionDetails from '@mui/material/AccordionDetails'
 
-// ** Icons Imports
-import Plus from 'mdi-material-ui/Plus'
-import Minus from 'mdi-material-ui/Minus'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // Styled component for Accordion component
 const Accordion = styled(MuiAccordion)(({ theme }) => ({
@@ -43,14 +42,15 @@ const Accordion = styled(MuiAccordion)(({ theme }) => ({
 const AccordionSummary = styled(MuiAccordionSummary)(({ theme }) => ({
   marginBottom: -1,
   padding: theme.spacing(0, 4),
-  minHeight: theme.spacing(12),
+  minHeight: theme.spacing(12.5),
+  transition: 'min-height 0.15s ease-in-out',
   borderBottom: `1px solid ${theme.palette.divider}`,
   backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey[50] : theme.palette.background.default,
   '&.Mui-expanded': {
-    minHeight: theme.spacing(12)
+    minHeight: theme.spacing(12.5)
   },
   '& .MuiAccordionSummary-content.Mui-expanded': {
-    margin: '12px 0'
+    margin: '10px 0'
   }
 }))
 
@@ -66,7 +66,7 @@ const AccordionCustomized = () => {
   const handleChange = panel => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false)
   }
-  const expandIcon = value => (expanded === value ? <Minus /> : <Plus />)
+  const expandIcon = value => <Icon icon={expanded === value ? 'mdi:minus' : 'mdi:plus'} />
 
   return (
     <div>

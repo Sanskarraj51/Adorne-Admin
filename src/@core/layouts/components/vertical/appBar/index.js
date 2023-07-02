@@ -27,12 +27,12 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
   borderBottomLeftRadius: theme.shape.borderRadius,
   borderBottomRightRadius: theme.shape.borderRadius,
   minHeight: `${theme.mixins.toolbar.minHeight}px !important`,
-  transition: 'padding .25s ease-in-out, box-shadow .25s ease-in-out, backdrop-filter .25s ease-in-out'
+  transition: 'padding .25s ease-in-out, box-shadow .25s ease-in-out, background-color .25s ease-in-out'
 }))
 
 const LayoutAppBar = props => {
   // ** Props
-  const { settings, verticalAppBarContent: userVerticalAppBarContent } = props
+  const { settings, appBarProps, appBarContent: userAppBarContent } = props
 
   // ** Hooks
   const theme = useTheme()
@@ -44,8 +44,8 @@ const LayoutAppBar = props => {
   const appBarFixedStyles = () => {
     return {
       px: `${theme.spacing(6)} !important`,
+      boxShadow: skin === 'bordered' ? 0 : 3,
       ...(appBarBlur && { backdropFilter: 'blur(8px)' }),
-      boxShadow: theme.shadows[skin === 'bordered' ? 0 : 3],
       backgroundColor: hexToRGBA(theme.palette.background.paper, appBarBlur ? 0.9 : 1),
       ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}`, borderTopWidth: 0 })
     }
@@ -53,9 +53,22 @@ const LayoutAppBar = props => {
   if (appBar === 'hidden') {
     return null
   }
+  let userAppBarStyle = {}
+  if (appBarProps && appBarProps.sx) {
+    userAppBarStyle = appBarProps.sx
+  }
+  const userAppBarProps = Object.assign({}, appBarProps)
+  delete userAppBarProps.sx
 
   return (
-    <AppBar elevation={0} color='default' className='layout-navbar' position={appBar === 'fixed' ? 'sticky' : 'static'}>
+    <AppBar
+      elevation={0}
+      color='default'
+      className='layout-navbar'
+      sx={{ ...userAppBarStyle }}
+      position={appBar === 'fixed' ? 'sticky' : 'static'}
+      {...userAppBarProps}
+    >
       <Toolbar
         className='navbar-content-container'
         sx={{
@@ -65,7 +78,7 @@ const LayoutAppBar = props => {
           })
         }}
       >
-        {(userVerticalAppBarContent && userVerticalAppBarContent(props)) || null}
+        {(userAppBarContent && userAppBarContent(props)) || null}
       </Toolbar>
     </AppBar>
   )

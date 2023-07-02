@@ -11,16 +11,16 @@ import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 // ** Styled Components
 const BoxWrapper = styled(Box)(({ theme }) => ({
   position: 'relative',
-  padding: theme.spacing(12.5, 35),
-  backgroundColor: hexToRGBA(theme.palette.primary.main, 0.05),
-  [theme.breakpoints.down('lg')]: {
-    padding: theme.spacing(12.5, 20)
+  padding: theme.spacing(11.25, 36),
+  backgroundColor: hexToRGBA(theme.palette.primary.main, 0.04),
+  [theme.breakpoints.down('xl')]: {
+    padding: theme.spacing(11.25, 20)
   },
   [theme.breakpoints.down('md')]: {
     textAlign: 'center'
   },
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(12.5, 5)
+    padding: theme.spacing(10, 5)
   }
 }))
 
@@ -54,7 +54,7 @@ const PricingCTA = () => {
           <Typography variant='h5' sx={{ mb: 2.5, color: 'primary.main' }}>
             Still not convinced? Start with a 14-day FREE trial!
           </Typography>
-          <Typography variant='body2' sx={{ mb: 10 }}>
+          <Typography sx={{ mb: 10, color: 'text.secondary' }}>
             You will get full access to with all the features for 14 days.
           </Typography>
           <Button variant='contained'>Start 14-day FREE trial</Button>

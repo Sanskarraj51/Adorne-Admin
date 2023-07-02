@@ -1,7 +1,7 @@
 // ** React Imports
 import { useState, useEffect } from 'react'
 
-// ** Next Imports
+// ** Next Import
 import { useRouter } from 'next/router'
 
 // ** MUI Imports
@@ -23,9 +23,8 @@ import InputAdornment from '@mui/material/InputAdornment'
 // ** Third Party Components
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import Magnify from 'mdi-material-ui/Magnify'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Import
 import CustomAvatar from 'src/@core/components/mui/avatar'
@@ -134,7 +133,7 @@ const SidebarLeft = props => {
                   width: '100%',
                   borderRadius: 1,
                   alignItems: 'flex-start',
-                  backgroundColor: theme => (activeCondition ? `${theme.palette.primary.main} !important` : '')
+                  ...(activeCondition && { backgroundColor: theme => `${theme.palette.primary.main} !important` })
                 }}
               >
                 <ListItemAvatar sx={{ m: 0 }}>
@@ -168,7 +167,7 @@ const SidebarLeft = props => {
                         sx={{
                           width: 40,
                           height: 40,
-                          border: theme => (activeCondition ? `2px solid ${theme.palette.common.white}` : '')
+                          outline: theme => `2px solid ${activeCondition ? theme.palette.common.white : 'transparent'}`
                         }}
                       />
                     ) : (
@@ -179,7 +178,7 @@ const SidebarLeft = props => {
                           width: 40,
                           height: 40,
                           fontSize: '1rem',
-                          border: theme => (activeCondition ? `2px solid ${theme.palette.common.white}` : '')
+                          outline: theme => `2px solid ${activeCondition ? theme.palette.common.white : 'transparent'}`
                         }}
                       >
                         {getInitials(chat.fullName)}
@@ -192,7 +191,7 @@ const SidebarLeft = props => {
                     my: 0,
                     ml: 4,
                     mr: 1.5,
-                    '& .MuiTypography-root': { ...(activeCondition ? { color: 'common.white' } : {}) }
+                    '& .MuiTypography-root': { ...(activeCondition && { color: 'common.white' }) }
                   }}
                   primary={
                     <Typography noWrap sx={{ ...(!activeCondition ? { color: 'text.secondary' } : {}) }}>
@@ -200,11 +199,7 @@ const SidebarLeft = props => {
                     </Typography>
                   }
                   secondary={
-                    <Typography
-                      noWrap
-                      variant='body2'
-                      sx={{ color: !activeCondition ? theme => theme.palette.text.disabled : {} }}
-                    >
+                    <Typography noWrap variant='body2' sx={{ ...(!activeCondition && { color: 'text.disabled' }) }}>
                       {lastMessage ? lastMessage.message : null}
                     </Typography>
                   }
@@ -268,7 +263,7 @@ const SidebarLeft = props => {
                       py: 2.5,
                       width: '100%',
                       borderRadius: 1,
-                      backgroundColor: theme => (activeCondition ? `${theme.palette.primary.main} !important` : '')
+                      ...(activeCondition && { backgroundColor: theme => `${theme.palette.primary.main} !important` })
                     }}
                   >
                     <ListItemAvatar sx={{ m: 0 }}>
@@ -279,7 +274,8 @@ const SidebarLeft = props => {
                           sx={{
                             width: 40,
                             height: 40,
-                            border: theme => (activeCondition ? `2px solid ${theme.palette.common.white}` : '')
+                            outline: theme =>
+                              `2px solid ${activeCondition ? theme.palette.common.white : 'transparent'}`
                           }}
                         />
                       ) : (
@@ -290,7 +286,8 @@ const SidebarLeft = props => {
                             width: 40,
                             height: 40,
                             fontSize: '1rem',
-                            border: theme => (activeCondition ? `2px solid ${theme.palette.common.white}` : '')
+                            outline: theme =>
+                              `2px solid ${activeCondition ? theme.palette.common.white : 'transparent'}`
                           }}
                         >
                           {getInitials(contact.fullName)}
@@ -298,18 +295,18 @@ const SidebarLeft = props => {
                       )}
                     </ListItemAvatar>
                     <ListItemText
-                      sx={{ my: 0, ml: 4, '& .MuiTypography-root': { color: activeCondition ? 'common.white' : '' } }}
+                      sx={{
+                        my: 0,
+                        ml: 4,
+                        ...(activeCondition && { '& .MuiTypography-root': { color: 'common.white' } })
+                      }}
                       primary={
                         <Typography sx={{ ...(!activeCondition ? { color: 'text.secondary' } : {}) }}>
                           {contact.fullName}
                         </Typography>
                       }
                       secondary={
-                        <Typography
-                          noWrap
-                          variant='body2'
-                          sx={{ color: !activeCondition ? theme => theme.palette.text.disabled : {} }}
-                        >
+                        <Typography noWrap variant='body2' sx={{ ...(!activeCondition && { color: 'text.disabled' }) }}>
                           {contact.about}
                         </Typography>
                       }
@@ -335,7 +332,7 @@ const SidebarLeft = props => {
   }
 
   return (
-    <Box>
+    <div>
       <Drawer
         open={leftSidebarOpen}
         onClose={handleLeftSidebarToggle}
@@ -413,19 +410,19 @@ const SidebarLeft = props => {
             InputProps={{
               startAdornment: (
                 <InputAdornment position='start'>
-                  <Magnify fontSize='small' />
+                  <Icon icon='mdi:magnify' fontSize='1.25rem' />
                 </InputAdornment>
               )
             }}
           />
           {!mdAbove ? (
             <IconButton sx={{ p: 1, ml: 1 }} onClick={handleLeftSidebarToggle}>
-              <Close sx={{ fontSize: '1.375rem' }} />
+              <Icon icon='mdi:close' fontSize='1.375rem' />
             </IconButton>
           ) : null}
         </Box>
 
-        <Box sx={{ height: `calc(100% - 4.0625rem)` }}>
+        <Box sx={{ height: `calc(100% - 4.125rem)` }}>
           <ScrollWrapper hidden={hidden}>
             <Box sx={{ p: theme => theme.spacing(5, 3, 3) }}>
               <Typography variant='h6' sx={{ ml: 2, mb: 4, color: 'primary.main' }}>
@@ -451,7 +448,7 @@ const SidebarLeft = props => {
         userProfileLeftOpen={userProfileLeftOpen}
         handleUserProfileLeftSidebarToggle={handleUserProfileLeftSidebarToggle}
       />
-    </Box>
+    </div>
   )
 }
 

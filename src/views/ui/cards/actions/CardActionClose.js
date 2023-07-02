@@ -2,6 +2,7 @@
 import { useState } from 'react'
 
 // ** MUI Imports
+import Box from '@mui/material/Box'
 import Fade from '@mui/material/Fade'
 import Card from '@mui/material/Card'
 import IconButton from '@mui/material/IconButton'
@@ -10,7 +11,7 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 
 // ** Icon Imports
-import Close from 'mdi-material-ui/Close'
+import Icon from 'src/@core/components/icon'
 
 const CardActionClose = () => {
   // ** State
@@ -28,14 +29,17 @@ const CardActionClose = () => {
               sx={{ color: 'text.secondary' }}
               onClick={() => setVisibility(false)}
             >
-              <Close fontSize='small' />
+              <Icon icon='mdi:close' fontSize={20} />
             </IconButton>
           }
         />
         <CardContent>
           <Typography variant='body2'>
             You can specifically add remove action using <code>actionRemove</code> prop Click on{' '}
-            <Close fontSize='small' sx={{ verticalAlign: 'bottom' }} /> icon to see it in action
+            <Box component='span' sx={{ verticalAlign: 'top' }}>
+              <Icon icon='mdi:close' fontSize={20} />
+            </Box>{' '}
+            icon to see it in action
           </Typography>
         </CardContent>
       </Card>

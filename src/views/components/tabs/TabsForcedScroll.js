@@ -8,12 +8,8 @@ import TabPanel from '@mui/lab/TabPanel'
 import TabContext from '@mui/lab/TabContext'
 import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import Phone from 'mdi-material-ui/Phone'
-import HeartOutline from 'mdi-material-ui/HeartOutline'
-import ThumbUpOutline from 'mdi-material-ui/ThumbUpOutline'
-import ThumbDownOutline from 'mdi-material-ui/ThumbDownOutline'
-import AccountCircleOutline from 'mdi-material-ui/AccountCircleOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const TabsForcedScroll = () => {
   // ** State
@@ -26,11 +22,11 @@ const TabsForcedScroll = () => {
   return (
     <TabContext value={value}>
       <TabList scrollButtons variant='scrollable' onChange={handleChange} aria-label='forced scroll tabs example'>
-        <Tab value='1' label='Tab 1' icon={<Phone />} />
-        <Tab value='2' label='Tab 2' icon={<HeartOutline />} />
-        <Tab value='3' label='Tab 3' icon={<ThumbUpOutline />} />
-        <Tab value='4' label='Tab 4' icon={<AccountCircleOutline />} />
-        <Tab value='5' label='Tab 5' icon={<ThumbDownOutline />} />
+        <Tab value='1' label='Tab 1' icon={<Icon icon='mdi:phone' />} />
+        <Tab value='2' label='Tab 2' icon={<Icon icon='mdi:heart-outline' />} />
+        <Tab value='3' label='Tab 3' icon={<Icon icon='mdi:thumb-up-outline' />} />
+        <Tab value='4' label='Tab 4' icon={<Icon icon='mdi:account-circle-outline' />} />
+        <Tab value='5' label='Tab 5' icon={<Icon icon='mdi:thumb-down-outline' />} />
       </TabList>
       <TabPanel value='1'>
         <Typography>

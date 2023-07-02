@@ -5,11 +5,8 @@ import { useState } from 'react'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
-// ** Icons Imports
-import FormatBold from 'mdi-material-ui/FormatBold'
-import FormatItalic from 'mdi-material-ui/FormatItalic'
-import FormatUnderline from 'mdi-material-ui/FormatUnderline'
-import FormatColorFill from 'mdi-material-ui/FormatColorFill'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ButtonToggleMultiple = () => {
   // ** State
@@ -22,16 +19,16 @@ const ButtonToggleMultiple = () => {
   return (
     <ToggleButtonGroup value={formats} onChange={handleFormat} aria-label='text alignment'>
       <ToggleButton value='bold' aria-label='bold'>
-        <FormatBold />
+        <Icon icon='mdi:format-bold' />
       </ToggleButton>
       <ToggleButton value='italic' aria-label='italic'>
-        <FormatItalic />
+        <Icon icon='mdi:format-italic' />
       </ToggleButton>
       <ToggleButton value='underlined' aria-label='underlined'>
-        <FormatUnderline />
+        <Icon icon='mdi:format-underline' />
       </ToggleButton>
       <ToggleButton value='color' aria-label='color' disabled>
-        <FormatColorFill />
+        <Icon icon='mdi:format-color-fill' />
       </ToggleButton>
     </ToggleButtonGroup>
   )

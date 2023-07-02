@@ -7,9 +7,8 @@ import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
@@ -137,18 +136,18 @@ const CardStatsSalesProfit = () => {
               <Typography variant='h6' sx={{ mr: 1.75 }}>
                 152k
               </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { color: 'success.main' } }}>
                 <Typography variant='subtitle2' sx={{ color: 'success.main' }}>
                   +12%
                 </Typography>
-                <ChevronUp fontSize='small' sx={{ color: 'success.main' }} />
+                <Icon icon='mdi:chevron-up' fontSize={20} />
               </Box>
             </Box>
             <Typography variant='body2'>Total Sales</Typography>
           </Grid>
         </Grid>
       </CardContent>
-      <Divider sx={{ my: 0 }} />
+      <Divider sx={{ my: '0 !important' }} />
       <CardContent sx={{ py: theme => `${theme.spacing(3)} !important` }}>
         <Grid container spacing={5}>
           <Grid item xs={6}>
@@ -159,11 +158,11 @@ const CardStatsSalesProfit = () => {
               <Typography variant='h6' sx={{ mr: 1.75 }}>
                 89.5k
               </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { color: 'error.main' } }}>
                 <Typography variant='subtitle2' sx={{ color: 'error.main' }}>
                   -8%
                 </Typography>
-                <ChevronDown fontSize='small' sx={{ color: 'error.main' }} />
+                <Icon icon='mdi:chevron-down' fontSize={20} />
               </Box>
             </Box>
             <Typography variant='body2'>Total Profit</Typography>

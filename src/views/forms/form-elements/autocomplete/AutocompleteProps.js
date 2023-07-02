@@ -14,7 +14,7 @@ const AutocompleteProps = () => {
         disableCloseOnSelect
         options={top100Films}
         id='autocomplete-disableCloseOnSelect'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='disableCloseOnSelect' />}
       />
       <Autocomplete
@@ -22,7 +22,7 @@ const AutocompleteProps = () => {
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-clearOnEscape'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='clearOnEscape' />}
       />
       <Autocomplete
@@ -30,7 +30,7 @@ const AutocompleteProps = () => {
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-disableClearable'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='disableClearable' />}
       />
       <Autocomplete
@@ -38,7 +38,7 @@ const AutocompleteProps = () => {
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-openOnFocus'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='openOnFocus' />}
       />
       <Autocomplete
@@ -46,7 +46,7 @@ const AutocompleteProps = () => {
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-autoHighlight'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='autoHighlight' />}
       />
       <Autocomplete
@@ -54,7 +54,7 @@ const AutocompleteProps = () => {
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-autoSelect'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='autoSelect' />}
       />
       <Autocomplete
@@ -62,7 +62,7 @@ const AutocompleteProps = () => {
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-blurOnSelect'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='blurOnSelect' />}
       />
       <Autocomplete
@@ -70,7 +70,7 @@ const AutocompleteProps = () => {
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-clearOnBlur'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='clearOnBlur' />}
       />
       <Autocomplete
@@ -78,7 +78,7 @@ const AutocompleteProps = () => {
         options={top100Films}
         selectOnFocus={false}
         id='autocomplete-selectOnFocus'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='selectOnFocus={false}' />}
       />
     </Box>

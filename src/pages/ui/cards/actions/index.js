@@ -11,9 +11,7 @@ import CardContent from '@mui/material/CardContent'
 import TableContainer from '@mui/material/TableContainer'
 
 // ** Icon Imports
-import Close from 'mdi-material-ui/Close'
-import Refresh from 'mdi-material-ui/Refresh'
-import ChevronUp from 'mdi-material-ui/ChevronUp'
+import Icon from 'src/@core/components/icon'
 
 // Component Imports
 import CardActionAll from 'src/views/ui/cards/actions/CardActionAll'
@@ -43,7 +41,7 @@ const CardActions = () => {
                       Collapse
                     </TableCell>
                     <TableCell align='center'>
-                      <ChevronUp />
+                      <Icon icon='mdi:chevron-up' />
                     </TableCell>
                     <TableCell>Collapse card content using collapse action.</TableCell>
                   </TableRow>
@@ -52,7 +50,7 @@ const CardActions = () => {
                       Refresh Content
                     </TableCell>
                     <TableCell align='center'>
-                      <Refresh />
+                      <Icon icon='mdi:refresh' />
                     </TableCell>
                     <TableCell>Refresh your card content using refresh action.</TableCell>
                   </TableRow>
@@ -61,7 +59,7 @@ const CardActions = () => {
                       Remove Card
                     </TableCell>
                     <TableCell align='center'>
-                      <Close />
+                      <Icon icon='mdi:close' />
                     </TableCell>
                     <TableCell>Remove card from page using remove card action</TableCell>
                   </TableRow>
@@ -72,6 +70,7 @@ const CardActions = () => {
         </Card>
       </Grid>
 
+      {/* Action Cards  */}
       <Grid item xs={12} md={6}>
         <CardActionCollapse />
       </Grid>

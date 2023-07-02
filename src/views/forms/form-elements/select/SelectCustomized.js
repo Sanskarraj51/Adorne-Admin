@@ -12,7 +12,7 @@ import MuiFormControl from '@mui/material/FormControl'
 // Styled FormControl component
 const FormControl = styled(MuiFormControl)(({ theme }) => ({
   '& .MuiFormLabel-root.Mui-focused': {
-    color: theme.palette.info.main
+    color: '#80BDFF'
   },
   '& .MuiInputLabel-root': {
     left: -14,
@@ -46,7 +46,7 @@ const FormControl = styled(MuiFormControl)(({ theme }) => ({
     ].join(','),
     '&:focus': {
       borderRadius: 4,
-      borderColor: '#80bdff',
+      borderColor: '#80BDFF',
       boxShadow: '0 0 0 0.2rem rgba(0,123,255,0.25)'
     }
   }

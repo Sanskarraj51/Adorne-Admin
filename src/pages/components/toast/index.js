@@ -1,6 +1,9 @@
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
 // ** Custom Components Imports
@@ -21,6 +24,11 @@ import ToastCustomPosition from 'src/views/components/toast/ToastCustomPosition'
 // ** Source code imports
 import * as source from 'src/views/components/toast/ToastSourceCode'
 
+const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main
+}))
+
 const ReactHotToasts = () => {
   return (
     <Grid container spacing={6} className='match-height'>
@@ -28,9 +36,9 @@ const ReactHotToasts = () => {
         subtitle={<Typography variant='body2'>Smoking hot React notifications.</Typography>}
         title={
           <Typography variant='h5'>
-            <Link href='https://github.com/timolins/react-hot-toast' target='_blank'>
+            <LinkStyled href='https://github.com/timolins/react-hot-toast' target='_blank'>
               React Hot Toasts
-            </Link>
+            </LinkStyled>
           </Typography>
         }
       />

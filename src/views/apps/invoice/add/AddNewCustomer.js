@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem'
 import { styled } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 import InputLabel from '@mui/material/InputLabel'
+import IconButton from '@mui/material/IconButton'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import FormControl from '@mui/material/FormControl'
@@ -16,8 +17,8 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, Controller } from 'react-hook-form'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const Header = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -81,7 +82,9 @@ const AddNewCustomer = ({ open, toggle, setSelectedClient, clients, setClients }
     >
       <Header>
         <Typography variant='h6'>Add New Customer</Typography>
-        <Close fontSize='small' onClick={toggle} sx={{ cursor: 'pointer' }} />
+        <IconButton size='small' onClick={toggle} sx={{ color: 'text.primary' }}>
+          <Icon icon='mdi:close' fontSize={20} />
+        </IconButton>
       </Header>
       <Box component='form' sx={{ p: 5 }} onSubmit={handleSubmit(onSubmit)}>
         <FormControl fullWidth sx={{ mb: 6 }}>
@@ -224,14 +227,14 @@ const AddNewCustomer = ({ open, toggle, setSelectedClient, clients, setClients }
             </FormHelperText>
           )}
         </FormControl>
-        <Box>
+        <div>
           <Button size='large' type='submit' variant='contained' sx={{ mr: 4 }}>
             Add
           </Button>
           <Button size='large' variant='outlined' color='secondary' onClick={handleDrawerClose}>
             Cancel
           </Button>
-        </Box>
+        </div>
       </Box>
     </Drawer>
   )

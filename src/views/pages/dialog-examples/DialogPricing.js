@@ -4,7 +4,6 @@ import { useState, forwardRef } from 'react'
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import Grid from '@mui/material/Grid'
 import Switch from '@mui/material/Switch'
 import Dialog from '@mui/material/Dialog'
 import Button from '@mui/material/Button'
@@ -15,12 +14,11 @@ import CardContent from '@mui/material/CardContent'
 import Fade from '@mui/material/Fade'
 import DialogContent from '@mui/material/DialogContent'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
-// ** Custom Components Imports
-import PlanDetails from 'src/@core/components/plan-details'
+// ** Component Import
+import PricingPlans from 'src/views/pages/pricing/PricingPlans'
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Fade ref={ref} {...props} />
@@ -29,7 +27,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 const DialogPricing = ({ data }) => {
   // ** States
   const [show, setShow] = useState(false)
-  const [plan, setPlan] = useState('monthly')
+  const [plan, setPlan] = useState('annually')
 
   const handleChange = e => {
     if (e.target.checked) {
@@ -39,20 +37,10 @@ const DialogPricing = ({ data }) => {
     }
   }
 
-  const renderPlan = () => {
-    return data?.pricingPlans.map(item => {
-      return (
-        <Grid item xs={12} md={4} key={item.title.toLowerCase()}>
-          <PlanDetails plan={plan} data={item} />
-        </Grid>
-      )
-    })
-  }
-
   return (
     <Card>
-      <CardContent sx={{ textAlign: 'center' }}>
-        <CurrencyUsd sx={{ mb: 2, fontSize: '2rem' }} />
+      <CardContent sx={{ textAlign: 'center', '& svg': { mb: 2 } }}>
+        <Icon icon='mdi:currency-usd' fontSize='2rem' />
         <Typography variant='h6' sx={{ mb: 4 }}>
           Pricing
         </Typography>
@@ -70,13 +58,19 @@ const DialogPricing = ({ data }) => {
         TransitionComponent={Transition}
         onBackdropClick={() => setShow(false)}
       >
-        <DialogContent sx={{ px: { xs: 8, sm: 15 }, py: { xs: 8, sm: 12.5 }, position: 'relative' }}>
+        <DialogContent
+          sx={{
+            position: 'relative',
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            py: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <IconButton
             size='small'
             onClick={() => setShow(false)}
             sx={{ position: 'absolute', right: '1rem', top: '1rem' }}
           >
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
           <Box sx={{ mb: 4, textAlign: 'center' }}>
             <Typography variant='h5' sx={{ mb: 3, lineHeight: '2rem' }}>
@@ -102,11 +96,9 @@ const DialogPricing = ({ data }) => {
               Annually
             </InputLabel>
           </Box>
-          <Grid container spacing={6}>
-            {renderPlan()}
-          </Grid>
-          <Box sx={{ mt: 4, textAlign: 'center' }}>
-            <Typography variant='body2' sx={{ mb: 4 }}>
+          <PricingPlans data={data} plan={plan} />
+          <Box sx={{ mt: 6, textAlign: 'center' }}>
+            <Typography variant='body2' sx={{ mb: 2.5 }}>
               Still Not Convinced? Start with a 14-day FREE trial!
             </Typography>
             <Button variant='contained' onClick={() => setShow(false)}>

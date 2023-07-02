@@ -1,16 +1,17 @@
-const Snackbar = (theme, skin) => {
+const Snackbar = skin => {
   return {
     MuiSnackbarContent: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           borderRadius: 8,
           padding: theme.spacing(1.75, 4),
           ...(skin === 'bordered' && { boxShadow: 'none' }),
-          backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey[900] : theme.palette.grey[100],
+          backgroundColor: `rgb(${theme.palette.customColors.main})`,
+          color: theme.palette.common[theme.palette.mode === 'light' ? 'white' : 'black'],
           '& .MuiSnackbarContent-message': {
             lineHeight: 1.429
           }
-        }
+        })
       }
     }
   }

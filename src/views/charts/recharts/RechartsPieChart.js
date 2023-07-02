@@ -8,8 +8,8 @@ import CardContent from '@mui/material/CardContent'
 // ** Third Party Imports
 import { Tooltip, PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 
-// ** Icons Imports
-import Circle from 'mdi-material-ui/Circle'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const data = [
   { name: 'R&D', value: 50, color: '#00d4bd' },
@@ -38,9 +38,8 @@ const RechartsPieChart = () => {
     <Card>
       <CardHeader
         title='Expense Ratio'
-        titleTypographyProps={{ variant: 'h6' }}
         subheader='Spending on various categories'
-        subheaderTypographyProps={{ variant: 'caption', sx: { color: 'text.disabled' } }}
+        subheaderTypographyProps={{ sx: { color: theme => `${theme.palette.text.disabled} !important` } }}
       />
       <CardContent>
         <Box sx={{ height: 350 }}>
@@ -56,21 +55,42 @@ const RechartsPieChart = () => {
           </ResponsiveContainer>
         </Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', mb: 4, justifyContent: 'center' }}>
-          <Box sx={{ mr: 6, display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.5, fontSize: '0.75rem', color: '#00d4bd' }} />
-            <Typography>R&D</Typography>
+          <Box
+            sx={{
+              mr: 6,
+              display: 'flex',
+              alignItems: 'center',
+              '& svg': { mr: 1.5, color: '#00d4bd' }
+            }}
+          >
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>R&D</Typography>
           </Box>
-          <Box sx={{ mr: 6, display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.5, fontSize: '0.75rem', color: '#ffe700' }} />
-            <Typography>Operational</Typography>
+          <Box
+            sx={{
+              mr: 6,
+              display: 'flex',
+              alignItems: 'center',
+              '& svg': { mr: 1.5, color: '#ffe700' }
+            }}
+          >
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>Operational</Typography>
           </Box>
-          <Box sx={{ mr: 6, display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.5, fontSize: '0.75rem', color: '#FFA1A1' }} />
-            <Typography>Networking</Typography>
+          <Box
+            sx={{
+              mr: 6,
+              display: 'flex',
+              alignItems: 'center',
+              '& svg': { mr: 1.5, color: '#FFA1A1' }
+            }}
+          >
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>Networking</Typography>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.5, fontSize: '0.75rem', color: '#826bf8' }} />
-            <Typography>Hiring</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: '#826bf8' } }}>
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>Hiring</Typography>
           </Box>
         </Box>
       </CardContent>

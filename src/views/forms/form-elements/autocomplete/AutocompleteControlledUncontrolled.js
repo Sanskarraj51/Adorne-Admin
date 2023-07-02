@@ -25,14 +25,14 @@ const AutocompleteControlledUncontrolled = () => {
         options={top100Films}
         onChange={handleChange}
         id='autocomplete-controlled'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='Controlled' />}
       />
       <Autocomplete
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-uncontrolled'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='Uncontrolled' />}
       />
     </Box>

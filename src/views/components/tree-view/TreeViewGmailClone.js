@@ -5,17 +5,8 @@ import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import TreeItem from '@mui/lab/TreeItem'
 
-// ** Icons Imports
-import TagOutline from 'mdi-material-ui/TagOutline'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import ChevronLeft from 'mdi-material-ui/ChevronLeft'
-import ChevronRight from 'mdi-material-ui/ChevronRight'
-import LabelOutline from 'mdi-material-ui/LabelOutline'
-import EmailOutline from 'mdi-material-ui/EmailOutline'
-import ForumOutline from 'mdi-material-ui/ForumOutline'
-import DeleteOutline from 'mdi-material-ui/DeleteOutline'
-import InformationOutline from 'mdi-material-ui/InformationOutline'
-import AccountSupervisorOutline from 'mdi-material-ui/AccountSupervisorOutline'
+// ** Custom Icon Import
+import Icon from 'src/@core/components/icon'
 
 // Styled TreeItem component
 const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
@@ -43,14 +34,14 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
 
 const StyledTreeItem = props => {
   // ** Props
-  const { labelText, labelIcon: LabelIcon, labelInfo, ...other } = props
+  const { labelText, labelIcon, labelInfo, ...other } = props
 
   return (
     <StyledTreeItemRoot
       {...other}
       label={
-        <Box sx={{ py: 1, display: 'flex', alignItems: 'center' }}>
-          <LabelIcon color='inherit' sx={{ mr: 1 }} />
+        <Box sx={{ py: 1, display: 'flex', alignItems: 'center', '& svg': { mr: 1 } }}>
+          <Icon icon={labelIcon} color='inherit' />
           <Typography variant='body2' sx={{ flexGrow: 1, fontWeight: 'inherit' }}>
             {labelText}
           </Typography>
@@ -66,24 +57,24 @@ const StyledTreeItem = props => {
 }
 
 const TreeViewGmailClone = ({ direction }) => {
-  const ExpandIcon = direction === 'rtl' ? <ChevronLeft /> : <ChevronRight />
+  const ExpandIcon = <Icon icon={direction === 'rtl' ? 'mdi:chevron-left' : 'mdi:chevron-right'} />
 
   return (
     <TreeView
       sx={{ minHeight: 240 }}
       defaultExpanded={['3']}
       defaultExpandIcon={ExpandIcon}
-      defaultCollapseIcon={<ChevronDown />}
+      defaultCollapseIcon={<Icon icon='mdi:chevron-down' />}
     >
-      <StyledTreeItem nodeId='1' labelText='All Mail' labelIcon={EmailOutline} />
-      <StyledTreeItem nodeId='2' labelText='Trash' labelIcon={DeleteOutline} />
-      <StyledTreeItem nodeId='3' labelText='Categories' labelIcon={LabelOutline}>
-        <StyledTreeItem nodeId='5' labelInfo='90' labelText='Social' labelIcon={AccountSupervisorOutline} />
-        <StyledTreeItem nodeId='6' labelInfo='2,294' labelText='Updates' labelIcon={InformationOutline} />
-        <StyledTreeItem nodeId='7' labelInfo='3,566' labelText='Forums' labelIcon={ForumOutline} />
-        <StyledTreeItem nodeId='8' labelInfo='733' labelText='Promotions' labelIcon={TagOutline} />
+      <StyledTreeItem nodeId='1' labelText='All Mail' labelIcon='mdi:email-outline' />
+      <StyledTreeItem nodeId='2' labelText='Trash' labelIcon='mdi:delete-outline' />
+      <StyledTreeItem nodeId='3' labelText='Categories' labelIcon='mdi:label-outline'>
+        <StyledTreeItem nodeId='5' labelInfo='90' labelText='Social' labelIcon='mdi:account-supervisor-outline' />
+        <StyledTreeItem nodeId='6' labelInfo='2,294' labelText='Updates' labelIcon='mdi:information-outline' />
+        <StyledTreeItem nodeId='7' labelInfo='3,566' labelText='Forums' labelIcon='mdi:forum-outline' />
+        <StyledTreeItem nodeId='8' labelInfo='733' labelText='Promotions' labelIcon='mdi:tag-outline' />
       </StyledTreeItem>
-      <StyledTreeItem nodeId='4' labelText='History' labelIcon={LabelOutline} />
+      <StyledTreeItem nodeId='4' labelText='History' labelIcon='mdi:label-outline' />
     </TreeView>
   )
 }

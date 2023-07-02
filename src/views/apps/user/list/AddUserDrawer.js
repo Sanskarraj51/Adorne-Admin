@@ -8,6 +8,7 @@ import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import { styled } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
+import IconButton from '@mui/material/IconButton'
 import InputLabel from '@mui/material/InputLabel'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -19,11 +20,11 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, Controller } from 'react-hook-form'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Store Imports
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 // ** Actions Imports
 import { addUser } from 'src/store/apps/user'
@@ -69,9 +70,9 @@ const defaultValues = {
   email: '',
   company: '',
   country: '',
-  contact: '',
   fullName: '',
-  username: ''
+  username: '',
+  contact: Number('')
 }
 
 const SidebarAddUser = props => {
@@ -84,11 +85,13 @@ const SidebarAddUser = props => {
 
   // ** Hooks
   const dispatch = useDispatch()
+  const store = useSelector(state => state.user)
 
   const {
     reset,
     control,
     setValue,
+    setError,
     handleSubmit,
     formState: { errors }
   } = useForm({
@@ -98,15 +101,30 @@ const SidebarAddUser = props => {
   })
 
   const onSubmit = data => {
-    dispatch(addUser({ ...data, role, currentPlan: plan }))
-    toggle()
-    reset()
+    if (store.allData.some(u => u.email === data.email || u.username === data.username)) {
+      store.allData.forEach(u => {
+        if (u.email === data.email) {
+          setError('email', {
+            message: 'Email already exists!'
+          })
+        }
+        if (u.username === data.username) {
+          setError('username', {
+            message: 'Username already exists!'
+          })
+        }
+      })
+    } else {
+      dispatch(addUser({ ...data, role, currentPlan: plan }))
+      toggle()
+      reset()
+    }
   }
 
   const handleClose = () => {
     setPlan('basic')
     setRole('subscriber')
-    setValue('contact', '')
+    setValue('contact', Number(''))
     toggle()
     reset()
   }
@@ -122,7 +140,9 @@ const SidebarAddUser = props => {
     >
       <Header>
         <Typography variant='h6'>Add User</Typography>
-        <Close fontSize='small' onClick={handleClose} sx={{ cursor: 'pointer' }} />
+        <IconButton size='small' onClick={handleClose} sx={{ color: 'text.primary' }}>
+          <Icon icon='mdi:close' fontSize={20} />
+        </IconButton>
       </Header>
       <Box sx={{ p: 5 }}>
         <form onSubmit={handleSubmit(onSubmit)}>

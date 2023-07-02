@@ -10,9 +10,8 @@ import OutlinedInput from '@mui/material/OutlinedInput'
 import FormHelperText from '@mui/material/FormHelperText'
 import InputAdornment from '@mui/material/InputAdornment'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const TextFieldInputAdornment = () => {
   // ** State
@@ -28,10 +27,6 @@ const TextFieldInputAdornment = () => {
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword })
-  }
-
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
   }
 
   return (
@@ -69,10 +64,10 @@ const TextFieldInputAdornment = () => {
               <IconButton
                 edge='end'
                 onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
+                onMouseDown={e => e.preventDefault()}
                 aria-label='toggle password visibility'
               >
-                {values.showPassword ? <EyeOutline fontSize='small' /> : <EyeOffOutline fontSize='small' />}
+                <Icon fontSize={20} icon={values.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
               </IconButton>
             </InputAdornment>
           }

@@ -1,8 +1,8 @@
-const select = theme => {
+const select = () => {
   return {
     MuiSelect: {
       styleOverrides: {
-        select: {
+        select: ({ theme }) => ({
           minWidth: '6rem !important',
           '&.MuiTablePagination-select': {
             minWidth: '1.5rem !important'
@@ -10,7 +10,7 @@ const select = theme => {
           '&.Mui-disabled ~ .MuiOutlinedInput-notchedOutline': {
             borderColor: `rgba(${theme.palette.customColors.main}, 0.22)`
           }
-        }
+        })
       }
     }
   }

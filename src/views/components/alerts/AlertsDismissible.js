@@ -11,8 +11,8 @@ import Button from '@mui/material/Button'
 import Collapse from '@mui/material/Collapse'
 import IconButton from '@mui/material/IconButton'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const AlertsDismissible = () => {
   // ** States
@@ -28,7 +28,7 @@ const AlertsDismissible = () => {
           <Alert
             action={
               <IconButton size='small' color='inherit' aria-label='close' onClick={() => setOpen1(false)}>
-                <Close fontSize='inherit' />
+                <Icon icon='mdi:close' fontSize='inherit' />
               </IconButton>
             }
           >
@@ -45,7 +45,7 @@ const AlertsDismissible = () => {
           <Alert
             action={
               <IconButton size='small' color='inherit' aria-label='close' onClick={() => setOpen2(false)}>
-                <Close fontSize='inherit' />
+                <Icon icon='mdi:close' fontSize='inherit' />
               </IconButton>
             }
           >
@@ -62,7 +62,7 @@ const AlertsDismissible = () => {
           <Alert
             action={
               <IconButton size='small' color='inherit' aria-label='close' onClick={() => setOpen3(false)}>
-                <Close fontSize='inherit' />
+                <Icon icon='mdi:close' fontSize='inherit' />
               </IconButton>
             }
           >
@@ -74,12 +74,12 @@ const AlertsDismissible = () => {
         </Button>
       </Box>
 
-      <Box>
+      <div>
         <Slide in={open4} direction='left' {...(open4 ? { timeout: 500 } : {})}>
           <Alert
             action={
               <IconButton size='small' color='inherit' aria-label='close' onClick={() => setOpen4(false)}>
-                <Close fontSize='inherit' />
+                <Icon icon='mdi:close' fontSize='inherit' />
               </IconButton>
             }
           >
@@ -89,7 +89,7 @@ const AlertsDismissible = () => {
         <Button disabled={open4} variant='outlined' sx={{ mt: 2 }} onClick={() => setOpen4(true)}>
           Open Slide
         </Button>
-      </Box>
+      </div>
     </>
   )
 }

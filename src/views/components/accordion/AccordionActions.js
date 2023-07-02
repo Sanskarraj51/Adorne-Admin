@@ -9,8 +9,8 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import AccordionDetails from '@mui/material/AccordionDetails'
 
-// ** Icons Imports
-import ChevronDown from 'mdi-material-ui/ChevronDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const AccordionActions = () => {
   // ** State
@@ -25,8 +25,8 @@ const AccordionActions = () => {
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
           id='actions-panel-header-1'
-          expandIcon={<ChevronDown />}
           aria-controls='actions-panel-content-1'
+          expandIcon={<Icon icon='mdi:chevron-down' />}
         >
           <FormControlLabel
             label='Accordion 1'
@@ -47,8 +47,8 @@ const AccordionActions = () => {
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <AccordionSummary
           id='actions-panel-header-2'
-          expandIcon={<ChevronDown />}
           aria-controls='actions-panel-content-2'
+          expandIcon={<Icon icon='mdi:chevron-down' />}
         >
           <FormControlLabel
             label='Accordion 2'
@@ -69,8 +69,8 @@ const AccordionActions = () => {
       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <AccordionSummary
           id='actions-panel-header-3'
-          expandIcon={<ChevronDown />}
           aria-controls='actions-panel-content-3'
+          expandIcon={<Icon icon='mdi:chevron-down' />}
         >
           <FormControlLabel
             label='Accordion 3'

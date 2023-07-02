@@ -13,7 +13,7 @@ const AutocompleteCountry = () => {
       sx={{ width: 250 }}
       id='autocomplete-country-select'
       options={countries}
-      getOptionLabel={option => option.label}
+      getOptionLabel={option => option.label || ''}
       renderOption={(props, option) => (
         <Box component='li' sx={{ '& > img': { mr: 4, flexShrink: 0 } }} {...props}>
           <img

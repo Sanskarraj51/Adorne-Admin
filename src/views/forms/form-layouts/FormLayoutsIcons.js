@@ -7,16 +7,13 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import InputAdornment from '@mui/material/InputAdornment'
 
-// ** Icons Imports
-import Phone from 'mdi-material-ui/Phone'
-import EmailOutline from 'mdi-material-ui/EmailOutline'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
-import MessageOutline from 'mdi-material-ui/MessageOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const FormLayoutsIcons = () => {
   return (
     <Card>
-      <CardHeader title='Basic with Icons' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Basic with Icons' />
       <CardContent>
         <form onSubmit={e => e.preventDefault()}>
           <Grid container spacing={5}>
@@ -28,7 +25,7 @@ const FormLayoutsIcons = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
-                      <AccountOutline />
+                      <Icon icon='mdi:account-outline' />
                     </InputAdornment>
                   )
                 }}
@@ -44,7 +41,7 @@ const FormLayoutsIcons = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
-                      <EmailOutline />
+                      <Icon icon='mdi:email-outline' />
                     </InputAdornment>
                   )
                 }}
@@ -59,7 +56,7 @@ const FormLayoutsIcons = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
-                      <Phone />
+                      <Icon icon='mdi:phone' />
                     </InputAdornment>
                   )
                 }}
@@ -76,7 +73,7 @@ const FormLayoutsIcons = () => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
-                      <MessageOutline />
+                      <Icon icon='mdi:message-outline' />
                     </InputAdornment>
                   )
                 }}

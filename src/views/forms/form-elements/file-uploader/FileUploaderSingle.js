@@ -1,9 +1,11 @@
 // ** React Imports
 import { useState } from 'react'
 
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
-import Link from '@mui/material/Link'
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
@@ -36,7 +38,7 @@ const FileUploaderSingle = () => {
   const [files, setFiles] = useState([])
 
   // ** Hook
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     multiple: false,
     accept: {
       'image/*': ['.png', '.jpg', '.jpeg', '.gif']
@@ -46,31 +48,30 @@ const FileUploaderSingle = () => {
     }
   })
 
-  const handleLinkClick = event => {
-    event.preventDefault()
-  }
-
   const img = files.map(file => (
     <img key={file.name} alt={file.name} className='single-file-image' src={URL.createObjectURL(file)} />
   ))
 
   return (
-    <Box {...getRootProps({ className: 'dropzone' })} sx={acceptedFiles.length ? { height: 450 } : {}}>
+    <Box {...getRootProps({ className: 'dropzone' })} sx={files.length ? { height: 450 } : {}}>
       <input {...getInputProps()} />
-      <Box sx={{ display: 'flex', flexDirection: ['column', 'column', 'row'], alignItems: 'center' }}>
-        <Img width={300} alt='Upload img' src='/images/misc/upload.png' />
-        <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: ['center', 'center', 'inherit'] }}>
-          <HeadingTypography variant='h5'>Drop files here or click to upload.</HeadingTypography>
-          <Typography color='textSecondary'>
-            Drop files here or click{' '}
-            <Link href='/' onClick={handleLinkClick}>
-              browse
-            </Link>{' '}
-            thorough your machine
-          </Typography>
+      {files.length ? (
+        img
+      ) : (
+        <Box sx={{ display: 'flex', flexDirection: ['column', 'column', 'row'], alignItems: 'center' }}>
+          <Img width={300} alt='Upload img' src='/images/misc/upload.png' />
+          <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: ['center', 'center', 'inherit'] }}>
+            <HeadingTypography variant='h5'>Drop files here or click to upload.</HeadingTypography>
+            <Typography color='textSecondary' sx={{ '& a': { color: 'primary.main', textDecoration: 'none' } }}>
+              Drop files here or click{' '}
+              <Link href='/' onClick={e => e.preventDefault()}>
+                browse
+              </Link>{' '}
+              thorough your machine
+            </Typography>
+          </Box>
         </Box>
-      </Box>
-      {files.length ? img : null}
+      )}
     </Box>
   )
 }

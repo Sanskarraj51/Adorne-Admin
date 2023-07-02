@@ -1,6 +1,10 @@
+// ** Next Import
+import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
 // ** Custom Components Imports
@@ -14,15 +18,17 @@ import RechartsWrapper from 'src/@core/styles/libs/recharts'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 
 // ** Demo Components Imports
-import RechartsBarChart from 'src/views/charts/recharts/RechartsBarChart'
-import RechartsPieChart from 'src/views/charts/recharts/RechartsPieChart'
-import RechartsLineChart from 'src/views/charts/recharts/RechartsLineChart'
-import RechartsAreaChart from 'src/views/charts/recharts/RechartsAreaChart'
-import RechartsRadarChart from 'src/views/charts/recharts/RechartsRadarChart'
-import RechartsScatterChart from 'src/views/charts/recharts/RechartsScatterChart'
+const RechartsBarChart = dynamic(() => import('src/views/charts/recharts/RechartsBarChart'), { ssr: false })
+const RechartsPieChart = dynamic(() => import('src/views/charts/recharts/RechartsPieChart'), { ssr: false })
+const RechartsLineChart = dynamic(() => import('src/views/charts/recharts/RechartsLineChart'), { ssr: false })
+const RechartsAreaChart = dynamic(() => import('src/views/charts/recharts/RechartsAreaChart'), { ssr: false })
+const RechartsRadarChart = dynamic(() => import('src/views/charts/recharts/RechartsRadarChart'), { ssr: false })
+const RechartsScatterChart = dynamic(() => import('src/views/charts/recharts/RechartsScatterChart'), { ssr: false })
 
-// ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main
+}))
 
 const Recharts = () => {
   // ** Hooks
@@ -35,9 +41,9 @@ const Recharts = () => {
           <PageHeader
             title={
               <Typography variant='h5'>
-                <Link href='https://github.com/recharts/recharts' target='_blank'>
+                <LinkStyled href='https://github.com/recharts/recharts' target='_blank'>
                   Recharts
-                </Link>
+                </LinkStyled>
               </Typography>
             }
             subtitle={<Typography variant='body2'>Redefined chart library built with React and D3</Typography>}

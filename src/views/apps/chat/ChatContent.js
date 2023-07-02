@@ -1,28 +1,22 @@
 // ** React Imports
-import { useState, Fragment } from 'react'
+import { Fragment } from 'react'
 
 // ** MUI Imports
-import Menu from '@mui/material/Menu'
 import Badge from '@mui/material/Badge'
 import MuiAvatar from '@mui/material/Avatar'
-import MenuItem from '@mui/material/MenuItem'
 import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import Box from '@mui/material/Box'
 
-// ** Icons Imports
-import MenuIcon from 'mdi-material-ui/Menu'
-import Magnify from 'mdi-material-ui/Magnify'
-import PhoneOutline from 'mdi-material-ui/PhoneOutline'
-import VideoOutline from 'mdi-material-ui/VideoOutline'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import MessageOutline from 'mdi-material-ui/MessageOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Import
 import ChatLog from './ChatLog'
 import SendMsgForm from 'src/views/apps/chat/SendMsgForm'
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import OptionsMenu from 'src/@core/components/option-menu'
 import UserProfileRight from 'src/views/apps/chat/UserProfileRight'
 
 // ** Styled Components
@@ -53,18 +47,6 @@ const ChatContent = props => {
     handleUserProfileRightSidebarToggle
   } = props
 
-  // ** State
-  const [anchorEl, setAnchorEl] = useState(null)
-  const open = Boolean(anchorEl)
-
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-
   const handleStartConversation = () => {
     if (!mdAbove) {
       handleLeftSidebarToggle()
@@ -89,20 +71,21 @@ const ChatContent = props => {
                 px: 7.5,
                 width: 110,
                 height: 110,
-                backgroundColor: 'background.paper',
-                boxShadow: theme => theme.shadows[3]
+                boxShadow: 3,
+                '& svg': { color: 'action.active' },
+                backgroundColor: 'background.paper'
               }}
             >
-              <MessageOutline sx={{ width: 50, height: 50, color: 'action.active' }} />
+              <Icon icon='mdi:message-outline' fontSize='3.125rem' />
             </MuiAvatar>
             <Box
               onClick={handleStartConversation}
               sx={{
                 px: 6,
                 py: 2.25,
+                boxShadow: 3,
                 borderRadius: 5,
                 backgroundColor: 'background.paper',
-                boxShadow: theme => theme.shadows[3],
                 cursor: mdAbove ? 'default' : 'pointer'
               }}
             >
@@ -114,10 +97,10 @@ const ChatContent = props => {
         return (
           <Box
             sx={{
+              width: 0,
               flexGrow: 1,
-              width: '100%',
               height: '100%',
-              backgroundColor: theme => theme.palette.action.hover
+              backgroundColor: 'action.hover'
             }}
           >
             <Box
@@ -133,7 +116,7 @@ const ChatContent = props => {
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 {mdAbove ? null : (
                   <IconButton onClick={handleLeftSidebarToggle} sx={{ mr: 2 }}>
-                    <MenuIcon />
+                    <Icon icon='mdi:menu' />
                   </IconButton>
                 )}
                 <Box
@@ -190,39 +173,23 @@ const ChatContent = props => {
                 {mdAbove ? (
                   <Fragment>
                     <IconButton size='small' sx={{ color: 'text.secondary' }}>
-                      <PhoneOutline />
+                      <Icon icon='mdi:phone-outline' />
                     </IconButton>
                     <IconButton size='small' sx={{ color: 'text.secondary' }}>
-                      <VideoOutline sx={{ fontSize: '1.5rem' }} />
+                      <Icon icon='mdi:video-outline' fontSize='1.5rem' />
                     </IconButton>
                     <IconButton size='small' sx={{ color: 'text.secondary' }}>
-                      <Magnify />
+                      <Icon icon='mdi:magnify' />
                     </IconButton>
                   </Fragment>
                 ) : null}
-                <IconButton size='small' onClick={handleClick} sx={{ color: 'text.secondary' }}>
-                  <DotsVertical />
-                </IconButton>
-                <Menu
-                  open={open}
-                  sx={{ mt: 2 }}
-                  anchorEl={anchorEl}
-                  onClose={handleClose}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right'
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                >
-                  <MenuItem onClick={handleClose}>View Contact</MenuItem>
-                  <MenuItem onClick={handleClose}>Mute Notifications</MenuItem>
-                  <MenuItem onClick={handleClose}>Block Contact</MenuItem>
-                  <MenuItem onClick={handleClose}>Clear Chat</MenuItem>
-                  <MenuItem onClick={handleClose}>Report</MenuItem>
-                </Menu>
+
+                <OptionsMenu
+                  menuProps={{ sx: { mt: 2 } }}
+                  icon={<Icon icon='mdi:dots-vertical' fontSize='1.25rem' />}
+                  iconButtonProps={{ size: 'small', sx: { color: 'text.secondary' } }}
+                  options={['View Contact', 'Mute Notifications', 'Block Contact', 'Clear Chat', 'Report']}
+                />
               </Box>
             </Box>
 

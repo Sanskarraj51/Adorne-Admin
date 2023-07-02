@@ -5,8 +5,8 @@ import { Fragment } from 'react'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 
-// ** Icons Imports
-import CameraIris from 'mdi-material-ui/CameraIris'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ButtonsSizes = () => {
   return (
@@ -46,16 +46,16 @@ const ButtonsSizes = () => {
       </div>
       <div className='demo-space-x'>
         <IconButton aria-label='capture screenshot' color='secondary' size='small'>
-          <CameraIris fontSize='inherit' />
+          <Icon icon='mdi:camera-iris' fontSize='inherit' />
         </IconButton>
         <IconButton aria-label='capture screenshot' color='secondary'>
-          <CameraIris fontSize='small' />
+          <Icon icon='mdi:camera-iris' fontSize={20} />
         </IconButton>
         <IconButton aria-label='capture screenshot' color='secondary'>
-          <CameraIris />
+          <Icon icon='mdi:camera-iris' />
         </IconButton>
         <IconButton aria-label='capture screenshot' color='secondary' size='large'>
-          <CameraIris fontSize='large' />
+          <Icon icon='mdi:camera-iris' fontSize={35} />
         </IconButton>
       </div>
     </Fragment>

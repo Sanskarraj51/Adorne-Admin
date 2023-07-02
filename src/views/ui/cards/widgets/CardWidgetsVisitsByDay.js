@@ -3,16 +3,15 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import ChevronRight from 'mdi-material-ui/ChevronRight'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 // ** Util Import
@@ -27,15 +26,6 @@ const CardWidgetsVisitsByDay = () => {
       parentHeightOffset: 0,
       toolbar: { show: false }
     },
-    plotOptions: {
-      bar: {
-        borderRadius: 8,
-        distributed: true,
-        columnWidth: '55%',
-        endingShape: 'rounded',
-        startingShape: 'rounded'
-      }
-    },
     legend: { show: false },
     dataLabels: { enabled: false },
     colors: [
@@ -47,6 +37,14 @@ const CardWidgetsVisitsByDay = () => {
       hexToRGBA(theme.palette.primary.main, 0.1),
       hexToRGBA(theme.palette.primary.main, 0.1)
     ],
+    grid: {
+      show: false,
+      padding: {
+        top: -15,
+        left: -7,
+        right: -4
+      }
+    },
     states: {
       hover: {
         filter: { type: 'none' }
@@ -55,20 +53,24 @@ const CardWidgetsVisitsByDay = () => {
         filter: { type: 'none' }
       }
     },
+    plotOptions: {
+      bar: {
+        borderRadius: 8,
+        distributed: true,
+        columnWidth: '55%',
+        endingShape: 'rounded',
+        startingShape: 'rounded'
+      }
+    },
     xaxis: {
       axisTicks: { show: false },
       axisBorder: { show: false },
-      categories: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
-    },
-    yaxis: { show: false },
-    grid: {
-      show: false,
-      padding: {
-        top: -15,
-        left: -7,
-        right: -4
+      categories: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+      labels: {
+        style: { colors: theme.palette.text.disabled }
       }
-    }
+    },
+    yaxis: { show: false }
   }
 
   return (
@@ -79,12 +81,13 @@ const CardWidgetsVisitsByDay = () => {
         subheaderTypographyProps={{ sx: { lineHeight: 1.429 } }}
         titleTypographyProps={{ sx: { letterSpacing: '0.15px' } }}
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Refresh', 'Update', 'Share']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
-      <CardContent sx={{ '& .apexcharts-canvas .apexcharts-text': { fill: theme.palette.text.secondary } }}>
+      <CardContent>
         <ReactApexcharts type='bar' height={222} options={options} series={[{ data: [38, 55, 48, 65, 80, 38, 48] }]} />
         <Box sx={{ mt: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -92,7 +95,7 @@ const CardWidgetsVisitsByDay = () => {
             <Typography variant='body2'>Total 62.4k Visits on Thursday</Typography>
           </Box>
           <CustomAvatar skin='light' variant='rounded'>
-            <ChevronRight />
+            <Icon icon='mdi:chevron-right' />
           </CustomAvatar>
         </Box>
       </CardContent>

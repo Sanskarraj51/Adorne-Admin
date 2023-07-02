@@ -3,16 +3,15 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import CalendarBlankOutline from 'mdi-material-ui/CalendarBlankOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components
 import CustomChip from 'src/@core/components/mui/chip'
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const data = [
   {
@@ -65,9 +64,10 @@ const CardMeetingSchedule = () => {
       <CardHeader
         title='Meeting Schedule'
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Refresh', 'Share', 'Reschedule']}
+            iconButtonProps={{ size: 'small', sx: { color: 'text.primary' } }}
+          />
         }
       />
       <CardContent>
@@ -95,15 +95,14 @@ const CardMeetingSchedule = () => {
                   <Typography variant='body2' sx={{ mb: 0.5, fontWeight: 600, color: 'text.primary' }}>
                     {item.title}
                   </Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <CalendarBlankOutline
-                      sx={{
-                        mr: 1.5,
-                        fontSize: '1rem',
-                        color: 'text.secondary',
-                        verticalAlign: 'middle'
-                      }}
-                    />
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      '& svg': { mr: 1.5, color: 'text.secondary', verticalAlign: 'middle' }
+                    }}
+                  >
+                    <Icon fontSize='1rem' icon='mdi:calendar-blank-outline' />
                     <Typography variant='caption'>{item.subtitle}</Typography>
                   </Box>
                 </Box>

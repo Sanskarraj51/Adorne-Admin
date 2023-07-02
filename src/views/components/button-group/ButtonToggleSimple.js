@@ -5,11 +5,8 @@ import { useState } from 'react'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
-// ** Icons Imports
-import FormatAlignLeft from 'mdi-material-ui/FormatAlignLeft'
-import FormatAlignRight from 'mdi-material-ui/FormatAlignRight'
-import FormatAlignCenter from 'mdi-material-ui/FormatAlignCenter'
-import FormatAlignJustify from 'mdi-material-ui/FormatAlignJustify'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ButtonToggleSimple = () => {
   // ** State
@@ -22,16 +19,16 @@ const ButtonToggleSimple = () => {
   return (
     <ToggleButtonGroup exclusive value={alignment} onChange={handleAlignment} aria-label='text alignment'>
       <ToggleButton value='left' aria-label='left aligned'>
-        <FormatAlignLeft />
+        <Icon icon='mdi:format-align-left' />
       </ToggleButton>
       <ToggleButton value='center' aria-label='center aligned'>
-        <FormatAlignCenter />
+        <Icon icon='mdi:format-align-center' />
       </ToggleButton>
       <ToggleButton value='right' aria-label='right aligned'>
-        <FormatAlignRight />
+        <Icon icon='mdi:format-align-right' />
       </ToggleButton>
       <ToggleButton value='justify' aria-label='justified' disabled>
-        <FormatAlignJustify />
+        <Icon icon='mdi:format-align-justify' />
       </ToggleButton>
     </ToggleButtonGroup>
   )

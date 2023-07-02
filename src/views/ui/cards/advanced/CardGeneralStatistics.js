@@ -6,21 +6,17 @@ import TableRow from '@mui/material/TableRow'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import LinearProgress from '@mui/material/LinearProgress'
 import TableContainer from '@mui/material/TableContainer'
 
-// ** Icons Imports
-import Circle from 'mdi-material-ui/Circle'
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import CreditCard from 'mdi-material-ui/CreditCard'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const data = [
   {
@@ -28,21 +24,33 @@ const data = [
     color: 'primary',
     amount: '$54,234',
     trendNumber: '+85%',
-    trend: <ChevronUp sx={{ color: 'success.main' }} />
+    trend: (
+      <Box sx={{ color: 'success.main' }}>
+        <Icon icon='mdi:chevron-up' />
+      </Box>
+    )
   },
   {
     title: 'Sales',
     amount: '8,657',
     color: 'warning',
     trendNumber: '+42%',
-    trend: <ChevronUp sx={{ color: 'success.main' }} />
+    trend: (
+      <Box sx={{ color: 'success.main' }}>
+        <Icon icon='mdi:chevron-up' />
+      </Box>
+    )
   },
   {
     title: 'User',
     color: 'info',
     amount: '16,456',
     trendNumber: '-12%',
-    trend: <ChevronDown sx={{ color: 'error.main' }} />
+    trend: (
+      <Box sx={{ color: 'error.main' }}>
+        <Icon icon='mdi:chevron-down' />
+      </Box>
+    )
   }
 ]
 
@@ -53,15 +61,16 @@ const CardGeneralStatistics = () => {
         title='General Statistics'
         titleTypographyProps={{ sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' } }}
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
       <CardContent sx={{ pt: theme => `${theme.spacing(2.5)} !important` }}>
         <Box sx={{ mb: 5.75, display: 'flex', alignItems: 'center' }}>
           <CustomAvatar skin='light' variant='rounded' sx={{ mr: 4, width: 50, height: 50 }}>
-            <CreditCard sx={{ fontSize: '2rem' }} />
+            <Icon icon='mdi:credit-card' fontSize='2rem' />
           </CustomAvatar>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Typography variant='h4'>$89,522</Typography>
@@ -84,14 +93,16 @@ const CardGeneralStatistics = () => {
                       '&:last-of-type td': { border: 0 },
                       '& .MuiTableCell-root': {
                         '&:last-of-type': { pr: 0 },
-                        '&:first-of-type': { pl: 0 },
+                        '&:first-of-type': { pl: '0 !important' },
                         py: theme => `${theme.spacing(2.75)} !important`
                       }
                     }}
                   >
                     <TableCell>
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Circle sx={{ mr: 1.8, fontSize: '1rem', color: `${row.color}.main` }} />
+                      <Box
+                        sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 1.8, color: `${row.color}.main` } }}
+                      >
+                        <Icon icon='mdi:circle' fontSize='1rem' />
                         <Typography variant='body2' sx={{ color: 'text.primary' }}>
                           {row.title}
                         </Typography>

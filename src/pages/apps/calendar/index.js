@@ -28,9 +28,6 @@ import {
   handleCalendarsUpdate
 } from 'src/store/apps/calendar'
 
-// ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
-
 // ** CalendarColors
 const calendarsColor = {
   Personal: 'error',
@@ -85,9 +82,8 @@ const AppCalendar = () => {
       />
       <Box
         sx={{
-          pb: 5,
           px: 5,
-          pt: 2.25,
+          pt: 3.75,
           flexGrow: 1,
           borderRadius: 1,
           boxShadow: 'none',

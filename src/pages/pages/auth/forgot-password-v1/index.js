@@ -1,9 +1,8 @@
-// ** Next Imports
+// ** Next Import
 import Link from 'next/link'
 
 // ** MUI Components
 import Box from '@mui/material/Box'
-import MuiLink from '@mui/material/Link'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
@@ -11,8 +10,8 @@ import CardContent from '@mui/material/CardContent'
 import { styled, useTheme } from '@mui/material/styles'
 import MuiCard from '@mui/material/Card'
 
-// ** Icons Imports
-import ChevronLeft from 'mdi-material-ui/ChevronLeft'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Configs
 import themeConfig from 'src/configs/themeConfig'
@@ -31,10 +30,6 @@ const Card = styled(MuiCard)(({ theme }) => ({
 const ForgotPasswordV1 = () => {
   // ** Hook
   const theme = useTheme()
-
-  const handleSubmit = e => {
-    e.preventDefault()
-  }
 
   return (
     <Box className='content-center'>
@@ -123,26 +118,31 @@ const ForgotPasswordV1 = () => {
               Enter your email and we&prime;ll send you instructions to reset your password
             </Typography>
           </Box>
-          <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
             <TextField autoFocus type='email' label='Email' sx={{ display: 'flex', mb: 4 }} />
             <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 5.25 }}>
               Send reset link
             </Button>
-            <Typography sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Link passHref href='/pages/auth/login-v1'>
-                <Typography
-                  component={MuiLink}
-                  sx={{ display: 'flex', alignItems: 'center', color: 'primary.main', justifyContent: 'center' }}
-                >
-                  <ChevronLeft sx={{ mr: 1.5, fontSize: '2rem' }} />
-                  <span>Back to login</span>
-                </Typography>
-              </Link>
-            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Typography
+                component={Link}
+                href='/pages/auth/login-v1'
+                sx={{
+                  display: 'flex',
+                  '& svg': { mr: 1.5 },
+                  alignItems: 'center',
+                  color: 'primary.main',
+                  textDecoration: 'none',
+                  justifyContent: 'center'
+                }}
+              >
+                <Icon icon='mdi:chevron-left' fontSize='2rem' />
+                <span>Back to login</span>
+              </Typography>
+            </Box>
           </form>
         </CardContent>
       </Card>
-
       <FooterIllustrationsV1 image={`/images/pages/auth-v1-forgot-password-mask-${theme.palette.mode}.png`} />
     </Box>
   )

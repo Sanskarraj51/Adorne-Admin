@@ -6,9 +6,8 @@ import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import SendOutline from 'mdi-material-ui/SendOutline'
-import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const PreviewActions = ({ id, toggleSendInvoiceDrawer, toggleAddPaymentDrawer }) => {
   return (
@@ -18,22 +17,41 @@ const PreviewActions = ({ id, toggleSendInvoiceDrawer, toggleAddPaymentDrawer })
           fullWidth
           sx={{ mb: 3.5 }}
           variant='contained'
-          startIcon={<SendOutline />}
           onClick={toggleSendInvoiceDrawer}
+          startIcon={<Icon icon='mdi:send-outline' />}
         >
           Send Invoice
         </Button>
-        <Link href={`/apps/invoice/edit/${id}`} passHref>
-          <Button fullWidth component='a' sx={{ mb: 3.5 }} color='secondary' variant='outlined'>
-            Edit Invoice
-          </Button>
-        </Link>
+        <Button fullWidth sx={{ mb: 3.5 }} color='secondary' variant='outlined'>
+          Download
+        </Button>
+        <Button
+          fullWidth
+          target='_blank'
+          sx={{ mb: 3.5 }}
+          component={Link}
+          color='secondary'
+          variant='outlined'
+          href={`/apps/invoice/print/${id}`}
+        >
+          Print
+        </Button>
+        <Button
+          fullWidth
+          sx={{ mb: 3.5 }}
+          component={Link}
+          color='secondary'
+          variant='outlined'
+          href={`/apps/invoice/edit/${id}`}
+        >
+          Edit Invoice
+        </Button>
         <Button
           fullWidth
           color='success'
           variant='contained'
-          startIcon={<CurrencyUsd />}
           onClick={toggleAddPaymentDrawer}
+          startIcon={<Icon icon='mdi:currency-usd' />}
         >
           Add Payment
         </Button>

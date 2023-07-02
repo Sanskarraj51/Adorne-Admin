@@ -16,8 +16,8 @@ import CardContent from '@mui/material/CardContent'
 import clsx from 'clsx'
 import { useKeenSlider } from 'keen-slider/react'
 
-// ** Icons Imports
-import ChevronUp from 'mdi-material-ui/ChevronUp'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
@@ -135,14 +135,14 @@ const CardStatisticsWeeklySales = () => {
         titleTypographyProps={{ variant: 'h6' }}
         sx={{ '& .swiper-dots': { mt: 0.75, mr: -1.75 } }}
         subheader={
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { color: 'success.main' } }}>
             <Typography variant='caption' sx={{ mr: 1.5 }}>
               Total $23.5k Earning
             </Typography>
             <Typography variant='subtitle2' sx={{ color: 'success.main' }}>
               +62%
             </Typography>
-            <ChevronUp fontSize='small' sx={{ color: 'success.main' }} />
+            <Icon icon='mdi:chevron-up' fontSize={20} />
           </Box>
         }
         action={

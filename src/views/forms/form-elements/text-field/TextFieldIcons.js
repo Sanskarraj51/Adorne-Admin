@@ -6,8 +6,8 @@ import InputLabel from '@mui/material/InputLabel'
 import FormControl from '@mui/material/FormControl'
 import InputAdornment from '@mui/material/InputAdornment'
 
-// ** Icons Imports
-import AccountCircleOutline from 'mdi-material-ui/AccountCircleOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const TextFieldIcons = () => {
   return (
@@ -18,7 +18,7 @@ const TextFieldIcons = () => {
           id='input-with-icon-adornment'
           startAdornment={
             <InputAdornment position='start'>
-              <AccountCircleOutline />
+              <Icon icon='mdi:account-circle-outline' />
             </InputAdornment>
           }
         />
@@ -30,15 +30,15 @@ const TextFieldIcons = () => {
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
-              <AccountCircleOutline />
+              <Icon icon='mdi:account-circle-outline' />
             </InputAdornment>
           )
         }}
       />
       <div>
         <Grid container spacing={2} alignItems='flex-end'>
-          <Grid item>
-            <AccountCircleOutline sx={{ color: theme => theme.palette.action.active }} />
+          <Grid item sx={{ '& svg': { color: 'action.active' } }}>
+            <Icon icon='mdi:account-circle-outline' />
           </Grid>
           <Grid item>
             <TextField variant='standard' id='input-with-icon-grid' label='With a grid' />

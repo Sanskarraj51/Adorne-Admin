@@ -1,28 +1,25 @@
-const DataGrid = theme => {
+const DataGrid = () => {
   return {
     MuiDataGrid: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           border: 0,
           color: theme.palette.text.primary,
           '& .MuiDataGrid-columnHeader:focus, & .MuiDataGrid-columnHeader:focus-within': {
             outline: 'none'
           }
-        },
-        toolbarContainer: {
+        }),
+        toolbarContainer: ({ theme }) => ({
           paddingRight: `${theme.spacing(5)} !important`,
           paddingLeft: `${theme.spacing(3.25)} !important`
-        },
-        columnHeaders: {
-          maxHeight: '54px !important',
-          minHeight: '54px !important',
-          lineHeight: '24px !important',
+        }),
+        columnHeaders: ({ theme }) => ({
           backgroundColor: theme.palette.customColors.tableHeaderBg
-        },
-        columnHeader: {
-          height: '54px',
+        }),
+        columnHeader: ({ theme }) => ({
           '&:not(.MuiDataGrid-columnHeaderCheckbox)': {
-            padding: theme.spacing(4),
+            paddingLeft: theme.spacing(4),
+            paddingRight: theme.spacing(4),
             '&:first-of-type': {
               paddingLeft: theme.spacing(5)
             }
@@ -30,7 +27,7 @@ const DataGrid = theme => {
           '&:last-of-type': {
             paddingRight: theme.spacing(5)
           }
-        },
+        }),
         columnHeaderCheckbox: {
           maxWidth: '58px !important',
           minWidth: '58px !important'
@@ -43,18 +40,9 @@ const DataGrid = theme => {
           letterSpacing: '0.17px',
           textTransform: 'uppercase'
         },
-        columnSeparator: {
+        columnSeparator: ({ theme }) => ({
           color: theme.palette.divider
-        },
-        virtualScroller: {
-          marginTop: '54px !important'
-        },
-        virtualScrollerRenderZone: {
-          '& .MuiDataGrid-row': {
-            maxHeight: '50px !important',
-            minHeight: '50px !important'
-          }
-        },
+        }),
         row: {
           '&:last-child': {
             '& .MuiDataGrid-cell': {
@@ -62,13 +50,11 @@ const DataGrid = theme => {
             }
           }
         },
-        cell: {
-          maxHeight: '50px !important',
-          minHeight: '50px !important',
-          lineHeight: '20px !important',
+        cell: ({ theme }) => ({
           borderColor: theme.palette.divider,
           '&:not(.MuiDataGrid-cellCheckbox)': {
-            padding: theme.spacing(4),
+            paddingLeft: theme.spacing(4),
+            paddingRight: theme.spacing(4),
             '&:first-of-type': {
               paddingLeft: theme.spacing(5)
             }
@@ -79,32 +65,33 @@ const DataGrid = theme => {
           '&:focus, &:focus-within': {
             outline: 'none'
           }
-        },
+        }),
         cellCheckbox: {
           maxWidth: '58px !important',
           minWidth: '58px !important'
         },
-        editInputCell: {
+        editInputCell: ({ theme }) => ({
           padding: 0,
           color: theme.palette.text.primary,
           '& .MuiInputBase-input': {
             padding: 0
           }
-        },
-        footerContainer: {
-          minHeight: '50px !important',
+        }),
+        footerContainer: ({ theme }) => ({
           borderTop: `1px solid ${theme.palette.divider}`,
           '& .MuiTablePagination-toolbar': {
-            minHeight: '50px !important'
+            paddingLeft: `${theme.spacing(4)} !important`,
+            paddingRight: `${theme.spacing(4)} !important`
           },
           '& .MuiTablePagination-select': {
             color: theme.palette.text.primary
           }
-        }
-      },
-      defaultProps: {
-        rowHeight: 50,
-        headerHeight: 54
+        }),
+        selectedRowCount: ({ theme }) => ({
+          margin: 0,
+          paddingLeft: theme.spacing(4),
+          paddingRight: theme.spacing(4)
+        })
       }
     }
   }

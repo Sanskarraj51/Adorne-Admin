@@ -28,13 +28,13 @@ const AutocompleteCreatable = () => {
       renderInput={params => <TextField {...params} label='Free solo with text demo' />}
       getOptionLabel={option => {
         if (typeof option === 'string') {
-          return option
+          return option || ''
         }
         if (option.inputValue) {
-          return option.inputValue
+          return option.inputValue || ''
         }
 
-        return option.title
+        return option.title || ''
       }}
       onChange={(event, newValue) => {
         if (typeof newValue === 'string') {

@@ -2,21 +2,17 @@
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
 import { styled, useTheme } from '@mui/material/styles'
 
-// ** Icons Imports
-import Creation from 'mdi-material-ui/Creation'
-import Cellphone from 'mdi-material-ui/Cellphone'
-import PencilRuler from 'mdi-material-ui/PencilRuler'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 // ** Util Import
@@ -108,6 +104,7 @@ const CrmProjectTimeline = () => {
     ],
     dataLabels: {
       enabled: true,
+      style: { fontWeight: 400 },
       formatter: (val, opts) => labels[opts.dataPointIndex]
     },
     states: {
@@ -121,6 +118,7 @@ const CrmProjectTimeline = () => {
     legend: { show: false },
     grid: {
       strokeDashArray: 6,
+      borderColor: theme.palette.divider,
       xaxis: {
         lines: { show: true }
       },
@@ -129,9 +127,9 @@ const CrmProjectTimeline = () => {
       },
       padding: {
         top: -22,
-        left: 34,
+        left: 20,
         right: 18,
-        bottom: 4
+        bottom: 6
       }
     },
     xaxis: {
@@ -139,6 +137,7 @@ const CrmProjectTimeline = () => {
       axisTicks: { show: false },
       axisBorder: { show: false },
       labels: {
+        style: { colors: theme.palette.text.disabled },
         datetimeFormatter: {
           year: 'MMM',
           month: 'MMM'
@@ -146,7 +145,14 @@ const CrmProjectTimeline = () => {
       }
     },
     yaxis: {
-      labels: { show: true, align: theme.direction === 'rtl' ? 'right' : 'left' }
+      labels: {
+        show: true,
+        align: theme.direction === 'rtl' ? 'right' : 'left',
+        style: {
+          fontSize: '0.875rem',
+          colors: theme.palette.text.primary
+        }
+      }
     }
   }
 
@@ -160,17 +166,7 @@ const CrmProjectTimeline = () => {
             subheaderTypographyProps={{ sx: { lineHeight: 1.429 } }}
             titleTypographyProps={{ sx: { letterSpacing: '0.15px' } }}
           />
-          <Box
-            sx={{
-              '& .apexcharts-data-labels .apexcharts-datalabel': { fill: theme.palette.common.white },
-              '& .apexcharts-canvas': {
-                '& .apexcharts-yaxis-label': { fontSize: '0.875rem' },
-                '& .apexcharts-xaxis-label': { letterSpacing: '0.4px', fill: theme.palette.text.disabled }
-              }
-            }}
-          >
-            <ReactApexcharts height={272} type='rangeBar' series={series} options={options} />
-          </Box>
+          <ReactApexcharts height={272} type='rangeBar' series={series} options={options} />
         </StyledGrid>
         <Grid item xs={12} sm={4}>
           <CardHeader
@@ -179,15 +175,16 @@ const CrmProjectTimeline = () => {
             subheaderTypographyProps={{ sx: { lineHeight: 1.429 } }}
             titleTypographyProps={{ sx: { letterSpacing: '0.15px' } }}
             action={
-              <IconButton size='small' aria-label='settings' className='card-more-options'>
-                <DotsVertical />
-              </IconButton>
+              <OptionsMenu
+                options={['Last 28 Days', 'Last Month', 'Last Year']}
+                iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+              />
             }
           />
           <CardContent>
             <Box sx={{ mb: 6, display: 'flex', alignItems: 'center' }}>
               <CustomAvatar skin='light' variant='rounded' sx={{ mr: 3, width: 45, height: 45 }}>
-                <Cellphone />
+                <Icon icon='mdi:cellphone' />
               </CustomAvatar>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography variant='body2' sx={{ mb: 0.5, fontWeight: 600, color: 'text.primary' }}>
@@ -198,7 +195,7 @@ const CrmProjectTimeline = () => {
             </Box>
             <Box sx={{ mb: 6, display: 'flex', alignItems: 'center' }}>
               <CustomAvatar skin='light' color='success' variant='rounded' sx={{ mr: 3, width: 45, height: 45 }}>
-                <Creation />
+                <Icon icon='mdi:creation' />
               </CustomAvatar>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography variant='body2' sx={{ mb: 0.5, fontWeight: 600, color: 'text.primary' }}>
@@ -209,7 +206,7 @@ const CrmProjectTimeline = () => {
             </Box>
             <Box sx={{ mb: 6, display: 'flex', alignItems: 'center' }}>
               <CustomAvatar skin='light' color='secondary' variant='rounded' sx={{ mr: 3, width: 45, height: 45 }}>
-                <CreditCardOutline />
+                <Icon icon='mdi:credit-card-outline' />
               </CustomAvatar>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography variant='body2' sx={{ mb: 0.5, fontWeight: 600, color: 'text.primary' }}>
@@ -220,7 +217,7 @@ const CrmProjectTimeline = () => {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <CustomAvatar skin='light' color='info' variant='rounded' sx={{ mr: 3, width: 45, height: 45 }}>
-                <PencilRuler />
+                <Icon icon='mdi:pencil-ruler' />
               </CustomAvatar>
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Typography variant='body2' sx={{ mb: 0.5, fontWeight: 600, color: 'text.primary' }}>

@@ -1,6 +1,9 @@
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
 // ** Custom Components Imports
@@ -16,6 +19,11 @@ import InputMaskExamples from 'src/views/forms/form-elements/input-mask/InputMas
 // ** Source code imports
 import * as source from 'src/views/forms/form-elements/input-mask/InputMaskSourceCode'
 
+const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main
+}))
+
 const InputMask = () => {
   return (
     <CleaveWrapper>
@@ -23,9 +31,9 @@ const InputMask = () => {
         <PageHeader
           title={
             <Typography variant='h5'>
-              <Link href='https://github.com/nosir/cleave.js' target='_blank'>
+              <LinkStyled href='https://github.com/nosir/cleave.js' target='_blank'>
                 Cleave.js
-              </Link>
+              </LinkStyled>
             </Typography>
           }
           subtitle={<Typography variant='body2'>Format input text content when you are typing</Typography>}

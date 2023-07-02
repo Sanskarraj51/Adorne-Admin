@@ -13,9 +13,8 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 
-// ** Icons Imports
-import Plus from 'mdi-material-ui/Plus'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
@@ -50,7 +49,7 @@ const DialogSimple = () => {
               <ListItemButton>
                 <ListItemAvatar>
                   <CustomAvatar skin='light'>
-                    <AccountOutline />
+                    <Icon icon='mdi:account-outline' />
                   </CustomAvatar>
                 </ListItemAvatar>
                 <ListItemText primary={email} />
@@ -61,7 +60,7 @@ const DialogSimple = () => {
             <ListItemButton>
               <ListItemAvatar>
                 <MuiAvatar>
-                  <Plus />
+                  <Icon icon='mdi:plus' />
                 </MuiAvatar>
               </ListItemAvatar>
               <ListItemText primary='Add account' />

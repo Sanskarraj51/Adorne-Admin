@@ -7,10 +7,8 @@ import Radio from '@mui/material/Radio'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import Aws from 'mdi-material-ui/Aws'
-import Firebase from 'mdi-material-ui/Firebase'
-import Database from 'mdi-material-ui/DatabaseOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Avatar Component
 import CustomAvatar from 'src/@core/components/mui/avatar'
@@ -23,7 +21,7 @@ const TabDatabase = () => {
   }
 
   return (
-    <Box>
+    <div>
       <TextField fullWidth sx={{ mb: 4 }} label='Database Name' placeholder='materialize_database' />
       <Typography variant='h6' sx={{ mb: 4 }}>
         Select Database Engine
@@ -35,14 +33,14 @@ const TabDatabase = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomAvatar skin='light' color='error' variant='rounded' sx={{ mr: 3, width: 48, height: 48 }}>
-              <Firebase />
+              <Icon icon='mdi:firebase' />
             </CustomAvatar>
-            <Box>
+            <div>
               <Typography sx={{ color: 'text.secondary' }}>Firebase</Typography>
               <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                 Cloud Firestore
               </Typography>
-            </Box>
+            </div>
           </Box>
           <Radio value='firebase' onChange={handleChange} checked={value === 'firebase'} />
         </Box>
@@ -52,14 +50,14 @@ const TabDatabase = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomAvatar skin='light' color='warning' variant='rounded' sx={{ mr: 3, width: 48, height: 48 }}>
-              <Aws />
+              <Icon icon='mdi:aws' />
             </CustomAvatar>
-            <Box>
+            <div>
               <Typography sx={{ color: 'text.secondary' }}>AWS</Typography>
               <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                 Amazon Fast NoSQL Database
               </Typography>
-            </Box>
+            </div>
           </Box>
           <Radio value='aws' onChange={handleChange} checked={value === 'aws'} />
         </Box>
@@ -69,19 +67,19 @@ const TabDatabase = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomAvatar skin='light' color='info' variant='rounded' sx={{ mr: 3, width: 48, height: 48 }}>
-              <Database />
+              <Icon icon='mdi:database-outline' />
             </CustomAvatar>
-            <Box>
+            <div>
               <Typography sx={{ color: 'text.secondary' }}>MySQL</Typography>
               <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                 Basic MySQL database
               </Typography>
-            </Box>
+            </div>
           </Box>
           <Radio value='sql' onChange={handleChange} checked={value === 'sql'} />
         </Box>
       </Box>
-    </Box>
+    </div>
   )
 }
 

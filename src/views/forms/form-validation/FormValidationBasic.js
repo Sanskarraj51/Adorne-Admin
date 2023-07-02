@@ -27,12 +27,8 @@ import toast from 'react-hot-toast'
 import DatePicker from 'react-datepicker'
 import { useForm, Controller } from 'react-hook-form'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
-
-// ** Styled Components
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const defaultValues = {
   dob: null,
@@ -67,15 +63,11 @@ const FormValidationBasic = () => {
   const handleClickShowPassword = () => {
     setState({ ...state, showPassword: !state.showPassword })
   }
-
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
-  }
   const onSubmit = () => toast.success('Form Submitted')
 
   return (
     <Card>
-      <CardHeader title='Basic' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Basic' />
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={5}>
@@ -177,10 +169,10 @@ const FormValidationBasic = () => {
                           <IconButton
                             edge='end'
                             onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
+                            onMouseDown={e => e.preventDefault()}
                             aria-label='toggle password visibility'
                           >
-                            {state.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                            <Icon icon={state.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                           </IconButton>
                         </InputAdornment>
                       }
@@ -201,24 +193,22 @@ const FormValidationBasic = () => {
                 control={control}
                 rules={{ required: true }}
                 render={({ field: { value, onChange } }) => (
-                  <DatePickerWrapper>
-                    <DatePicker
-                      selected={value}
-                      showYearDropdown
-                      showMonthDropdown
-                      onChange={e => onChange(e)}
-                      placeholderText='MM/DD/YYYY'
-                      customInput={
-                        <CustomInput
-                          value={value}
-                          onChange={onChange}
-                          label='Date of Birth'
-                          error={Boolean(errors.dob)}
-                          aria-describedby='validation-basic-dob'
-                        />
-                      }
-                    />
-                  </DatePickerWrapper>
+                  <DatePicker
+                    selected={value}
+                    showYearDropdown
+                    showMonthDropdown
+                    onChange={e => onChange(e)}
+                    placeholderText='MM/DD/YYYY'
+                    customInput={
+                      <CustomInput
+                        value={value}
+                        onChange={onChange}
+                        label='Date of Birth'
+                        error={Boolean(errors.dob)}
+                        aria-describedby='validation-basic-dob'
+                      />
+                    }
+                  />
                 )}
               />
               {errors.dob && (

@@ -3,48 +3,48 @@ import mock from 'src/@fake-db/mock'
 
 const navigation = [
   {
-    icon: 'HomeOutline',
+    icon: 'mdi:home-outline',
     title: 'Dashboards',
     children: [
       {
-        icon: 'ChartDonut',
+        icon: 'mdi:chart-donut',
         title: 'CRM',
         path: '/dashboards/crm'
       },
       {
-        icon: 'ChartTimelineVariant',
+        icon: 'mdi:chart-timeline-variant',
         title: 'Analytics',
         path: '/dashboards/analytics'
       },
       {
-        icon: 'CartOutline',
+        icon: 'mdi:cart-outline',
         title: 'eCommerce',
         path: '/dashboards/ecommerce'
       }
     ]
   },
   {
-    icon: 'Apps',
+    icon: 'mdi:apps',
     title: 'Apps',
     children: [
       {
         title: 'Email',
-        icon: 'EmailOutline',
+        icon: 'mdi:email-outline',
         path: '/apps/email'
       },
       {
         title: 'Chat',
-        icon: 'MessageOutline',
+        icon: 'mdi:message-outline',
         path: '/apps/chat'
       },
       {
         title: 'Calendar',
-        icon: 'CalendarBlankOutline',
+        icon: 'mdi:calendar-blank-outline',
         path: '/apps/calendar'
       },
       {
         title: 'Invoice',
-        icon: 'FileDocumentOutline',
+        icon: 'mdi:file-document-outline',
         children: [
           {
             title: 'List',
@@ -66,7 +66,7 @@ const navigation = [
       },
       {
         title: 'User',
-        icon: 'AccountOutline',
+        icon: 'mdi:account-outline',
         children: [
           {
             title: 'List',
@@ -74,13 +74,34 @@ const navigation = [
           },
           {
             title: 'View',
-            path: '/apps/user/view'
+            children: [
+              {
+                title: 'Overview',
+                path: '/apps/user/view/overview'
+              },
+              {
+                title: 'Security',
+                path: '/apps/user/view/security'
+              },
+              {
+                title: 'Billing & Plans',
+                path: '/apps/user/view/billing-plan'
+              },
+              {
+                title: 'Notifications',
+                path: '/apps/user/view/notification'
+              },
+              {
+                title: 'Connection',
+                path: '/apps/user/view/connection'
+              }
+            ]
           }
         ]
       },
       {
         title: 'Roles & Permissions',
-        icon: 'LockOutline',
+        icon: 'mdi:shield-outline',
         children: [
           {
             title: 'Roles',
@@ -95,34 +116,39 @@ const navigation = [
     ]
   },
   {
-    icon: 'PaletteSwatchOutline',
+    icon: 'mdi:palette-swatch-outline',
     title: 'UI',
     children: [
       {
         title: 'Typography',
-        icon: 'FormatLetterCase',
+        icon: 'mdi:format-letter-case',
         path: '/ui/typography'
       },
       {
         title: 'Icons',
         path: '/ui/icons',
-        icon: 'GoogleCirclesExtended'
+        icon: 'mdi:google-circles-extended'
       },
       {
+        
         title: 'Cards',
-        icon: 'CreditCardOutline',
+        icon: 'mdi:credit-card-outline',
         children: [
           {
             title: 'Basic',
             path: '/ui/cards/basic'
           },
           {
+            title: 'Advanced',
+            path: '/ui/cards/advanced'
+          },
+          {
             title: 'Statistics',
             path: '/ui/cards/statistics'
           },
           {
-            title: 'Advanced',
-            path: '/ui/cards/advanced'
+            title: 'Widgets',
+            path: '/ui/cards/widgets'
           },
           {
             title: 'Gamification',
@@ -131,16 +157,12 @@ const navigation = [
           {
             title: 'Actions',
             path: '/ui/cards/actions'
-          },
-          {
-            title: 'Widgets',
-            path: '/ui/cards/widgets'
           }
         ]
       },
       {
         title: 'Components',
-        icon: 'ArchiveOutline',
+        icon: 'mdi:archive-outline',
         children: [
           {
             title: 'Accordion',
@@ -187,6 +209,10 @@ const navigation = [
             path: '/components/pagination'
           },
           {
+            title: 'Progress',
+            path: '/components/progress'
+          },
+          {
             title: 'Ratings',
             path: '/components/ratings'
           },
@@ -223,12 +249,106 @@ const navigation = [
     ]
   },
   {
-    icon: 'FileOutline',
+    icon: 'mdi:file-document-outline',
     title: 'Pages',
     children: [
       {
-        title: 'Authentication',
-        icon: 'LockOutline',
+        title: 'User Profile',
+        icon: 'mdi:card-account-details-outline',
+        children: [
+          {
+            title: 'Profile',
+            path: '/pages/user-profile/profile'
+          },
+          {
+            title: 'Teams',
+            path: '/pages/user-profile/teams'
+          },
+          {
+            title: 'Projects',
+            path: '/pages/user-profile/projects'
+          },
+          {
+            title: 'Connections',
+            path: '/pages/user-profile/connections'
+          }
+        ]
+      },
+      {
+        icon: 'mdi:account-cog-outline',
+        title: 'Account Settings',
+        children: [
+          {
+            title: 'Account',
+            path: '/pages/account-settings/account'
+          },
+          {
+            title: 'Security',
+            path: '/pages/account-settings/security'
+          },
+          {
+            title: 'Billing',
+            path: '/pages/account-settings/billing'
+          },
+          {
+            title: 'Notifications',
+            path: '/pages/account-settings/notifications'
+          },
+          {
+            title: 'Connections',
+            path: '/pages/account-settings/connections'
+          }
+        ]
+      },
+      {
+        title: 'FAQ',
+        path: '/pages/faq',
+        icon: 'mdi:help-circle-outline'
+      },
+      {
+        title: 'Help Center',
+        icon: 'mdi:help-circle-outline',
+        path: '/pages/help-center'
+      },
+      {
+        title: 'Pricing',
+        icon: 'mdi:currency-usd',
+        path: '/pages/pricing'
+      },
+      {
+        title: 'Miscellaneous',
+        icon: 'mdi:file-outline',
+        children: [
+          {
+            openInNewTab: true,
+            title: 'Coming Soon',
+            path: '/pages/misc/coming-soon'
+          },
+          {
+            openInNewTab: true,
+            title: 'Under Maintenance',
+            path: '/pages/misc/under-maintenance'
+          },
+          {
+            openInNewTab: true,
+            title: 'Page Not Found - 404',
+            path: '/pages/misc/404-not-found'
+          },
+          {
+            openInNewTab: true,
+            title: 'Not Authorized - 401',
+            path: '/pages/misc/401-not-authorized'
+          },
+          {
+            openInNewTab: true,
+            title: 'Server Error - 500',
+            path: '/pages/misc/500-server-error'
+          }
+        ]
+      },
+      {
+        title: 'Auth Pages',
+        icon: 'mdi:lock-outline',
         children: [
           {
             title: 'Login',
@@ -262,6 +382,26 @@ const navigation = [
                 openInNewTab: true,
                 title: 'Register v2',
                 path: '/pages/auth/register-v2'
+              },
+              {
+                openInNewTab: true,
+                title: 'Register Multi-Steps',
+                path: '/pages/auth/register-multi-steps'
+              }
+            ]
+          },
+          {
+            title: 'Verify Email',
+            children: [
+              {
+                openInNewTab: true,
+                title: 'Verify Email v1',
+                path: '/pages/auth/verify-email-v1'
+              },
+              {
+                openInNewTab: true,
+                title: 'Verify Email v2',
+                path: '/pages/auth/verify-email-v2'
               }
             ]
           },
@@ -294,62 +434,44 @@ const navigation = [
                 path: '/pages/auth/reset-password-v2'
               }
             ]
+          },
+          {
+            title: 'Two Steps',
+            children: [
+              {
+                openInNewTab: true,
+                title: 'Two Steps v1',
+                path: '/pages/auth/two-steps-v1'
+              },
+              {
+                openInNewTab: true,
+                title: 'Two Steps v2',
+                path: '/pages/auth/two-steps-v2'
+              }
+            ]
           }
         ]
       },
       {
-        icon: 'CogOutline',
-        title: 'Account Settings',
-        path: '/pages/account-settings'
-      },
-      {
-        title: 'Pricing',
-        icon: 'CurrencyUsd',
-        path: '/pages/pricing'
-      },
-      {
-        title: 'FAQ',
-        path: '/pages/faq',
-        icon: 'HelpCircleOutline'
-      },
-      {
-        icon: 'BookOpenOutline',
-        title: 'Knowledge Base',
-        path: '/pages/knowledge-base'
-      },
-      {
-        title: 'Miscellaneous',
-        icon: 'FileOutline',
+        title: 'Wizard Examples',
+        icon: 'mdi:transit-connection-horizontal',
         children: [
           {
-            openInNewTab: true,
-            title: 'Coming Soon',
-            path: '/pages/misc/coming-soon'
+            title: 'Checkout',
+            path: '/pages/wizard-examples/checkout'
           },
           {
-            openInNewTab: true,
-            title: 'Under Maintenance',
-            path: '/pages/misc/under-maintenance'
+            title: 'Property Listing',
+            path: '/pages/wizard-examples/property-listing'
           },
           {
-            openInNewTab: true,
-            title: 'Page Not Found - 404',
-            path: '/pages/misc/404-not-found'
-          },
-          {
-            openInNewTab: true,
-            title: 'Not Authorized - 401',
-            path: '/pages/misc/401-not-authorized'
-          },
-          {
-            openInNewTab: true,
-            title: 'Server Error - 500',
-            path: '/pages/misc/500-server-error'
+            title: 'Create Deal',
+            path: '/pages/wizard-examples/create-deal'
           }
         ]
       },
       {
-        icon: 'VectorArrangeBelow',
+        icon: 'mdi:vector-arrange-below',
         title: 'Dialog Examples',
         path: '/pages/dialog-examples'
       }
@@ -357,11 +479,11 @@ const navigation = [
   },
   {
     title: 'Forms & Tables',
-    icon: 'CheckboxMarkedOutline',
+    icon: 'mdi:checkbox-marked-outline',
     children: [
       {
         title: 'Form Elements',
-        icon: 'FormSelect',
+        icon: 'mdi:form-select',
         children: [
           {
             title: 'Text Field',
@@ -378,6 +500,10 @@ const navigation = [
           {
             title: 'Radio',
             path: '/forms/form-elements/radio'
+          },
+          {
+            title: 'Custom Inputs',
+            path: '/forms/form-elements/custom-inputs'
           },
           {
             title: 'Textarea',
@@ -414,67 +540,67 @@ const navigation = [
         ]
       },
       {
-        icon: 'CubeOutline',
+        icon: 'mdi:cube-outline',
         title: 'Form Layouts',
         path: '/forms/form-layouts'
       },
       {
         title: 'Form Validation',
         path: '/forms/form-validation',
-        icon: 'CheckboxMarkedCircleOutline'
+        icon: 'mdi:checkbox-marked-circle-outline'
       },
       {
         title: 'Form Wizard',
         path: '/forms/form-wizard',
-        icon: 'PackageVariantClosed'
+        icon: 'mdi:transit-connection-horizontal'
       },
       {
         title: 'Table',
-        icon: 'Table',
+        icon: 'mdi:grid-large',
         path: '/tables/mui'
       },
       {
         title: 'Mui DataGrid',
-        icon: 'Table',
+        icon: 'mdi:grid',
         path: '/tables/data-grid'
       }
     ]
   },
   {
     title: 'Charts',
-    icon: 'ChartDonut',
+    icon: 'mdi:chart-donut',
     children: [
       {
         title: 'Apex',
-        icon: 'ChartLine',
+        icon: 'mdi:chart-line',
         path: '/charts/apex-charts'
       },
       {
         title: 'Recharts',
-        icon: 'ChartBellCurve',
+        icon: 'mdi:chart-bell-curve-cumulative',
         path: '/charts/recharts'
       },
       {
         title: 'ChartJS',
         path: '/charts/chartjs',
-        icon: 'ChartBellCurveCumulative'
+        icon: 'mdi:chart-bell-curve'
       }
     ]
   },
   {
     title: 'Others',
-    icon: 'DotsHorizontal',
+    icon: 'mdi:dots-horizontal',
     children: [
       {
         path: '/acl',
         action: 'read',
         subject: 'acl-page',
-        icon: 'ShieldOutline',
+        icon: 'mdi:shield-outline',
         title: 'Access Control'
       },
       {
         title: 'Menu Levels',
-        icon: 'Menu',
+        icon: 'mdi:menu',
         children: [
           {
             title: 'Menu Level 2.1'
@@ -494,22 +620,22 @@ const navigation = [
       },
       {
         title: 'Disabled Menu',
-        icon: 'EyeOffOutline',
+        icon: 'mdi:eye-off-outline',
         disabled: true
       },
       {
         title: 'Raise Support',
-        icon: 'Lifebuoy',
+        icon: 'mdi:lifebuoy',
         externalLink: true,
         openInNewTab: true,
         path: 'https://pixinvent.ticksy.com/'
       },
       {
         title: 'Documentation',
-        icon: 'FileDocumentOutline',
+        icon: 'mdi:file-document-outline',
         externalLink: true,
         openInNewTab: true,
-        path: 'https://pixinvent.com/demo/materialize-mui-react-nextjs-admin-template/documentation'
+        path: 'https://demos.pixinvent.com/materialize-nextjs-admin-template/documentation'
       }
     ]
   }

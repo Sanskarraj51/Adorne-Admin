@@ -2,44 +2,33 @@
 import { Fragment, useEffect, useState } from 'react'
 
 // ** MUI Imports
-import { styled } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Imports
 import axios from 'axios'
 
 // ** Demo Imports
+import FAQS from 'src/views/pages/faq/Faqs'
 import FaqHeader from 'src/views/pages/faq/FaqHeader'
 import FaqFooter from 'src/views/pages/faq/FaqFooter'
-import FaqAccordions from 'src/views/pages/faq/FaqAccordions'
-
-// Styled Box component
-const StyledBox = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(6, 35, 0, 35),
-  [theme.breakpoints.down('md')]: {
-    padding: theme.spacing(6, 25, 0, 25)
-  },
-  [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(14.25, 0, 0)
-  },
-  '& > :not(:first-of-type)': {
-    marginTop: theme.spacing(6)
-  }
-}))
 
 const FAQ = ({ apiData }) => {
   // ** States
   const [data, setData] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
+  const [activeTab, setActiveTab] = useState('payment')
   useEffect(() => {
     if (searchTerm !== '') {
       axios.get('/pages/faqs', { params: { q: searchTerm } }).then(response => {
-        if (response.data && response.data.length) {
+        if (response.data.faqData && Object.values(response.data.faqData).length) {
           setData(response.data)
+
+          // @ts-ignore
+          setActiveTab(Object.values(response.data.faqData)[0].id)
         } else {
           setData(null)
         }
@@ -49,9 +38,13 @@ const FAQ = ({ apiData }) => {
     }
   }, [apiData, searchTerm])
 
+  const handleChange = (event, newValue) => {
+    setActiveTab(newValue)
+  }
+
   const renderNoResult = (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <AlertCircleOutline sx={{ mr: 2 }} />
+    <Box sx={{ mt: 8, display: 'flex', justifyContent: 'center', alignItems: 'center', '& svg': { mr: 2 } }}>
+      <Icon icon='mdi:alert-circle-outline' />
       <Typography variant='h6'>No Results Found!!</Typography>
     </Box>
   )
@@ -59,10 +52,8 @@ const FAQ = ({ apiData }) => {
   return (
     <Fragment>
       <FaqHeader searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <StyledBox>
-        {data !== null ? <FaqAccordions data={data} /> : renderNoResult}
-        <FaqFooter />
-      </StyledBox>
+      {data !== null ? <FAQS data={data} activeTab={activeTab} handleChange={handleChange} /> : renderNoResult}
+      <FaqFooter />
     </Fragment>
   )
 }

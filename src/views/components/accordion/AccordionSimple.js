@@ -4,14 +4,18 @@ import Typography from '@mui/material/Typography'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 
-// ** Icons Imports
-import ChevronDown from 'mdi-material-ui/ChevronDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const AccordionSimple = () => {
   return (
     <div>
       <Accordion>
-        <AccordionSummary expandIcon={<ChevronDown />} aria-controls='panel-content-1' id='panel-header-1'>
+        <AccordionSummary
+          id='panel-header-1'
+          aria-controls='panel-content-1'
+          expandIcon={<Icon icon='mdi:chevron-down' />}
+        >
           <Typography>Accordion 1</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -23,7 +27,11 @@ const AccordionSimple = () => {
       </Accordion>
 
       <Accordion>
-        <AccordionSummary expandIcon={<ChevronDown />} aria-controls='panel-content-2' id='panel-header-2'>
+        <AccordionSummary
+          id='panel-header-2'
+          aria-controls='panel-content-2'
+          expandIcon={<Icon icon='mdi:chevron-down' />}
+        >
           <Typography>Accordion 2</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -35,7 +43,11 @@ const AccordionSimple = () => {
       </Accordion>
 
       <Accordion>
-        <AccordionSummary expandIcon={<ChevronDown />} aria-controls='panel-content-3' id='panel-header-3'>
+        <AccordionSummary
+          id='panel-header-3'
+          aria-controls='panel-content-3'
+          expandIcon={<Icon icon='mdi:chevron-down' />}
+        >
           <Typography>Accordion 3</Typography>
         </AccordionSummary>
         <AccordionDetails>

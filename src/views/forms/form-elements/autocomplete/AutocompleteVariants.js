@@ -13,21 +13,21 @@ const AutocompleteVariants = () => {
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-outlined'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='Combo box' />}
       />
       <Autocomplete
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-filled'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='Combo box' variant='filled' />}
       />
       <Autocomplete
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-default'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='Combo box' variant='standard' />}
       />
       <Autocomplete
@@ -35,7 +35,7 @@ const AutocompleteVariants = () => {
         sx={{ width: 250 }}
         options={top100Films}
         id='autocomplete-disabled'
-        getOptionLabel={option => option.title}
+        getOptionLabel={option => option.title || ''}
         renderInput={params => <TextField {...params} label='Disabled' />}
       />
     </Box>

@@ -26,11 +26,10 @@ import InputAdornment from '@mui/material/InputAdornment'
 import * as yup from 'yup'
 import toast from 'react-hot-toast'
 import { useForm, Controller } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import StepperCustomDot from './StepperCustomDot'
@@ -81,7 +80,7 @@ const accountSchema = yup.object().shape({
   'confirm-password': yup
     .string()
     .required()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .oneOf([yup.ref('password'), ''], 'Passwords must match')
 })
 
 const personalSchema = yup.object().shape({
@@ -164,17 +163,9 @@ const StepperLinearWithValidation = () => {
     setState({ ...state, showPassword: !state.showPassword })
   }
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
-  }
-
   // Handle Confirm Password
   const handleClickShowConfirmPassword = () => {
     setState({ ...state, showPassword2: !state.showPassword2 })
-  }
-
-  const handleMouseDownConfirmPassword = event => {
-    event.preventDefault()
   }
 
   const getStepContent = step => {
@@ -262,10 +253,10 @@ const StepperLinearWithValidation = () => {
                             <IconButton
                               edge='end'
                               onClick={handleClickShowPassword}
-                              onMouseDown={handleMouseDownPassword}
+                              onMouseDown={e => e.preventDefault()}
                               aria-label='toggle password visibility'
                             >
-                              {state.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                              <Icon icon={state.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                             </IconButton>
                           </InputAdornment>
                         }
@@ -303,11 +294,11 @@ const StepperLinearWithValidation = () => {
                           <InputAdornment position='end'>
                             <IconButton
                               edge='end'
+                              onMouseDown={e => e.preventDefault()}
                               aria-label='toggle password visibility'
                               onClick={handleClickShowConfirmPassword}
-                              onMouseDown={handleMouseDownConfirmPassword}
                             >
-                              {state.showPassword2 ? <EyeOutline /> : <EyeOffOutline />}
+                              <Icon icon={state.showPassword2 ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                             </IconButton>
                           </InputAdornment>
                         }
@@ -659,7 +650,7 @@ const StepperLinearWithValidation = () => {
                 <Step key={index}>
                   <StepLabel {...labelProps} StepIconComponent={StepperCustomDot}>
                     <div className='step-label'>
-                      <Typography className='step-number'>0{index + 1}</Typography>
+                      <Typography className='step-number'>{`0${index + 1}`}</Typography>
                       <div>
                         <Typography className='step-title'>{step.title}</Typography>
                         <Typography className='step-subtitle'>{step.subtitle}</Typography>
@@ -673,7 +664,7 @@ const StepperLinearWithValidation = () => {
         </StepperWrapper>
       </CardContent>
 
-      <Divider sx={{ m: 0 }} />
+      <Divider sx={{ m: '0 !important' }} />
 
       <CardContent>{renderContent()}</CardContent>
     </Card>

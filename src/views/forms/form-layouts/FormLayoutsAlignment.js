@@ -18,9 +18,8 @@ import OutlinedInput from '@mui/material/OutlinedInput'
 import InputAdornment from '@mui/material/InputAdornment'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // Styled component for the form
 const Form = styled('form')(({ theme }) => ({
@@ -46,13 +45,9 @@ const FormLayoutsAlignment = () => {
     setValues({ ...values, showPassword: !values.showPassword })
   }
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
-  }
-
   return (
     <Card>
-      <CardHeader title='Form Alignment' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Form Alignment' />
       <CardContent sx={{ minHeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Form onSubmit={e => e.preventDefault()}>
           <Grid container spacing={5}>
@@ -76,10 +71,10 @@ const FormLayoutsAlignment = () => {
                       <IconButton
                         edge='end'
                         onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
+                        onMouseDown={e => e.preventDefault()}
                         aria-label='toggle password visibility'
                       >
-                        {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                        <Icon icon={values.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                       </IconButton>
                     </InputAdornment>
                   }

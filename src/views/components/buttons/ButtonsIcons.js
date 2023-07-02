@@ -1,23 +1,23 @@
 // ** MUI Imports
 import IconButton from '@mui/material/IconButton'
 
-// ** Icons Imports
-import CameraIris from 'mdi-material-ui/CameraIris'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ButtonsIcons = () => {
   return (
     <div className='demo-space-x'>
       <IconButton aria-label='capture screenshot'>
-        <CameraIris />
+        <Icon icon='mdi:camera-iris' />
       </IconButton>
       <IconButton aria-label='capture screenshot' color='primary'>
-        <CameraIris />
+        <Icon icon='mdi:camera-iris' />
       </IconButton>
       <IconButton aria-label='capture screenshot' color='secondary'>
-        <CameraIris />
+        <Icon icon='mdi:camera-iris' />
       </IconButton>
       <IconButton aria-label='capture screenshot' disabled>
-        <CameraIris />
+        <Icon icon='mdi:camera-iris' />
       </IconButton>
     </div>
   )

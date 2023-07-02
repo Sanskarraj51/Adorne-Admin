@@ -11,24 +11,25 @@ import axios from 'axios'
 
 // ** Demo Imports
 import PricingCTA from 'src/views/pages/pricing/PricingCTA'
+import PricingTable from 'src/views/pages/pricing/PricingTable'
 import PricingPlans from 'src/views/pages/pricing/PricingPlans'
 import PricingHeader from 'src/views/pages/pricing/PricingHeader'
 import PricingFooter from 'src/views/pages/pricing/PricingFooter'
 
 // ** Styled Components
 const CardContent = styled(MuiCardContent)(({ theme }) => ({
-  padding: theme.spacing(20, 35, 35),
-  [theme.breakpoints.down('lg')]: {
-    padding: theme.spacing(12.5, 20, 20)
+  padding: `${theme.spacing(20, 36)} !important`,
+  [theme.breakpoints.down('xl')]: {
+    padding: `${theme.spacing(20)} !important`
   },
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(10, 5)
+    padding: `${theme.spacing(10, 5)} !important`
   }
 }))
 
 const Pricing = ({ apiData }) => {
   // ** States
-  const [plan, setPlan] = useState('monthly')
+  const [plan, setPlan] = useState('annually')
 
   const handleChange = e => {
     if (e.target.checked) {
@@ -42,10 +43,15 @@ const Pricing = ({ apiData }) => {
     <Card>
       <CardContent>
         <PricingHeader plan={plan} handleChange={handleChange} />
-        <PricingPlans plan={plan} data={apiData} />
+        <PricingPlans plan={plan} data={apiData.pricingPlans} />
       </CardContent>
       <PricingCTA />
-      <PricingFooter data={apiData} />
+      <CardContent>
+        <PricingTable data={apiData} />
+      </CardContent>
+      <CardContent sx={{ backgroundColor: 'action.hover' }}>
+        <PricingFooter data={apiData} />
+      </CardContent>
     </Card>
   )
 }

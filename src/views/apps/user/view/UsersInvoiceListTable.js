@@ -10,96 +10,33 @@ import Card from '@mui/material/Card'
 import Menu from '@mui/material/Menu'
 import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
-import { DataGrid } from '@mui/x-data-grid'
 import MenuItem from '@mui/material/MenuItem'
 import { styled } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
+import { DataGrid } from '@mui/x-data-grid'
 
-// ** Icons Imports
-import Send from 'mdi-material-ui/Send'
-import Check from 'mdi-material-ui/Check'
-import ArrowUp from 'mdi-material-ui/ArrowUp'
-import ChartPie from 'mdi-material-ui/ChartPie'
-import Download from 'mdi-material-ui/Download'
-import ArrowDown from 'mdi-material-ui/ArrowDown'
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import ContentCopy from 'mdi-material-ui/ContentCopy'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import DeleteOutline from 'mdi-material-ui/DeleteOutline'
-import PencilOutline from 'mdi-material-ui/PencilOutline'
-import ContentSaveOutline from 'mdi-material-ui/ContentSaveOutline'
-import InformationOutline from 'mdi-material-ui/InformationOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Component Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import OptionsMenu from 'src/@core/components/option-menu'
 
-const StyledLink = styled('a')(({ theme }) => ({
+const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
   color: theme.palette.primary.main
 }))
 
 // ** Vars
 const invoiceStatusObj = {
-  Sent: { color: 'secondary', icon: <Send sx={{ fontSize: '1.25rem' }} /> },
-  Paid: { color: 'success', icon: <Check sx={{ fontSize: '1.25rem' }} /> },
-  Draft: { color: 'primary', icon: <ContentSaveOutline sx={{ fontSize: '1.25rem' }} /> },
-  'Partial Payment': { color: 'warning', icon: <ChartPie sx={{ fontSize: '1.25rem' }} /> },
-  'Past Due': { color: 'error', icon: <InformationOutline sx={{ fontSize: '1.25rem' }} /> },
-  Downloaded: { color: 'info', icon: <ArrowDown sx={{ fontSize: '1.25rem' }} /> }
-}
-
-const RowOptions = ({ id }) => {
-  // ** State
-  const [anchorEl, setAnchorEl] = useState(null)
-  const rowOptionsOpen = Boolean(anchorEl)
-
-  const handleRowOptionsClick = event => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleRowOptionsClose = () => {
-    setAnchorEl(null)
-  }
-
-  return (
-    <>
-      <IconButton size='small' onClick={handleRowOptionsClick}>
-        <DotsVertical />
-      </IconButton>
-      <Menu
-        keepMounted
-        anchorEl={anchorEl}
-        open={rowOptionsOpen}
-        onClose={handleRowOptionsClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-      >
-        <MenuItem>
-          <Download fontSize='small' sx={{ mr: 2 }} />
-          Download
-        </MenuItem>
-        <Link href={`/apps/invoice/edit/${id}`} passHref>
-          <MenuItem>
-            <PencilOutline fontSize='small' sx={{ mr: 2 }} />
-            Edit
-          </MenuItem>
-        </Link>
-        <MenuItem>
-          <ContentCopy fontSize='small' sx={{ mr: 2 }} />
-          Duplicate
-        </MenuItem>
-      </Menu>
-    </>
-  )
+  Sent: { color: 'secondary', icon: 'mdi:send' },
+  Paid: { color: 'success', icon: 'mdi:check' },
+  Draft: { color: 'primary', icon: 'mdi:content-save-outline' },
+  'Partial Payment': { color: 'warning', icon: 'mdi:chart-pie' },
+  'Past Due': { color: 'error', icon: 'mdi:information-outline' },
+  Downloaded: { color: 'info', icon: 'mdi:arrow-down' }
 }
 
 const columns = [
@@ -108,21 +45,16 @@ const columns = [
     field: 'id',
     minWidth: 90,
     headerName: '# ID',
-    renderCell: ({ row }) => (
-      <Link href={`/apps/invoice/preview/${row.id}`} passHref>
-        <StyledLink>{`#${row.id}`}</StyledLink>
-      </Link>
-    )
+    renderCell: ({ row }) => <LinkStyled href={`/apps/invoice/preview/${row.id}`}>{`#${row.id}`}</LinkStyled>
   },
   {
     flex: 0.15,
     minWidth: 80,
     field: 'invoiceStatus',
-    renderHeader: () => <ArrowUp fontSize='small' sx={{ color: 'action.active' }} />,
+    renderHeader: () => <Icon icon='mdi:trending-up' fontSize={20} />,
     renderCell: ({ row }) => {
       const { dueDate, balance, invoiceStatus } = row
       const color = invoiceStatusObj[invoiceStatus] ? invoiceStatusObj[invoiceStatus].color : 'primary'
-      const Icon = invoiceStatusObj[invoiceStatus] ? invoiceStatusObj[invoiceStatus].icon : null
 
       return (
         <Tooltip
@@ -144,8 +76,8 @@ const columns = [
             </>
           }
         >
-          <CustomAvatar skin='light' color={color} sx={{ width: 34, height: 34 }}>
-            {Icon}
+          <CustomAvatar skin='light' color={color} sx={{ width: '1.875rem', height: '1.875rem' }}>
+            <Icon icon={invoiceStatusObj[invoiceStatus].icon} fontSize='1rem' />
           </CustomAvatar>
         </Tooltip>
       )
@@ -175,19 +107,34 @@ const columns = [
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Tooltip title='Delete Invoice'>
           <IconButton size='small'>
-            <DeleteOutline />
+            <Icon icon='mdi:delete-outline' fontSize={20} />
           </IconButton>
         </Tooltip>
         <Tooltip title='View'>
-          <Box>
-            <Link href={`/apps/invoice/preview/${row.id}`} passHref>
-              <IconButton size='small' component='a' sx={{ textDecoration: 'none' }}>
-                <EyeOutline />
-              </IconButton>
-            </Link>
-          </Box>
+          <IconButton size='small' component={Link} href={`/apps/invoice/preview/${row.id}`}>
+            <Icon icon='mdi:eye-outline' fontSize={20} />
+          </IconButton>
         </Tooltip>
-        <RowOptions id={row.id} />
+        <OptionsMenu
+          iconProps={{ fontSize: 20 }}
+          iconButtonProps={{ size: 'small' }}
+          menuProps={{ sx: { '& .MuiMenuItem-root svg': { mr: 2 } } }}
+          options={[
+            {
+              text: 'Download',
+              icon: <Icon icon='mdi:download' fontSize={20} />
+            },
+            {
+              text: 'Edit',
+              href: `/apps/invoice/edit/${row.id}`,
+              icon: <Icon icon='mdi:pencil-outline' fontSize={20} />
+            },
+            {
+              text: 'Duplicate',
+              icon: <Icon icon='mdi:content-copy' fontSize={20} />
+            }
+          ]}
+        />
       </Box>
     )
   }
@@ -195,8 +142,8 @@ const columns = [
 
 const InvoiceListTable = ({ invoiceData }) => {
   // ** State
-  const [pageSize, setPageSize] = useState(7)
   const [anchorEl, setAnchorEl] = useState(null)
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
 
   // ** Var
   const open = Boolean(anchorEl)
@@ -214,18 +161,14 @@ const InvoiceListTable = ({ invoiceData }) => {
       <CardHeader
         title='Invoice List'
         sx={{ '& .MuiCardHeader-action': { m: 0 } }}
-        titleTypographyProps={{
-          variant: 'h6',
-          sx: { lineHeight: '32px !important', letterSpacing: '0.15px !important' }
-        }}
         action={
           <>
             <Button
               variant='contained'
               aria-haspopup='true'
               onClick={handleClick}
-              endIcon={<ChevronDown />}
               aria-expanded={open ? 'true' : undefined}
+              endIcon={<Icon icon='mdi:chevron-down' />}
               aria-controls={open ? 'user-view-overview-export' : undefined}
             >
               Export
@@ -242,10 +185,10 @@ const InvoiceListTable = ({ invoiceData }) => {
         autoHeight
         columns={columns}
         rows={invoiceData}
-        pageSize={pageSize}
-        disableSelectionOnClick
-        rowsPerPageOptions={[7, 10, 25, 50]}
-        onPageSizeChange={newPageSize => setPageSize(newPageSize)}
+        disableRowSelectionOnClick
+        pageSizeOptions={[7, 10, 25, 50]}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
         sx={{ '& .MuiDataGrid-columnHeaders': { borderRadius: 0 } }}
       />
     </Card>

@@ -8,7 +8,7 @@ import { Bar } from 'react-chartjs-2'
 
 const ChartjsHorizontalBarChart = props => {
   // ** Props
-  const { info, warning, labelColor, borderColor, gridLineColor } = props
+  const { info, warning, labelColor, borderColor, legendColor } = props
 
   const options = {
     indexAxis: 'y',
@@ -31,15 +31,14 @@ const ChartjsHorizontalBarChart = props => {
         min: 0,
         grid: {
           drawTicks: false,
-          color: gridLineColor,
-          borderColor: 'transparent'
+          color: borderColor
         },
         ticks: { color: labelColor }
       },
       y: {
         grid: {
-          borderColor,
-          display: false
+          display: false,
+          color: borderColor
         },
         ticks: { color: labelColor }
       }
@@ -48,7 +47,7 @@ const ChartjsHorizontalBarChart = props => {
       legend: {
         align: 'end',
         position: 'top',
-        labels: { color: labelColor }
+        labels: { color: legendColor }
       }
     }
   }
@@ -75,14 +74,9 @@ const ChartjsHorizontalBarChart = props => {
 
   return (
     <Card>
-      <CardHeader
-        title='Balance'
-        subheader='$74,123'
-        titleTypographyProps={{ variant: 'h6' }}
-        subheaderTypographyProps={{ variant: 'caption' }}
-      />
+      <CardHeader title='Balance' subheader='$74,123' />
       <CardContent>
-        <Bar data={data} options={options} height={400} />
+        <Bar data={data} height={400} options={options} />
       </CardContent>
     </Card>
   )

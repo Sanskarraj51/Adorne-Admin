@@ -1,5 +1,5 @@
 // ** MUI Imports
-import { styled, useTheme } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
 import MuiSwipeableDrawer from '@mui/material/SwipeableDrawer'
 
 const SwipeableDrawer = styled(MuiSwipeableDrawer)({
@@ -30,48 +30,15 @@ const Drawer = props => {
     settings,
     navVisible,
     setNavHover,
+    navMenuProps,
     setNavVisible,
     collapsedNavWidth,
     navigationBorderWidth
   } = props
 
-  // ** Hook
-  const theme = useTheme()
-
   // ** Vars
-  const { skin, navCollapsed } = settings
-
-  const drawerColor = () => {
-    if (skin === 'semi-dark' && theme.palette.mode === 'light') {
-      return {
-        '& .MuiTypography-root': {
-          color: `rgba(${theme.palette.customColors.dark}, 0.87)`
-        }
-      }
-    } else if (skin === 'semi-dark' && theme.palette.mode === 'dark') {
-      return {
-        '& .MuiTypography-root': {
-          color: `rgba(${theme.palette.customColors.light}, 0.87)`
-        }
-      }
-    } else return {}
-  }
-
-  const drawerBgColor = () => {
-    if (skin === 'semi-dark' && theme.palette.mode === 'light') {
-      return {
-        backgroundColor: theme.palette.customColors.darkBg
-      }
-    } else if (skin === 'semi-dark' && theme.palette.mode === 'dark') {
-      return {
-        backgroundColor: theme.palette.customColors.lightBg
-      }
-    } else {
-      return {
-        backgroundColor: theme.palette.background.default
-      }
-    }
-  }
+  const { navCollapsed } = settings
+  let flag = true
 
   // Drawer Props for Mobile & Tablet screens
   const MobileDrawerProps = {
@@ -83,36 +50,57 @@ const Drawer = props => {
     }
   }
 
-  // Drawer Props for Desktop screens
+  // Drawer Props for Laptop & Desktop screens
   const DesktopDrawerProps = {
     open: true,
     onOpen: () => null,
     onClose: () => null,
     onMouseEnter: () => {
-      setNavHover(true)
+      // Declared flag to resolve first time flicker issue while trying to collapse the menu
+      if (flag || navCollapsed) {
+        setNavHover(true)
+        flag = false
+      }
     },
     onMouseLeave: () => {
-      setNavHover(false)
+      if (navCollapsed) {
+        setNavHover(false)
+      }
     }
   }
+  let userNavMenuStyle = {}
+  let userNavMenuPaperStyle = {}
+  if (navMenuProps && navMenuProps.sx) {
+    userNavMenuStyle = navMenuProps.sx
+  }
+  if (navMenuProps && navMenuProps.PaperProps && navMenuProps.PaperProps.sx) {
+    userNavMenuPaperStyle = navMenuProps.PaperProps.sx
+  }
+  const userNavMenuProps = Object.assign({}, navMenuProps)
+  delete userNavMenuProps.sx
+  delete userNavMenuProps.PaperProps
 
   return (
     <SwipeableDrawer
       className='layout-vertical-nav'
       variant={hidden ? 'temporary' : 'permanent'}
       {...(hidden ? { ...MobileDrawerProps } : { ...DesktopDrawerProps })}
-      sx={{
-        width: navCollapsed ? collapsedNavWidth : navWidth
-      }}
       PaperProps={{
         sx: {
-          ...drawerColor(),
-          ...drawerBgColor(),
+          backgroundColor: 'background.default',
           width: navCollapsed && !navHover ? collapsedNavWidth : navWidth,
           ...(!hidden && navCollapsed && navHover ? { boxShadow: 10 } : {}),
-          borderRight: navigationBorderWidth === 0 ? 0 : `${navigationBorderWidth}px solid ${theme.palette.divider}`
-        }
+          borderRight: theme =>
+            navigationBorderWidth === 0 ? 0 : `${navigationBorderWidth}px solid ${theme.palette.divider}`,
+          ...userNavMenuPaperStyle
+        },
+        ...navMenuProps?.PaperProps
       }}
+      sx={{
+        width: navCollapsed ? collapsedNavWidth : navWidth,
+        ...userNavMenuStyle
+      }}
+      {...userNavMenuProps}
     >
       {children}
     </SwipeableDrawer>

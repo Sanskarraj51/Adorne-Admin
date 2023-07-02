@@ -1,11 +1,11 @@
-const Table = theme => {
+const Table = () => {
   return {
     MuiTableContainer: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           boxShadow: theme.shadows[0],
           borderTopColor: theme.palette.divider
-        }
+        })
       }
     },
     MuiTableHead: {
@@ -23,7 +23,7 @@ const Table = theme => {
     },
     MuiTableBody: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           '& .MuiTableCell-body': {
             fontWeight: 400,
             fontSize: '0.875rem',
@@ -34,45 +34,45 @@ const Table = theme => {
               paddingBottom: theme.spacing(4)
             }
           }
-        }
+        })
       }
     },
     MuiTableRow: {
       styleOverrides: {
-        root: {
-          '& .MuiTableCell-head:first-child, & .MuiTableCell-root:first-child ': {
-            paddingLeft: theme.spacing(5)
-          },
+        root: ({ theme }) => ({
+          '& .MuiTableCell-head:not(.MuiTableCell-paddingCheckbox):first-child, & .MuiTableCell-root:not(.MuiTableCell-paddingCheckbox):first-child ':
+            {
+              paddingLeft: theme.spacing(5)
+            },
           '& .MuiTableCell-head:last-child, & .MuiTableCell-root:last-child': {
             paddingRight: theme.spacing(5)
           }
-        }
+        })
       }
     },
     MuiTableCell: {
       styleOverrides: {
-        root: {
-          borderBottom: `1px solid ${theme.palette.divider}`,
-          '& .MuiButton-root': {
-            textTransform: 'uppercase',
-            color: theme.palette.text.secondary
-          }
-        },
-        stickyHeader: {
+        root: ({ theme }) => ({
+          borderBottom: `1px solid ${theme.palette.divider}`
+        }),
+        paddingCheckbox: ({ theme }) => ({
+          paddingLeft: theme.spacing(2)
+        }),
+        stickyHeader: ({ theme }) => ({
           backgroundColor: theme.palette.customColors.tableHeaderBg
-        }
+        })
       }
     },
     MuiTablePagination: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           '& .MuiIconButton-root.Mui-disabled': {
             color: theme.palette.action.active
           }
-        },
-        displayedRows: {
+        }),
+        displayedRows: ({ theme }) => ({
           color: theme.palette.text.primary
-        }
+        })
       }
     }
   }

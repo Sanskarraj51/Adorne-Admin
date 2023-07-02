@@ -1,6 +1,3 @@
-// ** React Imports
-import { Fragment } from 'react'
-
 // ** MUI Components
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled, useTheme } from '@mui/material/styles'
@@ -27,11 +24,7 @@ const FooterIllustrationsV2 = props => {
   const hidden = useMediaQuery(theme.breakpoints.down('md'))
   const src = image || `/images/pages/auth-v2-login-mask-${theme.palette.mode}.png`
   if (!hidden) {
-    return (
-      <Fragment>
-        <MaskImg alt='mask' src={src} />
-      </Fragment>
-    )
+    return <>{image && typeof image !== 'string' ? image : <MaskImg alt='mask' src={src} />}</>
   } else {
     return null
   }

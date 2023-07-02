@@ -3,9 +3,8 @@ import Checkbox from '@mui/material/Checkbox'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-// ** Icons Imports
-import CheckboxMarked from 'mdi-material-ui/CheckboxMarked'
-import CheckboxBlankOutline from 'mdi-material-ui/CheckboxBlankOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const CheckboxesSizes = () => {
   return (
@@ -16,8 +15,8 @@ const CheckboxesSizes = () => {
           <Checkbox
             defaultChecked
             name='size-small'
-            icon={<CheckboxBlankOutline fontSize='small' />}
-            checkedIcon={<CheckboxMarked fontSize='small' />}
+            icon={<Icon icon='mdi:checkbox-blank-outline' fontSize={20} />}
+            checkedIcon={<Icon icon='mdi:checkbox-marked' fontSize={20} />}
           />
         }
       />

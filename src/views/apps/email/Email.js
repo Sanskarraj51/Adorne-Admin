@@ -55,8 +55,8 @@ const EmailAppLayout = ({ folder, label }) => {
 
   // ** Vars
   const leftSidebarWidth = 260
+  const { skin, direction } = settings
   const composePopupWidth = mdAbove ? 754 : smAbove ? 520 : '100%'
-  const { skin, appBar, footer, layout, navHidden, direction } = settings
 
   const routeParams = {
     label: label || '',
@@ -69,22 +69,15 @@ const EmailAppLayout = ({ folder, label }) => {
   const toggleComposeOpen = () => setComposeOpen(!composeOpen)
   const handleLeftSidebarToggle = () => setLeftSidebarOpen(!leftSidebarOpen)
 
-  const calculateAppHeight = () => {
-    return `(${
-      (appBar === 'hidden' ? 0 : theme.mixins.toolbar.minHeight) * (layout === 'horizontal' && !navHidden ? 2 : 1) +
-      (footer === 'hidden' ? 0 : 56)
-    }px + ${theme.spacing(6)} * 2)`
-  }
-
   return (
     <Box
       sx={{
+        width: '100%',
         display: 'flex',
         borderRadius: 1,
         overflow: 'hidden',
         position: 'relative',
         boxShadow: skin === 'bordered' ? 0 : 6,
-        height: `calc(100vh - ${calculateAppHeight()})`,
         ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}` })
       }}
     >

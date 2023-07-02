@@ -13,6 +13,8 @@ import AvatarsLetter from 'src/views/components/avatars/AvatarsLetter'
 import AvatarsGrouped from 'src/views/components/avatars/AvatarsGrouped'
 import AvatarsVariants from 'src/views/components/avatars/AvatarsVariants'
 import AvatarsWithBadge from 'src/views/components/avatars/AvatarsWithBadge'
+import AvatarsGroupedPullUp from 'src/views/components/avatars/AvatarsGroupedPullUp'
+import AvatarsGroupedPullUpWithTooltip from 'src/views/components/avatars/AvatarsGroupedPullUpWithTooltip'
 
 // ** Source code imports
 import * as source from 'src/views/components/avatars/AvatarsSourceCode'
@@ -107,9 +109,39 @@ const Avatars = () => {
           <AvatarsWithBadge />
         </CardSnippet>
       </Grid>
+      <Grid item xs={12} sm={6}>
+        <CardSnippet
+          title='Grouped Avatars With PullUp'
+          code={{
+            tsx: null,
+            jsx: source.AvatarsGroupedPullUpJSXCode
+          }}
+        >
+          <Typography sx={{ mb: 4 }}>
+            Use class <code>pull-up</code> with <code>AvatarGroup</code> component for pull-up effect on hover of the
+            avatar.
+          </Typography>
+          <AvatarsGroupedPullUp />
+        </CardSnippet>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <CardSnippet
+          title='Grouped Avatars With PullUp & Tooltip'
+          code={{
+            tsx: null,
+            jsx: source.AvatarsGroupedPullUpWithTooltipJSXCode
+          }}
+        >
+          <Typography sx={{ mb: 4 }}>
+            Use class <code>pull-up</code> with <code>AvatarGroup</code> component and wrap your <code>Avatar</code>{' '}
+            with <code>Tooltip</code> for pull-up effect & tooltip on hover of the avatar.
+          </Typography>
+          <AvatarsGroupedPullUpWithTooltip />
+        </CardSnippet>
+      </Grid>
       <Grid item xs={12}>
         <CardSnippet
-          title='Grouped Avatars'
+          title='Grouped Avatars Alignment'
           code={{
             tsx: null,
             jsx: source.AvatarsGroupedJSXCode

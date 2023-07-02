@@ -1,22 +1,24 @@
 // ** React Imports
 import { useState } from 'react'
 
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
-import Link from '@mui/material/Link'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import ArrowRight from 'mdi-material-ui/ArrowRight'
-import StarOutline from 'mdi-material-ui/StarOutline'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
+
+// ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 
 // ** Hooks Imports
 import useBgColor from 'src/@core/hooks/useBgColor'
@@ -27,19 +29,24 @@ const CardPlanUpgrade = () => {
   const [cvc2, setCvc2] = useState('')
 
   // ** Hook
-  const colorClasses = useBgColor()
+  const bgColors = useBgColor()
 
   return (
     <Card>
       <CardHeader
         title='Upgrade Your Plan'
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Add Cards', 'Edit Cards', 'Delete Year']}
+            iconButtonProps={{ size: 'small', sx: { color: 'text.primary' } }}
+          />
         }
       />
-      <CardContent>
+      <CardContent
+        sx={{
+          '& > a': { mt: 4, fontWeight: 500, mb: 4, fontSize: '0.75rem', color: 'primary.main', textDecoration: 'none' }
+        }}
+      >
         <Typography component='p' variant='caption' sx={{ mb: 3.5 }}>
           Please make the payment to start enjoying all the features of our premium plan as soon as possible.
         </Typography>
@@ -50,7 +57,7 @@ const CardPlanUpgrade = () => {
             borderRadius: 1,
             color: 'text.primary',
             p: theme => theme.spacing(2.75, 3.5),
-            backgroundColor: colorClasses.primaryLight.backgroundColor
+            backgroundColor: bgColors.primaryLight.backgroundColor
           }}
         >
           <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
@@ -60,11 +67,12 @@ const CardPlanUpgrade = () => {
                 mr: 3,
                 width: 40,
                 height: 40,
+                color: 'primary.main',
                 backgroundColor: 'transparent',
                 border: theme => `2px solid ${theme.palette.primary.main}`
               }}
             >
-              <StarOutline sx={{ color: 'primary.main' }} />
+              <Icon icon='mdi:star-outline' />
             </Avatar>
 
             <Box
@@ -82,8 +90,8 @@ const CardPlanUpgrade = () => {
                   href='/'
                   component={Link}
                   variant='caption'
-                  sx={{ color: 'primary.main' }}
                   onClick={e => e.preventDefault()}
+                  sx={{ color: 'primary.main', textDecoration: 'none' }}
                 >
                   Upgrade Plan
                 </Typography>
@@ -134,9 +142,7 @@ const CardPlanUpgrade = () => {
               type='number'
               sx={{ width: 80, mt: 0.4 }}
               onChange={e =>
-                e.target.value.length > 3
-                  ? setCvc1(parseInt(e.target.value.slice(0, 3)))
-                  : setCvc1(parseInt(e.target.value))
+                e.target.value.length > 3 ? setCvc1(e.target.value.slice(0, 3)) : setCvc1(e.target.value)
               }
             />
           </Box>
@@ -167,9 +173,7 @@ const CardPlanUpgrade = () => {
               type='number'
               sx={{ width: 80, mt: 0.4 }}
               onChange={e =>
-                e.target.value.length > 3
-                  ? setCvc2(parseInt(e.target.value.slice(0, 3)))
-                  : setCvc2(parseInt(e.target.value))
+                e.target.value.length > 3 ? setCvc2(e.target.value.slice(0, 3)) : setCvc2(e.target.value)
               }
             />
           </Box>
@@ -192,7 +196,7 @@ const CardPlanUpgrade = () => {
           sx={{ mt: 2.75, mb: 3.5 }}
           placeholder='john.doe@email.com'
         />
-        <Button fullWidth variant='contained' endIcon={<ArrowRight />}>
+        <Button fullWidth variant='contained' endIcon={<Icon icon='mdi:arrow-right' />}>
           Proceed to payment
         </Button>
       </CardContent>

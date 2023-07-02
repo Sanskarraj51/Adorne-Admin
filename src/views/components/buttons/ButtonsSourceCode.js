@@ -1,6 +1,4 @@
-export const ButtonsColorsJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const ButtonsColorsJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { Fragment } from 'react'
 
 // ** MUI Imports
@@ -48,13 +46,32 @@ const ButtonsColors = () => {
 }
 
 export default ButtonsColors
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const ButtonsCustomizedJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const ButtonsContainedJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
+import Button from '@mui/material/Button'
+
+const ButtonsContained = () => {
+  return (
+    <div className='demo-space-x'>
+      <Button variant='contained'>Primary</Button>
+      <Button variant='contained' color='secondary'>
+        Secondary
+      </Button>
+      <Button variant='contained' disabled>
+        Disabled
+      </Button>
+      <Button variant='contained' href='#'>
+        Link
+      </Button>
+    </div>
+  )
+}
+
+export default ButtonsContained
+`}</code></pre>) 
+
+export const ButtonsCustomizedJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import { brown } from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
 import Button from '@mui/material/Button'
@@ -117,121 +134,89 @@ const ButtonsCustomized = () => {
 }
 
 export default ButtonsCustomized
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const ButtonsIconsJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
-import IconButton from '@mui/material/IconButton'
-
-// ** Icons Imports
-import CameraIris from 'mdi-material-ui/CameraIris'
-
-const ButtonsIcons = () => {
-  return (
-    <div className='demo-space-x'>
-      <IconButton aria-label='capture screenshot'>
-        <CameraIris />
-      </IconButton>
-      <IconButton aria-label='capture screenshot' color='primary'>
-        <CameraIris />
-      </IconButton>
-      <IconButton aria-label='capture screenshot' color='secondary'>
-        <CameraIris />
-      </IconButton>
-      <IconButton aria-label='capture screenshot' disabled>
-        <CameraIris />
-      </IconButton>
-    </div>
-  )
-}
-
-export default ButtonsIcons
-`}</code>
-  </pre>
-)
-
-export const ButtonsFabSizesJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
-import { Fragment } from 'react'
-
-// ** MUI Imports
+export const ButtonsFabJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
+import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
+import Typography from '@mui/material/Typography'
 
-// ** Icons Import
-import Plus from 'mdi-material-ui/Plus'
-import NavigationOutline from 'mdi-material-ui/NavigationOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
-const ButtonsFabSizes = () => {
+const ButtonsFab = () => {
   return (
-    <Fragment>
+    <>
+      <Typography sx={{ fontWeight: 500 }}>Circular Variant</Typography>
+      <Box sx={{ mb: 6 }} className='demo-space-x'>
+        <Fab aria-label='edit'>
+          <Icon icon='mdi:pencil' />
+        </Fab>
+        <Fab color='primary' aria-label='edit'>
+          <Icon icon='mdi:pencil' />
+        </Fab>
+        <Fab color='secondary' aria-label='edit'>
+          <Icon icon='mdi:pencil' />
+        </Fab>
+        <Fab color='success' aria-label='edit'>
+          <Icon icon='mdi:pencil' />
+        </Fab>
+        <Fab color='error' aria-label='edit'>
+          <Icon icon='mdi:pencil' />
+        </Fab>
+        <Fab color='warning' aria-label='edit'>
+          <Icon icon='mdi:pencil' />
+        </Fab>
+        <Fab color='info' aria-label='edit'>
+          <Icon icon='mdi:pencil' />
+        </Fab>
+        <Fab disabled aria-label='edit'>
+          <Icon icon='mdi:pencil' />
+        </Fab>
+      </Box>
+      <Typography sx={{ fontWeight: 500 }}>Extended Variant</Typography>
       <div className='demo-space-x'>
-        <Fab color='primary' aria-label='add' size='small'>
-          <Plus />
+        <Fab variant='extended' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:plus' />
+          Add
         </Fab>
-        <Fab color='primary' aria-label='add' size='medium'>
-          <Plus />
+        <Fab color='primary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:plus' />
+          Add
         </Fab>
-        <Fab color='primary' aria-label='add' size='large'>
-          <Plus />
+        <Fab color='secondary' variant='extended' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:plus' />
+          Add
+        </Fab>
+        <Fab color='success' variant='extended' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:plus' />
+          Add
+        </Fab>
+        <Fab color='error' variant='extended' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:plus' />
+          Add
+        </Fab>
+        <Fab color='warning' variant='extended' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:plus' />
+          Add
+        </Fab>
+        <Fab color='info' variant='extended' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:plus' />
+          Add
+        </Fab>
+        <Fab disabled variant='extended' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:plus' />
+          Add
         </Fab>
       </div>
-      <div className='demo-space-x'>
-        <Fab variant='extended' size='small'>
-          <NavigationOutline sx={{ mr: 1 }} />
-          Navigate
-        </Fab>
-        <Fab variant='extended' size='medium'>
-          <NavigationOutline sx={{ mr: 1 }} />
-          Navigate
-        </Fab>
-        <Fab variant='extended' size='large'>
-          <NavigationOutline sx={{ mr: 1 }} />
-          Navigate
-        </Fab>
-      </div>
-    </Fragment>
+    </>
   )
 }
 
-export default ButtonsFabSizes
-`}</code>
-  </pre>
-)
+export default ButtonsFab
+`}</code></pre>) 
 
-export const ButtonsContainedJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
-import Button from '@mui/material/Button'
-
-const ButtonsContained = () => {
-  return (
-    <div className='demo-space-x'>
-      <Button variant='contained'>Primary</Button>
-      <Button variant='contained' color='secondary'>
-        Secondary
-      </Button>
-      <Button variant='contained' disabled>
-        Disabled
-      </Button>
-      <Button variant='contained' href='#'>
-        Link
-      </Button>
-    </div>
-  )
-}
-
-export default ButtonsContained
-`}</code>
-  </pre>
-)
-
-export const ButtonsOutlinedJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const ButtonsOutlinedJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Button from '@mui/material/Button'
 
 const ButtonsOutlined = () => {
@@ -252,133 +237,61 @@ const ButtonsOutlined = () => {
 }
 
 export default ButtonsOutlined
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const ButtonsFabJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
-import Box from '@mui/material/Box'
+export const ButtonsFabSizesJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
+import { Fragment } from 'react'
+
+// ** MUI Imports
 import Fab from '@mui/material/Fab'
-import Typography from '@mui/material/Typography'
 
-// ** Icons Import
-import Plus from 'mdi-material-ui/Plus'
-import Pencil from 'mdi-material-ui/Pencil'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
-const ButtonsFab = () => {
+const ButtonsFabSizes = () => {
   return (
-    <>
-      <Typography sx={{ fontWeight: 500 }}>Circular Variant</Typography>
-      <Box sx={{ mb: 6 }} className='demo-space-x'>
-        <Fab aria-label='edit'>
-          <Pencil />
-        </Fab>
-        <Fab color='primary' aria-label='edit'>
-          <Pencil />
-        </Fab>
-        <Fab color='secondary' aria-label='edit'>
-          <Pencil />
-        </Fab>
-        <Fab color='success' aria-label='edit'>
-          <Pencil />
-        </Fab>
-        <Fab color='error' aria-label='edit'>
-          <Pencil />
-        </Fab>
-        <Fab color='warning' aria-label='edit'>
-          <Pencil />
-        </Fab>
-        <Fab color='info' aria-label='edit'>
-          <Pencil />
-        </Fab>
-        <Fab disabled aria-label='edit'>
-          <Pencil />
-        </Fab>
-      </Box>
-      <Typography sx={{ fontWeight: 500 }}>Extended Variant</Typography>
+    <Fragment>
       <div className='demo-space-x'>
-        <Fab variant='extended'>
-          <Plus sx={{ mr: 1 }} />
-          Add
+        <Fab color='primary' aria-label='add' size='small'>
+          <Icon icon='mdi:plus' />
         </Fab>
-        <Fab color='primary' variant='extended'>
-          <Plus sx={{ mr: 1 }} />
-          Add
+        <Fab color='primary' aria-label='add' size='medium'>
+          <Icon icon='mdi:plus' />
         </Fab>
-        <Fab color='secondary' variant='extended'>
-          <Plus sx={{ mr: 1 }} />
-          Add
-        </Fab>
-        <Fab color='success' variant='extended'>
-          <Plus sx={{ mr: 1 }} />
-          Add
-        </Fab>
-        <Fab color='error' variant='extended'>
-          <Plus sx={{ mr: 1 }} />
-          Add
-        </Fab>
-        <Fab color='warning' variant='extended'>
-          <Plus sx={{ mr: 1 }} />
-          Add
-        </Fab>
-        <Fab color='info' variant='extended'>
-          <Plus sx={{ mr: 1 }} />
-          Add
-        </Fab>
-        <Fab disabled variant='extended'>
-          <Plus sx={{ mr: 1 }} />
-          Add
+        <Fab color='primary' aria-label='add' size='large'>
+          <Icon icon='mdi:plus' />
         </Fab>
       </div>
-    </>
+      <div className='demo-space-x'>
+        <Fab variant='extended' size='small' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:navigation-outline' />
+          Navigate
+        </Fab>
+        <Fab variant='extended' size='medium' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:navigation-outline' />
+          Navigate
+        </Fab>
+        <Fab variant='extended' size='large' sx={{ '& svg': { mr: 1 } }}>
+          <Icon icon='mdi:navigation-outline' />
+          Navigate
+        </Fab>
+      </div>
+    </Fragment>
   )
 }
 
-export default ButtonsFab
-`}</code>
-  </pre>
-)
+export default ButtonsFabSizes
+`}</code></pre>) 
 
-export const ButtonsTextJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
-import Button from '@mui/material/Button'
-
-const ButtonsText = () => {
-  return (
-    <div className='demo-space-x'>
-      <Button variant='text'>Primary</Button>
-      <Button variant='text' color='secondary'>
-        Secondary
-      </Button>
-      <Button variant='text' disabled>
-        Disabled
-      </Button>
-      <Button variant='text' href='#'>
-        Link
-      </Button>
-    </div>
-  )
-}
-
-export default ButtonsText
-`}</code>
-  </pre>
-)
-
-export const ButtonsSizesJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const ButtonsSizesJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { Fragment } from 'react'
 
 // ** MUI Imports
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 
-// ** Icons Imports
-import CameraIris from 'mdi-material-ui/CameraIris'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ButtonsSizes = () => {
   return (
@@ -418,16 +331,16 @@ const ButtonsSizes = () => {
       </div>
       <div className='demo-space-x'>
         <IconButton aria-label='capture screenshot' color='secondary' size='small'>
-          <CameraIris fontSize='inherit' />
+          <Icon icon='mdi:camera-iris' fontSize='inherit' />
         </IconButton>
         <IconButton aria-label='capture screenshot' color='secondary'>
-          <CameraIris fontSize='small' />
+          <Icon icon='mdi:camera-iris' fontSize={20} />
         </IconButton>
         <IconButton aria-label='capture screenshot' color='secondary'>
-          <CameraIris />
+          <Icon icon='mdi:camera-iris' />
         </IconButton>
         <IconButton aria-label='capture screenshot' color='secondary' size='large'>
-          <CameraIris fontSize='large' />
+          <Icon icon='mdi:camera-iris' fontSize={35} />
         </IconButton>
       </div>
     </Fragment>
@@ -435,26 +348,72 @@ const ButtonsSizes = () => {
 }
 
 export default ButtonsSizes
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const ButtonsWithIconAndLabelJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const ButtonsTextJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Button from '@mui/material/Button'
 
-// ** Icons Imports
-import Send from 'mdi-material-ui/Send'
-import DeleteOutline from 'mdi-material-ui/DeleteOutline'
+const ButtonsText = () => {
+  return (
+    <div className='demo-space-x'>
+      <Button variant='text'>Primary</Button>
+      <Button variant='text' color='secondary'>
+        Secondary
+      </Button>
+      <Button variant='text' disabled>
+        Disabled
+      </Button>
+      <Button variant='text' href='#'>
+        Link
+      </Button>
+    </div>
+  )
+}
+
+export default ButtonsText
+`}</code></pre>) 
+
+export const ButtonsIconsJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
+import IconButton from '@mui/material/IconButton'
+
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
+
+const ButtonsIcons = () => {
+  return (
+    <div className='demo-space-x'>
+      <IconButton aria-label='capture screenshot'>
+        <Icon icon='mdi:camera-iris' />
+      </IconButton>
+      <IconButton aria-label='capture screenshot' color='primary'>
+        <Icon icon='mdi:camera-iris' />
+      </IconButton>
+      <IconButton aria-label='capture screenshot' color='secondary'>
+        <Icon icon='mdi:camera-iris' />
+      </IconButton>
+      <IconButton aria-label='capture screenshot' disabled>
+        <Icon icon='mdi:camera-iris' />
+      </IconButton>
+    </div>
+  )
+}
+
+export default ButtonsIcons
+`}</code></pre>) 
+
+export const ButtonsWithIconAndLabelJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
+import Button from '@mui/material/Button'
+
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ButtonsWithIconAndLabel = () => {
   return (
     <div className='demo-space-x'>
-      <Button variant='contained' endIcon={<Send />}>
+      <Button variant='contained' endIcon={<Icon icon='mdi:send' />}>
         Send
       </Button>
-      <Button variant='contained' color='secondary' startIcon={<DeleteOutline />}>
+      <Button variant='contained' color='secondary' startIcon={<Icon icon='mdi:delete-outline' />}>
         Delete
       </Button>
     </div>
@@ -462,6 +421,5 @@ const ButtonsWithIconAndLabel = () => {
 }
 
 export default ButtonsWithIconAndLabel
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
+

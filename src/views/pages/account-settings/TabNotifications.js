@@ -1,71 +1,107 @@
 // ** MUI Imports
-import Box from '@mui/material/Box'
-import Switch from '@mui/material/Switch'
+import Grid from '@mui/material/Grid'
+import Card from '@mui/material/Card'
+import Table from '@mui/material/Table'
+import Select from '@mui/material/Select'
 import Button from '@mui/material/Button'
-import { styled } from '@mui/material/styles'
+import MenuItem from '@mui/material/MenuItem'
+import Checkbox from '@mui/material/Checkbox'
+import TableRow from '@mui/material/TableRow'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableHead from '@mui/material/TableHead'
+import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
-import MuiFormControlLabel from '@mui/material/FormControlLabel'
+import TableContainer from '@mui/material/TableContainer'
 
-// ** Icons Imports
-import Poll from 'mdi-material-ui/Poll'
-import EmailOutline from 'mdi-material-ui/EmailOutline'
-
-const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
-  '& .MuiFormControlLabel-label': {
-    fontSize: '0.875rem',
-    marginLeft: theme.spacing(1.5),
-    color: theme.palette.text.secondary
+const data = [
+  {
+    app: true,
+    email: true,
+    browser: true,
+    type: 'New for you'
+  },
+  {
+    app: true,
+    email: true,
+    browser: true,
+    type: 'Account activity'
+  },
+  {
+    app: false,
+    email: true,
+    browser: true,
+    type: 'A new browser used to sign in'
+  },
+  {
+    app: false,
+    email: true,
+    browser: false,
+    type: 'A new device is linked'
   }
-}))
+]
 
 const TabNotifications = () => {
   return (
-    <CardContent sx={{ pt: 10 }}>
-      <form>
-        <Box sx={{ mb: 4.5, display: 'flex', alignItems: 'center' }}>
-          <Poll sx={{ fontSize: '1.75rem', mr: 2 }} />
-          <Typography variant='h6'>Activity</Typography>
-        </Box>
+    <Card>
+      <CardHeader title='Recent Devices' />
+      <CardContent>
+        <Typography sx={{ color: 'text.secondary' }}>
+          We need permission from your browser to show notifications. <strong>Request Permission</strong>
+        </Typography>
+      </CardContent>
 
-        <Box sx={{ mb: 2 }}>
-          <FormControlLabel control={<Switch defaultChecked />} label='Email me when someone comments on my article' />
-        </Box>
-        <Box sx={{ mb: 2 }}>
-          <FormControlLabel
-            control={<Switch defaultChecked />}
-            label='Email me when someone answers on my forum thread'
-          />
-        </Box>
-        <Box sx={{ mb: 2 }}>
-          <FormControlLabel control={<Switch />} label='Email me when someone follows me' />
-        </Box>
-
-        <Box sx={{ mt: 6, mb: 4.5, display: 'flex', alignItems: 'center' }}>
-          <EmailOutline sx={{ fontSize: '1.75rem', mr: 2 }} />
-          <Typography variant='h6'>Application</Typography>
-        </Box>
-
-        <Box sx={{ mb: 2 }}>
-          <FormControlLabel control={<Switch />} label='News and announcements' />
-        </Box>
-        <Box sx={{ mb: 2 }}>
-          <FormControlLabel control={<Switch defaultChecked />} label='Weekly product updates' />
-        </Box>
-        <Box sx={{ mb: 2 }}>
-          <FormControlLabel control={<Switch />} label='Weekly blog digest' />
-        </Box>
-
-        <Box sx={{ mt: 6 }}>
-          <Button variant='contained' sx={{ mr: 4 }}>
-            Save Changes
-          </Button>
-          <Button type='reset' variant='outlined' color='secondary'>
-            Reset
-          </Button>
-        </Box>
-      </form>
-    </CardContent>
+      <TableContainer>
+        <Table size='small'>
+          <TableHead>
+            <TableRow>
+              <TableCell>Type</TableCell>
+              <TableCell sx={{ whiteSpace: 'nowrap' }}>✉️ Email</TableCell>
+              <TableCell sx={{ whiteSpace: 'nowrap' }}>🖥 Browser</TableCell>
+              <TableCell sx={{ whiteSpace: 'nowrap' }}>👩🏻‍💻 App</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map(row => (
+              <TableRow key={row.type}>
+                <TableCell>
+                  <Typography sx={{ whiteSpace: 'nowrap', color: 'text.secondary' }}>{row.type}</Typography>
+                </TableCell>
+                <TableCell>
+                  <Checkbox defaultChecked={row.email} />
+                </TableCell>
+                <TableCell>
+                  <Checkbox defaultChecked={row.browser} />
+                </TableCell>
+                <TableCell>
+                  <Checkbox defaultChecked={row.app} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <CardContent>
+        <Typography sx={{ mb: 4, fontWeight: 500 }}>When should we send you notifications?</Typography>
+        <Grid container spacing={6}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Select fullWidth size='small' defaultValue='online'>
+              <MenuItem value='online'>Only when I'm online</MenuItem>
+              <MenuItem value='anytime'>Anytime</MenuItem>
+            </Select>
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant='contained' sx={{ mr: 3 }}>
+              Save Changes
+            </Button>
+            <Button variant='outlined' color='secondary'>
+              Discard
+            </Button>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
   )
 }
 

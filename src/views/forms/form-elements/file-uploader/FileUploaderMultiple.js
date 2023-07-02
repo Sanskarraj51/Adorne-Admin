@@ -1,9 +1,11 @@
 // ** React Imports
 import { Fragment, useState } from 'react'
 
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
-import Link from '@mui/material/Link'
 import List from '@mui/material/List'
 import Button from '@mui/material/Button'
 import ListItem from '@mui/material/ListItem'
@@ -11,9 +13,8 @@ import { styled } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import FileDocumentOutline from 'mdi-material-ui/FileDocumentOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Imports
 import { useDropzone } from 'react-dropzone'
@@ -54,7 +55,7 @@ const FileUploaderMultiple = () => {
     if (file.type.startsWith('image')) {
       return <img width={38} height={38} alt={file.name} src={URL.createObjectURL(file)} />
     } else {
-      return <FileDocumentOutline />
+      return <Icon icon='mdi:file-document-outline' />
     }
   }
 
@@ -78,14 +79,10 @@ const FileUploaderMultiple = () => {
         </div>
       </div>
       <IconButton onClick={() => handleRemoveFile(file)}>
-        <Close fontSize='small' />
+        <Icon icon='mdi:close' fontSize={20} />
       </IconButton>
     </ListItem>
   ))
-
-  const handleLinkClick = event => {
-    event.preventDefault()
-  }
 
   const handleRemoveAllFiles = () => {
     setFiles([])
@@ -99,9 +96,9 @@ const FileUploaderMultiple = () => {
           <Img width={300} alt='Upload img' src='/images/misc/upload.png' />
           <Box sx={{ display: 'flex', flexDirection: 'column', textAlign: ['center', 'center', 'inherit'] }}>
             <HeadingTypography variant='h5'>Drop files here or click to upload.</HeadingTypography>
-            <Typography color='textSecondary'>
+            <Typography color='textSecondary' sx={{ '& a': { color: 'primary.main', textDecoration: 'none' } }}>
               Drop files here or click{' '}
-              <Link href='/' onClick={handleLinkClick}>
+              <Link href='/' onClick={e => e.preventDefault()}>
                 browse
               </Link>{' '}
               thorough your machine

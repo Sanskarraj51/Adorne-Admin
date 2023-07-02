@@ -1,12 +1,11 @@
 // ** React Imports
 import { useState } from 'react'
 
-// ** Next Imports
+// ** Next Import
 import Link from 'next/link'
 
 // ** MUI Components
 import Box from '@mui/material/Box'
-import MuiLink from '@mui/material/Link'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import InputLabel from '@mui/material/InputLabel'
@@ -18,10 +17,8 @@ import { styled, useTheme } from '@mui/material/styles'
 import MuiCard from '@mui/material/Card'
 import InputAdornment from '@mui/material/InputAdornment'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import ChevronLeft from 'mdi-material-ui/ChevronLeft'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Configs
 import themeConfig from 'src/configs/themeConfig'
@@ -49,10 +46,6 @@ const ResetPasswordV1 = () => {
   // ** Hook
   const theme = useTheme()
 
-  const handleSubmit = e => {
-    e.preventDefault()
-  }
-
   // Handle New Password
   const handleNewPasswordChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -62,10 +55,6 @@ const ResetPasswordV1 = () => {
     setValues({ ...values, showNewPassword: !values.showNewPassword })
   }
 
-  const handleMouseDownNewPassword = event => {
-    event.preventDefault()
-  }
-
   // Handle Confirm New Password
   const handleConfirmNewPasswordChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -73,10 +62,6 @@ const ResetPasswordV1 = () => {
 
   const handleClickShowConfirmNewPassword = () => {
     setValues({ ...values, showConfirmNewPassword: !values.showConfirmNewPassword })
-  }
-
-  const handleMouseDownConfirmNewPassword = event => {
-    event.preventDefault()
   }
 
   return (
@@ -164,7 +149,7 @@ const ResetPasswordV1 = () => {
             </Typography>
             <Typography variant='body2'>Your new password must be different from previously used passwords</Typography>
           </Box>
-          <form noValidate autoComplete='off' onSubmit={handleSubmit}>
+          <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
             <FormControl fullWidth sx={{ mb: 4 }}>
               <InputLabel htmlFor='auth-reset-password-new-password'>New Password</InputLabel>
               <OutlinedInput
@@ -179,10 +164,10 @@ const ResetPasswordV1 = () => {
                     <IconButton
                       edge='end'
                       onClick={handleClickShowNewPassword}
+                      onMouseDown={e => e.preventDefault()}
                       aria-label='toggle password visibility'
-                      onMouseDown={handleMouseDownNewPassword}
                     >
-                      {values.showNewPassword ? <EyeOutline /> : <EyeOffOutline />}
+                      <Icon icon={values.showNewPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                     </IconButton>
                   </InputAdornment>
                 }
@@ -200,11 +185,11 @@ const ResetPasswordV1 = () => {
                   <InputAdornment position='end'>
                     <IconButton
                       edge='end'
+                      onMouseDown={e => e.preventDefault()}
                       aria-label='toggle password visibility'
                       onClick={handleClickShowConfirmNewPassword}
-                      onMouseDown={handleMouseDownConfirmNewPassword}
                     >
-                      {values.showConfirmNewPassword ? <EyeOutline /> : <EyeOffOutline />}
+                      <Icon icon={values.showConfirmNewPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                     </IconButton>
                   </InputAdornment>
                 }
@@ -213,17 +198,23 @@ const ResetPasswordV1 = () => {
             <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 5.25 }}>
               Set New Password
             </Button>
-            <Typography sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Link passHref href='/pages/auth/login-v1'>
-                <Typography
-                  component={MuiLink}
-                  sx={{ display: 'flex', alignItems: 'center', color: 'primary.main', justifyContent: 'center' }}
-                >
-                  <ChevronLeft sx={{ mr: 1.5, fontSize: '2rem' }} />
-                  <span>Back to login</span>
-                </Typography>
-              </Link>
-            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Typography
+                component={Link}
+                href='/pages/auth/login-v1'
+                sx={{
+                  display: 'flex',
+                  '& svg': { mr: 1.5 },
+                  alignItems: 'center',
+                  color: 'primary.main',
+                  textDecoration: 'none',
+                  justifyContent: 'center'
+                }}
+              >
+                <Icon icon='mdi:chevron-left' fontSize='2rem' />
+                <span>Back to login</span>
+              </Typography>
+            </Box>
           </form>
         </CardContent>
       </Card>

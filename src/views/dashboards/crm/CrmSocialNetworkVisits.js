@@ -2,16 +2,15 @@
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import MenuUp from 'mdi-material-ui/MenuUp'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomChip from 'src/@core/components/mui/chip'
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const data = [
   {
@@ -59,17 +58,18 @@ const CrmSocialNetworkVisits = () => {
         title='Social Network Visits'
         titleTypographyProps={{ sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' } }}
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
       <CardContent sx={{ pb: theme => `${theme.spacing(6.5)} !important` }}>
-        <Box sx={{ mb: 0.5, display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ mb: 0.5, display: 'flex', alignItems: 'center', '& svg': { mr: 0.5, color: 'success.main' } }}>
           <Typography variant='h5' sx={{ mr: 0.5 }}>
             28,468
           </Typography>
-          <MenuUp sx={{ mr: 0.5, fontSize: '1.875rem', color: 'success.main' }} />
+          <Icon icon='mdi:menu-up' fontSize='1.875rem' />
           <Typography variant='body2' sx={{ fontWeight: 600, color: 'success.main' }}>
             62%
           </Typography>

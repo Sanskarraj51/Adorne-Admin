@@ -15,16 +15,15 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import TableContainer from '@mui/material/TableContainer'
 
-// ** Icons Imports
-import Plus from 'mdi-material-ui/Plus'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components
 import CustomChip from 'src/@core/components/mui/chip'
+import OptionsMenu from 'src/@core/components/option-menu'
 
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
@@ -240,9 +239,10 @@ const EcommerceSalesOverviewWithTabs = () => {
         title='Top Referral Sources'
         subheader='82% Activity Growth'
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
       <TabContext value={value}>
@@ -288,7 +288,7 @@ const EcommerceSalesOverviewWithTabs = () => {
                     backgroundColor: theme => hexToRGBA(theme.palette.secondary.main, 0.12)
                   }}
                 >
-                  <Plus />
+                  <Icon icon='mdi:plus' />
                 </Box>
               </Avatar>
             }

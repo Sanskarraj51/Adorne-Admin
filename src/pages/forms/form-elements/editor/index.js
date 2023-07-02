@@ -1,6 +1,9 @@
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
 // ** Custom Components Imports
@@ -20,6 +23,11 @@ import * as source from 'src/views/forms/form-elements/editor/EditorSourceCode'
 // ** Styles
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
+const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main
+}))
+
 const Editors = () => {
   return (
     <EditorWrapper>
@@ -27,9 +35,9 @@ const Editors = () => {
         <PageHeader
           title={
             <Typography variant='h5'>
-              <Link href='https://jpuri.github.io/react-draft-wysiwyg/#/' target='_blank'>
+              <LinkStyled href='https://jpuri.github.io/react-draft-wysiwyg/#/' target='_blank'>
                 React Draft Wysiwyg
-              </Link>
+              </LinkStyled>
             </Typography>
           }
           subtitle={<Typography variant='body2'>A Wysiwyg Built on ReactJS and DraftJS</Typography>}

@@ -9,10 +9,8 @@ import ListItemText from '@mui/material/ListItemText'
 import MuiMenu from '@mui/material/Menu'
 import MuiMenuItem from '@mui/material/MenuItem'
 
-// ** Icons Imports
-import Send from 'mdi-material-ui/Send'
-import EmailOpen from 'mdi-material-ui/EmailOpen'
-import InboxArrowDown from 'mdi-material-ui/InboxArrowDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // Styled Menu component
 const Menu = styled(MuiMenu)(({ theme }) => ({
@@ -66,19 +64,19 @@ const MenuCustomized = () => {
       >
         <MenuItem>
           <ListItemIcon>
-            <Send fontSize='small' />
+            <Icon icon='mdi:send' fontSize={20} />
           </ListItemIcon>
           <ListItemText primary='Sent mail' />
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <EmailOpen fontSize='small' />
+            <Icon icon='mdi:email-open' fontSize={20} />
           </ListItemIcon>
           <ListItemText primary='Drafts' />
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <InboxArrowDown fontSize='small' />
+            <Icon icon='mdi:inbox-arrow-down' fontSize={20} />
           </ListItemIcon>
           <ListItemText primary='Inbox' />
         </MenuItem>

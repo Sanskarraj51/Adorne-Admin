@@ -3,10 +3,8 @@ import { Fragment, useState } from 'react'
 
 // ** MUI Imports
 import List from '@mui/material/List'
-import Menu from '@mui/material/Menu'
 import Avatar from '@mui/material/Avatar'
 import Divider from '@mui/material/Divider'
-import MenuItem from '@mui/material/MenuItem'
 import ListItem from '@mui/material/ListItem'
 import { styled } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton'
@@ -14,21 +12,8 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import ListItemIcon from '@mui/material/ListItemIcon'
 
-// ** Icons Import
-import Circle from 'mdi-material-ui/Circle'
-import Attachment from 'mdi-material-ui/Attachment'
-import StarOutline from 'mdi-material-ui/StarOutline'
-import ChevronLeft from 'mdi-material-ui/ChevronLeft'
-import ChevronRight from 'mdi-material-ui/ChevronRight'
-import ShareOutline from 'mdi-material-ui/ShareOutline'
-import LabelOutline from 'mdi-material-ui/LabelOutline'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import ReplyOutline from 'mdi-material-ui/ReplyOutline'
-import EmailOutline from 'mdi-material-ui/EmailOutline'
-import DeleteOutline from 'mdi-material-ui/DeleteOutline'
-import FolderOutline from 'mdi-material-ui/FolderOutline'
-import ArrowExpandVertical from 'mdi-material-ui/ArrowExpandVertical'
-import ArrowCollapseVertical from 'mdi-material-ui/ArrowCollapseVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Imports
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -39,6 +24,7 @@ import { useSettings } from 'src/@core/hooks/useSettings'
 // ** Custom Components Imports
 import Sidebar from 'src/@core/components/sidebar'
 import CustomChip from 'src/@core/components/mui/chip'
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const HiddenReplyBack = styled(Box)(({ theme }) => ({
   height: 11,
@@ -50,10 +36,10 @@ const HiddenReplyBack = styled(Box)(({ theme }) => ({
   marginLeft: 'auto',
   marginRight: 'auto',
   borderStyle: 'solid',
+  borderColor: theme.palette.divider,
   borderTopLeftRadius: theme.shape.borderRadius,
   borderTopRightRadius: theme.shape.borderRadius,
-  backgroundColor: theme.palette.background.paper,
-  borderColor: `rgba(${theme.palette.customColors.main}, 0.12)`
+  backgroundColor: theme.palette.background.paper
 }))
 
 const HiddenReplyFront = styled(Box)(({ theme }) => ({
@@ -66,54 +52,11 @@ const HiddenReplyFront = styled(Box)(({ theme }) => ({
   marginLeft: 'auto',
   marginRight: 'auto',
   borderStyle: 'solid',
+  borderColor: theme.palette.divider,
   borderTopLeftRadius: theme.shape.borderRadius,
   borderTopRightRadius: theme.shape.borderRadius,
-  backgroundColor: theme.palette.background.paper,
-  borderColor: `rgba(${theme.palette.customColors.main}, 0.12)`
+  backgroundColor: theme.palette.background.paper
 }))
-
-const MailCardMenu = () => {
-  const [mailMenuAnchorEl, setMailMenuAnchorEl] = useState(null)
-  const openMailMenu = Boolean(mailMenuAnchorEl)
-
-  const handleMailMenuClick = event => {
-    setMailMenuAnchorEl(event.currentTarget)
-  }
-
-  const handleMailMenuClose = () => {
-    setMailMenuAnchorEl(null)
-  }
-
-  return (
-    <>
-      <IconButton size='small' onClick={handleMailMenuClick}>
-        <DotsVertical fontSize='small' />
-      </IconButton>
-      <Menu
-        anchorEl={mailMenuAnchorEl}
-        open={openMailMenu}
-        onClose={handleMailMenuClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-      >
-        <MenuItem>
-          <ShareOutline fontSize='small' sx={{ mr: 2 }} />
-          Reply
-        </MenuItem>
-        <MenuItem>
-          <ReplyOutline fontSize='small' sx={{ mr: 2 }} />
-          Forward
-        </MenuItem>
-      </Menu>
-    </>
-  )
-}
 
 const MailDetails = props => {
   // ** Props
@@ -137,35 +80,12 @@ const MailDetails = props => {
 
   // ** State
   const [showReplies, setShowReplies] = useState(false)
-  const [labelAnchorEl, setLabelAnchorEl] = useState(null)
-  const [folderAnchorEl, setFolderAnchorEl] = useState(null)
 
   // ** Hook
   const { settings } = useSettings()
 
-  // ** Vars
-  const openLabelMenu = Boolean(labelAnchorEl)
-  const openFolderMenu = Boolean(folderAnchorEl)
-
   const handleMoveToTrash = () => {
     dispatch(updateMail({ emailIds: [mail.id], dataToUpdate: { folder: 'trash' } }))
-    setMailDetailsOpen(false)
-  }
-
-  const handleLabelMenuClick = event => {
-    setLabelAnchorEl(event.currentTarget)
-  }
-
-  const handleLabelMenuClose = () => {
-    setLabelAnchorEl(null)
-  }
-
-  const handleFolderMenuClick = event => {
-    setFolderAnchorEl(event.currentTarget)
-  }
-
-  const handleFolderMenuClose = () => {
-    setFolderAnchorEl(null)
     setMailDetailsOpen(false)
   }
 
@@ -174,78 +94,79 @@ const MailDetails = props => {
     setMailDetailsOpen(false)
   }
 
-  const renderLabelsMenu = () => {
-    return Object.entries(labelColors).map(([key, value]) => {
-      return (
-        <MenuItem
-          key={key}
-          sx={{ display: 'flex', alignItems: 'center' }}
-          onClick={() => {
+  const handleLabelsMenu = () => {
+    const array = []
+    Object.entries(labelColors).map(([key, value]) => {
+      array.push({
+        text: <Typography sx={{ textTransform: 'capitalize' }}>{key}</Typography>,
+        icon: (
+          <Box component='span' sx={{ mr: 2, color: `${value}.main` }}>
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+          </Box>
+        ),
+        menuItemProps: {
+          onClick: () => {
             handleLabelUpdate([mail.id], key)
-            handleLabelMenuClose()
-          }}
-        >
-          <Circle sx={{ mr: 2, fontSize: '0.75rem', color: `${value}.main` }} />
-          <Typography sx={{ textTransform: 'capitalize' }}>{key}</Typography>
-        </MenuItem>
-      )
+            setMailDetailsOpen(false)
+          }
+        }
+      })
     })
+
+    return array
   }
 
-  const renderFoldersMenu = () => {
+  const handleFoldersMenu = () => {
+    const array = []
     if (routeParams && routeParams.folder && !routeParams.label && foldersObj[routeParams.folder]) {
-      return foldersObj[routeParams.folder].map(folder => {
-        return (
-          <MenuItem
-            key={folder.name}
-            sx={{ display: 'flex', alignItems: 'center' }}
-            onClick={() => {
+      foldersObj[routeParams.folder].map(folder => {
+        array.length = 0
+        array.push({
+          icon: folder.icon,
+          text: <Typography sx={{ textTransform: 'capitalize' }}>{folder.name}</Typography>,
+          menuItemProps: {
+            onClick: () => {
               handleFolderUpdate(mail.id, folder.name)
-              handleFolderMenuClose()
-            }}
-          >
-            {folder.icon}
-            <Typography sx={{ textTransform: 'capitalize' }}>{folder.name}</Typography>
-          </MenuItem>
-        )
+              setMailDetailsOpen(false)
+            }
+          }
+        })
       })
     } else if (routeParams && routeParams.label) {
-      return folders.map(folder => {
-        return (
-          <MenuItem
-            key={folder.name}
-            sx={{ display: 'flex', alignItems: 'center' }}
-            onClick={() => {
+      folders.map(folder => {
+        array.length = 0
+        array.push({
+          icon: folder.icon,
+          text: <Typography sx={{ textTransform: 'capitalize' }}>{folder.name}</Typography>,
+          menuItemProps: {
+            onClick: () => {
               handleFolderUpdate(mail.id, folder.name)
-              handleFolderMenuClose()
-            }}
-          >
-            {folder.icon}
-            <Typography sx={{ textTransform: 'capitalize' }}>{folder.name}</Typography>
-          </MenuItem>
-        )
+              setMailDetailsOpen(false)
+            }
+          }
+        })
       })
     } else {
-      return foldersObj['inbox'].map(folder => {
-        return (
-          <MenuItem
-            key={folder.name}
-            sx={{ display: 'flex', alignItems: 'center' }}
-            onClick={() => {
+      foldersObj['inbox'].map(folder => {
+        array.length = 0
+        array.push({
+          icon: folder.icon,
+          text: <Typography sx={{ textTransform: 'capitalize' }}>{folder.name}</Typography>,
+          menuItemProps: {
+            onClick: () => {
               handleFolderUpdate(mail.id, folder.name)
-              handleFolderMenuClose()
-            }}
-          >
-            {folder.icon}
-            <Typography sx={{ textTransform: 'capitalize' }}>{folder.name}</Typography>
-          </MenuItem>
-        )
+              setMailDetailsOpen(false)
+            }
+          }
+        })
       })
     }
+
+    return array
   }
-  const PrevMailIcon = direction === 'rtl' ? ChevronRight : ChevronLeft
-  const NextMailIcon = direction === 'rtl' ? ChevronLeft : ChevronRight
-  const GoBackIcon = PrevMailIcon
+  const prevMailIcon = direction === 'rtl' ? 'mdi:chevron-right' : 'mdi:chevron-left'
+  const nextMailIcon = direction === 'rtl' ? 'mdi:chevron-left' : 'mdi:chevron-right'
+  const goBackIcon = prevMailIcon
 
   const ScrollWrapper = ({ children }) => {
     if (hidden) {
@@ -260,7 +181,7 @@ const MailDetails = props => {
       hideBackdrop
       direction='right'
       show={mailDetailsOpen}
-      sx={{ zIndex: 1, width: '100%', overflow: 'hidden' }}
+      sx={{ zIndex: 3, width: '100%', overflow: 'hidden' }}
       onClose={() => {
         setMailDetailsOpen(false)
         setShowReplies(false)
@@ -287,13 +208,13 @@ const MailDetails = props => {
                 }}
               >
                 <IconButton
-                  sx={{ mr: 3 }}
+                  sx={{ mr: 3, '& svg': { color: 'text.primary' } }}
                   onClick={() => {
                     setMailDetailsOpen(false)
                     setShowReplies(false)
                   }}
                 >
-                  <GoBackIcon sx={{ color: 'text.primary', fontSize: '1.5rem' }} />
+                  <Icon icon={goBackIcon} fontSize='1.5rem' />
                 </IconButton>
                 <Box
                   sx={{
@@ -337,7 +258,7 @@ const MailDetails = props => {
                   sx={{ color: mail.hasPreviousMail ? 'text.primary' : 'text.secondary' }}
                   onClick={() => dispatch(paginateMail({ dir: 'previous', emailId: mail.id }))}
                 >
-                  <PrevMailIcon />
+                  <Icon icon={prevMailIcon} />
                 </IconButton>
                 <IconButton
                   size='small'
@@ -345,7 +266,7 @@ const MailDetails = props => {
                   sx={{ color: mail.hasNextMail ? 'text.primary' : 'text.secondary' }}
                   onClick={() => dispatch(paginateMail({ dir: 'next', emailId: mail.id }))}
                 >
-                  <NextMailIcon />
+                  <Icon icon={nextMailIcon} />
                 </IconButton>
               </Box>
             </Box>
@@ -361,76 +282,50 @@ const MailDetails = props => {
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 {routeParams && routeParams.folder !== 'trash' ? (
                   <IconButton size='small' onClick={handleMoveToTrash}>
-                    <DeleteOutline sx={{ mr: 1 }} />
+                    <Icon icon='mdi:delete-outline' />
                   </IconButton>
                 ) : null}
 
                 <IconButton size='small' onClick={handleReadMail}>
-                  <EmailOutline sx={{ mr: 1 }} />
+                  <Icon icon='mdi:email-outline' fontSize='1.375rem' />
                 </IconButton>
-                <IconButton size='small' onClick={handleFolderMenuClick}>
-                  <FolderOutline sx={{ mr: 1 }} />
-                </IconButton>
-                <Menu
-                  open={openLabelMenu}
-                  anchorEl={labelAnchorEl}
-                  onClose={handleLabelMenuClose}
-                  PaperProps={{ style: { minWidth: '9rem' } }}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left'
-                  }}
-                >
-                  {renderLabelsMenu()}
-                </Menu>
-                <IconButton size='small' onClick={handleLabelMenuClick}>
-                  <LabelOutline />
-                </IconButton>
-                <Menu
-                  open={openFolderMenu}
-                  anchorEl={folderAnchorEl}
-                  onClose={() => setFolderAnchorEl(null)}
-                  PaperProps={{ style: { minWidth: '9rem' } }}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left'
-                  }}
-                >
-                  {renderFoldersMenu()}
-                </Menu>
+                <OptionsMenu
+                  leftAlignMenu
+                  options={handleFoldersMenu()}
+                  iconButtonProps={{ size: 'small' }}
+                  icon={<Icon icon='mdi:folder-outline' fontSize='1.375rem' />}
+                />
+                <OptionsMenu
+                  leftAlignMenu
+                  options={handleLabelsMenu()}
+                  iconButtonProps={{ size: 'small' }}
+                  icon={<Icon icon='mdi:label-outline' fontSize='1.375rem' />}
+                />
               </Box>
-              <Box>
+              <div>
                 <IconButton
                   size='small'
                   onClick={e => handleStarMail(e, mail.id, !mail.isStarred)}
                   sx={{ mr: 1, ...(mail.isStarred ? { color: 'warning.main' } : {}) }}
                 >
-                  <StarOutline />
+                  <Icon icon='mdi:star-outline' />
                 </IconButton>
                 {mail.replies.length ? (
                   <IconButton size='small' onClick={() => (showReplies ? setShowReplies(false) : setShowReplies(true))}>
                     {showReplies ? (
-                      <ArrowCollapseVertical sx={{ mr: 1, fontSize: '1.375rem' }} />
+                      <Icon icon='mdi:arrow-collapse-vertical' fontSize='1.375rem' />
                     ) : (
-                      <ArrowExpandVertical sx={{ mr: 1, fontSize: '1.375rem' }} />
+                      <Icon icon='mdi:arrow-expand-vertical' fontSize='1.375rem' />
                     )}
                   </IconButton>
                 ) : null}
                 <IconButton size='small'>
-                  <DotsVertical />
+                  <Icon icon='mdi:dots-vertical' />
                 </IconButton>
-              </Box>
+              </div>
             </Box>
           </Box>
-          <Box sx={{ height: 'calc(100% - 7.75rem)', backgroundColor: theme => theme.palette.action.hover }}>
+          <Box sx={{ height: 'calc(100% - 7.75rem)', backgroundColor: 'action.hover' }}>
             <ScrollWrapper>
               <Box
                 sx={{
@@ -499,22 +394,22 @@ const MailDetails = props => {
                                 </Typography>
                                 {mail.attachments.length ? (
                                   <IconButton size='small' sx={{ mr: 0.5 }}>
-                                    <Attachment fontSize='small' />
+                                    <Icon icon='mdi:attachment' fontSize={20} />
                                   </IconButton>
                                 ) : null}
                                 <IconButton size='small'>
-                                  <DotsVertical fontSize='small' />
+                                  <Icon icon='mdi:dots-vertical' fontSize={20} />
                                 </IconButton>
                               </Box>
                             </Box>
                           </Box>
-                          <Divider sx={{ m: 0 }} />
+                          <Divider sx={{ m: '0 !important' }} />
                           <Box sx={{ px: 5, py: 0 }}>
                             <Box sx={{ color: 'text.secondary' }} dangerouslySetInnerHTML={{ __html: reply.message }} />
                           </Box>
                           {reply.attachments.length ? (
                             <Fragment>
-                              <Divider sx={{ m: 0 }} />
+                              <Divider sx={{ m: '0 !important' }} />
                               <Box sx={{ p: 5 }}>
                                 <Typography variant='body2'>Attachments</Typography>
                                 <List>
@@ -584,20 +479,35 @@ const MailDetails = props => {
                         </Typography>
                         {mail.attachments.length ? (
                           <IconButton size='small' sx={{ mr: 0.5, color: 'action.active' }}>
-                            <Attachment sx={{ fontSize: '1.25rem' }} />
+                            <Icon icon='mdi:attachment' fontSize={20} />
                           </IconButton>
                         ) : null}
-                        <MailCardMenu />
+                        <OptionsMenu
+                          iconButtonProps={{ size: 'small' }}
+                          iconProps={{ fontSize: '1.375rem' }}
+                          options={[
+                            {
+                              text: 'Reply',
+                              menuItemProps: { sx: { '& svg': { mr: 2 } } },
+                              icon: <Icon icon='mdi:share-outline' fontSize={20} />
+                            },
+                            {
+                              text: 'Forward',
+                              menuItemProps: { sx: { '& svg': { mr: 2 } } },
+                              icon: <Icon icon='mdi:reply-outline' fontSize={20} />
+                            }
+                          ]}
+                        />
                       </Box>
                     </Box>
                   </Box>
-                  <Divider sx={{ m: 0 }} />
+                  <Divider sx={{ m: '0 !important' }} />
                   <Box sx={{ px: 5, py: 0 }}>
                     <Box sx={{ color: 'text.secondary' }} dangerouslySetInnerHTML={{ __html: mail.message }} />
                   </Box>
                   {mail.attachments.length ? (
                     <Fragment>
-                      <Divider sx={{ m: 0 }} />
+                      <Divider sx={{ m: '0 !important' }} />
                       <Box sx={{ p: 5 }}>
                         <Typography variant='body2'>Attachments</Typography>
                         <List>

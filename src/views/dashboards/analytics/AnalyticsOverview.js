@@ -24,10 +24,16 @@ const AnalyticsOverview = () => {
     plotOptions: {
       radialBar: {
         hollow: { size: '55%' },
+        track: {
+          background: theme.palette.customColors.trackBg
+        },
         dataLabels: {
           name: { show: false },
           value: {
-            offsetY: 5
+            offsetY: 5,
+            fontWeight: 600,
+            fontSize: '1rem',
+            color: theme.palette.text.primary
           }
         }
       }
@@ -49,7 +55,7 @@ const AnalyticsOverview = () => {
 
   return (
     <Card>
-      <CardContent sx={{ '& .apexcharts-canvas .apexcharts-text': { fontWeight: 600, fontSize: '1rem' } }}>
+      <CardContent>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
           <Typography variant='h6' sx={{ mr: 1.5 }}>
             $67.1k

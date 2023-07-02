@@ -26,13 +26,12 @@ const Sidebar = props => {
   return (
     <Fragment>
       <Box
-        {...props}
         sx={{
           top: 0,
           height: '100%',
           zIndex: 'drawer',
           position: 'absolute',
-          transition: 'all .25s ease-in-out',
+          transition: 'all 0.25s ease-in-out',
           backgroundColor: 'background.paper',
           ...(show ? { opacity: 1 } : { opacity: 0 }),
           ...(direction === 'right'

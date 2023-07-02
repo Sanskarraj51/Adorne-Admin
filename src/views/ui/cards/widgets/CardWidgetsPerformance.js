@@ -2,13 +2,10 @@
 import Card from '@mui/material/Card'
 import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-
 // ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 const series = [
@@ -31,10 +28,18 @@ const CardWidgetsPerformance = () => {
       parentHeightOffset: 0,
       toolbar: { show: false }
     },
+    legend: {
+      markers: { offsetX: -2 },
+      itemMargin: { horizontal: 10 },
+      labels: { colors: theme.palette.text.secondary }
+    },
     plotOptions: {
       radar: {
         size: 110,
-        polygons: { strokeColors: ['transparent'] }
+        polygons: {
+          strokeColors: theme.palette.divider,
+          connectorColors: theme.palette.divider
+        }
       }
     },
     fill: {
@@ -55,7 +60,17 @@ const CardWidgetsPerformance = () => {
     xaxis: {
       labels: {
         show: true,
-        style: { fontSize: '14px' }
+        style: {
+          fontSize: '14px',
+          colors: [
+            theme.palette.text.disabled,
+            theme.palette.text.disabled,
+            theme.palette.text.disabled,
+            theme.palette.text.disabled,
+            theme.palette.text.disabled,
+            theme.palette.text.disabled
+          ]
+        }
       }
     },
     yaxis: { show: false },
@@ -67,20 +82,13 @@ const CardWidgetsPerformance = () => {
       <CardHeader
         title='Performance'
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
-      <CardContent
-        sx={{
-          '& .apexcharts-canvas .apexcharts-datalabel': { fill: theme.palette.text.secondary },
-          '& .apexcharts-canvas .apexcharts-legend-series .apexcharts-legend-text': {
-            letterSpacing: '0.4px',
-            color: `${theme.palette.text.secondary} !important`
-          }
-        }}
-      >
+      <CardContent>
         <ReactApexcharts type='radar' height={294} series={series} options={options} />
       </CardContent>
     </Card>

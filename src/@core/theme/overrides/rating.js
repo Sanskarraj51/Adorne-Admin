@@ -1,13 +1,16 @@
-const Rating = theme => {
+const Rating = () => {
   return {
     MuiRating: {
       styleOverrides: {
-        root: {
-          color: theme.palette.warning.main
-        },
-        iconEmpty: {
+        root: ({ theme }) => ({
+          color: theme.palette.warning.main,
+          '& svg': {
+            flexShrink: 0
+          }
+        }),
+        iconEmpty: ({ theme }) => ({
           color: `rgba(${theme.palette.customColors.main}, 0.22)`
-        }
+        })
       }
     }
   }

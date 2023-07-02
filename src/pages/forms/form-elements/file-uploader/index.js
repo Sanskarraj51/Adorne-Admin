@@ -1,6 +1,9 @@
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
 // ** Custom Components Imports
@@ -18,6 +21,11 @@ import FileUploaderRestrictions from 'src/views/forms/form-elements/file-uploade
 // ** Source code imports
 import * as source from 'src/views/forms/form-elements/file-uploader/FileUploaderSourceCode'
 
+const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main
+}))
+
 const FileUploader = () => {
   return (
     <DropzoneWrapper>
@@ -25,9 +33,9 @@ const FileUploader = () => {
         <PageHeader
           title={
             <Typography variant='h5'>
-              <Link href='https://github.com/react-dropzone/react-dropzone/' target='_blank'>
+              <LinkStyled href='https://github.com/react-dropzone/react-dropzone/' target='_blank'>
                 React Dropzone
-              </Link>
+              </LinkStyled>
             </Typography>
           }
           subtitle={<Typography variant='body2'>Simple HTML5 drag-drop zone with React.js</Typography>}

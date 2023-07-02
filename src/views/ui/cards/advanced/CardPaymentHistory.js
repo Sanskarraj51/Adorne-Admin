@@ -8,12 +8,11 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import TableContainer from '@mui/material/TableContainer'
 
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const data = [
   {
@@ -91,9 +90,10 @@ const CardPaymentHistory = () => {
         title='Payment History'
         titleTypographyProps={{ sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' } }}
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
       <TableContainer>

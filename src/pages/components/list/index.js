@@ -6,9 +6,11 @@ import Typography from '@mui/material/Typography'
 import CardSnippet from 'src/@core/components/card-snippet'
 
 // ** Demo Components Imports
+import ListUsers from 'src/views/components/list/ListUsers'
 import ListDense from 'src/views/components/list/ListDense'
 import ListSimple from 'src/views/components/list/ListSimple'
 import ListNested from 'src/views/components/list/ListNested'
+import ListProgress from 'src/views/components/list/ListProgress'
 import ListSecondary from 'src/views/components/list/ListSecondary'
 import ListWithSwitch from 'src/views/components/list/ListWithSwitch'
 import ListItemSelected from 'src/views/components/list/ListItemSelected'
@@ -121,6 +123,28 @@ const Lists = () => {
             <code>&lt;ListSubheader&gt;</code> is by default sticky.
           </Typography>
           <ListStickySubheader />
+        </CardSnippet>
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <CardSnippet
+          title='Users List'
+          code={{
+            tsx: null,
+            jsx: source.ListUsersJSXCode
+          }}
+        >
+          <ListUsers />
+        </CardSnippet>
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <CardSnippet
+          title='Progress List'
+          code={{
+            tsx: null,
+            jsx: source.ListUsersJSXCode
+          }}
+        >
+          <ListProgress />
         </CardSnippet>
       </Grid>
     </Grid>

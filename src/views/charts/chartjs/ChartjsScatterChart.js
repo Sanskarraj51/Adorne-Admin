@@ -13,7 +13,7 @@ import { Scatter } from 'react-chartjs-2'
 
 const ChartjsScatterChart = props => {
   // ** Props
-  const { green, warning, primary, labelColor, borderColor, gridLineColor } = props
+  const { green, warning, primary, labelColor, borderColor, legendColor } = props
 
   // ** State
   const [active, setActive] = useState('daily')
@@ -34,9 +34,8 @@ const ChartjsScatterChart = props => {
         min: 0,
         max: 140,
         grid: {
-          borderColor,
           drawTicks: false,
-          color: gridLineColor
+          color: borderColor
         },
         ticks: {
           stepSize: 10,
@@ -47,9 +46,8 @@ const ChartjsScatterChart = props => {
         min: 0,
         max: 400,
         grid: {
-          borderColor,
           drawTicks: false,
-          color: gridLineColor
+          color: borderColor
         },
         ticks: {
           stepSize: 100,
@@ -64,7 +62,7 @@ const ChartjsScatterChart = props => {
         labels: {
           padding: 25,
           boxWidth: 9,
-          color: labelColor,
+          color: legendColor,
           usePointStyle: true
         }
       }
@@ -155,7 +153,6 @@ const ChartjsScatterChart = props => {
     <Card>
       <CardHeader
         title='New Product Data'
-        titleTypographyProps={{ variant: 'h6' }}
         sx={{
           flexDirection: ['column', 'row'],
           alignItems: ['flex-start', 'center'],
@@ -171,7 +168,7 @@ const ChartjsScatterChart = props => {
         }
       />
       <CardContent>
-        <Scatter data={data} options={options} height={400} />
+        <Scatter data={data} height={400} options={options} />
       </CardContent>
     </Card>
   )

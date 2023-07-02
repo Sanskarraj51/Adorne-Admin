@@ -1,4 +1,4 @@
-// ** MUI Import
+// ** MUI Imports
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
 import Switch from '@mui/material/Switch'
@@ -17,24 +17,8 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator'
 import TimelineConnector from '@mui/lab/TimelineConnector'
 import MuiTimeline from '@mui/lab/Timeline'
 
-// ** Icons Imports
-import Web from 'mdi-material-ui/Web'
-import Memory from 'mdi-material-ui/Memory'
-import Server from 'mdi-material-ui/Server'
-import Refresh from 'mdi-material-ui/Refresh'
-import Airplane from 'mdi-material-ui/Airplane'
-import Cpu64Bit from 'mdi-material-ui/Cpu64Bit'
-import MapMarker from 'mdi-material-ui/MapMarker'
-import ArrowRight from 'mdi-material-ui/ArrowRight'
-import LinkVariant from 'mdi-material-ui/LinkVariant'
-import CartOutline from 'mdi-material-ui/CartOutline'
-import ClockOutline from 'mdi-material-ui/ClockOutline'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
-import MessageOutline from 'mdi-material-ui/MessageOutline'
-import FileEditOutline from 'mdi-material-ui/FileEditOutline'
-import PhoneDialOutline from 'mdi-material-ui/PhoneDialOutline'
-import MapMarkerOutline from 'mdi-material-ui/MapMarkerOutline'
-import ShareVariantOutline from 'mdi-material-ui/ShareVariantOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomChip from 'src/@core/components/mui/chip'
@@ -71,11 +55,11 @@ const TimelineCenter = () => {
       <TimelineItem>
         <TimelineSeparator>
           <CustomTimelineDot skin='light' color='error'>
-            <Airplane fontSize='small' />
+            <Icon icon='mdi:airplane' fontSize={20} />
           </CustomTimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent>
+        <TimelineContent sx={{ '& svg': { verticalAlign: 'bottom', mx: 4 } }}>
           <Box sx={{ mb: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
             <Typography variant='body2' sx={{ mr: 2, fontWeight: 600, color: 'text.primary' }}>
               Get on the flight
@@ -83,8 +67,7 @@ const TimelineCenter = () => {
             <Typography variant='caption'>Wednesday</Typography>
           </Box>
           <Typography variant='body2' sx={{ color: 'text.primary' }}>
-            <span>Charles de Gaulle Airport, Paris</span>{' '}
-            <ArrowRight fontSize='small' sx={{ verticalAlign: 'bottom', mx: 4 }} />{' '}
+            <span>Charles de Gaulle Airport, Paris</span> <Icon icon='mdi:arrow-right' fontSize={20} />{' '}
             <span>Heathrow Airport, London</span>
           </Typography>
           <Typography variant='caption'>6:30 AM</Typography>
@@ -100,7 +83,7 @@ const TimelineCenter = () => {
       <TimelineItem>
         <TimelineSeparator>
           <CustomTimelineDot skin='light' color='primary'>
-            <ClockOutline fontSize='small' />
+            <Icon icon='mdi:clock-outline' fontSize={20} />
           </CustomTimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -114,7 +97,7 @@ const TimelineCenter = () => {
           <Typography variant='body2' sx={{ color: 'text.primary' }}>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus quos, voluptates voluptas rem.
           </Typography>
-          <Divider sx={{ my: 3 }} />
+          <Divider sx={{ my: theme => `${theme.spacing(3)} !important` }} />
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex' }}>
               <Avatar src='/images/avatars/2.png' sx={{ width: '2rem', height: '2rem', mr: 2 }} />
@@ -127,10 +110,10 @@ const TimelineCenter = () => {
             </Box>
             <div>
               <IconButton sx={{ color: 'text.secondary' }}>
-                <MessageOutline fontSize='small' />
+                <Icon icon='mdi:message-outline' fontSize={20} />
               </IconButton>
               <IconButton sx={{ color: 'text.secondary' }}>
-                <PhoneDialOutline fontSize='small' />
+                <Icon icon='mdi:phone-dial-outline' fontSize={20} />
               </IconButton>
             </div>
           </Box>
@@ -140,7 +123,7 @@ const TimelineCenter = () => {
       <TimelineItem>
         <TimelineSeparator>
           <CustomTimelineDot skin='light' color='warning'>
-            <CartOutline fontSize='small' />
+            <Icon icon='mdi:cart-outline' fontSize={20} />
           </CustomTimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -180,12 +163,12 @@ const TimelineCenter = () => {
               </Typography>
               <Typography variant='caption'>$375.00</Typography>
             </Box>
-            <Box>
+            <div>
               <Typography variant='subtitle2' sx={{ fontWeight: 600 }}>
                 Quantity
               </Typography>
               <Typography variant='caption'>1</Typography>
-            </Box>
+            </div>
           </Box>
         </TimelineContent>
       </TimelineItem>
@@ -193,7 +176,7 @@ const TimelineCenter = () => {
       <TimelineItem>
         <TimelineSeparator>
           <CustomTimelineDot skin='light' color='success'>
-            <FileEditOutline fontSize='small' />
+            <Icon icon='mdi:file-edit-outline' fontSize={20} />
           </CustomTimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -219,7 +202,7 @@ const TimelineCenter = () => {
       <TimelineItem>
         <TimelineSeparator>
           <CustomTimelineDot skin='light' color='error'>
-            <Server fontSize='small' />
+            <Icon icon='mdi:server' fontSize={20} />
           </CustomTimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -233,21 +216,21 @@ const TimelineCenter = () => {
           <List dense>
             <ListItem>
               <ListItemIcon>
-                <Web />
+                <Icon icon='mdi:web' />
               </ListItemIcon>
               <ListItemText primary='IP Address' />
               <span>192.654.8.566</span>
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <Cpu64Bit />
+                <Icon icon='mdi:cpu-64-bit' />
               </ListItemIcon>
               <ListItemText primary='CPU' />
               <span>4 Cores</span>
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <Memory />
+                <Icon icon='mdi:memory' />
               </ListItemIcon>
               <ListItemText primary='Memory' />
               <span>2 GB</span>
@@ -257,10 +240,10 @@ const TimelineCenter = () => {
           <Box sx={{ ml: 4, display: 'flex', justifyContent: 'space-between' }}>
             <div>
               <IconButton sx={{ color: 'text.primary' }}>
-                <ShareVariantOutline fontSize='small' />
+                <Icon icon='mdi:share-variant-outline' fontSize={20} />
               </IconButton>
               <IconButton sx={{ color: 'text.primary' }}>
-                <Refresh fontSize='small' />
+                <Icon icon='mdi:refresh' fontSize={20} />
               </IconButton>
             </div>
             <Switch sx={{ mr: 2 }} />
@@ -271,14 +254,19 @@ const TimelineCenter = () => {
       <TimelineItem>
         <TimelineSeparator>
           <CustomTimelineDot skin='light' color='success'>
-            <MapMarkerOutline fontSize='small' />
+            <Icon icon='mdi:map-marker-outline' fontSize={20} />
           </CustomTimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
           <Box sx={{ mb: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Typography variant='body2' sx={{ mr: 2, fontWeight: 600, color: 'text.primary' }}>
-              <MapMarker sx={{ verticalAlign: 'bottom', mr: 2 }} fontSize='small' />
+            <Typography
+              variant='body2'
+              sx={{ mr: 2, fontWeight: 600, color: 'text.primary', display: 'flex', alignItems: 'center' }}
+            >
+              <Box component='span' sx={{ display: 'inline-flex', '& svg': { verticalAlign: 'bottom', mr: 2 } }}>
+                <Icon icon='mdi:map-marker' fontSize={20} />
+              </Box>
               <span>Location</span>
             </Typography>
             <CustomChip size='small' label='High' skin='light' color='error' />
@@ -289,17 +277,17 @@ const TimelineCenter = () => {
           <Typography variant='body2' sx={{ color: 'text.primary' }}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, quidem?
           </Typography>
-          <Divider sx={{ my: 3 }} />
+          <Divider sx={{ my: theme => `${theme.spacing(3)} !important` }} />
           <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between' }}>
             <Box sx={{ mr: 2, display: 'flex', alignItems: 'center' }}>
               <IconButton sx={{ color: 'text.primary' }}>
-                <LinkVariant fontSize='small' />
+                <Icon icon='mdi:link-variant' fontSize={20} />
               </IconButton>
               <IconButton sx={{ color: 'text.primary' }}>
-                <MessageOutline fontSize='small' />
+                <Icon icon='mdi:message-outline' fontSize={20} />
               </IconButton>
               <IconButton sx={{ color: 'text.primary' }}>
-                <AccountOutline fontSize='small' />
+                <Icon icon='mdi:account-outline' fontSize={20} />
               </IconButton>
             </Box>
             <Typography variant='subtitle2' sx={{ fontWeight: 600 }}>

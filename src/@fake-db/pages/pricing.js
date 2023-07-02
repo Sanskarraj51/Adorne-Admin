@@ -69,23 +69,103 @@ const data = {
   ],
   faq: [
     {
-      id: 'general-settings',
-      question: 'General settings',
+      id: 'responses-limit',
+      question: 'What counts towards the 100 responses limit?',
       answer:
-        'Sesame snaps tart bonbon tiramisu jelly beans lemon drops bear claw candy gummi bears. Caramels pudding sweet donut tootsie roll gummies macaroon. Lemon drops caramels sesame snaps dessert jujubes. Cupcake chocolate bonbon cake tiramisu. Gummies candy canes ice cream biscuit. Jelly gummies wafer danish chupa chups sugar plum cookie.'
+        'We count all responses submitted through all your forms in a month. If you already received 100 responses this month, you won’t be able to receive any more of them until next month when the counter resets.'
     },
     {
-      id: 'users',
-      question: 'Users',
+      id: 'process-payments',
+      question: 'How do you process payments?',
       answer:
-        'Chocolate sweet roll lemon drops chocolate cake candy canes halvah. Donut fruitcake sweet roll brownie carrot cake cake. Donut jujubes pudding candy macaroon. Gummies gingerbread croissant bonbon. Cookie toffee cupcake cotton candy candy canes dessert cotton candy liquorice. Jelly beans gummi bears toffee chocolate bar chocolate cake.'
+        'We accept Visa®, MasterCard®, American Express®, and PayPal®. So you can be confident that your credit card information will be kept safe and secure.'
     },
     {
-      id: 'advanced-settings',
-      question: 'Advanced settings',
-      answer:
-        'Halvah liquorice pastry marshmallow sugar plum. Dessert chocolate pastry gummi bears pastry. Gingerbread bonbon pudding oat cake jujubes pie wafer tart brownie. Soufflé jujubes icing powder liquorice. Sweet donut toffee liquorice dessert dragée. Topping cake danish chupa chups chupa chups gummies. Cotton candy gummies chocolate cake oat cake.'
+      id: 'payment-methods',
+      question: 'What payment methods do you accept?',
+      answer: '2Checkout accepts all types of credit and debit cards.'
+    },
+    {
+      id: 'money-back-guarantee',
+      question: 'Do you have a money-back guarantee?',
+      answer: 'Yes. You may request a refund within 30 days of your purchase without any additional explanations.'
+    },
+    {
+      id: 'more-questions',
+      question: 'I have more questions. Where can I get help?',
+      answer: 'Please contact us if you have any other questions or concerns. We’re here to help!'
     }
-  ]
+  ],
+  pricingTable: {
+    header: [
+      {
+        title: 'Features',
+        subtitle: 'Native Front Features'
+      },
+      {
+        title: 'Starter',
+        subtitle: 'Free'
+      },
+      {
+        isPro: true,
+        title: 'Pro',
+        subtitle: '$7.5/month'
+      },
+      {
+        title: 'Enterprise',
+        subtitle: '$16/month'
+      }
+    ],
+    rows: [
+      {
+        pro: true,
+        starter: true,
+        enterprise: true,
+        feature: '14-days free trial'
+      },
+      {
+        pro: false,
+        starter: false,
+        enterprise: true,
+        feature: 'No user limit'
+      },
+      {
+        pro: true,
+        starter: false,
+        enterprise: true,
+        feature: 'Product Support'
+      },
+      {
+        starter: false,
+        enterprise: true,
+        pro: 'Add-On Available',
+        feature: 'Email Support'
+      },
+      {
+        pro: true,
+        starter: false,
+        enterprise: true,
+        feature: 'Integrations'
+      },
+      {
+        starter: false,
+        enterprise: true,
+        pro: 'Add-On Available',
+        feature: 'Removal of Front branding'
+      },
+      {
+        pro: false,
+        starter: false,
+        enterprise: true,
+        feature: 'Active maintenance & support'
+      },
+      {
+        pro: false,
+        starter: false,
+        enterprise: true,
+        feature: 'Data storage for 365 days'
+      }
+    ]
+  }
 }
 mock.onGet('/pages/pricing').reply(() => [200, data])

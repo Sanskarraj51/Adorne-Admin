@@ -49,7 +49,7 @@ const SwiperThumbnails = ({ direction }) => {
       rtl: direction === 'rtl',
       slides: {
         perView: 4,
-        spacing: 8
+        spacing: 16
       },
       breakpoints: {
         [`(max-width: ${theme.breakpoints.values.sm}px)`]: {
@@ -66,37 +66,37 @@ const SwiperThumbnails = ({ direction }) => {
   return (
     <>
       <Box ref={sliderRef} className='keen-slider'>
-        <Box className='keen-slider__slide'>
+        <Box sx={{ display: 'flex' }} className='keen-slider__slide'>
           <img src='/images/banners/banner-1.jpg' alt='swiper 1' />
         </Box>
-        <Box className='keen-slider__slide'>
+        <Box sx={{ display: 'flex' }} className='keen-slider__slide'>
           <img src='/images/banners/banner-2.jpg' alt='swiper 2' />
         </Box>
-        <Box className='keen-slider__slide'>
+        <Box sx={{ display: 'flex' }} className='keen-slider__slide'>
           <img src='/images/banners/banner-3.jpg' alt='swiper 3' />
         </Box>
-        <Box className='keen-slider__slide'>
+        <Box sx={{ display: 'flex' }} className='keen-slider__slide'>
           <img src='/images/banners/banner-4.jpg' alt='swiper 4' />
         </Box>
-        <Box className='keen-slider__slide'>
+        <Box sx={{ display: 'flex' }} className='keen-slider__slide'>
           <img src='/images/banners/banner-5.jpg' alt='swiper 5' />
         </Box>
       </Box>
 
-      <Box sx={{ mt: 2 }} ref={thumbnailRef} className='keen-slider thumbnail'>
-        <Box className='keen-slider__slide'>
+      <Box sx={{ mt: 4 }} ref={thumbnailRef} className='keen-slider thumbnail'>
+        <Box className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
           <img src='/images/banners/banner-1.jpg' alt='swiper 1' />
         </Box>
-        <Box className='keen-slider__slide'>
+        <Box className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
           <img src='/images/banners/banner-2.jpg' alt='swiper 2' />
         </Box>
-        <Box className='keen-slider__slide'>
+        <Box className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
           <img src='/images/banners/banner-3.jpg' alt='swiper 3' />
         </Box>
-        <Box className='keen-slider__slide'>
+        <Box className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
           <img src='/images/banners/banner-4.jpg' alt='swiper 4' />
         </Box>
-        <Box className='keen-slider__slide'>
+        <Box className='keen-slider__slide' sx={{ display: 'flex', cursor: 'pointer' }}>
           <img src='/images/banners/banner-5.jpg' alt='swiper 5' />
         </Box>
       </Box>

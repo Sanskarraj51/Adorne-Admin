@@ -1,15 +1,15 @@
-const Tabs = theme => {
+const Tabs = () => {
   return {
     MuiTabs: {
       styleOverrides: {
-        vertical: {
+        vertical: ({ theme }) => ({
           minWidth: 130,
           marginRight: theme.spacing(4),
           borderRight: `1px solid ${theme.palette.divider}`,
           '& .MuiTab-root': {
             minWidth: 130
           }
-        }
+        })
       }
     },
     MuiTab: {
@@ -17,11 +17,11 @@ const Tabs = theme => {
         root: {
           lineHeight: 1.5
         },
-        textColorSecondary: {
+        textColorSecondary: ({ theme }) => ({
           '&.Mui-selected': {
             color: theme.palette.text.secondary
           }
-        }
+        })
       }
     }
   }

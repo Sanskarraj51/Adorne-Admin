@@ -7,6 +7,7 @@ import themeConfig from 'src/configs/themeConfig'
 const initialSettings = {
   themeColor: 'primary',
   mode: themeConfig.mode,
+  skin: themeConfig.skin,
   footer: themeConfig.footer,
   layout: themeConfig.layout,
   lastLayout: themeConfig.layout,
@@ -17,7 +18,6 @@ const initialSettings = {
   contentWidth: themeConfig.contentWidth,
   toastPosition: themeConfig.toastPosition,
   verticalNavToggleType: themeConfig.verticalNavToggleType,
-  skin: themeConfig.layout === 'horizontal' && themeConfig.skin === 'semi-dark' ? 'default' : themeConfig.skin,
   appBar: themeConfig.layout === 'horizontal' && themeConfig.appBar === 'hidden' ? 'fixed' : themeConfig.appBar
 }
 
@@ -78,8 +78,8 @@ export const SettingsProvider = ({ children, pageSettings }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageSettings])
   useEffect(() => {
-    if (settings.layout === 'horizontal' && settings.skin === 'semi-dark') {
-      saveSettings({ ...settings, skin: 'default' })
+    if (settings.layout === 'horizontal' && settings.mode === 'semi-dark') {
+      saveSettings({ ...settings, mode: 'light' })
     }
     if (settings.layout === 'horizontal' && settings.appBar === 'hidden') {
       saveSettings({ ...settings, appBar: 'fixed' })

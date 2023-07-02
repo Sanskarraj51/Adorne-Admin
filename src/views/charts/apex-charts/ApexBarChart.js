@@ -4,6 +4,7 @@ import { forwardRef, useState } from 'react'
 // ** MUI Imports
 import Card from '@mui/material/Card'
 import TextField from '@mui/material/TextField'
+import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import InputAdornment from '@mui/material/InputAdornment'
@@ -12,9 +13,8 @@ import InputAdornment from '@mui/material/InputAdornment'
 import format from 'date-fns/format'
 import DatePicker from 'react-datepicker'
 
-// ** Icons Imports
-import BellOutline from 'mdi-material-ui/BellOutline'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Component Import
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
@@ -22,15 +22,18 @@ import ReactApexcharts from 'src/@core/components/react-apexcharts'
 const ApexBarChart = () => {
   // ** States
   const [endDate, setEndDate] = useState(null)
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(null)
+
+  // ** Hook
+  const theme = useTheme()
 
   const options = {
     chart: {
       parentHeightOffset: 0,
-      toolbar: {
-        show: false
-      }
+      toolbar: { show: false }
     },
+    colors: ['#00cfe8'],
+    dataLabels: { enabled: false },
     plotOptions: {
       bar: {
         borderRadius: 8,
@@ -40,32 +43,31 @@ const ApexBarChart = () => {
       }
     },
     grid: {
+      borderColor: theme.palette.divider,
       xaxis: {
-        lines: {
-          show: false
-        }
+        lines: { show: false }
       },
       padding: {
         top: -10
       }
     },
-    colors: ['#00cfe8'],
-    dataLabels: {
-      enabled: false
+    yaxis: {
+      labels: {
+        style: { colors: theme.palette.text.disabled }
+      }
     },
     xaxis: {
-      categories: ['MON, 11', 'THU, 14', 'FRI, 15', 'MON, 18', 'WED, 20', 'FRI, 21', 'MON, 23']
+      axisBorder: { show: false },
+      axisTicks: { color: theme.palette.divider },
+      categories: ['MON, 11', 'THU, 14', 'FRI, 15', 'MON, 18', 'WED, 20', 'FRI, 21', 'MON, 23'],
+      labels: {
+        style: { colors: theme.palette.text.disabled }
+      }
     }
   }
 
-  const series = [
-    {
-      data: [700, 350, 480, 600, 210, 550, 150]
-    }
-  ]
-
   const CustomInput = forwardRef((props, ref) => {
-    const startDate = format(props.start, 'MM/dd/yyyy')
+    const startDate = props.start !== null ? format(props.start, 'MM/dd/yyyy') : ''
     const endDate = props.end !== null ? ` - ${format(props.end, 'MM/dd/yyyy')}` : null
     const value = `${startDate}${endDate !== null ? endDate : ''}`
 
@@ -78,12 +80,12 @@ const ApexBarChart = () => {
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
-              <BellOutline />
+              <Icon icon='mdi:bell-outline' />
             </InputAdornment>
           ),
           endAdornment: (
             <InputAdornment position='end'>
-              <ChevronDown />
+              <Icon icon='mdi:chevron-down' />
             </InputAdornment>
           )
         }}
@@ -102,8 +104,6 @@ const ApexBarChart = () => {
       <CardHeader
         title='Data Science'
         subheader='$74,382.72'
-        titleTypographyProps={{ variant: 'h6' }}
-        subheaderTypographyProps={{ variant: 'caption' }}
         sx={{
           flexDirection: ['column', 'row'],
           alignItems: ['flex-start', 'center'],
@@ -124,7 +124,12 @@ const ApexBarChart = () => {
         }
       />
       <CardContent>
-        <ReactApexcharts options={options} series={series} type='bar' height={400} />
+        <ReactApexcharts
+          type='bar'
+          height={400}
+          options={options}
+          series={[{ data: [700, 350, 480, 600, 210, 550, 150] }]}
+        />
       </CardContent>
     </Card>
   )

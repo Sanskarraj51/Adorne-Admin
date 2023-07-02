@@ -19,15 +19,11 @@ import DialogContent from '@mui/material/DialogContent'
 import InputAdornment from '@mui/material/InputAdornment'
 import IconButton from '@mui/material/IconButton'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import Twitter from 'mdi-material-ui/Twitter'
-import Facebook from 'mdi-material-ui/Facebook'
-import Linkedin from 'mdi-material-ui/Linkedin'
-import GiftOutline from 'mdi-material-ui/GiftOutline'
-import LicenseIcon from 'mdi-material-ui/LicenseIcon'
-import MessageOutline from 'mdi-material-ui/MessageOutline'
-import ClipboardOutline from 'mdi-material-ui/ClipboardOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
+
+// ** Config Import
+import themeConfig from 'src/configs/themeConfig'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
@@ -67,8 +63,8 @@ const DialogReferEarn = () => {
 
   return (
     <Card>
-      <CardContent sx={{ textAlign: 'center' }}>
-        <GiftOutline sx={{ mb: 2, fontSize: '2rem' }} />
+      <CardContent sx={{ textAlign: 'center', '& svg': { mb: 2 } }}>
+        <Icon icon='mdi:gift-outline' fontSize='2rem' />
         <Typography variant='h6' sx={{ mb: 4 }}>
           Refer & Earn
         </Typography>
@@ -88,13 +84,20 @@ const DialogReferEarn = () => {
         TransitionComponent={Transition}
         onBackdropClick={() => setShow(false)}
       >
-        <DialogContent sx={{ pb: 10, px: [8, 15], pt: [8, 12.5], position: 'relative' }}>
+        <DialogContent
+          sx={{
+            position: 'relative',
+            pb: theme => `${theme.spacing(8)} !important`,
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            pt: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <IconButton
             size='small'
             onClick={() => setShow(false)}
             sx={{ position: 'absolute', right: '1rem', top: '1rem' }}
           >
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
           <Box sx={{ mb: 10, textAlign: 'center' }}>
             <Typography variant='h5' sx={{ mb: 3, lineHeight: '2rem' }}>
@@ -107,8 +110,12 @@ const DialogReferEarn = () => {
           <Grid container spacing={6} sx={{ textAlign: 'center' }}>
             <Grid item sm={4} xs={12}>
               <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <CustomAvatar skin='light' color='primary' sx={{ mb: 2.5, width: [70, 100], height: [70, 100] }}>
-                  <MessageOutline sx={{ fontSize: ['2.2rem', '2.5rem'] }} />
+                <CustomAvatar
+                  skin='light'
+                  color='primary'
+                  sx={{ mb: 2.5, width: [70, 100], height: [70, 100], '& svg': { fontSize: ['2.2rem', '2.5rem'] } }}
+                >
+                  <Icon icon='mdi:message-outline' />
                 </CustomAvatar>
                 <Typography sx={{ mb: 3, fontWeight: '600' }}>Send Invitation 👍🏻</Typography>
                 <Typography variant='body2' sx={{ textAlign: 'center', maxWidth: '200px' }}>
@@ -118,8 +125,12 @@ const DialogReferEarn = () => {
             </Grid>
             <Grid item sm={4} xs={12}>
               <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <CustomAvatar skin='light' color='primary' sx={{ mb: 2.5, width: [70, 100], height: [70, 100] }}>
-                  <ClipboardOutline sx={{ fontSize: ['2.2rem', '2.5rem'] }} />
+                <CustomAvatar
+                  skin='light'
+                  color='primary'
+                  sx={{ mb: 2.5, width: [70, 100], height: [70, 100], '& svg': { fontSize: ['2.2rem', '2.5rem'] } }}
+                >
+                  <Icon icon='mdi:clipboard-outline' />
                 </CustomAvatar>
                 <Typography sx={{ mb: 3, fontWeight: '600' }}>Registration 😎</Typography>
                 <Typography variant='body2' sx={{ textAlign: 'center', maxWidth: '200px' }}>
@@ -129,8 +140,12 @@ const DialogReferEarn = () => {
             </Grid>
             <Grid item sm={4} xs={12}>
               <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <CustomAvatar skin='light' color='primary' sx={{ mb: 2.5, width: [70, 100], height: [70, 100] }}>
-                  <LicenseIcon sx={{ fontSize: ['2.2rem', '2.5rem'] }} />
+                <CustomAvatar
+                  skin='light'
+                  color='primary'
+                  sx={{ mb: 2.5, width: [70, 100], height: [70, 100], '& svg': { fontSize: ['2.2rem', '2.5rem'] } }}
+                >
+                  <Icon icon='mdi:license' />
                 </CustomAvatar>
                 <Typography sx={{ mb: 3, fontWeight: '600' }}>Free Trial 🎉</Typography>
                 <Typography variant='body2' sx={{ textAlign: 'center', maxWidth: '200px' }}>
@@ -140,8 +155,15 @@ const DialogReferEarn = () => {
             </Grid>
           </Grid>
         </DialogContent>
-        <Divider sx={{ m: 0 }} />
-        <DialogContent sx={{ pt: 7.5, px: [8, 15], pb: [8, 12.5], position: 'relative' }}>
+        <Divider sx={{ my: '0 !important' }} />
+        <DialogContent
+          sx={{
+            position: 'relative',
+            pt: theme => `${theme.spacing(8)} !important`,
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            pb: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <Box sx={{ mb: 8 }}>
             <Typography variant='h6' sx={{ mb: 4, lineHeight: '2rem' }}>
               Invite your friends
@@ -156,7 +178,7 @@ const DialogReferEarn = () => {
                 whiteSpace: 'break-spaces'
               }}
             >
-              Enter your friend’s email address and invite them to join Materialize 😍
+              {`Enter your friend’s email address and invite them to join ${themeConfig.templateName} 😍`}
             </InputLabel>
             <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', flexWrap: { xs: 'wrap', sm: 'nowrap' } }}>
               <TextField
@@ -171,7 +193,7 @@ const DialogReferEarn = () => {
               </Button>
             </Box>
           </Box>
-          <Box>
+          <div>
             <Typography variant='h6' sx={{ mb: 4, lineHeight: '2rem' }}>
               Share the referral link
             </Typography>
@@ -209,17 +231,17 @@ const DialogReferEarn = () => {
               />
               <Box sx={{ mt: [2, 0], display: 'flex', alignItems: 'center' }}>
                 <FacebookBtn>
-                  <Facebook />
+                  <Icon icon='mdi:facebook' />
                 </FacebookBtn>
                 <TwitterBtn>
-                  <Twitter />
+                  <Icon icon='mdi:twitter' />
                 </TwitterBtn>
                 <LinkedInBtn>
-                  <Linkedin />
+                  <Icon icon='mdi:linkedin' />
                 </LinkedInBtn>
               </Box>
             </Box>
-          </Box>
+          </div>
         </DialogContent>
       </Dialog>
     </Card>

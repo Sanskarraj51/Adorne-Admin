@@ -1,5 +1,5 @@
-const Menu = (theme, skin) => {
-  const boxShadow = () => {
+const Menu = skin => {
+  const boxShadow = theme => {
     if (skin === 'bordered') {
       return theme.shadows[0]
     } else if (theme.palette.mode === 'light') {
@@ -10,13 +10,13 @@ const Menu = (theme, skin) => {
   return {
     MuiMenu: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           '& .MuiMenu-paper': {
             borderRadius: 5,
-            boxShadow: boxShadow(),
+            boxShadow: boxShadow(theme),
             ...(skin === 'bordered' && { border: `1px solid ${theme.palette.divider}` })
           }
-        }
+        })
       }
     }
   }

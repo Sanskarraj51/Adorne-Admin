@@ -22,9 +22,8 @@ import Select from '@mui/material/Select'
 // ** Third Party Imports
 import DatePicker from 'react-datepicker'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
@@ -51,10 +50,6 @@ const FormLayoutsSeparator = () => {
     setValues({ ...values, showPassword: !values.showPassword })
   }
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
-  }
-
   // Handle Confirm Password
   const handleConfirmChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -64,10 +59,6 @@ const FormLayoutsSeparator = () => {
     setValues({ ...values, showPassword2: !values.showPassword2 })
   }
 
-  const handleMouseDownConfirmPassword = event => {
-    event.preventDefault()
-  }
-
   // Handle Select
   const handleSelectChange = event => {
     setLanguage(event.target.value)
@@ -75,8 +66,8 @@ const FormLayoutsSeparator = () => {
 
   return (
     <Card>
-      <CardHeader title='Multi Column with Form Separator' titleTypographyProps={{ variant: 'h6' }} />
-      <Divider sx={{ m: 0 }} />
+      <CardHeader title='Multi Column with Form Separator' />
+      <Divider sx={{ m: '0 !important' }} />
       <form onSubmit={e => e.preventDefault()}>
         <CardContent>
           <Grid container spacing={5}>
@@ -105,10 +96,10 @@ const FormLayoutsSeparator = () => {
                       <IconButton
                         edge='end'
                         onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
+                        onMouseDown={e => e.preventDefault()}
                         aria-label='toggle password visibility'
                       >
-                        {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                        <Icon icon={values.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                       </IconButton>
                     </InputAdornment>
                   }
@@ -128,11 +119,11 @@ const FormLayoutsSeparator = () => {
                     <InputAdornment position='end'>
                       <IconButton
                         edge='end'
+                        onMouseDown={e => e.preventDefault()}
                         aria-label='toggle password visibility'
                         onClick={handleClickShowConfirmPassword}
-                        onMouseDown={handleMouseDownConfirmPassword}
                       >
-                        {values.showPassword2 ? <EyeOutline /> : <EyeOffOutline />}
+                        <Icon icon={values.showPassword2 ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                       </IconButton>
                     </InputAdornment>
                   }
@@ -140,7 +131,7 @@ const FormLayoutsSeparator = () => {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <Divider sx={{ mb: 0 }} />
+              <Divider sx={{ mb: '0 !important' }} />
             </Grid>
             <Grid item xs={12}>
               <Typography variant='body2' sx={{ fontWeight: 600 }}>
@@ -206,13 +197,13 @@ const FormLayoutsSeparator = () => {
             </Grid>
           </Grid>
         </CardContent>
-        <Divider sx={{ m: 0 }} />
+        <Divider sx={{ m: '0 !important' }} />
         <CardActions>
           <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
             Submit
           </Button>
-          <Button size='large' color='secondary' variant='outlined'>
-            Cancel
+          <Button type='reset' size='large' color='secondary' variant='outlined'>
+            Reset
           </Button>
         </CardActions>
       </form>

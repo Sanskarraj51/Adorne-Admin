@@ -13,17 +13,16 @@ import format from 'date-fns/format'
 import { Bar } from 'react-chartjs-2'
 import DatePicker from 'react-datepicker'
 
-// ** Icons Imports
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import CalendarOutline from 'mdi-material-ui/CalendarOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ChartjsBarChart = props => {
   // ** Props
-  const { yellow, labelColor, borderColor, gridLineColor } = props
+  const { yellow, labelColor, borderColor } = props
 
   // ** States
   const [endDate, setEndDate] = useState(null)
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(null)
 
   const options = {
     responsive: true,
@@ -32,8 +31,7 @@ const ChartjsBarChart = props => {
     scales: {
       x: {
         grid: {
-          borderColor,
-          color: gridLineColor
+          color: borderColor
         },
         ticks: { color: labelColor }
       },
@@ -41,8 +39,7 @@ const ChartjsBarChart = props => {
         min: 0,
         max: 400,
         grid: {
-          borderColor,
-          color: gridLineColor
+          color: borderColor
         },
         ticks: {
           stepSize: 100,
@@ -83,7 +80,7 @@ const ChartjsBarChart = props => {
   }
 
   const CustomInput = forwardRef(({ ...props }, ref) => {
-    const startDate = format(props.start, 'MM/dd/yyyy')
+    const startDate = props.start !== null ? format(props.start, 'MM/dd/yyyy') : ''
     const endDate = props.end !== null ? ` - ${format(props.end, 'MM/dd/yyyy')}` : null
     const value = `${startDate}${endDate !== null ? endDate : ''}`
 
@@ -96,12 +93,12 @@ const ChartjsBarChart = props => {
         InputProps={{
           startAdornment: (
             <InputAdornment position='start'>
-              <CalendarOutline />
+              <Icon icon='mdi:calendar-outline' />
             </InputAdornment>
           ),
           endAdornment: (
             <InputAdornment position='end'>
-              <ChevronDown />
+              <Icon icon='mdi:chevron-down' />
             </InputAdornment>
           )
         }}
@@ -119,7 +116,6 @@ const ChartjsBarChart = props => {
     <Card>
       <CardHeader
         title='Latest Statistics'
-        titleTypographyProps={{ variant: 'h6' }}
         sx={{
           flexDirection: ['column', 'row'],
           alignItems: ['flex-start', 'center'],
@@ -140,7 +136,7 @@ const ChartjsBarChart = props => {
         }
       />
       <CardContent>
-        <Bar data={data} options={options} height={400} />
+        <Bar data={data} height={400} options={options} />
       </CardContent>
     </Card>
   )

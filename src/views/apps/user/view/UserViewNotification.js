@@ -17,9 +17,9 @@ import TableContainer from '@mui/material/TableContainer'
 const UserViewNotification = () => {
   return (
     <Card>
-      <CardHeader title='Notifications' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Notifications' />
 
-      <Divider sx={{ m: 0 }} />
+      <Divider sx={{ m: '0 !important' }} />
 
       <CardContent>
         <Typography variant='body2' sx={{ fontWeight: 600, color: 'text.primary' }}>
@@ -27,7 +27,7 @@ const UserViewNotification = () => {
         </Typography>
       </CardContent>
 
-      <Divider sx={{ m: 0 }} />
+      <Divider sx={{ m: '0 !important' }} />
 
       <TableContainer>
         <Table sx={{ minWidth: 500 }}>

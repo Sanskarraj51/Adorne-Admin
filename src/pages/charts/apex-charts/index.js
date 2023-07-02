@@ -1,6 +1,9 @@
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
 // ** Custom Components Imports
@@ -22,8 +25,10 @@ import ApexHeatmapChart from 'src/views/charts/apex-charts/ApexHeatmapChart'
 import ApexRadialBarChart from 'src/views/charts/apex-charts/ApexRadialBarChart'
 import ApexCandlestickChart from 'src/views/charts/apex-charts/ApexCandlestickChart'
 
-// ** Third Party Styles Imports
-import 'react-datepicker/dist/react-datepicker.css'
+const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main
+}))
 
 const ApexCharts = () => {
   return (
@@ -33,9 +38,9 @@ const ApexCharts = () => {
           <PageHeader
             title={
               <Typography variant='h5'>
-                <Link href='https://github.com/apexcharts/react-apexcharts' target='_blank'>
+                <LinkStyled href='https://github.com/apexcharts/react-apexcharts' target='_blank'>
                   React ApexCharts
-                </Link>
+                </LinkStyled>
               </Typography>
             }
             subtitle={<Typography variant='body2'>React Component for ApexCharts</Typography>}

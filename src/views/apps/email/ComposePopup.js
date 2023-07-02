@@ -18,18 +18,14 @@ import InputLabel from '@mui/material/InputLabel'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete'
 
-// ** Icons Imports
-import Minus from 'mdi-material-ui/Minus'
-import Close from 'mdi-material-ui/Close'
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import Attachment from 'mdi-material-ui/Attachment'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import DeleteOutline from 'mdi-material-ui/DeleteOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Components
 import { EditorState } from 'draft-js'
 
 // ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 import CustomAvatar from 'src/@core/components/mui/avatar'
 import ReactDraftWysiwyg from 'src/@core/components/react-draft-wysiwyg'
 
@@ -86,7 +82,6 @@ const ComposePopup = props => {
   const [subjectValue, setSubjectValue] = useState('')
   const [bccValue, setbccValue] = useState([])
   const [sendBtnOpen, setSendBtnOpen] = useState(false)
-  const [moreBtnOpen, setMoreBtnOpen] = useState(null)
   const [messageValue, setMessageValue] = useState(EditorState.createEmpty())
 
   const [visibility, setVisibility] = useState({
@@ -96,9 +91,6 @@ const ComposePopup = props => {
 
   // ** Ref
   const anchorRefSendBtn = useRef(null)
-
-  // ** vars
-  const moreBtnOpenRef = Boolean(moreBtnOpen)
   const toggleVisibility = value => setVisibility({ ...visibility, [value]: !visibility[value] })
 
   const handleSendMenuItemClick = () => {
@@ -107,14 +99,6 @@ const ComposePopup = props => {
 
   const handleSendBtnToggle = () => {
     setSendBtnOpen(prevOpen => !prevOpen)
-  }
-
-  const handleMoreBtnClick = event => {
-    setMoreBtnOpen(event.currentTarget)
-  }
-
-  const handleMoreBtnClose = () => {
-    setMoreBtnOpen(null)
   }
 
   const handleMailDelete = (value, state, setState) => {
@@ -148,18 +132,16 @@ const ComposePopup = props => {
   }
 
   const renderCustomChips = (array, getTagProps, state, setState) => {
-    return array.map((item, index) => {
-      return (
-        <Chip
-          size='small'
-          key={item.value}
-          label={item.name}
-          deleteIcon={<Close />}
-          {...getTagProps({ index })}
-          onDelete={() => handleMailDelete(item.value, state, setState)}
-        />
-      )
-    })
+    return array.map((item, index) => (
+      <Chip
+        size='small'
+        key={item.value}
+        label={item.name}
+        {...getTagProps({ index })}
+        deleteIcon={<Icon icon='mdi:close' />}
+        onDelete={() => handleMailDelete(item.value, state, setState)}
+      />
+    ))
   }
 
   const renderListItem = (props, option, array, setState) => {
@@ -229,10 +211,10 @@ const ComposePopup = props => {
         <Typography sx={{ fontWeight: 600, color: 'text.secondary' }}>Compose Mail</Typography>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <IconButton sx={{ p: 1, mr: 2, color: 'action.active' }} onClick={handleMinimize}>
-            <Minus fontSize='small' />
+            <Icon icon='mdi:minus' fontSize={20} />
           </IconButton>
           <IconButton sx={{ p: 1, color: 'action.active' }} onClick={handlePopupClose}>
-            <Close fontSize='small' />
+            <Icon icon='mdi:close' fontSize={20} />
           </IconButton>
         </Box>
       </Box>
@@ -247,11 +229,11 @@ const ComposePopup = props => {
         }}
       >
         <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
-          <Box>
+          <div>
             <InputLabel sx={{ mr: 3, color: 'text.disabled' }} htmlFor='email-to-select'>
               To:
             </InputLabel>
-          </Box>
+          </div>
           <Autocomplete
             multiple
             freeSolo
@@ -305,11 +287,11 @@ const ComposePopup = props => {
             borderBottom: theme => `1px solid ${theme.palette.divider}`
           }}
         >
-          <Box>
+          <div>
             <InputLabel sx={{ mr: 3, color: 'text.disabled' }} htmlFor='email-cc-select'>
               Cc:
             </InputLabel>
-          </Box>
+          </div>
           <TextField
             fullWidth
             size='small'
@@ -331,11 +313,11 @@ const ComposePopup = props => {
             borderBottom: theme => `1px solid ${theme.palette.divider}`
           }}
         >
-          <Box>
+          <div>
             <InputLabel sx={{ mr: 3, color: 'text.disabled' }} htmlFor='email-bcc-select'>
               Bcc:
             </InputLabel>
-          </Box>
+          </div>
           <TextField
             fullWidth
             size='small'
@@ -356,11 +338,11 @@ const ComposePopup = props => {
           borderBottom: theme => `1px solid ${theme.palette.divider}`
         }}
       >
-        <Box>
+        <div>
           <InputLabel sx={{ mr: 3, color: 'text.disabled' }} htmlFor='email-subject-input'>
             Subject:
           </InputLabel>
-        </Box>
+        </div>
         <Input
           fullWidth
           value={subjectValue}
@@ -423,7 +405,7 @@ const ComposePopup = props => {
               aria-expanded={sendBtnOpen ? 'true' : undefined}
               aria-controls={sendBtnOpen ? 'email-send-menu' : undefined}
             >
-              <ChevronUp sx={{ fontSize: '1.25rem' }} />
+              <Icon icon='mdi:chevron-up' fontSize='1.25rem' />
             </Button>
           </ButtonGroup>
           <Menu
@@ -445,39 +427,21 @@ const ComposePopup = props => {
             <MenuItem onClick={handleSendMenuItemClick}>Save as Draft</MenuItem>
           </Menu>
           <IconButton size='small' sx={{ ml: 3.5 }}>
-            <Attachment sx={{ fontSize: '1.25rem' }} />
+            <Icon icon='mdi:attachment' fontSize='1.25rem' />
           </IconButton>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton
-            size='small'
-            aria-label='more'
-            aria-haspopup='true'
-            onClick={handleMoreBtnClick}
-            aria-expanded={moreBtnOpen ? 'true' : undefined}
-          >
-            <DotsVertical fontSize='small' />
-          </IconButton>
-
-          <Menu
-            open={moreBtnOpenRef}
-            anchorEl={moreBtnOpen}
-            onClose={handleMoreBtnClose}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
+          <OptionsMenu
+            iconButtonProps={{ size: 'small' }}
+            iconProps={{ fontSize: '1.25rem' }}
+            options={['Print', 'Check spelling', 'Plain text mode']}
+            menuProps={{
+              anchorOrigin: { vertical: 'top', horizontal: 'right' },
+              transformOrigin: { vertical: 'bottom', horizontal: 'right' }
             }}
-            transformOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right'
-            }}
-          >
-            <MenuItem onClick={handleMoreBtnClose}>Print</MenuItem>
-            <MenuItem onClick={handleMoreBtnClose}>Check spelling</MenuItem>
-            <MenuItem onClick={handleMoreBtnClose}>Plain text mode</MenuItem>
-          </Menu>
+          />
           <IconButton size='small' onClick={handlePopupClose}>
-            <DeleteOutline sx={{ fontSize: '1.25rem' }} />
+            <Icon icon='mdi:delete-outline' fontSize='1.25rem' />
           </IconButton>
         </Box>
       </Box>

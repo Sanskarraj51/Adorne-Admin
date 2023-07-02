@@ -1,77 +1,77 @@
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
-const Timeline = theme => {
+const Timeline = () => {
   return {
     MuiTimelineItem: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           '&:not(:last-of-type)': {
             '& .MuiTimelineContent-root': {
               marginBottom: theme.spacing(4)
             }
           }
-        }
+        })
       }
     },
     MuiTimelineConnector: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           backgroundColor: theme.palette.divider
-        }
+        })
       }
     },
     MuiTimelineContent: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           marginTop: theme.spacing(0.5)
-        }
+        })
       }
     },
     MuiTimelineDot: {
       styleOverrides: {
-        filledPrimary: {
+        filledPrimary: ({ theme }) => ({
           boxShadow: `0 0 0 3px ${hexToRGBA(theme.palette.primary.main, 0.12)}`
-        },
-        filledSecondary: {
+        }),
+        filledSecondary: ({ theme }) => ({
           boxShadow: `0 0 0 3px ${hexToRGBA(theme.palette.secondary.main, 0.12)}`
-        },
-        filledSuccess: {
+        }),
+        filledSuccess: ({ theme }) => ({
           boxShadow: `0 0 0 3px ${hexToRGBA(theme.palette.success.main, 0.12)}`
-        },
-        filledError: {
+        }),
+        filledError: ({ theme }) => ({
           boxShadow: `0 0 0 3px ${hexToRGBA(theme.palette.error.main, 0.12)}`
-        },
-        filledWarning: {
+        }),
+        filledWarning: ({ theme }) => ({
           boxShadow: `0 0 0 3px ${hexToRGBA(theme.palette.warning.main, 0.12)}`
-        },
-        filledInfo: {
+        }),
+        filledInfo: ({ theme }) => ({
           boxShadow: `0 0 0 3px ${hexToRGBA(theme.palette.info.main, 0.12)}`
-        },
-        filledGrey: {
+        }),
+        filledGrey: ({ theme }) => ({
           boxShadow: `0 0 0 3px ${hexToRGBA(theme.palette.grey[400], 0.12)}`
-        },
-        outlinedPrimary: {
+        }),
+        outlinedPrimary: ({ theme }) => ({
           '& svg': { color: theme.palette.primary.main }
-        },
-        outlinedSecondary: {
+        }),
+        outlinedSecondary: ({ theme }) => ({
           '& svg': { color: theme.palette.secondary.main }
-        },
-        outlinedSuccess: {
+        }),
+        outlinedSuccess: ({ theme }) => ({
           '& svg': { color: theme.palette.success.main }
-        },
-        outlinedError: {
+        }),
+        outlinedError: ({ theme }) => ({
           '& svg': { color: theme.palette.error.main }
-        },
-        outlinedWarning: {
+        }),
+        outlinedWarning: ({ theme }) => ({
           '& svg': { color: theme.palette.warning.main }
-        },
-        outlinedInfo: {
+        }),
+        outlinedInfo: ({ theme }) => ({
           '& svg': { color: theme.palette.info.main }
-        },
-        outlinedGrey: {
+        }),
+        outlinedGrey: ({ theme }) => ({
           '& svg': { color: theme.palette.grey[400] }
-        }
+        })
       }
     }
   }

@@ -8,31 +8,27 @@ import { Line } from 'react-chartjs-2'
 
 const ChartjsLineChart = props => {
   // ** Props
-  const { white, primary, success, warning, labelColor, borderColor, gridLineColor } = props
+  const { white, primary, success, warning, labelColor, borderColor, legendColor } = props
 
   const options = {
     responsive: true,
-    backgroundColor: false,
     maintainAspectRatio: false,
     scales: {
       x: {
         ticks: { color: labelColor },
         grid: {
-          borderColor,
-          color: gridLineColor
+          color: borderColor
         }
       },
       y: {
         min: 0,
         max: 400,
-        scaleLabel: { display: true },
         ticks: {
           stepSize: 100,
           color: labelColor
         },
         grid: {
-          borderColor,
-          color: gridLineColor
+          color: borderColor
         }
       }
     },
@@ -43,7 +39,7 @@ const ChartjsLineChart = props => {
         labels: {
           padding: 25,
           boxWidth: 10,
-          color: labelColor,
+          color: legendColor,
           usePointStyle: true
         }
       }
@@ -103,14 +99,9 @@ const ChartjsLineChart = props => {
 
   return (
     <Card>
-      <CardHeader
-        title='New Technologies Data'
-        titleTypographyProps={{ variant: 'h6' }}
-        subheader='Commercial networks & enterprises'
-        subheaderTypographyProps={{ variant: 'caption' }}
-      />
+      <CardHeader title='New Technologies Data' subheader='Commercial networks & enterprises' />
       <CardContent>
-        <Line data={data} options={options} height={400} />
+        <Line data={data} height={400} options={options} />
       </CardContent>
     </Card>
   )

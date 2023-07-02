@@ -24,10 +24,10 @@ const RatingsBasic = () => {
         <Typography sx={{ fontWeight: 500 }}>Disabled</Typography>
         <Rating disabled value={value} name='disabled' />
       </Box>
-      <Box>
+      <div>
         <Typography sx={{ fontWeight: 500 }}>No rating given</Typography>
         <Rating value={null} name='no-value' />
-      </Box>
+      </div>
     </div>
   )
 }

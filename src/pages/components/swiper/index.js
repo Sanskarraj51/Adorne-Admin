@@ -1,6 +1,9 @@
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
 // ** Custom Components Imports
@@ -31,6 +34,11 @@ import * as source from 'src/views/components/swiper/SwiperSourceCode'
 // ** Hook Import
 import { useSettings } from 'src/@core/hooks/useSettings'
 
+const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main
+}))
+
 const Swiper = () => {
   // ** Hook
   const {
@@ -41,12 +49,12 @@ const Swiper = () => {
     <KeenSliderWrapper>
       <Grid container spacing={6} className='match-height'>
         <PageHeader
-          subtitle={<Typography variant='body2'>Swiper is the most modern free mobile touch slider.</Typography>}
+          subtitle={<Typography variant='body2'>Easily create sliders, carousels and much more</Typography>}
           title={
             <Typography variant='h5'>
-              <Link href='https://swiperjs.com/react' target='_blank'>
-                Swiper
-              </Link>
+              <LinkStyled href='https://github.com/rcbyr/keen-slider' target='_blank'>
+                Keen Slider
+              </LinkStyled>
             </Typography>
           }
         />

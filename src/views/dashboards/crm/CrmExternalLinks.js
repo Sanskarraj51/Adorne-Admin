@@ -7,18 +7,15 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import TableContainer from '@mui/material/TableContainer'
 
-// ** Icons Imports
-import Circle from 'mdi-material-ui/Circle'
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 // ** Util Import
@@ -30,14 +27,22 @@ const data = [
     trendAmount: 82,
     color: 'primary',
     title: 'Google Analytics',
-    icon: <ChevronUp sx={{ color: 'success.main' }} />
+    icon: (
+      <Box sx={{ color: 'success.main' }}>
+        <Icon icon='mdi:chevron-up' />
+      </Box>
+    )
   },
   {
     trendAmount: 52,
     amount: '$12.5k',
     color: 'secondary',
     title: 'Facebook Ads',
-    icon: <ChevronDown sx={{ color: 'error.main' }} />
+    icon: (
+      <Box sx={{ color: 'error.main' }}>
+        <Icon icon='mdi:chevron-down' />
+      </Box>
+    )
   }
 ]
 
@@ -80,6 +85,7 @@ const CrmExternalLinks = () => {
     colors: [hexToRGBA(theme.palette.primary.main, 1), hexToRGBA(theme.palette.secondary.main, 1)],
     grid: {
       strokeDashArray: 10,
+      borderColor: theme.palette.divider,
       padding: {
         top: 0,
         left: -4,
@@ -152,9 +158,10 @@ const CrmExternalLinks = () => {
       <CardHeader
         title='External Links'
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Refresh', 'Edit', 'Share']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
       <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
@@ -169,8 +176,14 @@ const CrmExternalLinks = () => {
                 sx={{ '& .MuiTableCell-root': { borderBottomWidth: 0, py: `${theme.spacing(1.125)} !important` } }}
               >
                 <TableCell>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Circle sx={{ mr: 2.25, fontSize: '0.75rem', color: `${theme.palette[item.color].main}` }} />
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      '& svg': { mr: 2.25, color: `${theme.palette[item.color].main}` }
+                    }}
+                  >
+                    <Icon icon='mdi:circle' fontSize='0.75rem' />
                     <Typography variant='body2' sx={{ fontWeight: 600, whiteSpace: 'nowrap', color: 'text.primary' }}>
                       {item.title}
                     </Typography>

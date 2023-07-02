@@ -41,15 +41,17 @@ const CrmTotalGrowth = () => {
             total: {
               label: '',
               show: true,
-              formatter(val) {
-                return typeof val === 'string' ? `${val}%` : '12%'
-              }
+              fontWeight: 600,
+              fontSize: '1rem',
+              color: theme.palette.text.secondary,
+              formatter: val => (typeof val === 'string' ? `${val}%` : '12%')
             },
             value: {
               offsetY: 6,
-              formatter(val) {
-                return `${val}%`
-              }
+              fontWeight: 600,
+              fontSize: '1rem',
+              formatter: val => `${val}%`,
+              color: theme.palette.text.secondary
             }
           }
         }
@@ -59,15 +61,7 @@ const CrmTotalGrowth = () => {
 
   return (
     <Card>
-      <CardContent
-        sx={{
-          '& .apexcharts-canvas .apexcharts-datalabel-value': {
-            fontWeight: 600,
-            fontSize: '1rem !important',
-            fill: theme.palette.text.secondary
-          }
-        }}
-      >
+      <CardContent>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
           <Typography variant='h6' sx={{ mr: 1.5 }}>
             $27.9k

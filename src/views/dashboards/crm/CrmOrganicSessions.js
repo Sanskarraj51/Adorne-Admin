@@ -3,15 +3,14 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import Circle from 'mdi-material-ui/Circle'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 // ** Util Import
@@ -55,21 +54,36 @@ const CrmOrganicSessions = () => {
           labels: {
             show: true,
             name: {
-              offsetY: 25
+              offsetY: 25,
+              fontSize: '1rem',
+              color: theme.palette.text.secondary
             },
             value: {
               offsetY: -15,
-              formatter: value => `${value}k`
+              fontWeight: 500,
+              fontSize: '2.125rem',
+              formatter: value => `${value}k`,
+              color: theme.palette.text.primary
             },
             total: {
               show: true,
               label: '2022',
+              fontSize: '1rem',
+              color: theme.palette.text.secondary,
               formatter: value => `${value.globals.seriesTotals.reduce((total, num) => total + num)}k`
             }
           }
         }
       }
-    }
+    },
+    responsive: [
+      {
+        breakpoint: 1709,
+        options: {
+          chart: { height: 237 }
+        }
+      }
+    ]
   }
 
   return (
@@ -77,51 +91,62 @@ const CrmOrganicSessions = () => {
       <CardHeader
         title='Organic Sessions'
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
-      <CardContent
-        sx={{
-          '& .apexcharts-datalabel-value': { fontWeight: '500 !important', fontSize: '2rem !important' },
-          '& .apexcharts-datalabel-label': {
-            fontSize: '1rem !important',
-            fill: `${theme.palette.text.secondary} !important`
-          }
-        }}
-      >
-        <ReactApexcharts type='donut' height={237} options={options} series={[13, 18, 18, 24, 16]} />
+      <CardContent>
+        <ReactApexcharts type='donut' height={257} options={options} series={[13, 18, 18, 24, 16]} />
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
-          <Box sx={{ mx: 3, display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.25, fontSize: '0.75rem', color: 'warning.main' }} />
-            <Typography variant='body2' sx={{ color: 'text.primary' }}>
-              USA
-            </Typography>
+          <Box sx={{ mx: 3, display: 'flex', alignItems: 'center', '& svg': { mr: 1.25, color: 'warning.main' } }}>
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>USA</Typography>
           </Box>
-          <Box sx={{ mx: 3, display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.25, fontSize: '0.75rem', color: hexToRGBA(theme.palette.warning.main, 0.8) }} />
-            <Typography variant='body2' sx={{ color: 'text.primary' }}>
-              India
-            </Typography>
+          <Box
+            sx={{
+              mx: 3,
+              display: 'flex',
+              alignItems: 'center',
+              '& svg': { mr: 1.25, color: hexToRGBA(theme.palette.warning.main, 0.8) }
+            }}
+          >
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>India</Typography>
           </Box>
-          <Box sx={{ mx: 3, display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.25, fontSize: '0.75rem', color: hexToRGBA(theme.palette.warning.main, 0.6) }} />
-            <Typography variant='body2' sx={{ color: 'text.primary' }}>
-              Canada
-            </Typography>
+          <Box
+            sx={{
+              mx: 3,
+              display: 'flex',
+              alignItems: 'center',
+              '& svg': { mr: 1.25, color: hexToRGBA(theme.palette.warning.main, 0.6) }
+            }}
+          >
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>Canada</Typography>
           </Box>
-          <Box sx={{ mx: 3, display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.25, fontSize: '0.75rem', color: hexToRGBA(theme.palette.warning.main, 0.4) }} />
-            <Typography variant='body2' sx={{ color: 'text.primary' }}>
-              Japan
-            </Typography>
+          <Box
+            sx={{
+              mx: 3,
+              display: 'flex',
+              alignItems: 'center',
+              '& svg': { mr: 1.25, color: hexToRGBA(theme.palette.warning.main, 0.4) }
+            }}
+          >
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>Japan</Typography>
           </Box>
-          <Box sx={{ mx: 3, display: 'flex', alignItems: 'center' }}>
-            <Circle sx={{ mr: 1.25, fontSize: '0.75rem', color: hexToRGBA(theme.palette.warning.main, 0.2) }} />
-            <Typography variant='body2' sx={{ color: 'text.primary' }}>
-              France
-            </Typography>
+          <Box
+            sx={{
+              mx: 3,
+              display: 'flex',
+              alignItems: 'center',
+              '& svg': { mr: 1.25, color: hexToRGBA(theme.palette.warning.main, 0.2) }
+            }}
+          >
+            <Icon icon='mdi:circle' fontSize='0.75rem' />
+            <Typography variant='body2'>France</Typography>
           </Box>
         </Box>
       </CardContent>

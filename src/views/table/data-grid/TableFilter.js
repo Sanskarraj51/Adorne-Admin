@@ -74,9 +74,11 @@ const columns = [
   },
   {
     flex: 0.2,
+    type: 'date',
     minWidth: 120,
     headerName: 'Date',
     field: 'start_date',
+    valueGetter: params => new Date(params.value),
     renderCell: params => (
       <Typography variant='body2' sx={{ color: 'text.primary' }}>
         {params.row.start_date}
@@ -129,9 +131,9 @@ const columns = [
 const TableColumns = () => {
   // ** States
   const [data] = useState(rows)
-  const [pageSize, setPageSize] = useState(7)
   const [searchText, setSearchText] = useState('')
   const [filteredData, setFilteredData] = useState([])
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
 
   const handleSearch = searchValue => {
     setSearchText(searchValue)
@@ -156,12 +158,15 @@ const TableColumns = () => {
       <DataGrid
         autoHeight
         columns={columns}
-        pageSize={pageSize}
-        rowsPerPageOptions={[7, 10, 25, 50]}
-        components={{ Toolbar: QuickSearchToolbar }}
+        pageSizeOptions={[7, 10, 25, 50]}
+        paginationModel={paginationModel}
+        slots={{ toolbar: QuickSearchToolbar }}
+        onPaginationModelChange={setPaginationModel}
         rows={filteredData.length ? filteredData : data}
-        onPageSizeChange={newPageSize => setPageSize(newPageSize)}
-        componentsProps={{
+        slotProps={{
+          baseButton: {
+            variant: 'outlined'
+          },
           toolbar: {
             value: searchText,
             clearSearch: () => handleSearch(''),

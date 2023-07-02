@@ -5,10 +5,8 @@ import { useState } from 'react'
 import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
-// ** Icons Imports
-import ViewList from 'mdi-material-ui/ViewList'
-import ViewQuilt from 'mdi-material-ui/ViewQuilt'
-import ViewModule from 'mdi-material-ui/ViewModule'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ButtonToggleVertical = () => {
   // ** State
@@ -21,13 +19,13 @@ const ButtonToggleVertical = () => {
   return (
     <ToggleButtonGroup exclusive value={view} orientation='vertical' onChange={handleView} aria-label='text alignment'>
       <ToggleButton value='left' aria-label='left aligned'>
-        <ViewList />
+        <Icon icon='mdi:view-list' />
       </ToggleButton>
       <ToggleButton value='center' aria-label='center aligned'>
-        <ViewModule />
+        <Icon icon='mdi:view-module' />
       </ToggleButton>
       <ToggleButton value='right' aria-label='right aligned'>
-        <ViewQuilt />
+        <Icon icon='mdi:view-quilt' />
       </ToggleButton>
     </ToggleButtonGroup>
   )

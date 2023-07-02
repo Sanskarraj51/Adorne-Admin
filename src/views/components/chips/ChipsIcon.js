@@ -1,15 +1,19 @@
 // ** MUI Imports
 import Chip from '@mui/material/Chip'
 
-// ** Icons Imports
-import ArrowLeftThinCircleOutline from 'mdi-material-ui/ArrowLeftThinCircleOutline'
-import ArrowRightThinCircleOutline from 'mdi-material-ui/ArrowRightThinCircleOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const ChipsIcon = () => {
   return (
     <div className='demo-space-x'>
-      <Chip label='Previous' icon={<ArrowLeftThinCircleOutline fontSize='small' />} />
-      <Chip label='Next' color='primary' variant='outlined' icon={<ArrowRightThinCircleOutline fontSize='small' />} />
+      <Chip label='Previous' icon={<Icon icon='mdi:arrow-left-thin-circle-outline' fontSize={20} />} />
+      <Chip
+        label='Next'
+        color='primary'
+        variant='outlined'
+        icon={<Icon icon='mdi:arrow-right-thin-circle-outline' fontSize={20} />}
+      />
     </div>
   )
 }

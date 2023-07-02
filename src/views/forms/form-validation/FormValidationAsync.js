@@ -20,9 +20,8 @@ import CircularProgress from '@mui/material/CircularProgress'
 import toast from 'react-hot-toast'
 import { useForm, Controller } from 'react-hook-form'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const defaultValues = {
   email: '',
@@ -51,10 +50,6 @@ const FormValidationAsync = () => {
     setState({ ...state, showPassword: !state.showPassword })
   }
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
-  }
-
   const onSubmit = async () => {
     setLoading(true)
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -65,7 +60,7 @@ const FormValidationAsync = () => {
 
   return (
     <Card>
-      <CardHeader title='Async Submit' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Async Submit' />
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={5}>
@@ -167,10 +162,10 @@ const FormValidationAsync = () => {
                           <IconButton
                             edge='end'
                             onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
+                            onMouseDown={e => e.preventDefault()}
                             aria-label='toggle password visibility'
                           >
-                            {state.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                            <Icon icon={state.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                           </IconButton>
                         </InputAdornment>
                       }

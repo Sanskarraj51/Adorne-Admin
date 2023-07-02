@@ -14,11 +14,8 @@ import ToggleButton from '@mui/material/ToggleButton'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
-// ** Icons Imports
-import CodeTags from 'mdi-material-ui/CodeTags'
-import ContentCopy from 'mdi-material-ui/ContentCopy'
-import LanguageJavascript from 'mdi-material-ui/LanguageJavascript'
-import LanguageTypescript from 'mdi-material-ui/LanguageTypescript'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Components
 import Prism from 'prismjs'
@@ -77,13 +74,12 @@ const CardSnippet = props => {
     >
       <CardHeader
         title={title}
-        titleTypographyProps={{ variant: 'h6' }}
         {...(hidden
           ? {}
           : {
               action: (
                 <IconButton onClick={() => setShowCode(!showCode)}>
-                  <CodeTags fontSize='small' />
+                  <Icon icon='mdi:code-tags' fontSize={20} />
                 </IconButton>
               )
             })}
@@ -91,7 +87,7 @@ const CardSnippet = props => {
       <CardContent>{children}</CardContent>
       {hidden ? null : (
         <Collapse in={showCode}>
-          <Divider sx={{ my: 0 }} />
+          <Divider sx={{ my: '0 !important' }} />
 
           <CardContent sx={{ position: 'relative', '& pre': { m: '0 !important', maxHeight: 500 } }}>
             <Box sx={{ mb: 4, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
@@ -104,12 +100,12 @@ const CardSnippet = props => {
               >
                 {code.tsx !== null ? (
                   <ToggleButton value='tsx'>
-                    <LanguageTypescript fontSize='small' />
+                    <Icon icon='mdi:language-typescript' fontSize={20} />
                   </ToggleButton>
                 ) : null}
                 {code.jsx !== null ? (
                   <ToggleButton value='jsx'>
-                    <LanguageJavascript fontSize='small' />
+                    <Icon icon='mdi:language-javascript' fontSize={20} />
                   </ToggleButton>
                 ) : null}
               </ToggleButtonGroup>
@@ -119,15 +115,15 @@ const CardSnippet = props => {
                 onClick={handleClick}
                 sx={{
                   top: '5rem',
+                  color: 'grey.100',
                   right: '2.5625rem',
-                  position: 'absolute',
-                  color: theme => theme.palette.grey[100]
+                  position: 'absolute'
                 }}
               >
-                <ContentCopy fontSize='small' />
+                <Icon icon='mdi:content-copy' fontSize={20} />
               </IconButton>
             </Tooltip>
-            <Box>{renderCode()}</Box>
+            <div>{renderCode()}</div>
           </CardContent>
         </Collapse>
       )}

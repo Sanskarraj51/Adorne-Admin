@@ -8,14 +8,12 @@ import CardContent from '@mui/material/CardContent'
 import CustomChip from 'src/@core/components/mui/chip'
 import CustomAvatar from 'src/@core/components/mui/avatar'
 
-// ** Icons Imports
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const CardStatsVertical = props => {
   // ** Props
-  const { title, color, icon, stats, trend, chipText, trendNumber } = props
-  const TrendIcon = trend === 'positive' ? ChevronUp : ChevronDown
+  const { title, color, icon, stats, chipText, trendNumber, trend = 'positive' } = props
 
   return (
     <Card>
@@ -24,11 +22,13 @@ const CardStatsVertical = props => {
           <CustomAvatar skin='light' variant='rounded' color={color}>
             {icon}
           </CustomAvatar>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box
+            sx={{ display: 'flex', alignItems: 'center', color: trend === 'positive' ? 'success.main' : 'error.main' }}
+          >
             <Typography variant='subtitle2' sx={{ color: trend === 'positive' ? 'success.main' : 'error.main' }}>
               {trendNumber}
             </Typography>
-            <TrendIcon fontSize='small' sx={{ color: trend === 'positive' ? 'success.main' : 'error.main' }} />
+            <Icon icon={trend === 'positive' ? 'mdi:chevron-up' : 'mdi:chevron-down'} fontSize='1.25rem' />
           </Box>
         </Box>
         <Typography variant='h6' sx={{ mb: 1 }}>
@@ -50,8 +50,3 @@ const CardStatsVertical = props => {
 }
 
 export default CardStatsVertical
-
-CardStatsVertical.defaultProps = {
-  color: 'primary',
-  trend: 'positive'
-}

@@ -8,19 +8,13 @@ const PricingPlans = props => {
   // ** Props
   const { plan, data } = props
 
-  const renderPlan = () => {
-    return data?.pricingPlans.map(item => {
-      return (
+  return (
+    <Grid container spacing={6}>
+      {data?.map(item => (
         <Grid item xs={12} md={4} key={item.title.toLowerCase()}>
           <PlanDetails plan={plan} data={item} />
         </Grid>
-      )
-    })
-  }
-
-  return (
-    <Grid container spacing={6}>
-      {renderPlan()}
+      ))}
     </Grid>
   )
 }

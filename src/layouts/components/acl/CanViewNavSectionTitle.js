@@ -10,8 +10,11 @@ const CanViewNavSectionTitle = props => {
 
   // ** Hook
   const ability = useContext(AbilityContext)
-
-  return ability && ability.can(navTitle?.action, navTitle?.subject) ? <>{children}</> : null
+  if (navTitle && navTitle.auth === false) {
+    return <>{children}</>
+  } else {
+    return ability && ability.can(navTitle?.action, navTitle?.subject) ? <>{children}</> : null
+  }
 }
 
 export default CanViewNavSectionTitle

@@ -1,11 +1,11 @@
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
-const Progress = theme => {
+const Progress = () => {
   return {
     MuiLinearProgress: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           height: 6,
           borderRadius: theme.shape.borderRadius,
           '&.MuiLinearProgress-colorPrimary': {
@@ -26,10 +26,10 @@ const Progress = theme => {
           '&.MuiLinearProgress-colorInfo': {
             backgroundColor: hexToRGBA(theme.palette.info.main, 0.12)
           }
-        },
-        bar: {
+        }),
+        bar: ({ theme }) => ({
           borderRadius: theme.shape.borderRadius
-        }
+        })
       }
     }
   }

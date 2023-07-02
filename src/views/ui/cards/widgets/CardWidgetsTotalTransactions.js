@@ -3,19 +3,17 @@ import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
 import { styled, useTheme } from '@mui/material/styles'
 
-// ** Icons Imports
-import TrendingUp from 'mdi-material-ui/TrendingUp'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import TrendingDown from 'mdi-material-ui/TrendingDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
+import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 // ** Util Import
@@ -52,32 +50,14 @@ const CardWidgetsTotalTransactions = () => {
       parentHeightOffset: 0,
       toolbar: { show: false }
     },
-    plotOptions: {
-      bar: {
-        borderRadius: 5,
-        barHeight: '30%',
-        horizontal: true,
-        endingShape: 'flat',
-        startingShape: 'rounded'
-      }
-    },
     tooltip: {
-      y: {
-        formatter: val => `${Math.abs(val)}`
-      }
+      y: { formatter: val => `${Math.abs(val)}` }
     },
-    xaxis: {
-      position: 'top',
-      axisTicks: { show: false },
-      axisBorder: { show: false },
-      labels: { formatter: val => `${Math.abs(Number(val))}` },
-      categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yaxis: {
-      labels: { show: false }
-    },
+    legend: { show: false },
+    dataLabels: { enabled: false },
     colors: [hexToRGBA(theme.palette.primary.main, 1), hexToRGBA(theme.palette.success.main, 1)],
     grid: {
+      borderColor: theme.palette.divider,
       xaxis: {
         lines: { show: true }
       },
@@ -89,8 +69,6 @@ const CardWidgetsTotalTransactions = () => {
         bottom: -25
       }
     },
-    legend: { show: false },
-    dataLabels: { enabled: false },
     states: {
       hover: {
         filter: { type: 'none' }
@@ -98,6 +76,28 @@ const CardWidgetsTotalTransactions = () => {
       active: {
         filter: { type: 'none' }
       }
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 5,
+        barHeight: '30%',
+        horizontal: true,
+        endingShape: 'flat',
+        startingShape: 'rounded'
+      }
+    },
+    xaxis: {
+      position: 'top',
+      axisTicks: { show: false },
+      axisBorder: { show: false },
+      categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      labels: {
+        formatter: val => `${Math.abs(Number(val))}`,
+        style: { colors: theme.palette.text.disabled }
+      }
+    },
+    yaxis: {
+      labels: { show: false }
     }
   }
 
@@ -108,7 +108,6 @@ const CardWidgetsTotalTransactions = () => {
           <CardHeader title='Total Transactions' />
           <CardContent
             sx={{
-              '& .apexcharts-canvas .apexcharts-text': { fill: theme.palette.text.disabled },
               '& .apexcharts-series[rel="2"]': {
                 transform: theme.direction === 'rtl' ? 'translateX(-5px)' : 'translateX(5px)'
               }
@@ -124,9 +123,10 @@ const CardWidgetsTotalTransactions = () => {
             subheaderTypographyProps={{ sx: { lineHeight: 1.429 } }}
             titleTypographyProps={{ sx: { letterSpacing: '0.15px' } }}
             action={
-              <IconButton size='small' aria-label='settings' className='card-more-options'>
-                <DotsVertical />
-              </IconButton>
+              <OptionsMenu
+                options={['Refresh', 'Update', 'Share']}
+                iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+              />
             }
           />
           <CardContent sx={{ pt: theme => `${theme.spacing(4)} !important` }}>
@@ -142,7 +142,7 @@ const CardWidgetsTotalTransactions = () => {
                 }}
               >
                 <CustomAvatar skin='light' sx={{ mb: 3 }} color='success' variant='rounded'>
-                  <TrendingUp />
+                  <Icon icon='mdi:trending-up' />
                 </CustomAvatar>
                 <Typography sx={{ mb: 0.5 }} variant='body2'>
                   This Week
@@ -151,7 +151,7 @@ const CardWidgetsTotalTransactions = () => {
               </Grid>
               <Grid item xs={6} sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                 <CustomAvatar skin='light' sx={{ mb: 3 }} variant='rounded'>
-                  <TrendingDown />
+                  <Icon icon='mdi:trending-down' />
                 </CustomAvatar>
                 <Typography sx={{ mb: 0.5 }} variant='body2'>
                   Last Week
@@ -159,7 +159,7 @@ const CardWidgetsTotalTransactions = () => {
                 <Typography sx={{ fontWeight: 600 }}>-24.86%</Typography>
               </Grid>
             </Grid>
-            <Divider sx={{ my: 6.25 }} />
+            <Divider sx={{ my: theme => `${theme.spacing(6.25)} !important` }} />
             <Grid container>
               <Grid
                 item

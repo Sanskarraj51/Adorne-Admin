@@ -1,54 +1,27 @@
-export const SwitchesBasicJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SwitchesLabelPlacementJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Switch from '@mui/material/Switch'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-const SwitchesBasic = () => {
+const SwitchedLabelPlacement = () => {
   return (
-    <FormGroup row>
-      <FormControlLabel control={<Switch defaultChecked />} label='Checked' />
-      <FormControlLabel control={<Switch />} label='Unchecked' />
-      <FormControlLabel disabled control={<Switch defaultChecked />} label='Disabled Checked' />
-      <FormControlLabel disabled control={<Switch />} label='Disabled Unchecked' />
-    </FormGroup>
+    <div>
+      <FormGroup row>
+        <FormControlLabel value='top' label='Top' labelPlacement='top' sx={{ mr: 8 }} control={<Switch />} />
+        <FormControlLabel value='bottom' control={<Switch />} label='Bottom' labelPlacement='bottom' />
+      </FormGroup>
+      <FormGroup row sx={{ mt: 4 }}>
+        <FormControlLabel value='start' label='Start' labelPlacement='start' sx={{ mr: 4 }} control={<Switch />} />
+        <FormControlLabel value='end' control={<Switch />} label='End' labelPlacement='end' />
+      </FormGroup>
+    </div>
   )
 }
 
-export default SwitchesBasic
-`}</code>
-  </pre>
-)
+export default SwitchedLabelPlacement
+`}</code></pre>) 
 
-export const SwitchesColorsJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
-import Switch from '@mui/material/Switch'
-import FormGroup from '@mui/material/FormGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-
-const SwitchesColors = () => {
-  return (
-    <FormGroup row>
-      <FormControlLabel control={<Switch defaultChecked />} label='Primary' />
-      <FormControlLabel control={<Switch defaultChecked color='secondary' />} label='Secondary' />
-      <FormControlLabel control={<Switch defaultChecked color='success' />} label='Success' />
-      <FormControlLabel control={<Switch defaultChecked color='error' />} label='Error' />
-      <FormControlLabel control={<Switch defaultChecked color='warning' />} label='Warning' />
-      <FormControlLabel control={<Switch defaultChecked color='info' />} label='Info' />
-    </FormGroup>
-  )
-}
-
-export default SwitchesColors
-`}</code>
-  </pre>
-)
-
-export const SwitchesCustomizedJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SwitchesCustomizedJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Switch from '@mui/material/Switch'
 import { styled } from '@mui/material/styles'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
@@ -89,13 +62,9 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 const SwitchesCustomized = () => <FormControlLabel label='iOS Style' control={<Switch defaultChecked />} />
 
 export default SwitchesCustomized
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SwitchesControlledUncontrolledJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const SwitchesControlledUncontrolledJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { useState } from 'react'
 
 // ** MUI Imports
@@ -120,40 +89,28 @@ const SwitchesControlledUncontrolled = () => {
 }
 
 export default SwitchesControlledUncontrolled
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SwitchesLabelPlacementJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SwitchesBasicJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Switch from '@mui/material/Switch'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-const SwitchedLabelPlacement = () => {
+const SwitchesBasic = () => {
   return (
-    <div>
-      <FormGroup row>
-        <FormControlLabel value='top' label='Top' labelPlacement='top' sx={{ mr: 8 }} control={<Switch />} />
-        <FormControlLabel value='bottom' control={<Switch />} label='Bottom' labelPlacement='bottom' />
-      </FormGroup>
-      <FormGroup row sx={{ mt: 4 }}>
-        <FormControlLabel value='start' label='Start' labelPlacement='start' sx={{ mr: 4 }} control={<Switch />} />
-        <FormControlLabel value='end' control={<Switch />} label='End' labelPlacement='end' />
-      </FormGroup>
-    </div>
+    <FormGroup row>
+      <FormControlLabel control={<Switch defaultChecked />} label='Checked' />
+      <FormControlLabel control={<Switch />} label='Unchecked' />
+      <FormControlLabel disabled control={<Switch defaultChecked />} label='Disabled Checked' />
+      <FormControlLabel disabled control={<Switch />} label='Disabled Unchecked' />
+    </FormGroup>
   )
 }
 
-export default SwitchedLabelPlacement
-`}</code>
-  </pre>
-)
+export default SwitchesBasic
+`}</code></pre>) 
 
-export const SwitchesStandaloneJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SwitchesStandaloneJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Switch from '@mui/material/Switch'
 
 const SwitchesStandalone = () => {
@@ -168,13 +125,30 @@ const SwitchesStandalone = () => {
 }
 
 export default SwitchesStandalone
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SwitchesSizesJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** MUI Imports
+export const SwitchesColorsJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
+import Switch from '@mui/material/Switch'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+
+const SwitchesColors = () => {
+  return (
+    <FormGroup row>
+      <FormControlLabel control={<Switch defaultChecked />} label='Primary' />
+      <FormControlLabel control={<Switch defaultChecked color='secondary' />} label='Secondary' />
+      <FormControlLabel control={<Switch defaultChecked color='success' />} label='Success' />
+      <FormControlLabel control={<Switch defaultChecked color='error' />} label='Error' />
+      <FormControlLabel control={<Switch defaultChecked color='warning' />} label='Warning' />
+      <FormControlLabel control={<Switch defaultChecked color='info' />} label='Info' />
+    </FormGroup>
+  )
+}
+
+export default SwitchesColors
+`}</code></pre>) 
+
+export const SwitchesSizesJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** MUI Imports
 import Switch from '@mui/material/Switch'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -189,6 +163,5 @@ const SwitchesSizes = () => {
 }
 
 export default SwitchesSizes
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
+

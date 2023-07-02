@@ -8,9 +8,8 @@ import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import Box from '@mui/material/Box'
 
-// ** Icons Imports
-import Microphone from 'mdi-material-ui/Microphone'
-import Paperclip from 'mdi-material-ui/Paperclip'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Styled Components
 const ChatFormWrapper = styled(Box)(({ theme }) => ({
@@ -57,10 +56,10 @@ const SendMsgForm = props => {
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <IconButton size='small' sx={{ mr: 1.5, color: 'text.primary' }}>
-            <Microphone sx={{ fontSize: '1.375rem' }} />
+            <Icon icon='mdi:microphone' fontSize='1.375rem' />
           </IconButton>
           <IconButton size='small' component='label' htmlFor='upload-img' sx={{ mr: 2.75, color: 'text.primary' }}>
-            <Paperclip sx={{ fontSize: '1.375rem' }} />
+            <Icon icon='mdi:attachment' fontSize='1.375rem' />
             <input hidden type='file' id='upload-img' />
           </IconButton>
           <Button type='submit' variant='contained'>

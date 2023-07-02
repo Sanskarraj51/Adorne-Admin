@@ -12,6 +12,7 @@ import ChipsArray from 'src/views/components/chips/ChipsArray'
 import ChipsLight from 'src/views/components/chips/ChipsLight'
 import ChipsColors from 'src/views/components/chips/ChipsColors'
 import ChipsAvatar from 'src/views/components/chips/ChipsAvatar'
+import ChipsRounded from 'src/views/components/chips/ChipsRounded'
 import ChipsVariants from 'src/views/components/chips/ChipsVariants'
 import ChipsDisabled from 'src/views/components/chips/ChipsDisabled'
 import ChipsOnDelete from 'src/views/components/chips/ChipsOnDelete'
@@ -162,6 +163,20 @@ const Pagination = () => {
             <code>skin='light'</code> prop.
           </Typography>
           <ChipsLight />
+        </CardSnippet>
+      </Grid>
+      <Grid item xs={12}>
+        <CardSnippet
+          title='Custom Rounded'
+          code={{
+            tsx: null,
+            jsx: source.ChipsRoundedJSXCode
+          }}
+        >
+          <Typography>
+            Use prop <code>rounded</code> for a rounded chip.
+          </Typography>
+          <ChipsRounded />
         </CardSnippet>
       </Grid>
     </Grid>

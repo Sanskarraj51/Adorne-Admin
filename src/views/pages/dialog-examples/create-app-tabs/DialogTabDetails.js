@@ -7,10 +7,11 @@ import Radio from '@mui/material/Radio'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-// ** Icons Imports
-import LicenseIcon from 'mdi-material-ui/LicenseIcon'
-import CartOutline from 'mdi-material-ui/CartOutline'
-import BriefcaseOutline from 'mdi-material-ui/BriefcaseOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
+
+// ** Config Import
+import themeConfig from 'src/configs/themeConfig'
 
 // ** Custom Avatar Component
 import CustomAvatar from 'src/@core/components/mui/avatar'
@@ -23,8 +24,8 @@ const TabDetails = () => {
   }
 
   return (
-    <Box>
-      <TextField fullWidth sx={{ mb: 4 }} label='Application Name' placeholder='Materialize Admin' />
+    <div>
+      <TextField fullWidth sx={{ mb: 4 }} label='Application Name' placeholder={`${themeConfig.templateName} Admin`} />
       <Typography variant='h6' sx={{ mb: 4 }}>
         Category
       </Typography>
@@ -35,14 +36,14 @@ const TabDetails = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomAvatar skin='light' color='info' variant='rounded' sx={{ mr: 3, width: 48, height: 48 }}>
-              <BriefcaseOutline />
+              <Icon icon='mdi:briefcase-outline' />
             </CustomAvatar>
-            <Box>
+            <div>
               <Typography sx={{ color: 'text.secondary' }}>CRM Application</Typography>
               <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                 Scales with any business
               </Typography>
-            </Box>
+            </div>
           </Box>
           <Radio value='crm' onChange={handleChange} checked={value === 'crm'} />
         </Box>
@@ -52,14 +53,14 @@ const TabDetails = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomAvatar skin='light' color='success' variant='rounded' sx={{ mr: 3, width: 48, height: 48 }}>
-              <CartOutline />
+              <Icon icon='mdi:cart-outline' />
             </CustomAvatar>
-            <Box>
+            <div>
               <Typography sx={{ color: 'text.secondary' }}>Ecommerce Platforms</Typography>
               <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                 Grow Your Business With App
               </Typography>
-            </Box>
+            </div>
           </Box>
           <Radio value='ecommerce' onChange={handleChange} checked={value === 'ecommerce'} />
         </Box>
@@ -69,19 +70,19 @@ const TabDetails = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomAvatar skin='light' color='error' variant='rounded' sx={{ mr: 3, width: 48, height: 48 }}>
-              <LicenseIcon />
+              <Icon icon='mdi:license' />
             </CustomAvatar>
-            <Box>
+            <div>
               <Typography sx={{ color: 'text.secondary' }}>Online Learning platform</Typography>
               <Typography variant='caption' sx={{ color: 'text.disabled' }}>
                 Start learning today
               </Typography>
-            </Box>
+            </div>
           </Box>
           <Radio value='learning' onChange={handleChange} checked={value === 'learning'} />
         </Box>
       </Box>
-    </Box>
+    </div>
   )
 }
 

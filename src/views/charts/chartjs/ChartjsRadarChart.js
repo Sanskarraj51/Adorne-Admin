@@ -11,7 +11,7 @@ import { Radar } from 'react-chartjs-2'
 
 const ChartjsRadarChart = props => {
   // ** Props
-  const { labelColor, gridLineColor } = props
+  const { labelColor, legendColor, borderColor } = props
 
   // ** States
   const [chartData, setChartData] = useState({
@@ -35,9 +35,9 @@ const ChartjsRadarChart = props => {
           maxTicksLimit: 1,
           color: labelColor
         },
-        grid: { color: gridLineColor },
+        grid: { color: borderColor },
         pointLabels: { color: labelColor },
-        angleLines: { color: gridLineColor }
+        angleLines: { color: borderColor }
       }
     },
     plugins: {
@@ -45,7 +45,7 @@ const ChartjsRadarChart = props => {
         position: 'top',
         labels: {
           padding: 25,
-          color: labelColor
+          color: legendColor
         }
       }
     }
@@ -90,9 +90,9 @@ const ChartjsRadarChart = props => {
 
   return (
     <Card>
-      <CardHeader title='Radar Chart' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Radar Chart' />
       <CardContent>
-        <Radar ref={chartRef} data={chartData} options={options} height={350} />
+        <Radar height={350} ref={chartRef} data={chartData} options={options} />
       </CardContent>
     </Card>
   )

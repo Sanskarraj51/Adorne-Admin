@@ -8,45 +8,24 @@ import UserThemeOptions from 'src/layouts/UserThemeOptions'
 import palette from './palette'
 import spacing from './spacing'
 import shadows from './shadows'
+import overrides from './overrides'
+import typography from './typography'
 import breakpoints from './breakpoints'
 
-const themeOptions = settings => {
+const themeOptions = (settings, overrideMode) => {
   // ** Vars
   const { skin, mode, direction, themeColor } = settings
 
   // ** Create New object before removing user component overrides and typography objects from userThemeOptions
   const userThemeConfig = Object.assign({}, UserThemeOptions())
-  const userFontFamily = userThemeConfig.typography?.fontFamily
-
-  // ** Remove component overrides and typography objects from userThemeOptions
-  delete userThemeConfig.components
-  delete userThemeConfig.typography
 
   const mergedThemeConfig = deepmerge(
     {
-      direction,
-      palette: palette(mode, skin),
-      typography: {
-        fontFamily:
-          userFontFamily ||
-          [
-            'Inter',
-            'sans-serif',
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"'
-          ].join(',')
-      },
-      shadows: shadows(mode),
-      ...spacing,
       breakpoints: breakpoints(),
+      direction,
+      components: overrides(settings),
+      palette: palette(mode === 'semi-dark' ? overrideMode : mode, skin),
+      ...spacing,
       shape: {
         borderRadius: 10
       },
@@ -54,7 +33,9 @@ const themeOptions = settings => {
         toolbar: {
           minHeight: 64
         }
-      }
+      },
+      shadows: shadows(mode === 'semi-dark' ? overrideMode : mode),
+      typography
     },
     userThemeConfig
   )
@@ -62,7 +43,9 @@ const themeOptions = settings => {
   return deepmerge(mergedThemeConfig, {
     palette: {
       primary: {
-        ...mergedThemeConfig.palette[themeColor]
+        ...(mergedThemeConfig.palette
+          ? mergedThemeConfig.palette[themeColor]
+          : palette(mode === 'semi-dark' ? overrideMode : mode, skin).primary)
       }
     }
   })

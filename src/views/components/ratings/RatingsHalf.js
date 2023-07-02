@@ -10,10 +10,10 @@ const RatingsHalf = () => {
         <Typography sx={{ fontWeight: 500 }}>Half Ratings</Typography>
         <Rating defaultValue={2.5} precision={0.5} name='half-rating' />
       </Box>
-      <Box>
+      <div>
         <Typography sx={{ fontWeight: 500 }}>Read only</Typography>
         <Rating readOnly defaultValue={2.5} precision={0.5} name='read-only' />
-      </Box>
+      </div>
     </div>
   )
 }

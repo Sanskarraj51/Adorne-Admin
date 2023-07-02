@@ -4,14 +4,11 @@ import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-
 // ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 // ** Util Import
@@ -50,8 +47,8 @@ const CardWidgetsWeeklyOverview = () => {
         colors: {
           ranges: [
             {
-              from: 40,
               to: 50,
+              from: 40,
               color: hexToRGBA(theme.palette.primary.main, 1)
             }
           ]
@@ -68,12 +65,15 @@ const CardWidgetsWeeklyOverview = () => {
     },
     stroke: {
       width: [0, 2],
-      colors: [theme.palette.background.default, theme.palette.primary.main]
+      colors: [theme.palette.customColors.trackBg, theme.palette.primary.main]
     },
     legend: { show: false },
-    grid: { strokeDashArray: 7 },
     dataLabels: { enabled: false },
-    colors: [hexToRGBA(theme.palette.background.default, 1)],
+    colors: [hexToRGBA(theme.palette.customColors.trackBg, 1)],
+    grid: {
+      strokeDashArray: 7,
+      borderColor: theme.palette.divider
+    },
     states: {
       hover: {
         filter: { type: 'none' }
@@ -95,7 +95,11 @@ const CardWidgetsWeeklyOverview = () => {
       show: true,
       tickAmount: 3,
       labels: {
-        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}` : value}k`
+        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}` : value}k`,
+        style: {
+          fontSize: '0.75rem',
+          colors: theme.palette.text.disabled
+        }
       }
     }
   }
@@ -105,17 +109,13 @@ const CardWidgetsWeeklyOverview = () => {
       <CardHeader
         title='Weekly Overview'
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Refresh', 'Update', 'Share']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         }
       />
-      <CardContent
-        sx={{
-          '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 },
-          '& .apexcharts-canvas .apexcharts-yaxis-label': { fontSize: '0.75rem', fill: theme.palette.text.disabled }
-        }}
-      >
+      <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
         <ReactApexcharts type='line' height={208} series={series} options={options} />
         <Box sx={{ mb: 4, display: 'flex', alignItems: 'center' }}>
           <Typography sx={{ mr: 4 }} variant='h5'>

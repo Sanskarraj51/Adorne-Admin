@@ -8,10 +8,10 @@ const cardStatsData = {
       trend: 'negative',
       trendNumber: '8.1%',
       title: 'New Customers',
-      icon: 'AccountOutline'
+      icon: 'mdi:account-outline'
     },
     {
-      icon: 'Poll',
+      icon: 'mdi:poll',
       stats: '$28.5k',
       color: 'warning',
       trendNumber: '18.2%',
@@ -21,14 +21,14 @@ const cardStatsData = {
       color: 'info',
       stats: '2,450k',
       trend: 'negative',
-      icon: 'TrendingUp',
+      icon: 'mdi:trending-up',
       trendNumber: '24.6%',
       title: 'New Transactions'
     },
     {
       stats: '$48.2K',
       color: 'success',
-      icon: 'CurrencyUsd',
+      icon: 'mdi:currency-usd',
       trendNumber: '22.5%',
       title: 'Total Revenue'
     }
@@ -37,7 +37,7 @@ const cardStatsData = {
     {
       stats: '155k',
       color: 'primary',
-      icon: 'CartPlus',
+      icon: 'mdi:cart-plus',
       trendNumber: '+22%',
       title: 'Total Orders',
       chipText: 'Last 4 Month'
@@ -48,11 +48,11 @@ const cardStatsData = {
       trend: 'negative',
       trendNumber: '-18%',
       title: 'Total Profit',
-      icon: 'WalletGiftcard',
+      icon: 'mdi:wallet-giftcard',
       chipText: 'Last One Year'
     },
     {
-      icon: 'Link',
+      icon: 'mdi:link',
       color: 'info',
       stats: '142.8k',
       trendNumber: '+62%',
@@ -63,7 +63,7 @@ const cardStatsData = {
       stats: '$13.4k',
       color: 'success',
       trendNumber: '+38%',
-      icon: 'CurrencyUsd',
+      icon: 'mdi:currency-usd',
       title: 'Total Sales',
       chipText: 'Last Six Months'
     },
@@ -73,13 +73,13 @@ const cardStatsData = {
       trend: 'negative',
       trendNumber: '-16%',
       title: 'Total Expenses',
-      icon: 'BriefcaseOutline',
+      icon: 'mdi:briefcase-outline',
       chipText: 'Last One Month'
     },
     {
       stats: '$2.55k',
       color: 'secondary',
-      icon: 'TrendingUp',
+      icon: 'mdi:trending-up',
       trendNumber: '+46%',
       title: 'Transactions',
       chipText: 'Last One Year'

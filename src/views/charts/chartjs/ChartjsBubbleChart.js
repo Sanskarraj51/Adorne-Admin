@@ -5,8 +5,8 @@ import CardHeader from '@mui/material/CardHeader'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import ArrowUp from 'mdi-material-ui/ArrowUp'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Imports
 import { Bubble } from 'react-chartjs-2'
@@ -16,18 +16,18 @@ import CustomChip from 'src/@core/components/mui/chip'
 
 const ChartjsBubbleChart = props => {
   // ** Props
-  const { yellow, primary, labelColor, borderColor, gridLineColor } = props
+  const { yellow, primary, labelColor, borderColor } = props
 
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    animation: { duration: 2000 },
     scales: {
       x: {
         min: 0,
         max: 140,
         grid: {
-          borderColor,
-          color: gridLineColor
+          color: borderColor
         },
         ticks: {
           stepSize: 10,
@@ -38,8 +38,7 @@ const ChartjsBubbleChart = props => {
         min: 0,
         max: 400,
         grid: {
-          borderColor,
-          color: gridLineColor
+          color: borderColor
         },
         ticks: {
           stepSize: 100,
@@ -53,7 +52,6 @@ const ChartjsBubbleChart = props => {
   }
 
   const data = {
-    animation: { duration: 10000 },
     datasets: [
       {
         label: 'Dataset 1',
@@ -102,9 +100,7 @@ const ChartjsBubbleChart = props => {
     <Card>
       <CardHeader
         title='Bubble Chart'
-        titleTypographyProps={{ variant: 'h6' }}
         subheader='Spending on various categories'
-        subheaderTypographyProps={{ variant: 'caption' }}
         sx={{
           flexDirection: ['column', 'row'],
           alignItems: ['flex-start', 'center'],
@@ -121,8 +117,8 @@ const ChartjsBubbleChart = props => {
               color='success'
               sx={{ fontWeight: 500, borderRadius: 1, fontSize: '0.875rem' }}
               label={
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <ArrowUp sx={{ fontSize: '1rem', mr: 1 }} />
+                <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 1 } }}>
+                  <Icon icon='mdi:arrow-up' fontSize='1rem' />
                   <span>22%</span>
                 </Box>
               }
@@ -131,7 +127,7 @@ const ChartjsBubbleChart = props => {
         }
       />
       <CardContent>
-        <Bubble data={data} options={options} height={450} />
+        <Bubble data={data} height={450} options={options} />
       </CardContent>
     </Card>
   )

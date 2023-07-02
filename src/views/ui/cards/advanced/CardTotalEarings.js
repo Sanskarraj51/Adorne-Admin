@@ -2,14 +2,15 @@
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import LinearProgress from '@mui/material/LinearProgress'
 
-// ** Icons Imports
-import MenuUp from 'mdi-material-ui/MenuUp'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
+
+// ** Custom Components Imports
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const data = [
   {
@@ -37,11 +38,11 @@ const CardTotalEarnings = () => {
     <Card>
       <CardHeader
         title='Total Earning'
-        titleTypographyProps={{ sx: { lineHeight: '2rem !important', letterSpacing: '0.15px !important' } }}
         action={
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', sx: { color: 'text.primary' } }}
+          />
         }
       />
       <CardContent sx={{ pt: theme => `${theme.spacing(2.5)} !important` }}>
@@ -49,10 +50,12 @@ const CardTotalEarnings = () => {
           <Typography variant='h4' sx={{ mr: 0.5 }}>
             $42,880
           </Typography>
-          <MenuUp sx={{ mr: 0.5, fontSize: '1.875rem', color: 'success.main' }} />
-          <Typography variant='body2' sx={{ fontWeight: 600, color: 'success.main' }}>
-            22%
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', color: 'success.main', '& svg': { mr: 0.5 } }}>
+            <Icon icon='mdi:menu-up' fontSize='1.875rem' />
+            <Typography variant='body2' sx={{ fontWeight: 600, color: 'success.main' }}>
+              22%
+            </Typography>
+          </Box>
         </Box>
 
         <Typography component='p' variant='caption' sx={{ mb: 7.5 }}>

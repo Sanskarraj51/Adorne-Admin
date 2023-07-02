@@ -1,6 +1,4 @@
-export const SnackbarAlertJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const SnackbarAlertJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { Fragment, useState } from 'react'
 
 // ** MUI Imports
@@ -8,9 +6,16 @@ import Alert from '@mui/material/Alert'
 import Button from '@mui/material/Button'
 import Snackbar from '@mui/material/Snackbar'
 
+// ** Hook Import
+import { useSettings } from 'src/@core/hooks/useSettings'
+
 const SnackbarAlert = () => {
   // ** State
   const [open, setOpen] = useState(false)
+
+  // ** Hook & Var
+  const { settings } = useSettings()
+  const { skin } = settings
 
   const handleClick = () => {
     setOpen(true)
@@ -29,7 +34,7 @@ const SnackbarAlert = () => {
         Open alert snackbar
       </Button>
       <Snackbar open={open} onClose={handleClose} autoHideDuration={3000}>
-        <Alert variant='filled' elevation={3} onClose={handleClose} severity='success'>
+        <Alert variant='filled' elevation={skin === 'bordered' ? 0 : 3} onClose={handleClose} severity='success'>
           This is a success message!
         </Alert>
       </Snackbar>
@@ -38,13 +43,78 @@ const SnackbarAlert = () => {
 }
 
 export default SnackbarAlert
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SnackbarConsecutiveJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const SnackbarControlSlideDirectionJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
+import { Fragment, useState } from 'react'
+
+// ** MUI Imports
+import Button from '@mui/material/Button'
+import Snackbar from '@mui/material/Snackbar'
+import Slide from '@mui/material/Slide'
+
+const TransitionLeft = props => {
+  return <Slide {...props} direction='left' />
+}
+
+const TransitionUp = props => {
+  return <Slide {...props} direction='up' />
+}
+
+const TransitionRight = props => {
+  return <Slide {...props} direction='right' />
+}
+
+const TransitionDown = props => {
+  return <Slide {...props} direction='down' />
+}
+
+const SnackbarControlSlideDirection = () => {
+  // ** States
+  const [open, setOpen] = useState(false)
+  const [transition, setTransition] = useState(undefined)
+
+  const handleClick = Transition => () => {
+    setTransition(() => Transition)
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  return (
+    <Fragment>
+      <div className='demo-space-x'>
+        <Button variant='outlined' onClick={handleClick(TransitionLeft)}>
+          Right
+        </Button>
+        <Button variant='outlined' onClick={handleClick(TransitionUp)}>
+          Up
+        </Button>
+        <Button variant='outlined' onClick={handleClick(TransitionRight)}>
+          Left
+        </Button>
+        <Button variant='outlined' onClick={handleClick(TransitionDown)}>
+          Down
+        </Button>
+      </div>
+      <Snackbar
+        open={open}
+        onClose={handleClose}
+        message='I love snacks'
+        autoHideDuration={3000}
+        TransitionComponent={transition}
+        key={transition ? transition.name : ''}
+      />
+    </Fragment>
+  )
+}
+
+export default SnackbarControlSlideDirection
+`}</code></pre>) 
+
+export const SnackbarConsecutiveJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { Fragment, useEffect, useState } from 'react'
 
 // ** MUI Imports
@@ -114,86 +184,63 @@ const SnackbarConsecutive = () => {
 }
 
 export default SnackbarConsecutive
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SnackbarControlSlideDirectionJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const SnackbarSimpleJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { Fragment, useState } from 'react'
 
 // ** MUI Imports
 import Button from '@mui/material/Button'
 import Snackbar from '@mui/material/Snackbar'
-import Slide from '@mui/material/Slide'
+import IconButton from '@mui/material/IconButton'
 
-const TransitionLeft = props => {
-  return <Slide {...props} direction='left' />
-}
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
-const TransitionUp = props => {
-  return <Slide {...props} direction='up' />
-}
-
-const TransitionRight = props => {
-  return <Slide {...props} direction='right' />
-}
-
-const TransitionDown = props => {
-  return <Slide {...props} direction='down' />
-}
-
-const SnackbarControlSlideDirection = () => {
-  // ** States
+const SnackbarSimple = () => {
+  // ** State
   const [open, setOpen] = useState(false)
-  const [transition, setTransition] = useState(undefined)
 
-  const handleClick = Transition => () => {
-    setTransition(() => Transition)
+  const handleClick = () => {
     setOpen(true)
   }
 
-  const handleClose = () => {
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
     setOpen(false)
   }
 
   return (
     <Fragment>
-      <div className='demo-space-x'>
-        <Button variant='outlined' onClick={handleClick(TransitionLeft)}>
-          Right
-        </Button>
-        <Button variant='outlined' onClick={handleClick(TransitionUp)}>
-          Up
-        </Button>
-        <Button variant='outlined' onClick={handleClick(TransitionRight)}>
-          Left
-        </Button>
-        <Button variant='outlined' onClick={handleClick(TransitionDown)}>
-          Down
-        </Button>
-      </div>
+      <Button variant='outlined' onClick={handleClick}>
+        Open simple snackbar
+      </Button>
       <Snackbar
         open={open}
         onClose={handleClose}
-        message='I love snacks'
+        message='Note archived'
         autoHideDuration={3000}
-        TransitionComponent={transition}
-        key={transition ? transition.name : ''}
+        action={
+          <Fragment>
+            <Button size='small' onClick={handleClose}>
+              Undo
+            </Button>
+            <IconButton size='small' aria-label='close' color='inherit' onClick={handleClose}>
+              <Icon icon='mdi:close' fontSize={20} />
+            </IconButton>
+          </Fragment>
+        }
       />
     </Fragment>
   )
 }
 
-export default SnackbarControlSlideDirection
-`}</code>
-  </pre>
-)
+export default SnackbarSimple
+`}</code></pre>) 
 
-export const SnackbarPositionedJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const SnackbarPositionedJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { Fragment, useState } from 'react'
 
 // ** MUI Imports
@@ -252,71 +299,9 @@ const SnackbarPositioned = () => {
 }
 
 export default SnackbarPositioned
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
 
-export const SnackbarSimpleJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
-import { Fragment, useState } from 'react'
-
-// ** MUI Imports
-import Button from '@mui/material/Button'
-import Snackbar from '@mui/material/Snackbar'
-import IconButton from '@mui/material/IconButton'
-
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-
-const SnackbarSimple = () => {
-  // ** State
-  const [open, setOpen] = useState(false)
-
-  const handleClick = () => {
-    setOpen(true)
-  }
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return
-    }
-    setOpen(false)
-  }
-
-  return (
-    <Fragment>
-      <Button variant='outlined' onClick={handleClick}>
-        Open simple snackbar
-      </Button>
-      <Snackbar
-        open={open}
-        onClose={handleClose}
-        message='Note archived'
-        autoHideDuration={3000}
-        action={
-          <Fragment>
-            <Button size='small' onClick={handleClose}>
-              UNDO
-            </Button>
-            <IconButton size='small' aria-label='close' color='inherit' onClick={handleClose}>
-              <Close fontSize='small' />
-            </IconButton>
-          </Fragment>
-        }
-      />
-    </Fragment>
-  )
-}
-
-export default SnackbarSimple
-`}</code>
-  </pre>
-)
-
-export const SnackbarTransitionJSXCode = (
-  <pre className='language-jsx'>
-    <code className='language-jsx'>{`// ** React Imports
+export const SnackbarTransitionJSXCode = (<pre className='language-jsx'><code className='language-jsx'>{`// ** React Imports
 import { Fragment, useState } from 'react'
 
 // ** MUI Imports
@@ -381,6 +366,5 @@ const SnackbarTransition = () => {
 }
 
 export default SnackbarTransition
-`}</code>
-  </pre>
-)
+`}</code></pre>) 
+

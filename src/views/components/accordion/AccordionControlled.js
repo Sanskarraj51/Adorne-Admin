@@ -7,8 +7,8 @@ import Typography from '@mui/material/Typography'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 
-// ** Icons Imports
-import ChevronDown from 'mdi-material-ui/ChevronDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const AccordionControlled = () => {
   // ** State
@@ -22,9 +22,9 @@ const AccordionControlled = () => {
     <div>
       <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <AccordionSummary
-          expandIcon={<ChevronDown />}
           id='controlled-panel-header-1'
           aria-controls='controlled-panel-content-1'
+          expandIcon={<Icon icon='mdi:chevron-down' />}
         >
           <Typography>Accordion 1</Typography>
         </AccordionSummary>
@@ -38,9 +38,9 @@ const AccordionControlled = () => {
 
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <AccordionSummary
-          expandIcon={<ChevronDown />}
           id='controlled-panel-header-2'
           aria-controls='controlled-panel-content-2'
+          expandIcon={<Icon icon='mdi:chevron-down' />}
         >
           <Typography>Accordion 2</Typography>
         </AccordionSummary>
@@ -54,9 +54,9 @@ const AccordionControlled = () => {
 
       <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
         <AccordionSummary
-          expandIcon={<ChevronDown />}
           id='controlled-panel-header-3'
           aria-controls='controlled-panel-content-3'
+          expandIcon={<Icon icon='mdi:chevron-down' />}
         >
           <Typography>Accordion 3</Typography>
         </AccordionSummary>

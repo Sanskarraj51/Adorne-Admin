@@ -10,7 +10,7 @@ import CustomChip from 'src/@core/components/mui/chip'
 
 const CardStatsCharacter = ({ data }) => {
   // ** Vars
-  const { title, chipColor, chipText, src, stats, trend, trendNumber } = data
+  const { title, chipText, src, stats, trendNumber, trend = 'positive', chipColor = 'primary' } = data
 
   return (
     <Card sx={{ overflow: 'visible', position: 'relative' }}>
@@ -44,8 +44,3 @@ const CardStatsCharacter = ({ data }) => {
 }
 
 export default CardStatsCharacter
-
-CardStatsCharacter.defaultProps = {
-  trend: 'positive',
-  chipColor: 'primary'
-}

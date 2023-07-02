@@ -25,6 +25,7 @@ const CardStatsLineChart = () => {
     tooltip: { enabled: false },
     grid: {
       strokeDashArray: 6,
+      borderColor: theme.palette.divider,
       xaxis: {
         lines: { show: true }
       },

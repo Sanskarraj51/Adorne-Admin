@@ -4,8 +4,8 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import HelpCircleOutline from 'mdi-material-ui/HelpCircleOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomAvatar from 'src/@core/components/mui/avatar'
@@ -15,7 +15,7 @@ const CardSupport = () => {
     <Card>
       <CardContent sx={{ display: 'flex', textAlign: 'center', alignItems: 'center', flexDirection: 'column' }}>
         <CustomAvatar skin='light' sx={{ width: 56, height: 56, mb: 2 }}>
-          <HelpCircleOutline sx={{ fontSize: '2rem' }} />
+          <Icon icon='mdi:help-circle-outline' fontSize='2rem' />
         </CustomAvatar>
         <Typography variant='h6' sx={{ mb: 2 }}>
           Support

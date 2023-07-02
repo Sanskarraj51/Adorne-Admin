@@ -1,15 +1,15 @@
-const input = theme => {
+const input = () => {
   return {
     MuiInputLabel: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           color: theme.palette.text.secondary
-        }
+        })
       }
     },
     MuiInput: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           lineHeight: '1.5rem',
           '&:before': {
             borderBottom: `1px solid rgba(${theme.palette.customColors.main}, 0.22)`
@@ -20,12 +20,12 @@ const input = theme => {
           '&.Mui-disabled:before': {
             borderBottomStyle: 'solid'
           }
-        }
+        })
       }
     },
     MuiFilledInput: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           borderTopLeftRadius: 8,
           borderTopRightRadius: 8,
           backgroundColor: `rgba(${theme.palette.customColors.main}, 0.05)`,
@@ -44,14 +44,14 @@ const input = theme => {
               borderBottomStyle: 'solid'
             }
           }
-        }
+        })
       }
     },
     MuiOutlinedInput: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           borderRadius: 8,
-          '&:hover:not(.Mui-focused):not(.Mui-disabled) .MuiOutlinedInput-notchedOutline': {
+          '&:hover:not(.Mui-focused):not(.Mui-disabled):not(.Mui-error) .MuiOutlinedInput-notchedOutline': {
             borderColor: `rgba(${theme.palette.customColors.main}, 0.32)`
           },
           '&:hover.Mui-error .MuiOutlinedInput-notchedOutline': {
@@ -63,7 +63,7 @@ const input = theme => {
           '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
             borderColor: theme.palette.text.disabled
           }
-        }
+        })
       }
     }
   }

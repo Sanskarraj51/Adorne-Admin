@@ -70,9 +70,11 @@ const columns = [
   },
   {
     flex: 0.175,
+    type: 'date',
     minWidth: 120,
     headerName: 'Date',
     field: 'start_date',
+    valueGetter: params => new Date(params.value),
     renderCell: params => (
       <Typography variant='body2' sx={{ color: 'text.primary' }}>
         {params.row.start_date}
@@ -123,16 +125,15 @@ const columns = [
 ]
 
 const TableServerSide = () => {
-  // ** State
-  const [page, setPage] = useState(0)
+  // ** States
   const [total, setTotal] = useState(0)
   const [sort, setSort] = useState('asc')
-  const [pageSize, setPageSize] = useState(7)
   const [rows, setRows] = useState([])
   const [searchValue, setSearchValue] = useState('')
   const [sortColumn, setSortColumn] = useState('full_name')
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
   function loadServerRows(currentPage, data) {
-    return data.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+    return data.slice(currentPage * paginationModel.pageSize, (currentPage + 1) * paginationModel.pageSize)
   }
 
   const fetchTableData = useCallback(
@@ -147,11 +148,11 @@ const TableServerSide = () => {
         })
         .then(res => {
           setTotal(res.data.total)
-          setRows(loadServerRows(page, res.data.data))
+          setRows(loadServerRows(paginationModel.page, res.data.data))
         })
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [page, pageSize]
+    [paginationModel]
   )
   useEffect(() => {
     fetchTableData(sort, searchValue, sortColumn)
@@ -183,15 +184,17 @@ const TableServerSide = () => {
         rowCount={total}
         columns={columns}
         checkboxSelection
-        pageSize={pageSize}
         sortingMode='server'
         paginationMode='server'
+        pageSizeOptions={[7, 10, 25, 50]}
+        paginationModel={paginationModel}
         onSortModelChange={handleSortModel}
-        rowsPerPageOptions={[7, 10, 25, 50]}
-        onPageChange={newPage => setPage(newPage)}
-        components={{ Toolbar: ServerSideToolbar }}
-        onPageSizeChange={newPageSize => setPageSize(newPageSize)}
-        componentsProps={{
+        slots={{ toolbar: ServerSideToolbar }}
+        onPaginationModelChange={setPaginationModel}
+        slotProps={{
+          baseButton: {
+            variant: 'outlined'
+          },
           toolbar: {
             value: searchValue,
             clearSearch: () => handleSearch(''),

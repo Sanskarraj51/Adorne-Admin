@@ -15,7 +15,7 @@ const AlertsBasic = () => {
       <Alert
         action={
           <Button color='inherit' size='small'>
-            UNDO
+            Undo
           </Button>
         }
         variant='outlined'
@@ -25,7 +25,7 @@ const AlertsBasic = () => {
       <Alert
         action={
           <Button color='inherit' size='small'>
-            UNDO
+            Undo
           </Button>
         }
         variant='filled'

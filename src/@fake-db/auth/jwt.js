@@ -4,6 +4,9 @@ import jwt from 'jsonwebtoken'
 // ** Mock Adapter
 import mock from 'src/@fake-db/mock'
 
+// ** Default AuthConfig
+import defaultAuthConfig from 'src/configs/auth'
+
 const users = [
   {
     id: 1,
@@ -25,8 +28,9 @@ const users = [
 
 // ! These two secrets should be in .env file and not in any other file
 const jwtConfig = {
-  secret: 'dd5f3089-40c3-403d-af14-d0c228b05cb4',
-  refreshTokenSecret: '7c4c1c50-3230-45bf-9eae-c9b2e401c767'
+  secret: process.env.NEXT_PUBLIC_JWT_SECRET,
+  expirationTime: process.env.NEXT_PUBLIC_JWT_EXPIRATION,
+  refreshTokenSecret: process.env.NEXT_PUBLIC_JWT_REFRESH_TOKEN_SECRET
 }
 mock.onPost('/jwt/login').reply(request => {
   const { email, password } = JSON.parse(request.data)
@@ -36,10 +40,11 @@ mock.onPost('/jwt/login').reply(request => {
   }
   const user = users.find(u => u.email === email && u.password === password)
   if (user) {
-    const accessToken = jwt.sign({ id: user.id }, jwtConfig.secret)
+    const accessToken = jwt.sign({ id: user.id }, jwtConfig.secret, { expiresIn: jwtConfig.expirationTime })
 
     const response = {
-      accessToken
+      accessToken,
+      userData: { ...user, password: undefined }
     }
 
     return [200, response]
@@ -92,19 +97,57 @@ mock.onPost('/jwt/register').reply(request => {
   }
 })
 mock.onGet('/auth/me').reply(config => {
+  // ** Get token from header
   // @ts-ignore
   const token = config.headers.Authorization
 
-  // get the decoded payload and header
-  const decoded = jwt.decode(token, { complete: true })
-  if (decoded) {
-    // @ts-ignore
-    const { id: userId } = decoded.payload
-    const userData = JSON.parse(JSON.stringify(users.find(u => u.id === userId)))
-    delete userData.password
+  // ** Default response
+  let response = [200, {}]
 
-    return [200, { userData }]
-  } else {
-    return [401, { error: { error: 'Invalid User' } }]
-  }
+  // ** Checks if the token is valid or expired
+  jwt.verify(token, jwtConfig.secret, (err, decoded) => {
+    // ** If token is expired
+    if (err) {
+      // ** If onTokenExpiration === 'logout' then send 401 error
+      if (defaultAuthConfig.onTokenExpiration === 'logout') {
+        // ** 401 response will logout user from AuthContext file
+        response = [401, { error: { error: 'Invalid User' } }]
+      } else {
+        // ** If onTokenExpiration === 'refreshToken' then generate the new token
+        const oldTokenDecoded = jwt.decode(token, { complete: true })
+
+        // ** Get user id from old token
+        // @ts-ignore
+        const { id: userId } = oldTokenDecoded.payload
+
+        // ** Get user that matches id in token
+        const user = users.find(u => u.id === userId)
+
+        // ** Sign a new token
+        const accessToken = jwt.sign({ id: userId }, jwtConfig.secret, {
+          expiresIn: jwtConfig.expirationTime
+        })
+
+        // ** Set new token in localStorage
+        window.localStorage.setItem(defaultAuthConfig.storageTokenKeyName, accessToken)
+        const obj = { userData: { ...user, password: undefined } }
+
+        // ** return 200 with user data
+        response = [200, obj]
+      }
+    } else {
+      // ** If token is valid do nothing
+      // @ts-ignore
+      const userId = decoded.id
+
+      // ** Get user that matches id in token
+      const userData = JSON.parse(JSON.stringify(users.find(u => u.id === userId)))
+      delete userData.password
+
+      // ** return 200 with user data
+      response = [200, { userData }]
+    }
+  })
+
+  return response
 })

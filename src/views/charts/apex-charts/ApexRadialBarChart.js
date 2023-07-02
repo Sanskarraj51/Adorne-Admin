@@ -1,10 +1,14 @@
 // ** MUI Imports
 import Card from '@mui/material/Card'
+import { useTheme } from '@mui/material/styles'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 
 // ** Component Import
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
+
+// ** Util Import
+import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
 const radialBarColors = {
   series1: '#fdd835',
@@ -15,29 +19,48 @@ const radialBarColors = {
 }
 
 const ApexRadialBarChart = () => {
+  // ** Hook
+  const theme = useTheme()
+
   const options = {
+    stroke: { lineCap: 'round' },
+    labels: ['Comments', 'Replies', 'Shares'],
+    legend: {
+      show: true,
+      position: 'bottom',
+      labels: {
+        colors: theme.palette.text.secondary
+      },
+      markers: {
+        offsetX: -3
+      },
+      itemMargin: {
+        vertical: 3,
+        horizontal: 10
+      }
+    },
     colors: [radialBarColors.series1, radialBarColors.series2, radialBarColors.series4],
     plotOptions: {
       radialBar: {
-        hollow: {
-          size: '30%'
-        },
+        hollow: { size: '30%' },
         track: {
-          margin: 15
+          margin: 15,
+          background: hexToRGBA(theme.palette.customColors.trackBg, 1)
         },
         dataLabels: {
           name: {
-            fontSize: '2rem',
-            fontFamily: 'Montserrat'
+            fontSize: '2rem'
           },
           value: {
             fontSize: '1rem',
-            fontFamily: 'Montserrat'
+            color: theme.palette.text.secondary
           },
           total: {
             show: true,
+            fontWeight: 400,
             label: 'Comments',
             fontSize: '1.125rem',
+            color: theme.palette.text.primary,
             formatter: function (w) {
               const totalValue =
                 w.globals.seriesTotals.reduce((a, b) => {
@@ -58,22 +81,14 @@ const ApexRadialBarChart = () => {
         top: -35,
         bottom: -30
       }
-    },
-    legend: {
-      show: true,
-      position: 'bottom'
-    },
-    stroke: {
-      lineCap: 'round'
-    },
-    labels: ['Comments', 'Replies', 'Shares']
+    }
   }
 
   return (
     <Card>
-      <CardHeader title='Statistics' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Statistics' />
       <CardContent>
-        <ReactApexcharts options={options} series={[80, 50, 35]} type='radialBar' height={400} />
+        <ReactApexcharts type='radialBar' height={400} options={options} series={[80, 50, 35]} />
       </CardContent>
     </Card>
   )

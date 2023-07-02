@@ -8,30 +8,18 @@ import Typography from '@mui/material/Typography'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import MuiAccordion from '@mui/material/Accordion'
-import MuiCardContent from '@mui/material/CardContent'
 
-// ** Icons Imports
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-
-// ** Styled Components
-const CardContent = styled(MuiCardContent)(({ theme }) => ({
-  padding: `${theme.spacing(20, 35)} !important`,
-  [theme.breakpoints.down('lg')]: {
-    padding: `${theme.spacing(12.5, 20)} !important`
-  },
-  [theme.breakpoints.down('sm')]: {
-    padding: `${theme.spacing(10, 5)} !important`
-  }
-}))
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const Accordion = styled(MuiAccordion)(({ theme }) => ({
-  border: `1px solid ${theme.palette.divider}`,
-  '&:before': {
-    height: 0
-  },
-  '&.Mui-expanded': {
-    boxShadow: 'none'
-  }
+  '&:before': { display: 'none' },
+  boxShadow: `${theme.shadows[0]} !important`,
+  borderLeft: `1px solid ${theme.palette.divider}`,
+  borderRight: `1px solid ${theme.palette.divider}`,
+  borderBottom: `1px solid ${theme.palette.divider}`,
+  '&:first-of-type': { borderTop: `1px solid ${theme.palette.divider}` },
+  '&.Mui-expanded + .MuiAccordion-root': { borderTop: `1px solid ${theme.palette.divider}` }
 }))
 
 const PricingFooter = props => {
@@ -50,8 +38,8 @@ const PricingFooter = props => {
       return (
         <Accordion key={item.id} elevation={0} expanded={expanded === item.id} onChange={handleChange(item.id)}>
           <AccordionSummary
-            expandIcon={<ChevronDown />}
             id={`pricing-accordion-${item.id}-header`}
+            expandIcon={<Icon icon='mdi:chevron-down' />}
             aria-controls={`pricing-accordion-${item.id}-content`}
           >
             <Typography>{item.question}</Typography>
@@ -65,17 +53,17 @@ const PricingFooter = props => {
   }
 
   return (
-    <CardContent>
-      <Box sx={{ mb: 12, textAlign: 'center' }}>
+    <>
+      <Box sx={{ mb: 11.75, textAlign: 'center' }}>
         <Typography variant='h5' sx={{ mb: 2.5 }}>
           FAQs
         </Typography>
         <Typography variant='body2'>Let us help answer the most common questions.</Typography>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Box>{renderAccordion()}</Box>
+        <div>{renderAccordion()}</div>
       </Box>
-    </CardContent>
+    </>
   )
 }
 

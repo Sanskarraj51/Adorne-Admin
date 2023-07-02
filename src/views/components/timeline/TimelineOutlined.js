@@ -1,4 +1,4 @@
-// ** MUI Import
+// ** MUI Imports
 import Box from '@mui/material/Box'
 import Avatar from '@mui/material/Avatar'
 import Divider from '@mui/material/Divider'
@@ -12,10 +12,8 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator'
 import TimelineConnector from '@mui/lab/TimelineConnector'
 import MuiTimeline from '@mui/lab/Timeline'
 
-// ** Icons Imports
-import ArrowRight from 'mdi-material-ui/ArrowRight'
-import MessageOutline from 'mdi-material-ui/MessageOutline'
-import PhoneDialOutline from 'mdi-material-ui/PhoneDialOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // Styled Timeline component
 const Timeline = styled(MuiTimeline)({
@@ -42,7 +40,7 @@ const TimelineRight = () => {
           <TimelineDot color='error' variant='outlined' />
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent>
+        <TimelineContent sx={{ '& svg': { verticalAlign: 'bottom', mx: 4 } }}>
           <Box sx={{ mb: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
             <Typography variant='body2' sx={{ mr: 2, fontWeight: 600, color: 'text.primary' }}>
               Get on the flight
@@ -50,8 +48,7 @@ const TimelineRight = () => {
             <Typography variant='caption'>Wednesday</Typography>
           </Box>
           <Typography variant='body2' sx={{ color: 'text.primary' }}>
-            <span>Charles de Gaulle Airport, Paris</span>{' '}
-            <ArrowRight fontSize='small' sx={{ verticalAlign: 'bottom', mx: 4 }} />{' '}
+            <span>Charles de Gaulle Airport, Paris</span> <Icon icon='mdi:arrow-right' fontSize={20} />{' '}
             <span>Heathrow Airport, London</span>
           </Typography>
           <Typography variant='caption'>6:30 AM</Typography>
@@ -79,7 +76,7 @@ const TimelineRight = () => {
           <Typography variant='body2' sx={{ color: 'text.primary' }}>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus quos, voluptates voluptas rem.
           </Typography>
-          <Divider sx={{ my: 3 }} />
+          <Divider sx={{ my: theme => `${theme.spacing(3)} !important` }} />
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex' }}>
               <Avatar src='/images/avatars/2.png' sx={{ width: '2rem', height: '2rem', mr: 2 }} />
@@ -92,10 +89,10 @@ const TimelineRight = () => {
             </Box>
             <div>
               <IconButton sx={{ color: 'text.secondary' }}>
-                <MessageOutline fontSize='small' />
+                <Icon icon='mdi:message-outline' fontSize={20} />
               </IconButton>
               <IconButton sx={{ color: 'text.secondary' }}>
-                <PhoneDialOutline fontSize='small' />
+                <Icon icon='mdi:phone-dial-outline' fontSize={20} />
               </IconButton>
             </div>
           </Box>
@@ -143,12 +140,12 @@ const TimelineRight = () => {
               </Typography>
               <Typography variant='caption'>$375.00</Typography>
             </Box>
-            <Box>
+            <div>
               <Typography variant='subtitle2' sx={{ fontWeight: 600 }}>
                 Quantity
               </Typography>
               <Typography variant='caption'>1</Typography>
-            </Box>
+            </div>
           </Box>
         </TimelineContent>
       </TimelineItem>

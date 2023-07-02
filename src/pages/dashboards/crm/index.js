@@ -2,8 +2,7 @@
 import Grid from '@mui/material/Grid'
 
 // ** Icon Imports
-import CartPlus from 'mdi-material-ui/CartPlus'
-import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Component Import
 import CardStatisticsVertical from 'src/@core/components/card-statistics/card-stats-vertical'
@@ -38,9 +37,9 @@ const CrmDashboard = () => {
             stats='155k'
             color='primary'
             trendNumber='+22%'
-            icon={<CartPlus />}
             title='Total Orders'
             chipText='Last 4 Month'
+            icon={<Icon icon='mdi:cart-plus' />}
           />
         </Grid>
         <Grid item xs={6} sm={3} md={2}>
@@ -49,8 +48,8 @@ const CrmDashboard = () => {
             color='success'
             trendNumber='+38%'
             title='Total Sales'
-            icon={<CurrencyUsd />}
             chipText='Last Six Month'
+            icon={<Icon icon='mdi:currency-usd' />}
           />
         </Grid>
         <Grid item xs={6} sm={3} md={2}>

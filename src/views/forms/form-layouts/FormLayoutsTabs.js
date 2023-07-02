@@ -24,9 +24,8 @@ import Select from '@mui/material/Select'
 // ** Third Party Imports
 import DatePicker from 'react-datepicker'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
@@ -58,10 +57,6 @@ const FormLayoutsTabs = () => {
     setValues({ ...values, showPassword: !values.showPassword })
   }
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
-  }
-
   // Handle Confirm Password
   const handleConfirmChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -69,10 +64,6 @@ const FormLayoutsTabs = () => {
 
   const handleClickShowConfirmPassword = () => {
     setValues({ ...values, showPassword2: !values.showPassword2 })
-  }
-
-  const handleMouseDownConfirmPassword = event => {
-    event.preventDefault()
   }
 
   // Handle Select
@@ -179,10 +170,10 @@ const FormLayoutsTabs = () => {
                           <IconButton
                             edge='end'
                             onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
+                            onMouseDown={e => e.preventDefault()}
                             aria-label='toggle password visibility'
                           >
-                            {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                            <Icon icon={values.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                           </IconButton>
                         </InputAdornment>
                       }
@@ -202,11 +193,11 @@ const FormLayoutsTabs = () => {
                         <InputAdornment position='end'>
                           <IconButton
                             edge='end'
+                            onMouseDown={e => e.preventDefault()}
                             aria-label='toggle password visibility'
                             onClick={handleClickShowConfirmPassword}
-                            onMouseDown={handleMouseDownConfirmPassword}
                           >
-                            {values.showPassword2 ? <EyeOutline /> : <EyeOffOutline />}
+                            <Icon icon={values.showPassword2 ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                           </IconButton>
                         </InputAdornment>
                       }
@@ -239,13 +230,13 @@ const FormLayoutsTabs = () => {
               </Grid>
             </TabPanel>
           </CardContent>
-          <Divider sx={{ m: 0 }} />
+          <Divider sx={{ m: '0 !important' }} />
           <CardActions>
             <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
               Submit
             </Button>
-            <Button size='large' variant='outlined' color='secondary'>
-              Cancel
+            <Button type='reset' size='large' variant='outlined' color='secondary'>
+              Reset
             </Button>
           </CardActions>
         </form>

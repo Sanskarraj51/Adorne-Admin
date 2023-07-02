@@ -1,10 +1,10 @@
-const Button = theme => {
+const Button = () => {
   return {
     MuiFab: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           boxShadow: theme.shadows[5]
-        }
+        })
       }
     }
   }

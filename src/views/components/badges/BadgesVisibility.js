@@ -10,9 +10,8 @@ import { styled } from '@mui/material/styles'
 import ButtonGroup from '@mui/material/ButtonGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-// ** Icons Imports
-import Plus from 'mdi-material-ui/Plus'
-import Minus from 'mdi-material-ui/Minus'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // Styled component for a wrapper
 const Wrapper = styled('div')(({ theme }) => ({
@@ -40,10 +39,10 @@ const BadgesVisibility = () => {
         </Badge>
         <ButtonGroup size='small'>
           <Button aria-label='reduce' onClick={() => setCount(Math.max(count - 1, 0))}>
-            <Minus fontSize='small' />
+            <Icon icon='mdi:minus' fontSize={20} />
           </Button>
           <Button aria-label='increase' onClick={() => setCount(count + 1)}>
-            <Plus fontSize='small' />
+            <Icon icon='mdi:plus' fontSize={20} />
           </Button>
         </ButtonGroup>
       </Wrapper>

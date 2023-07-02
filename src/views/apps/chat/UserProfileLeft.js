@@ -8,6 +8,7 @@ import Badge from '@mui/material/Badge'
 import Radio from '@mui/material/Radio'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
+import Switch from '@mui/material/Switch'
 import ListItem from '@mui/material/ListItem'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
@@ -18,12 +19,8 @@ import ListItemText from '@mui/material/ListItemText'
 import ListItemButton from '@mui/material/ListItemButton'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
-// ** Icons Imports
-import Close from 'mdi-material-ui/Close'
-import BellOutline from 'mdi-material-ui/BellOutline'
-import DeleteOutline from 'mdi-material-ui/DeleteOutline'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
-import CheckCircleOutline from 'mdi-material-ui/CheckCircleOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Third Party Components
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -78,7 +75,7 @@ const UserProfileLeft = props => {
             onClick={handleUserProfileLeftSidebarToggle}
             sx={{ top: '.7rem', right: '.7rem', position: 'absolute' }}
           >
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
 
           <Box sx={{ px: 5, pb: 7, pt: 9.5, display: 'flex', flexDirection: 'column' }}>
@@ -166,18 +163,18 @@ const UserProfileLeft = props => {
                   Settings
                 </Typography>
                 <List dense sx={{ p: 0, mb: 6 }}>
-                  <ListItem disablePadding>
+                  <ListItem disablePadding secondaryAction={<Switch defaultChecked />}>
                     <ListItemButton sx={{ px: 2 }}>
                       <ListItemIcon sx={{ mr: 2 }}>
-                        <CheckCircleOutline sx={{ fontSize: '1.25rem' }} />
+                        <Icon icon='mdi:check-circle-outline' fontSize='1.25rem' />
                       </ListItemIcon>
                       <ListItemText secondary='Two-step Verification' />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem disablePadding>
+                  <ListItem disablePadding secondaryAction={<Switch defaultChecked />}>
                     <ListItemButton sx={{ px: 2 }}>
                       <ListItemIcon sx={{ mr: 2 }}>
-                        <BellOutline sx={{ fontSize: '1.25rem' }} />
+                        <Icon icon='mdi:bell-outline' fontSize='1.25rem' />
                       </ListItemIcon>
                       <ListItemText secondary='Notification' />
                     </ListItemButton>
@@ -185,7 +182,7 @@ const UserProfileLeft = props => {
                   <ListItem disablePadding>
                     <ListItemButton sx={{ px: 2 }}>
                       <ListItemIcon sx={{ mr: 2 }}>
-                        <AccountOutline sx={{ fontSize: '1.25rem' }} />
+                        <Icon icon='mdi:account-outline' fontSize='1.25rem' />
                       </ListItemIcon>
                       <ListItemText secondary='Invite Friends' />
                     </ListItemButton>
@@ -193,7 +190,7 @@ const UserProfileLeft = props => {
                   <ListItem disablePadding>
                     <ListItemButton sx={{ px: 2 }}>
                       <ListItemIcon sx={{ mr: 2 }}>
-                        <DeleteOutline sx={{ fontSize: '1.25rem' }} />
+                        <Icon icon='mdi:delete-outline' fontSize='1.25rem' />
                       </ListItemIcon>
                       <ListItemText secondary='Delete Account' />
                     </ListItemButton>

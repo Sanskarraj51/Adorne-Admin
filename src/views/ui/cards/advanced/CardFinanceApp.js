@@ -3,19 +3,17 @@ import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Avatar from '@mui/material/Avatar'
 import CardMedia from '@mui/material/CardMedia'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import AvatarGroup from '@mui/material/AvatarGroup'
 import CardContent from '@mui/material/CardContent'
 import LinearProgress from '@mui/material/LinearProgress'
 
-// ** Icons Imports
-import Paperclip from 'mdi-material-ui/Paperclip'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import CheckCircleOutline from 'mdi-material-ui/CheckCircleOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Custom Components Imports
 import CustomChip from 'src/@core/components/mui/chip'
+import OptionsMenu from 'src/@core/components/option-menu'
 
 const CardFinanceApp = () => {
   return (
@@ -39,9 +37,10 @@ const CardFinanceApp = () => {
               sx={{ height: 20, fontSize: '0.75rem', fontWeight: 500 }}
             />
           </Box>
-          <IconButton size='small' aria-label='settings' className='card-more-options'>
-            <DotsVertical />
-          </IconButton>
+          <OptionsMenu
+            options={['Last 28 Days', 'Last Month', 'Last Year']}
+            iconButtonProps={{ size: 'small', className: 'card-more-options' }}
+          />
         </Box>
 
         <Typography variant='h6' sx={{ mb: 1 }}>
@@ -70,12 +69,12 @@ const CardFinanceApp = () => {
             <Avatar src='/images/avatars/4.png' alt='Hallie Richards' />
             <Avatar src='/images/avatars/2.png' alt='Alice Cobb' />
           </AvatarGroup>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Paperclip sx={{ mr: 1, fontSize: '1.375rem', color: 'text.secondary' }} />
+          <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 1, color: 'text.secondary' } }}>
+            <Icon icon='mdi:paperclip' fontSize='1.375rem' />
             <Typography variant='body2' sx={{ mr: 2.5, fontWeight: 600 }}>
               24
             </Typography>
-            <CheckCircleOutline sx={{ mr: 1, fontSize: '1.375rem', color: 'text.secondary' }} />
+            <Icon icon='mdi:check-circle-outline' fontSize='1.375rem' />
             <Typography variant='body2' sx={{ fontWeight: 600 }}>
               74/180
             </Typography>

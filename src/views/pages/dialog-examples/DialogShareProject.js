@@ -24,12 +24,8 @@ import DialogContent from '@mui/material/DialogContent'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
 
-// ** Icons Imports
-import Link from 'mdi-material-ui/Link'
-import Close from 'mdi-material-ui/Close'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
-import AccountMultiple from 'mdi-material-ui/AccountMultiple'
-import FileDocumentOutline from 'mdi-material-ui/FileDocumentOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 // ** Configs Imports
 import themeConfig from 'src/configs/themeConfig'
@@ -141,8 +137,8 @@ const DialogShareProject = () => {
 
   return (
     <Card>
-      <CardContent sx={{ textAlign: 'center' }}>
-        <FileDocumentOutline sx={{ mb: 2, fontSize: '2rem' }} />
+      <CardContent sx={{ textAlign: 'center', '& svg': { mb: 2 } }}>
+        <Icon icon='mdi:file-document-outline' fontSize='2rem' />
         <Typography variant='h6' sx={{ mb: 4 }}>
           Share Project
         </Typography>
@@ -162,13 +158,19 @@ const DialogShareProject = () => {
         TransitionComponent={Transition}
         onBackdropClick={() => setShow(false)}
       >
-        <DialogContent sx={{ px: { xs: 8, sm: 15 }, py: { xs: 8, sm: 12.5 }, position: 'relative' }}>
+        <DialogContent
+          sx={{
+            position: 'relative',
+            px: theme => [`${theme.spacing(5)} !important`, `${theme.spacing(15)} !important`],
+            py: theme => [`${theme.spacing(8)} !important`, `${theme.spacing(12.5)} !important`]
+          }}
+        >
           <IconButton
             size='small'
             onClick={() => setShow(false)}
             sx={{ position: 'absolute', right: '1rem', top: '1rem' }}
           >
-            <Close />
+            <Icon icon='mdi:close' />
           </IconButton>
           <Box sx={{ mb: 4, textAlign: 'center' }}>
             <Typography variant='h5' sx={{ mb: 3, lineHeight: '2rem' }}>
@@ -194,7 +196,7 @@ const DialogShareProject = () => {
             id='add-members'
             options={options}
             ListboxComponent={List}
-            getOptionLabel={option => option.name}
+            getOptionLabel={option => option.name || ''}
             renderInput={params => <TextField {...params} size='small' placeholder='Add project members...' />}
             renderOption={(props, option) => (
               <ListItem {...props}>
@@ -234,7 +236,7 @@ const DialogShareProject = () => {
                         onClick={handleClick}
                         aria-controls='modal-share-examples'
                       >
-                        <ChevronDown fontSize='small' />
+                        <Icon icon='mdi:chevron-down' fontSize={20} />
                       </IconButton>
                     ) : (
                       <Fragment>
@@ -244,7 +246,7 @@ const DialogShareProject = () => {
                           onClick={handleClick}
                           sx={{ textTransform: 'capitalize' }}
                           aria-controls='modal-share-examples'
-                          endIcon={<ChevronDown fontSize='small' />}
+                          endIcon={<Icon icon='mdi:chevron-down' fontSize={20} />}
                         >
                           {member.value}
                         </Button>
@@ -256,14 +258,14 @@ const DialogShareProject = () => {
             })}
           </List>
           <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <AccountMultiple sx={{ fontSize: '1.25rem', mr: 2 }} />
+            <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 2 } }}>
+              <Icon icon='mdi:account-multiple-outline' fontSize='1.25rem' />
               <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>
                 {`Public to ${themeConfig.templateName} - Pixinvent`}
               </Typography>
             </Box>
-            <Button sx={{ lineHeight: '1.5rem' }}>
-              <Link sx={{ mr: 2 }} fontSize='small' />
+            <Button sx={{ lineHeight: '1.5rem', '& svg': { mr: 2 } }}>
+              <Icon icon='mdi:link-variant' fontSize={20} />
               Copy Project Link
             </Button>
           </Box>

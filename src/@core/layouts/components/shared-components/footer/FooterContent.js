@@ -1,8 +1,16 @@
+// ** Next Import
+import Link from 'next/link'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
-import Link from '@mui/material/Link'
+import { styled } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
+
+const LinkStyled = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  color: theme.palette.primary.main
+}))
 
 const FooterContent = () => {
   // ** Var
@@ -16,27 +24,27 @@ const FooterContent = () => {
           ❤️
         </Box>
         {` by `}
-        <Link target='_blank' href='https://pixinvent.com/'>
+        <LinkStyled target='_blank' href='https://pixinvent.com/'>
           Pixinvent
-        </Link>
+        </LinkStyled>
       </Typography>
       {hidden ? null : (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', '& :not(:last-child)': { mr: 4 } }}>
-          <Link target='_blank' href='https://themeforest.net/licenses/standard'>
+          <LinkStyled target='_blank' href='https://themeforest.net/licenses/standard'>
             License
-          </Link>
-          <Link target='_blank' href='https://1.envato.market/pixinvent_portfolio'>
+          </LinkStyled>
+          <LinkStyled target='_blank' href='https://1.envato.market/pixinvent_portfolio'>
             More Themes
-          </Link>
-          <Link
+          </LinkStyled>
+          <LinkStyled
             target='_blank'
-            href='https://pixinvent.com/demo/materialize-mui-react-nextjs-admin-template/documentation'
+            href='https://demos.pixinvent.com/materialize-nextjs-admin-template/documentation'
           >
             Documentation
-          </Link>
-          <Link target='_blank' href='https://pixinvent.ticksy.com/'>
+          </LinkStyled>
+          <LinkStyled target='_blank' href='https://pixinvent.ticksy.com/'>
             Support
-          </Link>
+          </LinkStyled>
         </Box>
       )}
     </Box>

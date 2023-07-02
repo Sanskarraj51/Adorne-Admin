@@ -30,9 +30,9 @@ const SidebarLeft = props => {
             sx={{ mb: 0.5 }}
             control={
               <Checkbox
+                color={value}
                 checked={store.selectedCalendars.includes(key)}
                 onChange={() => dispatch(handleCalendarsUpdate(key))}
-                sx={{ color: `${value}.main`, '&.Mui-checked': { color: `${value}.main` } }}
               />
             }
           />
@@ -65,9 +65,10 @@ const SidebarLeft = props => {
             boxShadow: 'none',
             width: leftSidebarWidth,
             borderTopRightRadius: 0,
+            alignItems: 'flex-start',
             borderBottomRightRadius: 0,
             p: theme => theme.spacing(5),
-            zIndex: mdAbove ? '2' : 'drawer',
+            zIndex: mdAbove ? 2 : 'drawer',
             position: mdAbove ? 'static' : 'absolute'
           },
           '& .MuiBackdrop-root': {
@@ -76,7 +77,7 @@ const SidebarLeft = props => {
           }
         }}
       >
-        <Button variant='contained' onClick={handleSidebarToggleSidebar}>
+        <Button fullWidth variant='contained' onClick={handleSidebarToggleSidebar}>
           Add Event
         </Button>
 

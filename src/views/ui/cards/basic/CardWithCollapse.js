@@ -13,9 +13,8 @@ import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 
-// ** Icons Imports
-import ChevronUp from 'mdi-material-ui/ChevronUp'
-import ChevronDown from 'mdi-material-ui/ChevronDown'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const CardWithCollapse = () => {
   // ** State
@@ -47,12 +46,12 @@ const CardWithCollapse = () => {
         >
           <Button onClick={handleClick}>Details</Button>
           <IconButton size='small' onClick={handleClick}>
-            {collapse ? <ChevronUp sx={{ fontSize: '1.875rem' }} /> : <ChevronDown sx={{ fontSize: '1.875rem' }} />}
+            <Icon fontSize='1.875rem' icon={collapse ? 'mdi:chevron-up' : 'mdi:chevron-down'} />
           </IconButton>
         </Box>
       </CardActions>
       <Collapse in={collapse}>
-        <Divider sx={{ m: 0 }} />
+        <Divider sx={{ m: '0 !important' }} />
         <CardContent>
           <Typography variant='body2'>
             I&prime;m a thing. But, like most politicians, he promised more than he could deliver. You won&prime;t have

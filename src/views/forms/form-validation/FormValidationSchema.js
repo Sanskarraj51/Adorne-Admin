@@ -19,11 +19,10 @@ import InputAdornment from '@mui/material/InputAdornment'
 import * as yup from 'yup'
 import toast from 'react-hot-toast'
 import { useForm, Controller } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+// ** Icon Imports
+import Icon from 'src/@core/components/icon'
 
 const defaultValues = {
   email: '',
@@ -79,15 +78,11 @@ const FormValidationSchema = () => {
   const handleClickShowPassword = () => {
     setState({ ...state, showPassword: !state.showPassword })
   }
-
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
-  }
   const onSubmit = () => toast.success('Form Submitted')
 
   return (
     <Card>
-      <CardHeader title='Validation Schema With OnChange' titleTypographyProps={{ variant: 'h6' }} />
+      <CardHeader title='Validation Schema With OnChange' />
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={5}>
@@ -189,10 +184,10 @@ const FormValidationSchema = () => {
                           <IconButton
                             edge='end'
                             onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
+                            onMouseDown={e => e.preventDefault()}
                             aria-label='toggle password visibility'
                           >
-                            {state.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                            <Icon icon={state.showPassword ? 'mdi:eye-outline' : 'mdi:eye-off-outline'} />
                           </IconButton>
                         </InputAdornment>
                       }
