@@ -8,6 +8,9 @@ const path = require('path')
 module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
+  env: {
+    baseUrl: 'https://my-property-go-backend.onrender.com/api'
+  },
   webpack: config => {
     config.resolve.alias = {
       ...config.resolve.alias,

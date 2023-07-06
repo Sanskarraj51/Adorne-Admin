@@ -1,4 +1,5 @@
 // ** JWT import
+import { loadingButtonClasses } from '@mui/lab'
 import jwt from 'jsonwebtoken'
 
 // ** Mock Adapter
@@ -28,9 +29,9 @@ const users = [
 
 // ! These two secrets should be in .env file and not in any other file
 const jwtConfig = {
-  secret: process.env.NEXT_PUBLIC_JWT_SECRET,
-  expirationTime: process.env.NEXT_PUBLIC_JWT_EXPIRATION,
-  refreshTokenSecret: process.env.NEXT_PUBLIC_JWT_REFRESH_TOKEN_SECRET
+  secret: 'jewldfdcdnckadmcladdCollectionlamloadingButtonClassesmaddfcvadfmc',
+  expirationTime: '7d',
+  refreshTokenSecret: 'ewdewfderfqlmqlefdlqefqefqefefqerf'
 }
 mock.onPost('/jwt/login').reply(request => {
   const { email, password } = JSON.parse(request.data)

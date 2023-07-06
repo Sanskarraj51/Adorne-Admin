@@ -97,9 +97,9 @@ const Customizer = () => {
 
   return (
     <div className='customizer'>
-      <Toggler className='customizer-toggler' onClick={() => setOpen(true)}>
+      {/* <Toggler className='customizer-toggler' onClick={() => setOpen(true)}>
         <Icon icon='mdi:cog-outline' fontSize={20} />
-      </Toggler>
+      </Toggler> */}
       <Drawer open={open} hideBackdrop anchor='right' variant='persistent'>
         <Box
           className='customizer-header'
