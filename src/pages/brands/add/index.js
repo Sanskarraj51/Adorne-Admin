@@ -48,8 +48,8 @@ const AddBrands = () => {
                 <RHFTextField
                   fullWidth
                   name='name'
-                  label='Category Name'
-                  placeholder='Fashion'
+                  label='Brand Name'
+                  placeholder='Enter Brand name'
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position='start'>
