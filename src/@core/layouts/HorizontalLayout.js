@@ -114,6 +114,7 @@ const HorizontalLayout = props => {
           <Box
             className='layout-navbar'
             sx={{
+              bgcolor: 'primary.main',
               width: '100%',
               ...(navHidden ? {} : { borderBottom: theme => `1px solid ${theme.palette.divider}` })
             }}

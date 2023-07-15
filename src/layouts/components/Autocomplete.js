@@ -529,7 +529,7 @@ const AutocompleteComponent = ({ hidden, settings }) => {
                 }}
               />
             </Box>
-            {searchValue.length === 0 ? (
+            {/* {searchValue.length === 0 ? (
               <Box
                 sx={{
                   p: 10,
@@ -543,7 +543,7 @@ const AutocompleteComponent = ({ hidden, settings }) => {
               >
                 <DefaultSuggestions setOpenDialog={setOpenDialog} />
               </Box>
-            ) : null}
+            ) : null} */}
           </Dialog>
         )}
       </Box>

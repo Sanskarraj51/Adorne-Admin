@@ -7,6 +7,7 @@
 const themeConfig = {
   // ** Layout Configs
   templateName: 'Tech Trox' /* App Name */,
+  appLogo: '/logo.svg' /* logo path */,
   layout: 'horizontal' /* vertical | horizontal */,
   mode: 'light' /* light | dark | semi-dark /*! Note: semi-dark value will only work for Vertical Layout */,
   direction: 'ltr' /* ltr | rtl */,

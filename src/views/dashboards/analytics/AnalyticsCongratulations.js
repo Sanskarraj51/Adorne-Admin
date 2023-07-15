@@ -39,8 +39,8 @@ const AnalyticsCongratulations = () => {
           <Grid item xs={12} sm={6}>
             <Typography variant='h5' sx={{ mb: 4.5 }}>
               Congratulations{' '}
-              <Box component='span' sx={{ fontWeight: 'bold' }}>
-                John
+              <Box component='span' sx={{ fontWeight: 'bold' ,textTransform:"uppercase"}}>
+              TechTrox  Admin
               </Box>
               ! 🎉
             </Typography>

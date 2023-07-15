@@ -20,12 +20,19 @@ import EcommerceMarketingSales from 'src/views/dashboards/ecommerce/EcommerceMar
 import EcommerceActivityTimeline from 'src/views/dashboards/ecommerce/EcommerceActivityTimeline'
 import EcommerceImpressionsOrders from 'src/views/dashboards/ecommerce/EcommerceImpressionsOrders'
 import EcommerceSalesOverviewWithTabs from 'src/views/dashboards/ecommerce/EcommerceSalesOverviewWithTabs'
+import AnalyticsCongratulations from 'src/views/dashboards/analytics/AnalyticsCongratulations'
 
 const EcommerceDashboard = () => {
   return (
     <ApexChartWrapper>
       <KeenSliderWrapper>
         <Grid container spacing={6} className='match-height'>
+          <Grid item xs={12} md={8}>
+            <AnalyticsCongratulations />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <EcommerceLiveVisitors />
+          </Grid>
           <Grid item xs={12} md={6}>
             <EcommerceSalesOverview />
           </Grid>
@@ -67,23 +74,17 @@ const EcommerceDashboard = () => {
             <EcommerceActivityTimeline />
           </Grid>
           <Grid item xs={12} md={6}>
-            <EcommerceSalesOverviewWithTabs />
+            {/* <EcommerceSalesOverviewWithTabs /> */}
+            <EcommerceVisitsByDay />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          {/* <Grid item xs={12} sm={6} md={3}>
             <EcommerceImpressionsOrders />
           </Grid>
           <Grid item xs={12} md={5} sx={{ order: [2, 2, 1] }}>
             <EcommerceMarketingSales />
           </Grid>
           <Grid item xs={12} sm={6} md={4} sx={{ order: [1, 1, 2] }}>
-            <EcommerceLiveVisitors />
-          </Grid>
-          <Grid item xs={12} md={8} sx={{ order: 3 }}>
-            <EcommerceTable />
-          </Grid>
-          <Grid item xs={12} md={4} sx={{ order: 3 }}>
-            <EcommerceVisitsByDay />
-          </Grid>
+          </Grid> */}
         </Grid>
       </KeenSliderWrapper>
     </ApexChartWrapper>
