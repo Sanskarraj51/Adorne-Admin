@@ -74,7 +74,7 @@ const EcommerceActivityTimeline = () => {
             </TimelineContent>
           </TimelineItem>
 
-          <TimelineItem>
+          {/* <TimelineItem>
             <TimelineSeparator>
               <TimelineDot color='primary' />
               <TimelineConnector />
@@ -128,7 +128,7 @@ const EcommerceActivityTimeline = () => {
               </Box>
               <Typography variant='body2'>Invoices have been paid to the company.</Typography>
             </TimelineContent>
-          </TimelineItem>
+          </TimelineItem> */}
         </Timeline>
       </CardContent>
     </Card>

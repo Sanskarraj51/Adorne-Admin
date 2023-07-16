@@ -156,7 +156,29 @@ const LoginPage = () => {
           <FooterIllustrationsV2 />
         </Box>
       ) : null}
-      <RightWrapper sx={skin === 'bordered' && !hidden ? { borderLeft: `1px solid ${theme.palette.divider}` } : {}}>
+      <RightWrapper
+        sx={
+          skin === 'bordered' && !hidden
+            ? { borderLeft: `1px solid ${theme.palette.divider}`,position: 'relative' }
+            : {position: 'relative'}
+        }
+      >
+        <Box
+          sx={{
+            top: 30,
+            left: '33%',
+            display: 'flex',
+            position: 'absolute',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          {themeConfig?.appLogo ? (
+            <Image alt='' width={150} height={100} style={{ margin: '1rem 0rem' }} src={themeConfig?.appLogo} />
+          ) : (
+            LogoSvg()
+          )}
+        </Box>
         <Box
           sx={{
             p: 7,
@@ -168,22 +190,6 @@ const LoginPage = () => {
           }}
         >
           <BoxWrapper>
-            <Box
-              sx={{
-                top: 30,
-                left: 40,
-                display: 'flex',
-                position: 'absolute',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-                {themeConfig?.appLogo ? (
-            <Image alt=''  objectFit='contain' width={200} height={80} style={{margin:"1rem 0rem"}} src={themeConfig?.appLogo} />
-          ) : (
-            LogoSvg()
-          )}
-            </Box>
             <Box sx={{ mb: 6 }}>
               <TypographyStyled variant='h5'>{`Welcome to ${themeConfig.templateName}! 👋🏻`}</TypographyStyled>
               <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>

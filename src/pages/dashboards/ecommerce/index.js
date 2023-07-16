@@ -21,6 +21,7 @@ import EcommerceActivityTimeline from 'src/views/dashboards/ecommerce/EcommerceA
 import EcommerceImpressionsOrders from 'src/views/dashboards/ecommerce/EcommerceImpressionsOrders'
 import EcommerceSalesOverviewWithTabs from 'src/views/dashboards/ecommerce/EcommerceSalesOverviewWithTabs'
 import AnalyticsCongratulations from 'src/views/dashboards/analytics/AnalyticsCongratulations'
+import CrmPaymentHistory from 'src/views/dashboards/crm/CrmPaymentHistory'
 
 const EcommerceDashboard = () => {
   return (
@@ -36,7 +37,7 @@ const EcommerceDashboard = () => {
           <Grid item xs={12} md={6}>
             <EcommerceSalesOverview />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          {/* <Grid item xs={12} sm={6} md={3}>
             <CardStatisticsCharacter
               data={{
                 stats: '8.14k',
@@ -47,8 +48,8 @@ const EcommerceDashboard = () => {
                 src: '/images/cards/card-stats-img-1.png'
               }}
             />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          </Grid> */}
+          {/* <Grid item xs={12} sm={6} md={3}>
             <CardStatisticsCharacter
               data={{
                 stats: '12.2k',
@@ -60,7 +61,7 @@ const EcommerceDashboard = () => {
                 src: '/images/cards/card-stats-img-2.png'
               }}
             />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} md={6}>
             <EcommerceWeeklySalesBg />
           </Grid>
@@ -77,6 +78,9 @@ const EcommerceDashboard = () => {
             {/* <EcommerceSalesOverviewWithTabs /> */}
             <EcommerceVisitsByDay />
           </Grid>
+          <Grid item xs={12} sm={6} >
+          <CrmPaymentHistory />
+        </Grid>
           {/* <Grid item xs={12} sm={6} md={3}>
             <EcommerceImpressionsOrders />
           </Grid>
