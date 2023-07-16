@@ -156,25 +156,27 @@ const LoginPage = () => {
           <FooterIllustrationsV2 />
         </Box>
       ) : null}
+
       <RightWrapper
         sx={
           skin === 'bordered' && !hidden
-            ? { borderLeft: `1px solid ${theme.palette.divider}`,position: 'relative' }
-            : {position: 'relative'}
+            ? { borderLeft: `1px solid ${theme.palette.divider}`, position: 'relative' }
+            : { position: 'relative' }
         }
       >
         <Box
           sx={{
-            top: 30,
-            left: '33%',
-            display: 'flex',
             position: 'absolute',
+            height: '40%',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center'
           }}
         >
           {themeConfig?.appLogo ? (
-            <Image alt='' width={150} height={100} style={{ margin: '1rem 0rem' }} src={themeConfig?.appLogo} />
+            <Image alt='' width={150} height={90} style={{ margin: '1rem 0rem' }} src={themeConfig?.appLogo} />
           ) : (
             LogoSvg()
           )}
@@ -190,7 +192,7 @@ const LoginPage = () => {
           }}
         >
           <BoxWrapper>
-            <Box sx={{ mb: 6 }}>
+            <Box sx={{ mb: 6, mt: 4 }}>
               <TypographyStyled variant='h5'>{`Welcome to ${themeConfig.templateName}! 👋🏻`}</TypographyStyled>
               <Typography variant='body2'>Please sign-in to your account and start the adventure</Typography>
             </Box>
