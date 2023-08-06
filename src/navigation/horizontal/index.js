@@ -6,101 +6,24 @@ const navigation = () => {
       path: '/dashboards/ecommerce'
     },
     {
-      icon: 'mdi:apps',
-      title: 'Basic',
-      children: [
-        {
-          title: 'Category',
-          icon: 'mdi:email-outline',
-          path: '/category'
-        },
-        {
-          title: 'Brand',
-          icon: 'mdi:email-outline',
-          path: '/brands'
-        },
-        // {
-        //   title: 'Chat',
-        //   icon: 'mdi:message-outline',
-        //   path: '/apps/chat'
-        // },
-        // {
-        //   title: 'Calendar',
-        //   icon: 'mdi:calendar-blank-outline',
-        //   path: '/apps/calendar'
-        // },
-        // {
-        //   title: 'Invoice',
-        //   icon: 'mdi:file-document-outline',
-        //   children: [
-        //     {
-        //       title: 'List',
-        //       path: '/apps/invoice/list'
-        //     },
-        //     {
-        //       title: 'Preview',
-        //       path: '/apps/invoice/preview'
-        //     },
-        //     {
-        //       title: 'Edit',
-        //       path: '/apps/invoice/edit'
-        //     },
-        //     {
-        //       title: 'Add',
-        //       path: '/apps/invoice/add'
-        //     }
-        //   ]
-        // },
-        // {
-        //   title: 'User',
-        //   icon: 'mdi:account-outline',
-        //   children: [
-        //     {
-        //       title: 'List',
-        //       path: '/apps/user/list'
-        //     },
-        //     {
-        //       title: 'View',
-        //       children: [
-        //         {
-        //           title: 'Overview',
-        //           path: '/apps/user/view/overview'
-        //         },
-        //         {
-        //           title: 'Security',
-        //           path: '/apps/user/view/security'
-        //         },
-        //         {
-        //           title: 'Billing & Plans',
-        //           path: '/apps/user/view/billing-plan'
-        //         },
-        //         {
-        //           title: 'Notifications',
-        //           path: '/apps/user/view/notification'
-        //         },
-        //         {
-        //           title: 'Connection',
-        //           path: '/apps/user/view/connection'
-        //         }
-        //       ]
-        //     }
-        //   ]
-        // },
-        // {
-        //   title: 'Roles & Permissions',
-        //   icon: 'mdi:shield-outline',
-        //   children: [
-        //     {
-        //       title: 'Roles',
-        //       path: '/apps/roles'
-        //     },
-        //     {
-        //       title: 'Permissions',
-        //       path: '/apps/permissions'
-        //     }
-        //   ]
-        // }
-      ]
+      title: 'Category',
+      icon: 'mdi:shape-outline',
+      path: '/category'
+    },
+    {
+      title: 'Brand',
+      icon: 'mdi-watermark',
+      path: '/brands'
+    },
+    {
+      icon: 'mdi:shopping-outline',
+      title: 'Products',
+      path: '/products'
+    },
+    {
+      icon: 'mdi-view-carousel',
+      title: 'Banner Settings',
+      path: '/banner-settings'
     },
     // {
     //   icon: 'mdi:palette-swatch-outline',

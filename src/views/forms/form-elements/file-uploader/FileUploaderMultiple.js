@@ -18,6 +18,7 @@ import Icon from 'src/@core/components/icon'
 
 // ** Third Party Imports
 import { useDropzone } from 'react-dropzone'
+import { toast } from 'react-hot-toast'
 
 // Styled component for the upload image inside the dropzone area
 const Img = styled('img')(({ theme }) => ({
@@ -46,8 +47,18 @@ const FileUploaderMultiple = () => {
 
   // ** Hooks
   const { getRootProps, getInputProps } = useDropzone({
+    maxFiles: 5,
+    maxSize: 20000000,
+    accept: {
+      'image/*': ['.png', '.jpg', '.jpeg', '.gif']
+    },
     onDrop: acceptedFiles => {
       setFiles(acceptedFiles.map(file => Object.assign(file)))
+    },
+    onDropRejected: () => {
+      toast.error('You can only upload 5 files & maximum size of 20 MB.', {
+        duration: 5000
+      })
     }
   })
 
@@ -64,6 +75,8 @@ const FileUploaderMultiple = () => {
     const filtered = uploadedFiles.filter(i => i.name !== file.name)
     setFiles([...filtered])
   }
+
+  console.log("files",files);
 
   const fileList = files.map(file => (
     <ListItem key={file.name}>
@@ -113,7 +126,7 @@ const FileUploaderMultiple = () => {
             <Button color='error' variant='outlined' onClick={handleRemoveAllFiles}>
               Remove All
             </Button>
-            <Button variant='contained'>Upload Files</Button>
+            {/* <Button variant='contained'>Upload Files</Button> */}
           </div>
         </Fragment>
       ) : null}

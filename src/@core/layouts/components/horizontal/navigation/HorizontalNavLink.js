@@ -60,12 +60,19 @@ const HorizontalNavLink = props => {
   const Wrapper = !hasParent ? List : Fragment
 
   const isNavLinkActive = () => {
-    if (router.pathname === item.path || handleURLQueries(router, item.path)) {
+    if (router.pathname === item.path || handleURLQueries(router, item.path) || router.asPath.includes(item?.path)) {
       return true
     } else {
       return false
     }
   }
+  // const isNavLinkActive = () => {
+  //   if (router.pathname === item.path || handleURLQueries(router, item.path)) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
 
   return (
     <CanViewNavLink navLink={item}>

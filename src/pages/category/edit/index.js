@@ -5,11 +5,11 @@ import IconifyIcon from 'src/@core/components/icon'
 
 import AddCategoryForm from 'src/views/pages/category/AddCategoryForm'
 
-const AddCategory = () => {
+const EditCategory = () => {
   return (
     <Card>
       <CardHeader
-        title='Add Category'
+        title='Edit Category'
         action={
           <Button component={Link} href='/category' startIcon={<IconifyIcon icon='mdi:arrow-left' />}>
             Back to Categories page
@@ -17,10 +17,10 @@ const AddCategory = () => {
         }
       />
       <CardContent>
-        <AddCategoryForm  type='Add'  />
+        <AddCategoryForm type='Edit' />
       </CardContent>
     </Card>
   )
 }
 
-export default AddCategory
+export default EditCategory

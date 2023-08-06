@@ -100,6 +100,8 @@ const App = props => {
       <CacheProvider value={emotionCache}>
         <Head>
           <title>{themeConfig.templateName}</title>
+          <link rel='icon' href='/favTech.png' sizes='any' />
+
           <meta name='keywords' content={`${themeConfig.templateName} Admin Dashboard`} />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
         </Head>

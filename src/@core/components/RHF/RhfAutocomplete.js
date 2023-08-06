@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import { FormHelperText } from '@mui/material'
 
-export const RHFAutocompleteField = props => {
+export const RHFAutocomplete = props => {
   const { control, options, name, size, handleChange } = props
   return (
     <Controller
@@ -18,7 +18,7 @@ export const RHFAutocompleteField = props => {
         return (
           <>
             <Autocomplete
-              size={size || 'small'}
+              size={size || 'medium'}
               value={
                 value
                   ? options.find(option => {

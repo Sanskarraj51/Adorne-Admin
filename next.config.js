@@ -9,7 +9,10 @@ module.exports = {
   trailingSlash: true,
   reactStrictMode: false,
   env: {
-    baseUrl: 'https://my-property-go-backend.onrender.com/api'
+    BASE_URL: process.env.BASE_URL
+  },
+  images: {
+    domains: ['images.unsplash.com']
   },
   webpack: config => {
     config.resolve.alias = {

@@ -102,8 +102,8 @@ const schema = yup.object().shape({
 })
 
 const defaultValues = {
-  password: 'admin',
-  email: 'admin@materialize.com'
+  password: '',
+  email: 'admin@gmail.com'
 }
 
 const LoginPage = () => {
@@ -133,12 +133,20 @@ const LoginPage = () => {
 
   const onSubmit = data => {
     const { email, password } = data
-    auth.login({ email, password, rememberMe }, error => {
+    auth.login({ email, password }, error => {
       console.log(error)
-      setError('email', {
-        type: 'manual',
-        message: 'Email or Password is invalid'
-      })
+
+      if (error.response?.data?.message === 'Wrong Password') {
+        setError('password', {
+          type: 'manual',
+          message: 'Password is invalid'
+        })
+      } else {
+        setError('email', {
+          type: 'manual',
+          message: 'Email or Password is invalid'
+        })
+      }
     })
   }
   const imageSource = skin === 'bordered' ? 'auth-v2-login-illustration-bordered' : 'auth-v2-login-illustration'
@@ -256,10 +264,10 @@ const LoginPage = () => {
               <Box
                 sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
               >
-                <FormControlLabel
+                {/* <FormControlLabel
                   label='Remember Me'
                   control={<Checkbox checked={rememberMe} onChange={e => setRememberMe(e.target.checked)} />}
-                />
+                /> */}
                 <Typography
                   variant='body2'
                   component={Link}
