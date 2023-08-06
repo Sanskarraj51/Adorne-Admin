@@ -25,8 +25,6 @@ const AuthProvider = ({ children }) => {
   // ** States
   const [user, setUser] = useState(defaultProvider.user)
   const [loading, setLoading] = useState(defaultProvider.loading)
-
-  console.log('loading', loading)
   // ** Hooks
   const router = useRouter()
   useEffect(() => {

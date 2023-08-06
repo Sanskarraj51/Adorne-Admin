@@ -76,8 +76,6 @@ const FileUploaderMultiple = () => {
     setFiles([...filtered])
   }
 
-  console.log("files",files);
-
   const fileList = files.map(file => (
     <ListItem key={file.name}>
       <div className='file-details'>
