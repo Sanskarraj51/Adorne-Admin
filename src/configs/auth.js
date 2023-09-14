@@ -5,4 +5,7 @@ export default {
   storageTokenKeyName: 'accessToken',
   onTokenExpiration: 'refreshToken' ,
   category: '/category' ,
+  brand: '/brand' ,
+  colors: '/colors' ,
+  product: '/product' ,
 }

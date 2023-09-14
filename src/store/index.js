@@ -9,7 +9,7 @@ import invoice from 'src/store/apps/invoice'
 import calendar from 'src/store/apps/calendar'
 import permissions from 'src/store/apps/permissions'
 import product from 'src/store/apps/product'
-
+import { useDispatch as useAppDispatch, useSelector as useAppSelector } from 'react-redux'
 
 export const store = configureStore({
   reducer: {
@@ -26,3 +26,9 @@ export const store = configureStore({
       serializableCheck: false
     })
 })
+
+const useSelector = useAppSelector
+
+const useDispatch = () => useAppDispatch()
+
+export { useSelector, useDispatch }

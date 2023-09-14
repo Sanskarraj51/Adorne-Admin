@@ -1,13 +1,15 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
+export const mediaUrl = "http://35.154.22.90:3000/"
+
+
 export const checkLoginError = err => {
-  if (err.response?.data?.chkLogin === false) {
+  if (err.response?.data?.message === 'jwt expired') {
     toast.error('Your token has expired, Kindly login again!')
     localStorage.clear()
-    // setTimeout(() => {
     window.location.reload()
-    // }, 500)
+
     return true
   } else {
     toast.error(
@@ -20,6 +22,7 @@ export const checkLoginError = err => {
 
 export const debounce = func => {
   let timer
+
   return function (...args) {
     const context = this
     if (timer) clearTimeout(timer)
@@ -69,6 +72,7 @@ export const fetchProjectListData = async () => {
     const response = await axios.get(`${process.env.BASE_URL}/projects`, {
       headers: { Authorization: `Bearer ${localStorageToken()}` }
     })
+
     return response.data
   } catch (err) {
     checkLoginError(err)
@@ -80,10 +84,10 @@ export const previewFile = file => {
   reader.readAsDataURL(file)
   reader.onload = () => {
     let fileView = reader.result
+
     return fileView
   }
 }
-
 
 export async function handlePostAPI(url, data, msg) {
   try {
@@ -102,6 +106,7 @@ export async function handlePostAPI(url, data, msg) {
     checkLoginError(e)
   }
 }
+
 export async function handlePostAPIWithoutHeader(url, data, msg) {
   try {
     const response = await axios.post(process.env.BASE_URL + url, data)
@@ -109,6 +114,7 @@ export async function handlePostAPIWithoutHeader(url, data, msg) {
       if (msg !== null) {
         toast.success(msg || response.data.message)
       }
+
       return response.data
     }
   } catch (e) {
@@ -124,6 +130,7 @@ export async function handlePutAPIWithoutHeader(url, data, msg) {
       if (msg !== null) {
         toast.success(msg || response.data.message)
       }
+
       return response.data
     }
   } catch (e) {
@@ -141,6 +148,7 @@ export async function handlePutAPI(url, data, msg) {
       if (msg !== null) {
         toast.success(msg || response.data.message)
       }
+
       return response.data
     }
   } catch (e) {
@@ -158,6 +166,7 @@ export async function handleGetAPI(url, msg) {
       if (msg) {
         toast.success(msg || response.data.message)
       }
+
       return response.data
     }
   } catch (e) {
@@ -165,6 +174,7 @@ export async function handleGetAPI(url, msg) {
     checkLoginError(e)
   }
 }
+
 export async function handleDeleteAPI(url, msg) {
   try {
     const response = await axios.delete(process.env.BASE_URL + url, {
@@ -174,6 +184,7 @@ export async function handleDeleteAPI(url, msg) {
       if (msg) {
         toast.success(msg || response.data.message)
       }
+
       return response.data
     }
   } catch (e) {
@@ -189,6 +200,7 @@ export async function handleGetAPIHeaderLess(url, msg) {
       if (msg) {
         toast.success(msg || response.data.message)
       }
+
       return response.data
     }
   } catch (e) {
@@ -203,6 +215,7 @@ export async function uploadImage(data) {
     let bodyData = new FormData()
     bodyData.append('imageUrl', data.image)
     let value = await handlePostAPI(url, bodyData, null)
+
     return value
   } else {
     return ''
@@ -214,6 +227,7 @@ export async function uploadGLobalImage(data) {
   let bodyData = new FormData()
   bodyData.append('imageUrl', data)
   let value = await handlePostAPI(url, bodyData, null)
+
   return value?.baseUrl
 }
 
@@ -238,6 +252,7 @@ export const downloadFile = async url => {
 
 const getFilenameFromURL = url => {
   const parts = url.split('/')
+
   return parts[parts.length - 1]
 }
 
@@ -250,5 +265,3 @@ export const handleKeyPress = event => {
     event.preventDefault()
   }
 }
-
-

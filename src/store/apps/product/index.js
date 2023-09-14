@@ -1,38 +1,34 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
-// ** Axios Imports
-import axios from 'axios'
 import { handleGetAPI } from 'src/@core/api-handler'
 import authConfig from 'src/configs/auth'
 
 // ** Fetch ProductData
 export const fetchProductData = createAsyncThunk('appProduct/fetchProductData', async params => {
-  const { name, status, supplier, category } = params
+  // const { name, status, supplier, category } = params
 
-  let response = await handleGetAPI('/products')
+  let response = await handleGetAPI(authConfig.product)
+
   return response
-
-  //     let importType = params?.isImported === 'both' ? '' : `isImport=${params?.isImported || false}`
-  //     const response = await axios.get(
-  //       `${process.env.REACT_APP_API_ENDPOINT}/supplier/products?name=${name || ''}&status=${status || ''}&supplierId=${
-  //         supplier || ''
-  //       }&${importType}&${category?.map((n, index) => `categoryId[${index}]=${n}`).join('&')}
-  //       `,
-  //       {
-  //         headers: { Authorization: `JWT ${localStorageToken()}` }
-  //       }
-  //     )
-  //     return response.data
-  //   } catch (err) {
-  //     checkLoginError(err)
-  //     let arr = []
-  //     return arr
-  //   }
 })
 
 // ** Fetch CategoryData
 export const fetchCategoryData = createAsyncThunk('appProduct/fetchCategoryData', async () => {
   let response = await handleGetAPI(authConfig.category)
+
+  return response
+})
+
+// ** Fetch Brand Data
+export const fetchBrandData = createAsyncThunk('appProduct/fetchBrandData', async () => {
+  let response = await handleGetAPI(authConfig.brand)
+
+  return response
+})
+
+// ** Fetch Color Data
+export const fetchColorData = createAsyncThunk('appProduct/fetchColorData', async () => {
+  let response = await handleGetAPI(authConfig.colors)
+
   return response
 })
 
@@ -56,7 +52,8 @@ export const appProductSlice = createSlice({
     data: [],
     categoryData: [],
     categoryDetailData: {},
-    brandData: []
+    brandData: [],
+    colors: []
   },
   reducers: {
     setProductData: (state, action) => {
@@ -68,10 +65,16 @@ export const appProductSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(fetchProductData.fulfilled, (state, action) => {
-      state.data = action.payload
+      state.data = action.payload.respData
     })
     builder.addCase(fetchCategoryData.fulfilled, (state, action) => {
       state.categoryData = action.payload.data
+    })
+    builder.addCase(fetchBrandData.fulfilled, (state, action) => {
+      state.brandData = action.payload.data
+    })
+    builder.addCase(fetchColorData.fulfilled, (state, action) => {
+      state.colors = action.payload.data
     })
   }
 })

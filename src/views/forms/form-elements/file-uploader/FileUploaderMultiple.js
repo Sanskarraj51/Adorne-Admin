@@ -41,7 +41,7 @@ const HeadingTypography = styled(Typography)(({ theme }) => ({
   }
 }))
 
-const FileUploaderMultiple = () => {
+const FileUploaderMultiple = ({ onHandleDrop }) => {
   // ** State
   const [files, setFiles] = useState([])
 
@@ -53,7 +53,9 @@ const FileUploaderMultiple = () => {
       'image/*': ['.png', '.jpg', '.jpeg', '.gif']
     },
     onDrop: acceptedFiles => {
-      setFiles(acceptedFiles.map(file => Object.assign(file)))
+      let newFiles = acceptedFiles.map(file => Object.assign(file))
+      setFiles([...files, ...newFiles])
+      onHandleDrop([...files, ...newFiles])
     },
     onDropRejected: () => {
       toast.error('You can only upload 5 files & maximum size of 20 MB.', {
@@ -63,11 +65,7 @@ const FileUploaderMultiple = () => {
   })
 
   const renderFilePreview = file => {
-    if (file.type.startsWith('image')) {
-      return <img width={38} height={38} alt={file.name} src={URL.createObjectURL(file)} />
-    } else {
-      return <Icon icon='mdi:file-document-outline' />
-    }
+    return <img width={38} height={38} alt={file.name} src={URL.createObjectURL(file)} />
   }
 
   const handleRemoveFile = file => {
@@ -77,7 +75,14 @@ const FileUploaderMultiple = () => {
   }
 
   const fileList = files.map(file => (
-    <ListItem key={file.name}>
+    <ListItem
+      key={file.name}
+      secondaryAction={
+        <IconButton color='error' onClick={() => handleRemoveFile(file)}>
+          <Icon icon='mdi:close' fontSize={20} />
+        </IconButton>
+      }
+    >
       <div className='file-details'>
         <div className='file-preview'>{renderFilePreview(file)}</div>
         <div>
@@ -89,9 +94,6 @@ const FileUploaderMultiple = () => {
           </Typography>
         </div>
       </div>
-      <IconButton onClick={() => handleRemoveFile(file)}>
-        <Icon icon='mdi:close' fontSize={20} />
-      </IconButton>
     </ListItem>
   ))
 
@@ -119,7 +121,7 @@ const FileUploaderMultiple = () => {
       </div>
       {files.length ? (
         <Fragment>
-          <List>{fileList}</List>
+          <List sx={{ width: '100%' }}>{fileList}</List>
           <div className='buttons'>
             <Button color='error' variant='outlined' onClick={handleRemoveAllFiles}>
               Remove All

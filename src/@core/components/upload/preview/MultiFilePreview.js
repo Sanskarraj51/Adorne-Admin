@@ -1,118 +1,53 @@
-import { m, AnimatePresence } from 'framer-motion';
-// @mui
-import { alpha } from '@mui/material/styles';
-import { IconButton, Stack, Typography } from '@mui/material';
-// utils
-//
-import Iconify from '../../iconify';
-import FileThumbnail, { fileData } from '../../file-thumbnail';
-//
-import { UploadProps } from '../types';
-import { fData } from 'src/utils/formatNumber';
-import { varFade } from '../../animate';
+import { alpha } from '@mui/material/styles'
+import { IconButton, ListItem, Stack, Typography } from '@mui/material'
+import Icon from 'src/@core/components/icon'
 
 // ----------------------------------------------------------------------
 
-export default function MultiFilePreview({ thumbnail, files, onRemove, sx }: UploadProps) {
+export default function MultiFilePreview({ thumbnail, files, onRemove, sx }) {
   if (!files?.length) {
-    return null;
+    return null
   }
 
+  const renderFilePreview = file => {
+    if (file.type.startsWith('image')) {
+      return <img width={38} height={38} alt={file.name} src={URL.createObjectURL(file)} />
+    } else {
+      return <Icon icon='mdi:file-document-outline' />
+    }
+  }
+
+  const fileList = files.map(file => {
+    const isNotFormatFile = typeof file === 'string'
+    return (
+      <ListItem key={file.name}>
+        <div className='file-details'>
+          <div className='file-preview'>{renderFilePreview(file)}</div>
+          <div>
+            <Typography className='file-name'>{file.name}</Typography>
+            <Typography className='file-size' variant='body2'>
+              {Math.round(file.size / 100) / 10 > 1000
+                ? `${(Math.round(file.size / 100) / 10000).toFixed(1)} mb`
+                : `${(Math.round(file.size / 100) / 10).toFixed(1)} kb`}
+            </Typography>
+          </div>
+        </div>
+        <IconButton onClick={() => onRemove(file)}>
+          <Icon icon='mdi:close' fontSize={20} />
+        </IconButton>
+      </ListItem>
+    )
+  })
+
   return (
-    <AnimatePresence initial={false}>
-      {files.map((file) => {
-        const { key, name = '', size = 0 } = fileData(file);
-
-        const isNotFormatFile = typeof file === 'string';
-
-        if (thumbnail) {
-          return (
-            <Stack
-              key={key}
-              component={m.div}
-              {...varFade().inUp}
-              alignItems="center"
-              display="inline-flex"
-              justifyContent="center"
-              sx={{
-                m: 0.5,
-                width: 80,
-                height: 80,
-                borderRadius: 1.25,
-                overflow: 'hidden',
-                position: 'relative',
-                border: (theme) => `solid 1px ${theme.palette.divider}`,
-                ...sx,
-              }}
-            >
-              <FileThumbnail
-                tooltip
-                imageView
-                file={file}
-                sx={{ position: 'absolute' }}
-                imgSx={{ position: 'absolute' }}
-              />
-
-              {onRemove && (
-                <IconButton
-                  size="small"
-                  onClick={() => onRemove(file)}
-                  sx={{
-                    top: 4,
-                    right: 4,
-                    p: '1px',
-                    position: 'absolute',
-                    color: (theme) => alpha(theme.palette.common.white, 0.72),
-                    bgcolor: (theme) => alpha(theme.palette.grey[900], 0.48),
-                    '&:hover': {
-                      bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
-                    },
-                  }}
-                >
-                  <Iconify icon="eva:close-fill" width={16} />
-                </IconButton>
-              )}
-            </Stack>
-          );
-        }
-
-        return (
-          <Stack
-            key={key}
-            component={m.div}
-            {...varFade().inUp}
-            spacing={2}
-            direction="row"
-            alignItems="center"
-            sx={{
-              my: 1,
-              px: 1,
-              py: 0.75,
-              borderRadius: 0.75,
-              border: (theme) => `solid 1px ${theme.palette.divider}`,
-              ...sx,
-            }}
-          >
-            <FileThumbnail file={file} />
-
-            <Stack flexGrow={1} sx={{ minWidth: 0 }}>
-              <Typography variant="subtitle2" noWrap>
-                {isNotFormatFile ? file : name}
-              </Typography>
-
-              <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                {isNotFormatFile ? '' : fData(size)}
-              </Typography>
-            </Stack>
-
-            {onRemove && (
-              <IconButton edge="end" size="small" onClick={() => onRemove(file)}>
-                <Iconify icon="eva:close-fill" />
-              </IconButton>
-            )}
-          </Stack>
-        );
-      })}
-    </AnimatePresence>
-  );
+    <Fragment>
+      <List>{fileList}</List>
+      <div className='buttons'>
+        <Button color='error' variant='outlined' onClick={handleRemoveAllFiles}>
+          Remove All
+        </Button>
+        {/* <Button variant='contained'>Upload Files</Button> */}
+      </div>
+    </Fragment>
+  )
 }

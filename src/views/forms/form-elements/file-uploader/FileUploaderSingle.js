@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import { useDropzone } from 'react-dropzone'
 
 // Styled component for the upload image inside the dropzone area
-const Img = styled('img')(({ theme }) => ({
+export const Img = styled('img')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     marginRight: theme.spacing(10)
   },
@@ -26,14 +26,14 @@ const Img = styled('img')(({ theme }) => ({
 }))
 
 // Styled component for the heading inside the dropzone area
-const HeadingTypography = styled(Typography)(({ theme }) => ({
+export const HeadingTypography = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(5),
   [theme.breakpoints.down('sm')]: {
     marginBottom: theme.spacing(4)
   }
 }))
 
-const FileUploaderSingle = () => {
+const FileUploaderSingle = ({handleDrop}) => {
   // ** State
   const [files, setFiles] = useState([])
 
@@ -45,6 +45,7 @@ const FileUploaderSingle = () => {
     },
     onDrop: acceptedFiles => {
       setFiles(acceptedFiles.map(file => Object.assign(file)))
+      handleDrop(acceptedFiles)
     }
   })
 

@@ -8,6 +8,7 @@ import AddCategoryForm from 'src/views/pages/category/AddCategoryForm'
 
 export default function FormDialog({ open, setOpen, title, id, log, maxWidth, display_close_icon }) {
   const theme = useTheme()
+
   const handleClose = () => {
     setOpen(false)
   }
@@ -51,12 +52,8 @@ export default function FormDialog({ open, setOpen, title, id, log, maxWidth, di
     switch (title) {
       case 'Add New Category':
         return <AddCategoryForm  type='Add'  handleClose={handleClose} />
-    //   case 'Edit Product Category':
-    //     return <AddCategory handleClose={handleClose} productCategoryId={id} />
       case 'Add New Brand':
         return <AddBrandForm handleClose={handleClose} />
-    //   case 'Edit Brand':
-    //     return <AddBrands handleClose={handleClose} />
       default:
         return null
     }

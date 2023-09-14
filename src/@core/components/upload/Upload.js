@@ -1,19 +1,35 @@
-import { useDropzone } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone'
+
 // @mui
-import { Box, Stack, Button, IconButton, Typography, StackProps } from '@mui/material';
-import { styled, alpha } from '@mui/material/styles';
+import { Box, Stack, Button, IconButton, Typography, StackProps } from '@mui/material'
+import { styled, alpha } from '@mui/material/styles'
+
 // assets
 //
 import Icon from 'src/@core/components/icon'
-//
-import RejectionFiles from './errors/RejectionFiles';
-import MultiFilePreview from './preview/MultiFilePreview';
-import SingleFilePreview from './preview/SingleFilePreview';
-import { UploadIllustration } from 'src/assets/illustrations';
+import SingleFilePreview from './preview/SingleFilePreview'
+import FileUploaderSingle, {
+  HeadingTypography,
+  Img
+} from 'src/views/forms/form-elements/file-uploader/FileUploaderSingle'
+import Link from 'next/link'
+
+// import RejectionFiles from './errors/RejectionFiles';
+import MultiFilePreview from './preview/MultiFilePreview'
+import FileUploaderMultiple from 'src/views/forms/form-elements/file-uploader/FileUploaderMultiple'
+import DropzoneWrapper from 'src/@core/styles/libs/react-dropzone'
+
+// import { UploadIllustration } from 'src/assets/illustrations';
 
 // ----------------------------------------------------------------------
 
-const StyledDropZone = styled('div')(({ theme }) => ({
+export const StyledDropZone = styled('div')(({ theme }) => ({
+  minHeight: 300,
+  display: 'flex',
+  flexWrap: 'wrap',
+  cursor: 'pointer',
+  alignItems: 'center',
+  justifyContent: 'center',
   outline: 'none',
   cursor: 'pointer',
   overflow: 'hidden',
@@ -22,11 +38,11 @@ const StyledDropZone = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   transition: theme.transitions.create('padding'),
   backgroundColor: theme.palette.background.neutral,
-  border: `1px dashed ${alpha(theme.palette.grey[500], 0.32)}`,
+  border: `2px dashed ${alpha(theme.palette.grey[500], 0.32)}`,
   '&:hover': {
-    opacity: 0.72,
-  },
-}));
+    opacity: 0.72
+  }
+}))
 
 // ----------------------------------------------------------------------
 
@@ -35,159 +51,48 @@ export default function Upload({
   multiple = false,
   error,
   helperText,
-  //
   file,
   onDelete,
-  //
   files,
   thumbnail,
   onUpload,
   onRemove,
   onRemoveAll,
   sx,
+  onDrop,
   ...other
 }) {
-  const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
-    multiple,
-    disabled,
-    ...other,
-  });
+  // const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
+  //   multiple,
+  //   disabled,
+  //   ...other
+  // })
 
-  const hasFile = !!file && !multiple;
+  const hasFile = !!file && !multiple
 
-  const hasFiles = files && multiple && files.length > 0;
-
-  const isError = isDragReject || !!error;
 
   return (
     <Box sx={{ width: 1, position: 'relative', ...sx }}>
-      <StyledDropZone
-        {...getRootProps()}
+      <DropzoneWrapper
+      
+        // {...getRootProps()}
         sx={{
-          ...(isDragActive && {
-            opacity: 0.72,
-          }),
-          ...(isError && {
+          ...(error && {
             color: 'error.main',
             bgcolor: 'error.lighter',
-            borderColor: 'error.light',
+            borderColor: 'error.light'
           }),
           ...(disabled && {
             opacity: 0.48,
-            pointerEvents: 'none',
+            pointerEvents: 'none'
           }),
           ...(hasFile && {
-            padding: '12% 0',
-          }),
+            padding: '12% 0'
+          })
         }}
       >
-        <input {...getInputProps()} />
-
-        <Placeholder
-          sx={{
-            ...(hasFile && {
-              opacity: 0,
-            }),
-          }}
-        />
-
-        {hasFile && <SingleFilePreview file={file} />}
-      </StyledDropZone>
-
-      {helperText && helperText}
-
-      <RejectionFiles fileRejections={fileRejections} />
-
-      {hasFile && onDelete && (
-        <IconButton
-          size="small"
-          onClick={onDelete}
-          sx={{
-            top: 16,
-            right: 16,
-            zIndex: 9,
-            position: 'absolute',
-            color: (theme) => alpha(theme.palette.common.white, 0.8),
-            bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
-            '&:hover': {
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.48),
-            },
-          }}
-        >
-          <Icon icon="eva:close-fill" width={18} />
-        </IconButton>
-      )}
-
-      {hasFiles && (
-        <>
-          <Box sx={{ my: 3 }}>
-            <MultiFilePreview files={files} thumbnail={thumbnail} onRemove={onRemove} />
-          </Box>
-
-          <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
-            {onRemoveAll && (
-              <Button color="inherit" variant="outlined" size="small" onClick={onRemoveAll}>
-                Remove all
-              </Button>
-            )}
-
-            {onUpload && (
-              <Button size="small" variant="contained" onClick={onUpload}>
-                Upload files
-              </Button>
-            )}
-          </Stack>
-        </>
-      )}
+        {multiple ? <FileUploaderMultiple onHandleDrop={onDrop} /> : <FileUploaderSingle onHandleDrop={onDrop}/>}
+      </DropzoneWrapper>
     </Box>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-function Placeholder({ sx, ...other }) {
-  return (
-    <Stack
-      spacing={5}
-      alignItems="center"
-      justifyContent="center"
-      direction={{
-        xs: 'column',
-        md: 'row',
-      }}
-      sx={{
-        width: 1,
-        textAlign: {
-          xs: 'center',
-          md: 'left',
-        },
-        ...sx,
-      }}
-      {...other}
-    >
-      <UploadIllustration sx={{ width: 220 }} />
-
-      <div>
-        <Typography gutterBottom variant="h5">
-          Drop or Select file
-        </Typography>
-
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          Drop files here or click
-          <Typography
-            variant="body2"
-            component="span"
-            sx={{
-              mx: 0.5,
-              color: 'primary.main',
-              textDecoration: 'underline',
-            }}
-          >
-            browse
-          </Typography>
-          thorough your machine
-        </Typography>
-      </div>
-    </Stack>
-  );
+  )
 }

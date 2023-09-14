@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 
 /** @type {import('next').NextConfig} */
@@ -21,6 +20,9 @@ module.exports = {
     }
 
     return config
+  },
+  images: {
+    domains: ['35.154.22.90:3000']
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if

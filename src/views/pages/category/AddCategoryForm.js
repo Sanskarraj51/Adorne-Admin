@@ -23,9 +23,8 @@ const defaultValues = {
   name: ''
 }
 
-const AddCategoryForm = ({ type = 'Add' }) => {
+const AddCategoryForm = ({ type = 'Add', handleClose }) => {
   const [loading, setLoading] = useState(false)
-  // hooks
   const dispatch = useDispatch()
   const store = useSelector(state => state.product)
 
@@ -69,11 +68,17 @@ const AddCategoryForm = ({ type = 'Add' }) => {
       res = await handlePostAPI(auth.category, data, 'Category Added Successfully')
     }
     if (res) {
-      // dispatch(fetchCategoryData())
-      router.push('/category')
       if (type === 'Edit') {
         dispatch(setCategoryDetailDataData({}))
       }
+
+      if (router.pathname.startsWith('/category')) {
+        router.push('/category')
+      } else {
+        dispatch(fetchCategoryData({}))
+        handleClose()
+      }
+      handleClose()
     }
     setLoading(false)
   }

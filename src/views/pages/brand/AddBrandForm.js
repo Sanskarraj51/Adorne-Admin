@@ -1,5 +1,5 @@
 import { Button, FormControl, Grid, InputAdornment } from '@mui/material'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import IconifyIcon from 'src/@core/components/icon'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
@@ -9,18 +9,34 @@ import RHFTextField from 'src/@core/components/RHF/RHFTextField'
 import Icon from 'src/@core/components/icon'
 import FileUploaderSingle from 'src/views/forms/form-elements/file-uploader/FileUploaderSingle'
 import DropzoneWrapper from 'src/@core/styles/libs/react-dropzone'
+import { handlePostAPI, handlePutAPI } from 'src/@core/api-handler'
+import auth from 'src/configs/auth'
+import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
+import { LoadingButton } from '@mui/lab'
+import { fetchBrandData, setCategoryDetailDataData } from 'src/store/apps/product'
 
 const schema = yup.object().shape({
   name: yup.string().required('Brand name is required'),
-  description: yup.string().required('escription is required')
+  description: yup.string().required('Description is required'),
+  logo: yup.mixed().required('Logo is required')
 })
 
 const defaultValues = {
   description: '',
-  email: ''
+  name: '',
+  logo: ''
 }
 
-const AddBrandForm = () => {
+const AddBrandForm = ({ type = 'Add', handleClose }) => {
+  const [loading, setLoading] = useState(false)
+
+  // hooks
+  const dispatch = useDispatch()
+  const store = useSelector(state => state.product)
+
+  const router = useRouter()
+
   const methods = useForm({
     mode: 'onChange',
     resolver: yupResolver(schema),
@@ -30,18 +46,52 @@ const AddBrandForm = () => {
   const {
     control,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors, isSubmitting, isValid }
   } = methods
+
   const onSubmit = async data => {
-    console.log(data)
+    setLoading(true)
+    let res
+    const formData = new FormData()
+    if (data?.logo instanceof File) {
+      formData.append('icon', data?.logo)
+    }
+    formData.append('name', data?.name)
+    formData.append('description', data?.description)
+
+    if (type === 'Edit') {
+      res = await handlePutAPI(`${auth.brand}/${store?.categoryDetailData?.id}`, formData, 'Brand Updated Successfully')
+    } else {
+      res = await handlePostAPI(auth.brand, formData, 'Brand Added Successfully')
+    }
+    if (res) {
+      // dispatch(fetchCategoryData()) fetchBrandData
+      if (router.pathname.startsWith('/brands/add')) {
+        router.push('/brands')
+      } else {
+        dispatch(fetchBrandData({}))
+        handleClose()
+      }
+      if (type === 'Edit') {
+        dispatch(setCategoryDetailDataData({}))
+      }
+    }
+    setLoading(false)
   }
+
+  const handleDrop = useCallback(async acceptedFiles => {
+    const file = acceptedFiles[0]
+    setValue('logo', file)
+  }, [])
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid sx={{ mt: 1 }} container spacing={5}>
         <Grid item xs={12} md={6}>
           <DropzoneWrapper>
-            <FileUploaderSingle />
+            <FileUploaderSingle handleDrop={handleDrop} />
           </DropzoneWrapper>
         </Grid>
         <Grid item xs={12} md={6}>
@@ -84,9 +134,16 @@ const AddBrandForm = () => {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <Button disabled={!isValid} fullWidth type='submit' variant='contained' size='large'>
+              <LoadingButton
+                loading={loading}
+                disabled={!isValid}
+                fullWidth
+                type='submit'
+                variant='contained'
+                size='large'
+              >
                 Submit
-              </Button>
+              </LoadingButton>
             </Grid>
           </Grid>
         </Grid>

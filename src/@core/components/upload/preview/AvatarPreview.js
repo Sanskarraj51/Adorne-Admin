@@ -1,15 +1,8 @@
 //
 //
 import Image from 'next/image';
-import { CustomFile } from '../types';
 
-// ----------------------------------------------------------------------
-
-type Props = {
-  file: CustomFile | string | null;
-};
-
-export default function AvatarPreview({ file }: Props) {
+export default function AvatarPreview({ file }) {
   if (!file) {
     return null;
   }

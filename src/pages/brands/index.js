@@ -1,40 +1,55 @@
 import { Box, Button, Card, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Icon from 'src/@core/components/icon'
-import { tableStyles, userStatusObj } from '../products'
+import { tableStyles } from '../products'
 import CustomChip from 'src/@core/components/mui/chip'
-import { itemData } from '../banner-settings'
 import Image from 'next/image'
+import { useDispatch, useSelector } from 'react-redux'
+import auth from 'src/configs/auth'
+import { fetchBrandData } from 'src/store/apps/product'
+import { mediaUrl } from 'src/@core/api-handler'
 
-
+const brandStatusObj = {
+  active: 'primary',
+  pending: 'warning',
+  Inactive: 'secondary'
+}
 
 const columns = [
   {
     flex: 0.2,
-    field: 'images',
+    field: 'icon',
     minWidth: 150,
     headerName: 'Banner',
     renderCell: ({ row }) => (
       <Box sx={{ py: 1 }}>
-        <Image src={row.img} alt='' width={120} height={90} style={{ objectFit: 'contain' }} />
+        <img
+          src={
+            row?.icon ? `${mediaUrl}brands/${row?.icon}` : 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e'
+          }
+          alt=''
+          width={120}
+          height={120}
+          style={{ objectFit: 'contain' }}
+        />
       </Box>
     )
   },
   {
     flex: 0.3,
     minWidth: 200,
-    field: 'title',
+    field: 'name',
     headerName: 'Name',
-    renderCell: ({ row }) => <Typography>{row?.title}</Typography>
+    renderCell: ({ row }) => <Typography>{row?.name}</Typography>
   },
   {
     flex: 0.4,
     minWidth: 200,
-    field: 'Description',
+    field: 'description',
     headerName: 'Description',
-    renderCell: ({ row }) => <Typography>{row?.title}</Typography>
+    renderCell: ({ row }) => <Typography>{row?.description}</Typography>
   },
 
   {
@@ -43,16 +58,16 @@ const columns = [
     field: 'status',
     headerName: 'Status',
     renderCell: ({ row }) => {
-        return (
-          <CustomChip
-            skin='light'
-            size='small'
-            label={row.status}
-            color={userStatusObj[row.status]}
-            sx={{ textTransform: 'capitalize', '& .MuiChip-label': { lineHeight: '18px' } }}
-          />
-        )
-      }
+      return (
+        <CustomChip
+          skin='light'
+          size='small'
+          label={row.status}
+          color={brandStatusObj[row.status]}
+          sx={{ textTransform: 'capitalize', '& .MuiChip-label': { lineHeight: '18px' } }}
+        />
+      )
+    }
   },
   {
     flex: 0.1,
@@ -63,12 +78,12 @@ const columns = [
     renderCell: ({ row }) => (
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Tooltip title='Edit'>
-          <IconButton  color='primary' component={Link} href={`/brand/add`}>
+          <IconButton color='primary' component={Link} href={`/brands/add`}>
             <Icon icon='mdi:pencil-outline' fontSize={27} />
           </IconButton>
         </Tooltip>
-        <Tooltip title='Delete Banner'>
-          <IconButton color='error' >
+        <Tooltip title='Delete Brand'>
+          <IconButton color='error'>
             <Icon icon='mdi:delete-outline' fontSize={27} />
           </IconButton>
         </Tooltip>
@@ -81,14 +96,34 @@ const BrandsPage = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
 
+  const [loading, setLoading] = useState(false)
+  const [showDelete, setShowDelete] = useState(false)
+  const [delLoading, setDelLoading] = useState(false)
+  const [deletId, setDeleteId] = useState('')
 
-  const rowData = itemData?.map((item, i) => {
-    return {
-      ...item,
-      id: i,
-      status: 'Active'
-    }
-  })
+  const dispatch = useDispatch()
+  const store = useSelector(state => state.product)
+
+  async function getBrand() {
+    setLoading(true)
+    await dispatch(fetchBrandData())
+    setLoading(false)
+  }
+
+  // async function deleteBrand() {
+  //   setDelLoading(true)
+  //   let res = await handleDeleteAPI(`${auth.brand}/${deletId?.id}`, 'Brand Deleted Successfully')
+  //   if (res) {
+  //     getBrand()
+  //     setShowDelete(false)
+  //   }
+  //   setDelLoading(false)
+  // }
+
+  useEffect(() => {
+    getBrand()
+  }, [])
+
   return (
     <Card>
       <CardHeader
@@ -103,14 +138,14 @@ const BrandsPage = () => {
         <DataGrid
           autoHeight
           columns={columns}
-          rows={rowData}
+          rows={store?.brandData?.length ? store?.brandData : []}
           getRowHeight={() => 'auto'}
-
+          loading={loading}
           disableRowSelectionOnClick
           pageSizeOptions={[7, 10, 25, 50]}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          sx={{ '& .MuiDataGrid-columnHeaders': { borderRadius: 0 },...tableStyles }}
+          sx={{ '& .MuiDataGrid-columnHeaders': { borderRadius: 0 }, ...tableStyles }}
         />{' '}
       </CardContent>
     </Card>
@@ -118,4 +153,3 @@ const BrandsPage = () => {
 }
 
 export default BrandsPage
-

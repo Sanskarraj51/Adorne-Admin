@@ -21,9 +21,19 @@ const navigation = () => {
       path: '/products'
     },
     {
+      icon: 'mdi-cart-outline',
+      title: 'Orders',
+      path: '/orders'
+    },
+    {
       icon: 'mdi-view-carousel',
       title: 'Banner Settings',
       path: '/banner-settings'
+    },
+    {
+      icon: 'mdi-post',
+      title: 'Blogs',
+      path: '/blogs'
     },
     // {
     //   icon: 'mdi:palette-swatch-outline',
