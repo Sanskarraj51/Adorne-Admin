@@ -177,11 +177,11 @@ const Products = () => {
       headerName: 'Actions',
       renderCell: ({ row }) => (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Tooltip title='Edit'>
+          {/* <Tooltip title='Edit'>
             <IconButton color='primary' component={Link} href={`/products/${row?.id}`}>
               <Icon icon='mdi:eye-outline' fontSize={27} />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title='Delete Banner'>
             <IconButton color='error'>
               <Icon icon='mdi:delete-outline' fontSize={27} />
