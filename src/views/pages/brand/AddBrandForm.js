@@ -1,4 +1,4 @@
-import { Button, FormControl, Grid, InputAdornment } from '@mui/material'
+import { Button, FormControl, FormHelperText, Grid, InputAdornment } from '@mui/material'
 import React, { useCallback, useState } from 'react'
 import IconifyIcon from 'src/@core/components/icon'
 import * as yup from 'yup'
@@ -15,17 +15,18 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { LoadingButton } from '@mui/lab'
 import { fetchBrandData, setCategoryDetailDataData } from 'src/store/apps/product'
+import { StyledDropZone } from 'src/@core/components/upload/Upload'
 
 const schema = yup.object().shape({
   name: yup.string().required('Brand name is required'),
   description: yup.string().required('Description is required'),
-  logo: yup.mixed().required('Logo is required')
+  logo: yup.array().min(1, 'Logo is required')
 })
 
 const defaultValues = {
   description: '',
   name: '',
-  logo: ''
+  logo: []
 }
 
 const AddBrandForm = ({ type = 'Add', handleClose }) => {
@@ -55,8 +56,8 @@ const AddBrandForm = ({ type = 'Add', handleClose }) => {
     setLoading(true)
     let res
     const formData = new FormData()
-    if (data?.logo instanceof File) {
-      formData.append('icon', data?.logo)
+    if (data?.logo?.length) {
+      formData.append('icon', data?.logo[0])
     }
     formData.append('name', data?.name)
     formData.append('description', data?.description)
@@ -82,17 +83,32 @@ const AddBrandForm = ({ type = 'Add', handleClose }) => {
   }
 
   const handleDrop = useCallback(async acceptedFiles => {
-    const file = acceptedFiles[0]
-    setValue('logo', file)
+    setValue('logo', acceptedFiles, {
+      shouldValidate: true,
+      shouldDirty: true
+    })
   }, [])
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid sx={{ mt: 1 }} container spacing={5}>
         <Grid item xs={12} md={6}>
-          <DropzoneWrapper>
+          <StyledDropZone
+            sx={{
+              ...(Boolean(errors?.product_photo) && {
+                color: 'error.main',
+                bgcolor: 'error.lighter',
+                borderColor: 'error.light'
+              })
+            }}
+          >
             <FileUploaderSingle handleDrop={handleDrop} />
-          </DropzoneWrapper>
+          </StyledDropZone>
+          {errors?.logo && <FormHelperText sx={{ color: 'error.main' }}>{errors?.logo?.message}</FormHelperText>}
+
+          {/* <DropzoneWrapper>
+            <FileUploaderSingle handleDrop={handleDrop} />
+          </DropzoneWrapper> */}
         </Grid>
         <Grid item xs={12} md={6}>
           <Grid container spacing={5}>

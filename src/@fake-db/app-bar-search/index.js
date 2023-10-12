@@ -158,7 +158,7 @@ const searchData = [
   },
   {
     id: 23,
-    url: '/pages/account-settings/account',
+    url: '/settings',
     icon: 'mdi:account-cog-outline',
     title: 'Account Settings',
     category: 'appsPages'

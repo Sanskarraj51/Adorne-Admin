@@ -1830,6 +1830,11 @@ date-fns@2.29.3, date-fns@^2.24.0:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
   integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
 
+dayjs@^1.11.10:
+  version "1.11.10"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.10.tgz#68acea85317a6e164457d6d6947564029a6a16a0"
+  integrity sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==
+
 debug@^3.1.0, debug@^3.2.7:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.7.tgz#72580b7e9145fb39b6676f9c5e5fb100b934179a"
@@ -1969,6 +1974,11 @@ draft-js@0.11.7:
     fbjs "^2.0.0"
     immutable "~3.7.4"
     object-assign "^4.1.1"
+
+draftjs-to-html@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/draftjs-to-html/-/draftjs-to-html-0.9.1.tgz#1c870fbb588d2390204cb4d0ee7e04ad0c709969"
+  integrity sha512-fFstE6+IayaVFBEvaFt/wN8vdj8FsTRzij7dy7LI9QIwf5LgfHFi9zSpvCg+feJ2tbYVqHxUkjcibwpsTpgFVQ==
 
 draftjs-utils@^0.10.2:
   version "0.10.2"

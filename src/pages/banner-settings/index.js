@@ -1,12 +1,18 @@
-import { Button, Card, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Icon from 'src/@core/components/icon'
 import Link from 'next/link'
-import { Box } from '@mui/system'
 import CustomChip from 'src/@core/components/mui/chip'
 import { tableStyles } from '../products'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchBannerData, fetchBrandData } from 'src/store/apps/product'
+import { handleGetAPI, mediaUrl } from 'src/@core/api-handler'
+import { oneTwoStatusObj } from '../blogs'
+import ConfirmBox from 'src/views/pages/confirm-dialog'
+import auth from 'src/configs/auth'
 
 export const itemData = [
   {
@@ -59,57 +65,114 @@ export const itemData = [
   }
 ]
 
-const userStatusObj = {
-    Active: 'success',
-    pending: 'warning',
-    Inactive: 'secondary'
+const bannerPositionObj = {
+  carousel: 'success',
+  side: 'warning'
+}
+
+const BannerSettings = () => {
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
+
+  const [loading, setLoading] = useState(false)
+  const [showDelete, setShowDelete] = useState(false)
+  const [delLoading, setDelLoading] = useState(false)
+  const [deletId, setDeleteId] = useState('')
+
+  const dispatch = useDispatch()
+  const store = useSelector(state => state.product)
+
+  async function getBanners() {
+    setLoading(true)
+    await dispatch(fetchBannerData())
+    setLoading(false)
   }
 
+  async function deleteBanner() {
+    setDelLoading(true)
+    let res = await handleGetAPI(`${auth.removeBanner}?bannerId=${deletId?.id}`, 'Banner Deleted Successfully')
+    if (res) {
+      getBanners()
+      setShowDelete(false)
+    }
+    setDelLoading(false)
+  }
+
+  useEffect(() => {
+    getBanners()
+  }, [])
 
   const columns = [
     {
       flex: 0.2,
-      field: 'images',
+      field: 'icon',
       minWidth: 150,
       headerName: 'Banner',
       renderCell: ({ row }) => (
         <Box sx={{ py: 1 }}>
-          <Image src={row.img} alt='' width={120} height={90} style={{ objectFit: 'contain' }} />
+          <img
+            src={
+              row?.bannerImage
+                ? `${store?.banners?.mediaUrl}${row?.bannerImage}`
+                : 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e'
+            }
+            alt=''
+            width={120}
+            height={120}
+            style={{ objectFit: 'contain' }}
+          />
         </Box>
       )
     },
     {
       flex: 0.3,
       minWidth: 200,
-      field: 'title',
-      headerName: 'Name',
-      renderCell: ({ row }) => <Typography>{row?.title}</Typography>
+      field: 'heading',
+      headerName: 'Heading',
+      renderCell: ({ row }) => <Typography>{row?.heading}</Typography>
     },
     {
       flex: 0.4,
       minWidth: 200,
-      field: 'Description',
+      field: 'description',
       headerName: 'Description',
-      renderCell: ({ row }) => <Typography>{row?.title}</Typography>
+      renderCell: ({ row }) => <Typography>{row?.description}</Typography>
     },
-  
+
     {
       flex: 0.1,
       minWidth: 120,
       field: 'status',
       headerName: 'Status',
       renderCell: ({ row }) => {
-          return (
-            <CustomChip
-              skin='light'
-              size='small'
-              label={row.status}
-              color={userStatusObj[row.status]}
-              sx={{ textTransform: 'capitalize', '& .MuiChip-label': { lineHeight: '18px' } }}
-            />
-          )
-        }
+        return (
+          <CustomChip
+            skin='light'
+            size='small'
+            label={row.status === 1 ? 'Active' : 'In-Active'}
+            color={oneTwoStatusObj[row.status]}
+            sx={{ textTransform: 'capitalize', '& .MuiChip-label': { lineHeight: '18px' } }}
+          />
+        )
+      }
     },
+    // {
+    //   flex: 0.1,
+    //   minWidth: 120,
+    //   field: 'bannerPosition',
+    //   headerName: 'Position',
+    //   renderCell: ({ row }) => {
+    //     return (
+    //       <CustomChip
+    //         skin='light'
+    //         size='small'
+    //         label={row.bannerPosition}
+    //         color={bannerPositionObj[row.bannerPosition]}
+    //         sx={{ textTransform: 'capitalize', '& .MuiChip-label': { lineHeight: '18px' } }}
+    //       />
+    //     )
+    //   }
+    // },
     {
       flex: 0.1,
       minWidth: 130,
@@ -119,12 +182,18 @@ const userStatusObj = {
       renderCell: ({ row }) => (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Tooltip title='Edit'>
-            <IconButton  color='primary' component={Link} href={`/brand/add`}>
+            <IconButton color='primary' component={Link} href={`/banner-settings/edit/${row?.id}`}>
               <Icon icon='mdi:pencil-outline' fontSize={27} />
             </IconButton>
           </Tooltip>
           <Tooltip title='Delete Banner'>
-            <IconButton color='error' >
+            <IconButton
+              onClick={() => {
+                setShowDelete(true)
+                setDeleteId(row)
+              }}
+              color='error'
+            >
               <Icon icon='mdi:delete-outline' fontSize={27} />
             </IconButton>
           </Tooltip>
@@ -132,16 +201,6 @@ const userStatusObj = {
       )
     }
   ]
-const BannerSettings = () => {
-  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
-
-  const rowData = itemData?.map((item, i) => {
-    return {
-      ...item,
-      id: i,
-      status: 'Active'
-    }
-  })
 
   return (
     <Card>
@@ -157,15 +216,25 @@ const BannerSettings = () => {
         <DataGrid
           autoHeight
           columns={columns}
-          rows={rowData}
+          loading={loading}
+          rows={store?.banners?.posts?.length ? store?.banners?.posts : []}
           getRowHeight={() => 'auto'}
           disableRowSelectionOnClick
           pageSizeOptions={[7, 10, 25, 50]}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
-          sx={{ '& .MuiDataGrid-columnHeaders': { borderRadius: 0 },...tableStyles }}
+          sx={{ '& .MuiDataGrid-columnHeaders': { borderRadius: 0 }, ...tableStyles }}
         />{' '}
       </CardContent>
+
+      <ConfirmBox
+        name={deletId?.heading}
+        title='Banner'
+        open={showDelete}
+        closeDialog={() => setShowDelete(false)}
+        toDoFunction={deleteBanner}
+        loading={delLoading}
+      />
     </Card>
   )
 }

@@ -76,7 +76,7 @@ const defaultSuggestionsData = [
       {
         icon: 'mdi:account-cog-outline',
         suggestion: 'Account Settings',
-        link: '/pages/account-settings/account'
+        link: '/settings/colors'
       }
     ]
   },
@@ -275,7 +275,7 @@ const NoResult = ({ value, setOpenDialog }) => {
         <ListItem sx={{ py: 2 }} disablePadding onClick={() => setOpenDialog(false)}>
           <Box
             component={Link}
-            href='/pages/account-settings/account'
+            href='/settings'
             sx={{
               display: 'flex',
               alignItems: 'center',

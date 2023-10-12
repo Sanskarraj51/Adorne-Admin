@@ -20,11 +20,8 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Icon from 'src/@core/components/icon'
 
 // ** Demo Tabs Imports
-import TabAccount from 'src/views/pages/account-settings/TabAccount'
-import TabBilling from 'src/views/pages/account-settings/TabBilling'
-import TabSecurity from 'src/views/pages/account-settings/TabSecurity'
-import TabConnections from 'src/views/pages/account-settings/TabConnections'
-import TabNotifications from 'src/views/pages/account-settings/TabNotifications'
+import ColorTab from './ColorsTab'
+import SizesTab from './SizesTab'
 
 const TabList = styled(MuiTabList)(({ theme }) => ({
   '& .MuiTabs-indicator': {
@@ -44,7 +41,7 @@ const TabList = styled(MuiTabList)(({ theme }) => ({
   }
 }))
 
-const AccountSettings = ({ tab, apiPricingPlanData }) => {
+const AccountSettings = ({ tab }) => {
   // ** State
   const [activeTab, setActiveTab] = useState(tab)
   const [isLoading, setIsLoading] = useState(false)
@@ -55,7 +52,7 @@ const AccountSettings = ({ tab, apiPricingPlanData }) => {
 
   const handleChange = (event, value) => {
     setIsLoading(true)
-    router.push(`/pages/account-settings/${value.toLowerCase()}`).then(() => setIsLoading(false))
+    router.push(`/settings/${value.toLowerCase()}`).then(() => setIsLoading(false))
   }
   useEffect(() => {
     if (tab && tab !== activeTab) {
@@ -65,11 +62,8 @@ const AccountSettings = ({ tab, apiPricingPlanData }) => {
   }, [tab])
 
   const tabContentList = {
-    account: <TabAccount />,
-    security: <TabSecurity />,
-    connections: <TabConnections />,
-    notifications: <TabNotifications />,
-    billing: <TabBilling apiPricingPlanData={apiPricingPlanData} />
+    colors: <ColorTab />,
+    sizes: <SizesTab />,
   }
 
   return (
@@ -85,47 +79,20 @@ const AccountSettings = ({ tab, apiPricingPlanData }) => {
                 aria-label='customized tabs example'
               >
                 <Tab
-                  value='account'
+                  value='colors'
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
-                      <Icon icon='mdi:account-outline' />
-                      {!hideText && 'Account'}
+                      <Icon icon='mdi:palette-outline' />
+                      {!hideText && 'Colors'}
                     </Box>
                   }
                 />
                 <Tab
-                  value='security'
+                  value='sizes'
                   label={
                     <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
-                      <Icon icon='mdi:lock-open-outline' />
-                      {!hideText && 'Security'}
-                    </Box>
-                  }
-                />
-                <Tab
-                  value='billing'
-                  label={
-                    <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
-                      <Icon icon='mdi:bookmark-outline' />
-                      {!hideText && 'Billing'}
-                    </Box>
-                  }
-                />
-                <Tab
-                  value='notifications'
-                  label={
-                    <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
-                      <Icon icon='mdi:bell-outline' />
-                      {!hideText && 'Notifications'}
-                    </Box>
-                  }
-                />
-                <Tab
-                  value='connections'
-                  label={
-                    <Box sx={{ display: 'flex', alignItems: 'center', ...(!hideText && { '& svg': { mr: 2 } }) }}>
-                      <Icon icon='mdi:link-variant' />
-                      {!hideText && 'Connections'}
+                      <Icon icon='mdi:size-l' />
+                      {!hideText && 'Sizes'}
                     </Box>
                   }
                 />

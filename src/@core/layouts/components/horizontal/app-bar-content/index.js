@@ -32,7 +32,7 @@ const AppBarContent = props => {
       ) : (
         <LinkStyled href='/'>
           {themeConfig?.appLogo ? (
-            <Image alt=''  objectFit='contain' style={{margin:"0.5rem 0rem"}} width={200} height={80} src={themeConfig?.appLogo} />
+            <Image alt=''   style={{margin:"0.5rem 0rem", objectFit:'contain'}} width={200} height={80} src={themeConfig?.appLogo} />
           ) : (
             LogoSvg()
           )}

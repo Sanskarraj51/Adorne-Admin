@@ -1,6 +1,5 @@
 // form
 import { useFormContext, Controller } from 'react-hook-form'
-// @mui
 import {
   Checkbox,
   FormLabel,
@@ -8,7 +7,6 @@ import {
   FormControl,
   FormHelperText,
   FormControlLabel,
-  FormControlLabelProps
 } from '@mui/material'
 
 // ----------------------------------------------------------------------

@@ -2,31 +2,25 @@ import { Button, Card, CardContent, CardHeader, IconButton, Tooltip, Typography 
 import { DataGrid } from '@mui/x-data-grid'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import Icon from 'src/@core/components/icon'
 import Link from 'next/link'
 import { Box } from '@mui/system'
 import CustomChip from 'src/@core/components/mui/chip'
-import { itemData } from '../banner-settings'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductData } from 'src/store/apps/product'
-import Avatar from 'src/@core/components/mui/avatar'
-import { getInitials } from 'src/@core/utils/get-initials'
+import IconifyIcon from 'src/@core/components/icon'
+import ConfirmBox from 'src/views/pages/confirm-dialog'
+import { handleDeleteAPI } from 'src/@core/api-handler'
+import auth from 'src/configs/auth'
 
 export const tableStyles = {
   '& .MuiDataGrid-columnHeaders': {
-    bgcolor: '#0E2366',
+    bgcolor: '#86533C',
     color: 'white'
   }
 }
 
 export const userStatusObj = {
   'In Stock': 'success',
-  pending: 'warning',
-  Inactive: 'secondary'
-}
-
-const brandStatusObj = {
-  'In Stock': 'primary',
   pending: 'warning',
   Inactive: 'secondary'
 }
@@ -52,7 +46,7 @@ const Products = () => {
   const [loading, setLoading] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
   const [delLoading, setDelLoading] = useState(false)
-  const [deletId, setDeleteId] = useState('')
+  const [deletId, setDeleteId] = useState({})
 
   const dispatch = useDispatch()
   const store = useSelector(state => state.product)
@@ -63,26 +57,16 @@ const Products = () => {
     setLoading(false)
   }
 
-  // async function deleteBrand() {
-  //   setDelLoading(true)
-  //   let res = await handleDeleteAPI(`${auth.brand}/${deletId?.id}`, 'Brand Deleted Successfully')
-  //   if (res) {
-  //     getBrand()
-  //     setShowDelete(false)
-  //   }
-  //   setDelLoading(false)
-  // }
-
   useEffect(() => {
     getProducts()
   }, [dispatch])
 
   const columns = [
     {
-      flex: 0.10,
+      flex: 0.1,
       field: 'ProductImageEntity',
       minWidth: 150,
-      headerName: 'Banner',
+      headerName: 'Image',
       renderCell: ({ row }) => (
         <Box sx={{ py: 1 }}>
           <img
@@ -109,12 +93,10 @@ const Products = () => {
     {
       flex: 0.3,
       minWidth: 120,
-      field: 'description',
-      headerName: 'Description',
+      field: 'shortDescription',
+      headerName: 'Short Description',
       renderCell: ({ row }) => {
-        let desc = row?.description ? JSON.parse(row?.description) : []
-
-        return <Typography>{desc?.length ? desc[0]?.value : null}</Typography>
+        return <Typography>{row?.shortDescription}</Typography>
       }
     },
     {
@@ -177,20 +159,36 @@ const Products = () => {
       headerName: 'Actions',
       renderCell: ({ row }) => (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {/* <Tooltip title='Edit'>
+          <Tooltip title='Edit'>
             <IconButton color='primary' component={Link} href={`/products/${row?.id}`}>
-              <Icon icon='mdi:eye-outline' fontSize={27} />
+              <IconifyIcon icon='mdi:eye-outline' fontSize={27} />
             </IconButton>
-          </Tooltip> */}
-          <Tooltip title='Delete Banner'>
-            <IconButton color='error'>
-              <Icon icon='mdi:delete-outline' fontSize={27} />
+          </Tooltip>
+          <Tooltip title='Delete Product'>
+            <IconButton
+              onClick={() => {
+                setShowDelete(true)
+                setDeleteId(row)
+              }}
+              color='error'
+            >
+              <IconifyIcon icon='mdi:delete-outline' fontSize={27} />
             </IconButton>
           </Tooltip>
         </Box>
       )
     }
   ]
+
+  async function deleteProduct() {
+    setDelLoading(true)
+    let res = await handleDeleteAPI(`/product/${deletId?.id}`, 'Product Deleted Successfully')
+    if (res) {
+      getProducts()
+      setShowDelete(false)
+    }
+    setDelLoading(false)
+  }
 
   return (
     <Card>
@@ -206,6 +204,7 @@ const Products = () => {
         <DataGrid
           autoHeight
           columns={columns}
+          loading={loading}
           rows={store?.data?.products?.length ? store?.data?.products : []}
           getRowHeight={() => 'auto'}
           disableRowSelectionOnClick
@@ -215,6 +214,15 @@ const Products = () => {
           sx={{ '& .MuiDataGrid-columnHeaders': { borderRadius: 0 }, ...tableStyles }}
         />{' '}
       </CardContent>
+
+      <ConfirmBox
+        name={deletId?.name}
+        title='Product'
+        open={showDelete}
+        closeDialog={() => setShowDelete(false)}
+        toDoFunction={deleteProduct}
+        loading={delLoading}
+      />
     </Card>
   )
 }

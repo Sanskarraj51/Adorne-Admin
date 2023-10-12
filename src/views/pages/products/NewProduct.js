@@ -36,14 +36,15 @@ import RHFTextField from 'src/@core/components/RHF/RHFTextField'
 import FileUploaderMultiple from 'src/views/forms/form-elements/file-uploader/FileUploaderMultiple'
 import FormDialog from 'src/@core/components/dialog/FormDialog'
 import { useDispatch, useSelector } from 'src/store'
-import { fetchBrandData, fetchCategoryData, fetchColorData } from 'src/store/apps/product'
+import { fetchBrandData, fetchCategoryData, fetchColorData, fetchSizeData } from 'src/store/apps/product'
 import { StyledDropZone } from 'src/@core/components/upload/Upload'
 import { handlePostAPI } from 'src/@core/api-handler'
 import { useRouter } from 'next/router'
+import DropzoneWrapper from 'src/@core/styles/libs/react-dropzone'
 
 export default function NewProduct() {
   const dispatch = useDispatch()
-  const { colors, categoryData, brandData } = useSelector(state => state?.product)
+  const { colors, categoryData, brandData, sizes } = useSelector(state => state?.product)
 
   const [createOpenProductCategory, setCreateOpenProductCategory] = useState(false)
   const [isLoading, setLoading] = useState(false)
@@ -54,38 +55,34 @@ export default function NewProduct() {
   const defaultValues = {
     product_photo: [],
     name: '',
+    shortDescription: '',
     brand_id: '',
     category_id: '',
     price: '',
     sku_id: '',
     qty: '',
     description: [{ value: '' }],
-    sizes: [{ value: '' }],
+    sizes: [],
     colors: []
   }
 
+  // colors: Yup.array().min(1, 'Color is Required'),
+  // sizes: Yup.array().min(1, 'Size is Required'),
   const newProductSchema = Yup.object().shape({
     product_photo: Yup.array().min(1, 'Photo is required'),
     name: Yup.string().required('Name is required'),
     qty: Yup.string().required('Stock is required'),
     sku_id: Yup.string().required('SKU is required'),
+    shortDescription: Yup.string().required('Short Description is required'),
     width: Yup.string().required('Width is required'),
     height: Yup.string().required('Height is required'),
     weight: Yup.string().required('Weight is required'),
     length: Yup.string().required('length is required'),
     category_id: Yup.string().required('Category is Required'),
-    colors: Yup.array().min(1, 'Color is Required'),
     description: Yup.array()
       .of(
         Yup.object().shape({
           value: Yup.string().required('Description is Required')
-        })
-      )
-      .required(),
-    sizes: Yup.array()
-      .of(
-        Yup.object().shape({
-          value: Yup.string().required('Size is Required')
         })
       )
       .required(),
@@ -112,21 +109,13 @@ export default function NewProduct() {
     name: 'description'
   })
 
-  const {
-    fields: sizeField,
-    append: sizeAppend,
-    remove: sizeRemove
-  } = useFieldArray({
-    control,
-    name: 'sizes'
-  })
-
   const onSubmit = async data => {
     const bodyFormData = new FormData()
     bodyFormData.append('name', data?.name)
     bodyFormData.append('category_id', data?.category_id)
     bodyFormData.append('price', data?.price)
     bodyFormData.append('brand_id', data?.brand_id)
+    bodyFormData.append('shortDescription', data?.shortDescription)
     bodyFormData.append('sku_id', data?.sku_id || '')
 
     // bodyFormData.append('sizes', data?.sizes || '')
@@ -140,8 +129,15 @@ export default function NewProduct() {
     for (let i of data?.product_photo) {
       bodyFormData.append('images', i)
     }
+
+    // for (let i of data?.sizes) {
+    //   bodyFormData.append('sizes', i.id)
+    // }
+    // for (let i of data?.colors) {
+    //   bodyFormData.append('colors', i.id)
+    // }
     setLoading(true)
-    const res = await handlePostAPI(authConfig.product, bodyFormData)
+    const res = await handlePostAPI('/product', bodyFormData)
     if (res) {
       router.push('/products')
     }
@@ -159,7 +155,8 @@ export default function NewProduct() {
   )
 
   useEffect(() => {
-    dispatch(fetchColorData())
+    // dispatch(fetchColorData())
+    // dispatch(fetchSizeData())
     dispatch(fetchCategoryData())
     dispatch(fetchBrandData())
   }, [dispatch])
@@ -167,8 +164,8 @@ export default function NewProduct() {
   return (
     <Container maxWidth='xl'>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
+        <Grid container justifyContent='center' spacing={3}>
+          <Grid item xs={12} sm={10} md={9} lg={8} >
             <Card sx={{ padding: '25px', textAlign: 'center' }}>
               <Grid
                 sx={{
@@ -183,29 +180,25 @@ export default function NewProduct() {
                 </Typography>
               </Grid>
 
-              {/* <RHFUpload 
-multiple={true}
-name='product_photo'
-onDrop={handleDrop}
-/> */}
-
-              <StyledDropZone
+              <DropzoneWrapper
                 sx={{
                   ...(Boolean(errors?.product_photo) && {
-                    color: 'error.main',
-                    bgcolor: 'error.lighter',
-                    borderColor: 'error.light'
+                    '&.dropzone, & .dropzone': {
+                      color: 'error.main',
+                      bgcolor: 'error.lighter',
+                      borderColor: 'error.light'
+                    }
                   })
                 }}
               >
                 <FileUploaderMultiple onHandleDrop={handleDrop} />
-              </StyledDropZone>
+              </DropzoneWrapper>
               {errors?.product_photo && (
                 <FormHelperText sx={{ color: 'error.main' }}>{errors?.product_photo?.message}</FormHelperText>
               )}
             </Card>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} sm={10} md={9} lg={8}>
             <Card sx={{ padding: '25px' }}>
               <Typography variant='h6' gutterBottom>
                 Product Details
@@ -307,6 +300,7 @@ onDrop={handleDrop}
                 <RHFTextField name='sku_id' label='SKU' type='text' disabled={isSubmitting} />
 
                 <RHFTextField name='qty' label='Stock (Qty)' type='number' disabled={isSubmitting} />
+                <RHFTextField   name='shortDescription' label='Short Description' sx={{gridColumn: '1/3' }} multiline minRows={2} disabled={isSubmitting} />
               </Box>
               {fields?.length > 0
                 ? fields.map((field, index) => (
@@ -348,8 +342,8 @@ onDrop={handleDrop}
               </Grid>
             </Card>
           </Grid>
-
-          <Grid item xs={12} sm={6}>
+{/* 
+          <Grid item xs={12} sm={10} md={9} lg={8} >
             <Card sx={{ padding: '25px' }}>
               <Typography variant='h6' gutterBottom>
                 Product Attributes
@@ -411,47 +405,35 @@ onDrop={handleDrop}
                     ) : null
                   }}
                 />
-                {sizeField?.length > 0
-                  ? sizeField.map((field, index) => (
-                      <Grid key={field?.id} display='flex'>
-                        <RHFTextField
-                          multiline
-                          key={field.id}
-                          name={`sizes.${index}.value`}
-                          sx={{ mt: 2 }}
-                          label='Sizes'
-                          placeholder='Enter Sizes'
-                        />
-                        <IconButton
-                          color='error'
-                          sx={{
-                            display: watch('sizes')?.length > 1 ? 'flex' : 'none',
-                            width: 'fit-content',
-                            borderRadius: '8px'
-                          }}
-                          onClick={() => sizeRemove(index)}
-                        >
-                          <Icon icon='material-symbols:close' />
-                        </IconButton>
-                      </Grid>
-                    ))
-                  : null}
-                <Stack alignItems='flex-end' sx={{ mt: 2 }}>
-                  <Button
-                    startIcon={<Icon icon='material-symbols:add' />}
-                    onClick={() => {
-                      sizeAppend('')
-                    }}
-                    color='primary'
-                    variant='contained'
-                  >
-                    Add More
-                  </Button>
-                </Stack>
+
+                <Autocomplete
+                  fullWidth
+                  multiple
+                  options={sizes}
+                  // eslint-disable-next-line no-unneeded-ternary
+                  getOptionLabel={option => (option ? option.name : '')}
+                  filterSelectedOptions
+                  onChange={(event, newValue) => {
+                    setValue('sizes', newValue, {
+                      shouldValidate: true,
+                      shouldDirty: true
+                    })
+                  }}
+                  renderInput={params => (
+                    <TextField
+                      {...params}
+                      label='Sizes'
+                      placeholder=''
+                      name='sizes'
+                      error={Boolean(errors?.sizes)}
+                      helperText={errors?.sizes?.message || ''}
+                    />
+                  )}
+                />
               </Box>
             </Card>
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </Grid> */}
+          <Grid item xs={12} sm={10} md={9} lg={8} >
             <Card sx={{ padding: '25px' }}>
               <Typography variant='h6' gutterBottom>
                 Product Dimensions

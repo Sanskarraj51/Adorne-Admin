@@ -35,6 +35,8 @@ const navigation = () => {
       title: 'Blogs',
       path: '/blogs'
     },
+
+
     // {
     //   icon: 'mdi:palette-swatch-outline',
     //   title: 'UI',
@@ -200,7 +202,7 @@ const navigation = () => {
     //       children: [
     //         {
     //           title: 'Account',
-    //           path: '/pages/account-settings/account'
+    //           path: '/settings'
     //         },
     //         {
     //           title: 'Security',

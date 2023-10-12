@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // ** Next Import
 import Link from 'next/link'
@@ -33,7 +33,7 @@ export const HeadingTypography = styled(Typography)(({ theme }) => ({
   }
 }))
 
-const FileUploaderSingle = ({handleDrop}) => {
+const FileUploaderSingle = ({ handleDrop, previewFile = [] }) => {
   // ** State
   const [files, setFiles] = useState([])
 
@@ -49,9 +49,17 @@ const FileUploaderSingle = ({handleDrop}) => {
     }
   })
 
-  const img = files.map(file => (
-    <img key={file.name} alt={file.name} className='single-file-image' src={URL.createObjectURL(file)} />
-  ))
+  useEffect(() => {
+    if (previewFile?.length) {
+      setFiles(previewFile)
+    }
+  }, [previewFile])
+
+  const img = files.map((file, i) => {
+    let url = typeof file === 'string' ? file : URL.createObjectURL(file)
+
+    return <img key={file.name} alt={file.name} className='single-file-image' src={url} />
+  })
 
   return (
     <Box {...getRootProps({ className: 'dropzone' })} sx={files.length ? { height: 450 } : {}}>

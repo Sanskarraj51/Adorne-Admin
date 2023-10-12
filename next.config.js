@@ -22,7 +22,7 @@ module.exports = {
     return config
   },
   images: {
-    domains: ['35.154.22.90:3000']
+    domains: ['35.154.22.90:3000','images.unsplash.com']
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if

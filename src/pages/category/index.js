@@ -25,7 +25,7 @@ const CategoryPage = () => {
   const [delLoading, setDelLoading] = useState(false)
   const [deletId, setDeleteId] = useState('')
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
-  // hooks
+
   const dispatch = useDispatch()
   const store = useSelector(state => state.product)
 
@@ -123,6 +123,7 @@ const CategoryPage = () => {
       )
     }
   ]
+
   return (
     <Card>
       <CardHeader

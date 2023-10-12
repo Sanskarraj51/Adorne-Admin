@@ -78,7 +78,6 @@ const AddCategoryForm = ({ type = 'Add', handleClose }) => {
         dispatch(fetchCategoryData({}))
         handleClose()
       }
-      handleClose()
     }
     setLoading(false)
   }

@@ -92,7 +92,7 @@ const shortcuts = [
     title: 'Settings',
     icon: 'mdi:cog-outline',
     subtitle: 'Account Settings',
-    url: '/pages/account-settings/account'
+    url: '/settings/colors'
   },
   {
     title: 'Help Center',

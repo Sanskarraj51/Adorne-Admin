@@ -184,7 +184,7 @@ const LoginPage = () => {
           }}
         >
           {themeConfig?.appLogo ? (
-            <Image alt='' width={150} height={90} style={{ margin: '1rem 0rem' }} src={themeConfig?.appLogo} />
+            <Image alt='' width={150} height={90} style={{ margin: '1rem 0rem', objectFit:'contain' }} src={themeConfig?.appLogo} />
           ) : (
             LogoSvg()
           )}

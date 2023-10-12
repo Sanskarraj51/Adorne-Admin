@@ -1,11 +1,11 @@
 import axios from 'axios'
+import { ContentState, EditorState, convertFromHTML } from 'draft-js'
 import toast from 'react-hot-toast'
 
-export const mediaUrl = "http://35.154.22.90:3000/"
-
+export const mediaUrl = 'http://localhost:3030/'
 
 export const checkLoginError = err => {
-  if (err.response?.data?.message === 'jwt expired') {
+  if (err.response?.status === 403) {
     toast.error('Your token has expired, Kindly login again!')
     localStorage.clear()
     window.location.reload()
@@ -264,4 +264,16 @@ export const handleKeyPress = event => {
   if (!isValidInput) {
     event.preventDefault()
   }
+}
+
+export function convertToRawEditorState(data) {
+  if (data !== '' && data !== undefined) {
+    const blocksFromHTML = convertFromHTML(data)
+    const state = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks, blocksFromHTML.entityMap)
+    let editorState = EditorState.createWithContent(state)
+    // eslint-disable-next-line
+    return editorState
+  }
+
+  return ''
 }

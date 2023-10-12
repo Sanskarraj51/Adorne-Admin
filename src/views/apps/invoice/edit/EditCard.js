@@ -146,7 +146,7 @@ const EditCard = ({ data }) => {
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Box sx={{ mb: 6, display: 'flex', alignItems: 'center' }}>
                 {themeConfig?.appLogo ? (
-            <Image alt=''  objectFit='contain' width={200} height={80} style={{margin:"1rem 0rem"}} src={themeConfig?.appLogo} />
+            <Image alt=''   width={200} height={80} style={{margin:"1rem 0rem",objectFit:'contain' }} src={themeConfig?.appLogo} />
           ) : (
             LogoSvg()
           )}
