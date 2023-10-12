@@ -116,11 +116,10 @@ const ProductDetail = () => {
                 </Box>
               }
             />
-            <Tab
+            {/* <Tab
               value='attributes'
               label={
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  {/* <FlagVariantOutline sx={{ fontSize: '1.125rem' }} /> */}
                   <Icon icon='mdi:flag-outline' fontSize={20} />
 
                   <TabName>Attributes</TabName>
@@ -131,13 +130,12 @@ const ProductDetail = () => {
               value='pricing'
               label={
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  {/* <CurrencyUsd sx={{ fontSize: '1.125rem' }} /> */}
                   <Icon icon='mdi:currency-usd' fontSize={20} />
 
                   <TabName>Variants</TabName>
                 </Box>
               }
-            />
+            /> */}
           </TabList>{' '}
           <TabPanel sx={{ p: 0 }} value='basic'>
             <BasicInfoTab
@@ -150,12 +148,12 @@ const ProductDetail = () => {
             <ProductImagesTab productDetail={productDetail?.products} getProductDetails={refreshProductDetailData} mediaUrl={productDetail?.mediaUrl} />
           </TabPanel>
           
-          <TabPanel sx={{ p: 0 }} value='attributes'>
+          {/* <TabPanel sx={{ p: 0 }} value='attributes'>
             <AttributeTab  productAttribute={productDetail?.productAttribute} productData={productDetail?.products} getProductDetails={refreshProductDetailData} />
           </TabPanel>
           <TabPanel sx={{ p: 0 }} value='pricing'>
             <Pricestab productAttribute={productDetail?.productAttribute} detailData={productDetail?.products} getProductDetails={refreshProductDetailData} />
-          </TabPanel>
+          </TabPanel> */}
         </TabContext>
       </CardContent>
     </Card>

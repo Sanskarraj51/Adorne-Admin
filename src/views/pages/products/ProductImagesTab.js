@@ -159,12 +159,12 @@ function ProductImagesTab({ productDetail, getProductDetails, mediaUrl }) {
                   }}
                 >
                   <FormControl>
-                    <FormControlLabel
+                    {/* <FormControlLabel
                       control={
                         <Checkbox checked={defaultImg === item?.key} onChange={e => handleChange(e, item?.image)} />
                       }
                       label={defaultImg === item?.image ? 'Primary' : 'Set as Primary'}
-                    />
+                    /> */}
                   </FormControl>
                   <Tooltip title='Delete'>
                     <span>
