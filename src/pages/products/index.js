@@ -104,7 +104,7 @@ const Products = () => {
       minWidth: 120,
       field: 'price',
       headerName: 'Price',
-      renderCell: ({ row }) => <Typography>${row?.price || 0}</Typography>
+      renderCell: ({ row }) => <Typography>€{row?.price || 0}</Typography>
     },
 
     {
