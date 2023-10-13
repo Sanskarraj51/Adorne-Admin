@@ -40,7 +40,7 @@ const AnalyticsCongratulations = () => {
             <Typography variant='h5' sx={{ mb: 4.5 }}>
               Congratulations{' '}
               <Box component='span' sx={{ fontWeight: 'bold' ,textTransform:"uppercase"}}>
-              TechTrox  Admin
+              Adorne  Admin
               </Box>
               ! 🎉
             </Typography>

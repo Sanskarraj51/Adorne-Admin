@@ -116,6 +116,11 @@ const BasicInfoTab = ({ productInfo, id, getProductDetailData }) => {
         </Grid>
         <Grid item sm={6} xs={12}>
           <FormControl fullWidth>
+            <RHFTextField size='small' name='price' label='Price' placeholder='' />
+          </FormControl>
+        </Grid>
+        <Grid item sm={6} xs={12}>
+          <FormControl fullWidth>
             <RHFTextField size='small' name='length' label='Package Length' placeholder='Package Length' />
           </FormControl>
         </Grid>

@@ -33,7 +33,6 @@ const DefaultPalette = (mode, skin) => {
       black: '#000',
       white: whiteColor
     },
-    // main: '#666CFF',
     primary: {
       light: '#787EFF',
       main: '#000000',
